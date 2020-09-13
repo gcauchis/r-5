@@ -1,0 +1,32 @@
+<div class="card">
+<span class="unit-title">Type : </span>
+  <select [(ngModel)]="currentWeaponType" (ngModelChange)='onChangecurrentWeaponType()'><option *ngFor="let weaponType of weaponTypes" [value]="weaponType.value">{{weaponType.key}}</option></select><br>
+
+<table>				
+  <tr>
+    <th>Type</th>
+    <th *ngIf="currentWeaponType != WeaponType.Melee">Portée (pouces)</th>
+    <th>Puissance</th>
+    <th>Règles spéciales</th>
+    <th *ngIf="currentWeaponType != WeaponType.Melee">Assaut</th>
+    <th *ngIf="currentWeaponType != WeaponType.Melee">Lourd</th>
+    <th *ngIf="currentWeaponType != WeaponType.Melee">Couverture</th>
+    <th *ngIf="currentWeaponType == WeaponType.Explosive">Gabarit</th>
+    <th>Valeur</th>
+  </tr>
+  <tr *ngFor="let weapon of selectableWeapon">
+    <td>{{weapon.name}}</td>
+    <td *ngIf="currentWeaponType != WeaponType.Melee"><span *ngIf="weapon.range; else NArange">
+      <span *ngIf="weapon.rangeMin">+{{weapon.rangeMin}}'' à </span>{{weapon.range}}''
+      </span><ng-template #NArange>NA</ng-template></td>
+    <td><span *ngIf="weapon.power; else NApower">{{weapon.power}}D<span *ngIf="weapon.superPower">++</span><span *ngIf="weapon.superSuperPower">[++</span></span><ng-template #NApower>NA</ng-template></td>
+    <td>{{weapon.rule}}</td>
+    <td *ngIf="currentWeaponType != WeaponType.Melee">{{weapon.assault}}</td>
+    <td *ngIf="currentWeaponType != WeaponType.Melee">{{weapon.heavy}}</td>
+    <td *ngIf="currentWeaponType != WeaponType.Melee">{{weapon.cover}}</td>
+    <td *ngIf="currentWeaponType == WeaponType.Explosive">{{enumUtils.exposiveWeaponSizeToString(weapon.size)}}</td>
+    <td>{{priceService.getPrice(weapon, unit)}}</td>
+    <td><button (click)="addWeapon(weapon)">Use</button></td>
+  </tr>
+</table>
+</div>

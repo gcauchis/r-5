@@ -1,0 +1,37 @@
+<div class="card">
+<span class="unit-title">Nom : </span>
+  <input [(ngModel)]="unit.name" placeholder="Nom"/><br>
+
+<span class="unit-title">Description : </span>
+  <input [(ngModel)]="unit.desc" placeholder="Description"/><br>
+
+<span class="unit-title">Dé Qualité Martial (DQM) : </span>
+  <select *ngIf="unit.tacticalRole != TacticalRole.Civilian; else showDQM" [(ngModel)]="unit.dqm" (ngModelChange)='logUnit()'>><option *ngFor="let dice of dices" [ngValue]="dice.value">{{dice.key}}</option></select><ng-template #showDQM>{{enumUtils.diceToString(unit.dqm)}}</ng-template><br>
+
+<span class="unit-title">Dé Combat (DC) : </span>
+  <select *ngIf="unit.tacticalRole != TacticalRole.Civilian; else showDC" [(ngModel)]="unit.dc"><option *ngFor="let dice of dices" [ngValue]="dice.value">{{dice.key}}</option></select><ng-template #showDC>{{enumUtils.diceToString(unit.dc)}}</ng-template><br>
+
+<span class="unit-title">Nombre de point de vie : </span>
+  <input type="number" min="1" max="5" [(ngModel)]="unit.pv" placeholder="PV"/><br>
+
+<span class="unit-title">Type d’unité : </span>
+  <select [(ngModel)]="unit.unitType"><option *ngFor="let unitType of unitTypes" [ngValue]="unitType.value">{{unitType.key}}</option></select><br>
+
+<span class="unit-title">Type de figurine : </span>
+  <select [(ngModel)]="unit.size"><option *ngFor="let unitSize of unitSizes" [ngValue]="unitSize.value">{{unitSize.key}}</option></select><br>
+
+<span class="unit-title">Type de mouvement : </span>
+  <select [(ngModel)]="unit.moveType"><option *ngFor="let moveType of moveTypes" [ngValue]="moveType.value">{{moveType.key}}</option></select><br>
+
+<span class="unit-title">Mouvement tactique : </span>
+  <input type="number" min="0" max="100" [(ngModel)]="unit.tacticalMove" placeholder="Mouvement"/><br>
+
+<span class="unit-title">Rôle tactique : </span>
+  <select [(ngModel)]="unit.tacticalRole" (ngModelChange)='onChangeTacticalRole()'><option *ngFor="let tacticalRole of tacticalRoles" [ngValue]="tacticalRole.value">{{tacticalRole.key}}</option></select><br>
+
+<span *ngIf="unit.tacticalRole == TacticalRole.Mage"><span class="unit-title">Miveau de Mage : </span>
+  <input type="number" min="1" max="3" [(ngModel)]="unit.mageLevel" placeholder="Level"/><br></span>
+ 
+</div>
+<app-weapon-selector [unit]="unit"></app-weapon-selector>
+<app-view-unit [unit]="unit"></app-view-unit>

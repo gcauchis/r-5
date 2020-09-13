@@ -1,0 +1,13 @@
+<div *ngIf="unit" class="card" #unitCard>
+  <p style="margin:0px"><span class="unit-title">{{unit.name}}/{{enumUtils.tacticalRoleToString(unit.tacticalRole)}}</span></p>
+  <p style="margin:0px"><span class="unit-title">Mouvement :</span> {{unit.tacticalMove}}''/{{unitService.getRunMove(unit)}}''</p>
+  <p style="margin:0px"><span class="unit-title">DQM :</span> {{enumUtils.diceToString(unit.dqm)}}</p>
+  <p style="margin:0px"><span class="unit-title">Tir :</span> TODO</p>
+  <p style="margin:0px"><span class="unit-title">CC :</span> TODO</p>
+  <p style="margin:0px"><span class="unit-title">Sauvegarde :</span> 4+ <span class="unit-title">/ PV :</span> {{unit.pv}}</p>
+  <p style="margin:0px"><span class="unit-title">Prix :</span> {{priceService.compute(unit)}}</p>
+  <p style="margin:0px" *ngIf="unit.desc"><span class="unit-title">Description :</span> {{unit.desc}}</p>
+  <p style="margin:0px" *ngFor="let weapon of unit.weapons">{{weapon.name}}</p>
+
+</div>
+<button (click)="openPDF()">PDF</button>

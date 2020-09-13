@@ -1,0 +1,8 @@
+Arme laser							
+							
+Type	Portée (pouces)	Puissance	Règles spéciales	Assaut	Lourd	couverture	Valeur
+
+Mitrailleuse légère laser	35	3D++	Modifiable, rafale, anti-véhicule	Non	Oui	Oui	3139
+Mitrailleuse lourde laser	45	3D++	Modifiable, rafale, surprise, anti-véhicule	Non	Oui	Oui	5138
+Fusil de précision laser	40	1D	Modifiable	Non	Non	Non	1312
+
