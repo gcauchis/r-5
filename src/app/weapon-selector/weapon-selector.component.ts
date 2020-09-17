@@ -20,7 +20,7 @@ export class WeaponSelectorComponent implements OnInit {
   WeaponType = WeaponType;
 
   selectableWeapon: Weapon[];
-  weaponTypes;
+  weaponTypes: any[];
 
   constructor(
     public weaponService: WeaponService,
@@ -36,7 +36,10 @@ export class WeaponSelectorComponent implements OnInit {
   ngOnInit() {}
 
   addWeapon(weapon: Weapon) {
-    this.unit.weapons.push(weapon);
+    let weaponToAdd = new Weapon();
+    Object.assign(weaponToAdd, weapon);
+    weaponToAdd.id = null;
+    this.unit.weapons.push(weaponToAdd);
   }
 
   onChangecurrentWeaponType() {

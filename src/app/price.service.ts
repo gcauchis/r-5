@@ -19,16 +19,16 @@ export class PriceService {
     let result = DICE_VALUE;
     switch (dice) {
       case Dice.D6:
-        result *= 3;
+        result *= 3/6;
         break;
       case Dice.D8:
-        result *= 5;
+        result *= 5/8;
         break;
       case Dice.D10:
-        result *= 7;
+        result *= 7/10;
         break;
       case Dice.D12:
-        result *= 9;
+        result *= 9/12;
         break;
       default:
         result = 0;
@@ -38,7 +38,7 @@ export class PriceService {
   }
 
   public computeDC(dice: Dice): number {
-    return this.computeDQM(dice) * 1.8;
+    return this.computeDQM(dice) * 1.2;
   }
 
   public computeBase(unit: Unit): number {

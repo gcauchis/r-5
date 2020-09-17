@@ -33,5 +33,7 @@ export class Unit {
   mageLevel: number = 0;
   /** The list of weapon */
   weapons: Weapon[] = [];
+  /** The image. */
+  img?: Blob;
 
 }
