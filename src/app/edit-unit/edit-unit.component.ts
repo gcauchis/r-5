@@ -26,6 +26,8 @@ export class EditUnitComponent implements OnInit {
   constructor(private utils: UtilsService,
               public enumUtils:EnumUtilsService) {
     this.unit = new Unit();
+    this.unit.dqm = Dice.D8;
+    this.unit.dc = Dice.D8;
     
     this.dices = this.utils.enumToKeyValue(Dice, enumUtils.diceToString);
     this.unitTypes = this.utils.enumToKeyValue(UnitType,  enumUtils.unitTypeToString);

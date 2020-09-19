@@ -64,9 +64,9 @@
 {"id":144,"weaponType":1,"name":"Arbalète Wookie","range":22,"power":2,"rule":"Modifiable, anti-personnelle","assault":true,"heavy":false,"cover":true},
 
 {"id":300,"weaponType":2,"name":"Grenade","range":10,"power":1,"rule":"D8, anti-personnelle","assault":false,"heavy":false,"cover":true,"size":0},
-{"id":301,"weaponType":2,"name":"Grenade flash","range":10,"power":1,"rule":"Surprise","assault":false,"heavy":false,"cover":true,"size":1},
+{"id":301,"weaponType":2,"name":"Grenade flash","range":10,"power":1,"rule":"Surprise","assault":false,"heavy":false,"cover":true,"size":1, "nonLethal": true},
 {"id":302,"weaponType":2,"name":"Grenade anti-véhicule","range":10,"power":1,"rule":"D8, anti-véhicule","assault":false,"heavy":false,"cover":true,"size":0},
-{"id":303,"weaponType":2,"name":"Grenade fumigène","range":10,"power":1,"rule":"Fumigène","assault":false,"heavy":false,"cover":true,"size":1},
+{"id":303,"weaponType":2,"name":"Grenade fumigène","range":10,"power":1,"rule":"Fumigène","assault":false,"heavy":false,"cover":true,"size":1, "nonLethal": true},
 {"id":304,"weaponType":2,"name":"Lance-grenade","range":18,"power":1,"rule":"D8, surprise, tir en lobe","assault":false,"heavy":false,"cover":true,"size":1},
 {"id":305,"weaponType":2,"name":"Mortier","rangeMin":20,"range":60,"power":1,"rule":"D8, surprise ; tir en lobe","assault":false,"heavy":true,"cover":true,"size":1},
 {"id":306,"weaponType":2,"name":"Canon","rangeMin":15,"range":60,"power":1,"rule":"D12, anti-véhicule, tir en lobe","assault":false,"heavy":true,"cover":false,"size":0},

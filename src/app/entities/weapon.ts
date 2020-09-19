@@ -29,4 +29,6 @@ export class Weapon {
   cover?: boolean = false;
   /** The gabarit for explosive only */
   size?: ExposiveWeaponSize = null;
+  /** If non lethal weapon */
+  nonLethal?:boolean;
 }

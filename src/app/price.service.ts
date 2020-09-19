@@ -8,27 +8,28 @@ import { UnitType } from "./entities/unit-type.enum";
 import { TacticalRole } from "./entities/tactical-role.enum";
 import { MoveType } from "./entities/move-type.enum";
 import { UnitService } from "./unit.service";
+import { ExposiveWeaponSize } from "./entities/exposive-weapon-size.enum";
 
 const DICE_VALUE: number = 10;
 
 @Injectable()
 export class PriceService {
-  constructor(private unitService:UnitService) {}
+  constructor(private unitService: UnitService) {}
 
   public computeDQM(dice: Dice): number {
     let result = DICE_VALUE;
     switch (dice) {
       case Dice.D6:
-        result *= 3/6;
+        result *= 3 / 6;
         break;
       case Dice.D8:
-        result *= 5/8;
+        result *= 5 / 8;
         break;
       case Dice.D10:
-        result *= 7/10;
+        result *= 7 / 10;
         break;
       case Dice.D12:
-        result *= 9/12;
+        result *= 9 / 12;
         break;
       default:
         result = 0;
@@ -46,7 +47,8 @@ export class PriceService {
     let dcPrive = this.computeDC(unit.dc);
     let baseUnit = dqmPrice + dcPrive;
     let pvPrice = baseUnit * unit.pv;
-    let movePrice = (unit.tacticalMove + this.unitService.getRunMove(unit)) * 10;
+    let movePrice =
+      (unit.tacticalMove + this.unitService.getRunMove(unit)) * 10;
     let result = pvPrice + movePrice;
     switch (unit.size) {
       case UnitSize.Small:
@@ -86,39 +88,43 @@ export class PriceService {
     let unitBase = this.computeBase(unit);
     let result = 0;
     let powerCoef = weapon.power;
-    if (weapon.superPower)
-      powerCoef *= 2;
-    
+    if (weapon.superPower) powerCoef *= 2;
+
     switch (weapon.weaponType) {
       case WeaponType.Melee:
-        result = (unitBase * powerCoef) / 10;
+        result = unitBase * powerCoef * (Math.pow(1.5, 2) * Math.PI);
         break;
       case WeaponType.Shoot:
-        let baseShoot = 0;
-        // TODO options
-        if (weapon.assault)
-          baseShoot += 10;
-        if (weapon.heavy)
-          baseShoot += 10;
-        if (weapon.cover)
-          baseShoot += 10;
-        baseShoot += Math.pow(weapon.range, 2) * Math.PI;
-        result = (baseShoot * unitBase) / 1000;
+        result = unitBase * powerCoef * (Math.pow(weapon.range, 2) * Math.PI);
         break;
       case WeaponType.Explosive:
-        let baseExp = 0;
-        // TODO options
-        if (weapon.assault)
-          baseExp += 10;
-        if (weapon.heavy)
-          baseExp += 10;
-        if (weapon.cover)
-          baseExp += 10;
-        baseExp += Math.pow(weapon.range, 2) * Math.PI;
+        let baseExp = Math.pow(weapon.range, 2) * Math.PI;
         if (weapon.rangeMin)
           baseExp -= Math.pow(weapon.rangeMin, 2) * Math.PI;
-        
-        result = (baseExp * unitBase) / 1000;
+        let baseSize = 0;
+        switch (weapon.size) {
+          case ExposiveWeaponSize.Small:
+            baseSize = 3.14;//(Math.pow(1, 2) * Math.PI);
+            break;
+          case ExposiveWeaponSize.Medium:
+            baseSize = 13.53;//(Math.pow(2, 2) * Math.PI);
+            break;
+          case ExposiveWeaponSize.Big:
+            baseSize = (Math.pow(3, 2) * Math.PI);
+            break;
+          case ExposiveWeaponSize.Cone:
+            baseSize = 17;
+            break;
+
+          default:
+            break;
+        }
+        let baseVp = 0;
+        // Se base sur la regle et mon unit
+        if (!weapon.nonLethal)
+          baseVp = this.computeDC(unit.dc);
+
+        result = baseSize * baseVp * powerCoef + baseExp * unitBase;
         break;
       default:
         break;
@@ -128,8 +134,7 @@ export class PriceService {
 
   public compute(unit: Unit): number {
     let price = this.computeBase(unit);
-    for (let weapon of unit.weapons)
-      price += this.getPrice(weapon, unit);
+    for (let weapon of unit.weapons) price += this.getPrice(weapon, unit);
     return price;
   }
 }
