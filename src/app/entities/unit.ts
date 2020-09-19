@@ -4,6 +4,7 @@ import { UnitSize } from "./unit-size.enum";
 import { MoveType } from "./move-type.enum";
 import { TacticalRole } from "./tactical-role.enum";
 import { Weapon } from "./weapon";
+import { Armor } from "./armor";
 
 /** The representation of a figurine. */
 export class Unit {
@@ -33,6 +34,8 @@ export class Unit {
   mageLevel: number = 0;
   /** The list of weapon */
   weapons: Weapon[] = [];
+  /** The unit armor */
+  armor: Armor;
   /** The image. */
   img?: Blob;
 

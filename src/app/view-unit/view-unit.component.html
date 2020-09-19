@@ -4,10 +4,10 @@
   <p style="margin:0px"><span class="unit-title">DQM :</span> {{enumUtils.diceToString(unit.dqm)}}</p>
   <p style="margin:0px"><span class="unit-title">Tir :</span> TODO</p>
   <p style="margin:0px"><span class="unit-title">CC :</span> TODO</p>
-  <p style="margin:0px"><span class="unit-title">Sauvegarde :</span> 4+ <span class="unit-title">/ PV :</span> {{unit.pv}}</p>
+  <p style="margin:0px"><span class="unit-title">Sauvegarde :</span><span *ngIf="unit.armor; else noProtection"> {{unit.armor.protection}}</span><ng-template #noProtection> Aucune sauvegarde</ng-template> <span class="unit-title"> / PV :</span> {{unit.pv}}</p>
   <p style="margin:0px"><span class="unit-title">Prix :</span> {{priceService.compute(unit)}}</p>
   <p style="margin:0px" *ngIf="unit.desc"><span class="unit-title">Description :</span> {{unit.desc}}</p>
   <p style="margin:0px" *ngFor="let weapon of unit.weapons">{{weapon.name}} {{weapon.range}}’’ {{weapon.power}}{{enumUtils.diceToString(unit.dc)}}<span *ngIf="weapon.superPower">++</span><span *ngIf="weapon.superSuperPower">[++</span></p>
 
 </div>
-<button (click)="openPDF()">PDF</button>
+<button *ngIf="showPdfButton" (click)="openPDF()">PDF</button>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { WeaponService } from "../weapon.service";
 import { Weapon } from "../entities/weapon";
 import { Unit } from "../entities/unit";

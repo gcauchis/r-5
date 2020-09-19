@@ -21,21 +21,8 @@ import htmlToPdfmake from "html-to-pdfmake";
   styleUrls: ["./view-unit.component.css"]
 })
 export class ViewUnitComponent implements OnInit {
-  @Input() unit: Unit = {
-    id: 1,
-    name: "Name1",
-    desc: "Embedded",
-    dqm: Dice.D6,
-    dc: Dice.D6,
-    pv: 5,
-    unitType: UnitType.Alive,
-    size: UnitSize.Standard,
-    moveType: MoveType.Ground,
-    tacticalMove: 8,
-    tacticalRole: TacticalRole.Troop,
-    mageLevel: 0,
-    weapons: null
-  };
+  @Input() unit: Unit;
+  @Input() showPdfButton: boolean = false;
 
   @ViewChild("unitCard") unitCard: ElementRef;
 
