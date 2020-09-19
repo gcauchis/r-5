@@ -93,6 +93,8 @@ export class EnumUtilsService {
           return "Tir";
         case WeaponType.Explosive:
           return "Explosif";
+        case WeaponType.Grenade:
+          return "Grenade";
         default:
           return null;
       }

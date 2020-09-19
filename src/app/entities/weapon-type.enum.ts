@@ -1,5 +1,6 @@
 export enum WeaponType {
   Melee,
   Shoot,
-  Explosive
+  Explosive,
+  Grenade
 }
