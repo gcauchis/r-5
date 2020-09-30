@@ -29,6 +29,8 @@
     "e2e": "ng e2e",
     "start:electron": "ng build --base-href ./ && electron .",
     "build:election": "ng build --base-href ./ && electron-builder",
+    "build:prod:election": "ng build --prod --base-href ./ && electron-builder",
+    "build:prod:election:win:linux": "ng build --prod --base-href ./ && electron-builder --linux --win",
     "postinstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
