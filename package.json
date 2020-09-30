@@ -1,6 +1,8 @@
 {
   "name": "r-5",
   "version": "0.0.0",
+  "author": "gcauchis",
+  "description": "The R-5 army unit builder",
   "main": "main.js",
   "private": true,
   "dependencies": {
@@ -25,7 +27,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:electron": "ng build --base-href ./ && electron ."
+    "start:electron": "ng build --base-href ./ && electron .",
+    "build:election": "ng build --base-href ./ && electron-builder",
+    "postinstall": "electron-builder install-app-deps",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1001.3",
@@ -37,6 +43,7 @@
     "@types/node": "^8.9.5",
     "codelyzer": "~4.5.0",
     "electron": "^10.1.2",
+    "electron-builder": "^22.8.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^5.2.3",
@@ -48,5 +55,13 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "^3.9.7"
+  },
+  "build": {
+    "appId": "com.github.gcauchis.r5",
+    "productName": "R-5",
+    "files": [
+      "main.js",
+      "dist/demo"
+    ]
   }
 }
