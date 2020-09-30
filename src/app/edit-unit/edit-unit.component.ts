@@ -15,11 +15,11 @@ import { EnumUtilsService } from "../enum-utils.service";
 })
 export class EditUnitComponent implements OnInit {
   @Output() unit: Unit;
-  dices;
-  unitTypes;
-  unitSizes;
-  moveTypes;
-  tacticalRoles;
+  dices: any[];
+  unitTypes: any[];
+  unitSizes: any[];
+  moveTypes: any[];
+  tacticalRoles: any[];
   /** Pas terrible mais donne acces dans le template */
   TacticalRole = TacticalRole;
 
