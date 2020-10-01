@@ -27,9 +27,9 @@ script:
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
-        /bin/bash -c "npm run build:prod:election:win:linux"
+        /bin/bash -c "npm run build:prod:electron:win:linux"
     else
-      npm run build:prod:election
+      npm run build:prod:electron
     fi
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
