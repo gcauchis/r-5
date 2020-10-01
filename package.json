@@ -28,12 +28,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start:electron": "ng build --base-href ./ && electron .",
-    "build:election": "ng build --base-href ./ && electron-builder",
-    "build:prod:election": "ng build --prod --base-href ./ && electron-builder",
-    "build:prod:election:win:linux": "ng build --prod --base-href ./ && electron-builder --linux --win",
-    "postinstall": "electron-builder install-app-deps",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "build:electron": "ng build --base-href ./ && electron-builder",
+    "build:prod:electron": "ng build --prod --base-href ./ && electron-builder",
+    "build:prod:electron:win:linux": "ng build --prod --base-href ./ && electron-builder --linux --win",
+    "postinstall": "electron-builder install-app-deps"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1001.3",
