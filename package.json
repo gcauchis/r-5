@@ -30,7 +30,8 @@
     "start:electron": "ng build --base-href ./ && electron .",
     "build:electron": "ng build --base-href ./ && electron-builder",
     "build:prod:electron": "ng build --prod --base-href ./ && electron-builder",
-    "build:prod:electron:win:linux": "ng build --prod --base-href ./ && electron-builder --linux --win"
+    "build:prod:electron:win:linux": "ng build --prod --base-href ./ && electron-builder --linux --win",
+    "release": "ng build --prod --base-href ./ && electron-builder"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1001.3",
