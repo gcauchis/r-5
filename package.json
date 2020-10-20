@@ -30,8 +30,7 @@
     "start:electron": "ng build --base-href ./ && electron .",
     "build:electron": "ng build --base-href ./ && electron-builder",
     "build:prod:electron": "ng build --prod --base-href ./ && electron-builder",
-    "build:prod:electron:win:linux": "ng build --prod --base-href ./ && electron-builder --linux --win",
-    "postinstall": "electron-builder install-app-deps"
+    "build:prod:electron:win:linux": "ng build --prod --base-href ./ && electron-builder --linux --win"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1001.3",
@@ -63,5 +62,12 @@
       "main.js",
       "dist/demo"
     ]
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false,
+    "constants": false,
+    "stream": false
   }
 }

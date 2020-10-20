@@ -14,12 +14,11 @@ import { PriceService } from './price.service';
 import { EnumUtilsService } from './enum-utils.service';
 import { ArmorSelectorComponent } from './armor-selector/armor-selector.component';
 import { ArmorService } from './armor.service';
-import { FileService } from './file.service';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule ],
   declarations: [ AppComponent, HelloComponent, ViewUnitComponent, EditUnitComponent, WeaponSelectorComponent, ArmorSelectorComponent ],
   bootstrap:    [ AppComponent ],
-  providers: [UnitService, UtilsService, WeaponService, PriceService, EnumUtilsService, ArmorService, FileService]
+  providers: [UnitService, UtilsService, WeaponService, PriceService, EnumUtilsService, ArmorService]
 })
 export class AppModule { }
