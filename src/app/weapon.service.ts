@@ -16,8 +16,7 @@ export class WeaponService {
       if (tmpWeapon == null) {
         console.log("Weapons from base configuration");
         Object.assign(this.weapons, jsonWeapons);
-        localStorage.set("weapons", this.weapons);
-        console.log("Weapons stored");
+        this.storeWeapons();
       } else {
         console.log("Weapons retrieved")
         this.weapons = tmpWeapon;
@@ -26,7 +25,6 @@ export class WeaponService {
       console.log("Weapons from base configuration");
       Object.assign(this.weapons, jsonWeapons);
     }
-
   }
 
   public getWeapons(type: WeaponType = null): Weapon[] {
@@ -34,6 +32,13 @@ export class WeaponService {
       return this.weapons.filter(w => w.weaponType == type);
     } else {
       return this.weapons;
+    }
+  }
+
+  private storeWeapons(): void {
+    if (localStorage.isLocalStorageSupported) {
+      localStorage.set("weapons", this.weapons);
+      console.log("Weapons stored");
     }
   }
 }
