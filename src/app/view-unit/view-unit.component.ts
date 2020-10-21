@@ -49,6 +49,6 @@ export class ViewUnitComponent implements OnInit {
           }
         }
       })
-      .open();
+      .download();
   }
 }
