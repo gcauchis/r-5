@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 
 const KEY_PREFIX: string = "R-5.storage.";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class LocalStorageService {
-
   localStorage: Storage;
   changes$ = new Subject();
 
@@ -24,10 +23,11 @@ export class LocalStorageService {
 
   set(key: string, value: any): boolean {
     if (this.isLocalStorageSupported) {
-      this.localStorage.setItem(KEY_PREFIX + key, JSON.stringify(value));
+      let usedKey = KEY_PREFIX + key;
+      this.localStorage.setItem(usedKey, JSON.stringify(value));
       this.changes$.next({
-        type: 'set',
-        key,
+        type: "set",
+        usedKey,
         value
       });
       return true;
@@ -37,10 +37,11 @@ export class LocalStorageService {
 
   remove(key: string): boolean {
     if (this.isLocalStorageSupported) {
-      this.localStorage.removeItem(KEY_PREFIX + key);
+      let usedKey = KEY_PREFIX + key;
+      this.localStorage.removeItem(usedKey);
       this.changes$.next({
-        type: 'remove',
-        key
+        type: "remove",
+        usedKey
       });
       return true;
     }
@@ -48,7 +49,6 @@ export class LocalStorageService {
   }
 
   get isLocalStorageSupported(): boolean {
-    return !!this.localStorage
+    return !!this.localStorage;
   }
-
 }

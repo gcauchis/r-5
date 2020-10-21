@@ -1,25 +1,24 @@
-import { LocalStorageService } from './local-storage.service';
+import { LocalStorageService } from "./local-storage.service";
 import { Injectable } from "@angular/core";
 import { Weapon } from "./entities/weapon";
 import { WeaponType } from "./entities/weapon-type.enum";
 
-import jsonWeapons from './resources/weapons.json';
+import jsonWeapons from "./resources/weapons.json";
 
 @Injectable()
 export class WeaponService {
-
   private weapons: Weapon[] = [];
 
   constructor(localStorage: LocalStorageService) {
     if (localStorage.isLocalStorageSupported) {
-      let tmpWeapon = localStorage.get("weapons");
-      if (tmpWeapon == null) {
+      let tmpWeapons = localStorage.get("weapons");
+      if (tmpWeapons == null) {
         console.log("Weapons from base configuration");
         Object.assign(this.weapons, jsonWeapons);
         this.storeWeapons();
       } else {
-        console.log("Weapons retrieved")
-        this.weapons = tmpWeapon;
+        console.log("Weapons retrieved");
+        this.weapons = tmpWeapons;
       }
     } else {
       console.log("Weapons from base configuration");
