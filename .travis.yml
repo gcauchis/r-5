@@ -27,7 +27,7 @@ script:
           echo "$var=${var_fixed}" >>.env
       done
       docker run --rm \
-        --env-file < .env \
+        --env-file .env \
         -v ${PWD}:/project \
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
