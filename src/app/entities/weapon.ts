@@ -15,8 +15,8 @@ export class Weapon {
   superPower?: boolean = false;
   /** The power++[++ */
   superSuperPower?: boolean = false;
-  /** The special rule of the weapon */
-  rule: string = "";
+  /** The special rules of the weapon */
+  rule: string[] = [];
   /** The minimum range in inch. */
   rangeMin?: number = 0;
   /** The range in inch. */

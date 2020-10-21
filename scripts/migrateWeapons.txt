@@ -1,0 +1,3 @@
+sed -i -E 's/,"rule":"([^"]*)"/,"rule":["\1"]/' src/app/resources/weapons.json
+sed -i -E 's/\["([^",]*),\s*([^"]*)"\]/["\1","\2"]/' src/app/resources/weapons.json
+sed -i -E 's/\["(.*)","([^",]*),\s*([^"]*)"\]/["\1","\2","\3"]/' src/app/resources/weapons.json
