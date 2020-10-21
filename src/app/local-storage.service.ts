@@ -12,6 +12,7 @@ export class LocalStorageService {
 
   constructor() {
     this.localStorage = window.localStorage;
+    //this.clear();
   }
 
   get(key: string): any {
@@ -50,5 +51,12 @@ export class LocalStorageService {
 
   get isLocalStorageSupported(): boolean {
     return !!this.localStorage;
+  }
+
+  clear(): void {
+    if (this.isLocalStorageSupported) {
+      this.localStorage.clear();
+      console.log("clear local storage");
+    }
   }
 }
