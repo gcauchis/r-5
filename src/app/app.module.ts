@@ -14,11 +14,24 @@ import { PriceService } from './price.service';
 import { EnumUtilsService } from './enum-utils.service';
 import { ArmorSelectorComponent } from './armor-selector/armor-selector.component';
 import { ArmorService } from './armor.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: '', redirectTo: '/editUnit', pathMatch: 'full'  },
+  { path: 'editUnit', component: EditUnitComponent },
+  { path: 'unit', component: ViewUnitComponent },
+  { path: '**', component: PageNotFoundComponent }
+];
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent, HelloComponent, ViewUnitComponent, EditUnitComponent, WeaponSelectorComponent, ArmorSelectorComponent ],
-  bootstrap:    [ AppComponent ],
+  imports: [BrowserModule, FormsModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )],
+  declarations: [AppComponent, HelloComponent, ViewUnitComponent, EditUnitComponent, WeaponSelectorComponent, ArmorSelectorComponent, PageNotFoundComponent],
+  bootstrap: [AppComponent],
   providers: [UnitService, UtilsService, WeaponService, PriceService, EnumUtilsService, ArmorService]
 })
 export class AppModule { }
