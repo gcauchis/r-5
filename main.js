@@ -12,6 +12,7 @@ const {app, BrowserWindow} = require('electron')
           nodeIntegration: true
         }
       })
+      mainWindow.maximize();
 
       mainWindow.loadURL(
         url.format({
