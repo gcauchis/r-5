@@ -1,6 +1,12 @@
 <hello name="{{ name }}"></hello>
-<nav>
-    <a routerLink="/editUnit" routerLinkActive="active">Nouvelle unité</a>
-    <a routerLink="/unit" routerLinkActive="active">Unité</a>
-</nav>
+
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+    <mat-icon>more_vert</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="/editUnit"><span class="nav-caption">Nouvelle unité</span></a>
+    <a mat-menu-item routerLink="/unit"><span class="nav-caption">Unité</span></a>
+</mat-menu>
+
 <router-outlet></router-outlet>
