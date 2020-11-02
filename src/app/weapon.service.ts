@@ -31,12 +31,45 @@ export class WeaponService {
     console.log(this.weapons);
   }
 
+  public getRules(): string[] {
+    return this.weapons.flatMap(w => w.rule).filter((value, index, self) => self.indexOf(value) === index).sort();
+  }
+
   public getWeapons(type: WeaponType = null): Weapon[] {
-    if (type) {
+    if (type != null) {
       return this.weapons.filter(w => w.weaponType == type);
     } else {
       return this.weapons;
     }
+  }
+
+  public getWeapon(id: number): Weapon {
+    if (id != null) {
+      return this.weapons.find(w => w.id == id);
+    } else {
+      return null;
+    }
+  }
+
+  public saveWeapon(weapon: Weapon): void {
+    if (weapon.editable) {
+      if (weapon.id) {
+        let found: Weapon = this.getWeapon(weapon.id);
+        if (found) {
+          Object.assign(found, weapon);
+        } else {
+          this.weapons.push(weapon);
+        }
+      } else {
+        weapon.id = this.genId();
+        this.weapons.push(weapon);
+      }
+      this.storeWeapons();
+   }
+  }
+
+  private genId(): number {
+    return this.weapons.length > 0 ? Math.max(...this.weapons.map(w => w.id)) + 1 : 5000;
   }
 
   private storeWeapons(): void {

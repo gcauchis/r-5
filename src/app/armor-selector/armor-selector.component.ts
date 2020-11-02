@@ -6,7 +6,7 @@ import { Unit } from "../entities/unit";
 @Component({
   selector: "app-armor-selector",
   templateUrl: "./armor-selector.component.html",
-  styleUrls: ["./armor-selector.component.css"]
+  styleUrls: ["./armor-selector.component.scss"]
 })
 export class ArmorSelectorComponent implements OnInit {
   @Input() unit: Unit;

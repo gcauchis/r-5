@@ -14,6 +14,8 @@ import { PriceService } from "../price.service";
 })
 export class WeaponSelectorComponent implements OnInit {
   @Input() unit: Unit;
+  @Input() enableEdit: boolean = true;
+  @Input() enableAdd: boolean = false;
   currentWeaponType: WeaponType = WeaponType.Melee;
 
   /** Pas terrible mais donne acces dans le template */
@@ -29,11 +31,11 @@ export class WeaponSelectorComponent implements OnInit {
     public priceService: PriceService
   ) {
     this.currentWeaponType = WeaponType.Melee;
-    this.selectableWeapon = weaponService.getWeapons(this.currentWeaponType);
     this.weaponTypes = this.utils.enumToKeyValue(
       WeaponType,
       enumUtils.weaponTypeToString
     );
+    this.onChangecurrentWeaponType();
   }
 
   ngOnInit() {}

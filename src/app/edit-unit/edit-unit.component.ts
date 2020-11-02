@@ -7,11 +7,12 @@ import { UnitSize } from "../entities/unit-size.enum";
 import { MoveType } from "../entities/move-type.enum";
 import { TacticalRole } from "../entities/tactical-role.enum";
 import { EnumUtilsService } from "../enum-utils.service";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: "app-edit-unit",
   templateUrl: "./edit-unit.component.html",
-  styleUrls: ["./edit-unit.component.css"]
+  styleUrls: ["./edit-unit.component.scss"]
 })
 export class EditUnitComponent implements OnInit {
   @Output() unit: Unit;
@@ -23,11 +24,10 @@ export class EditUnitComponent implements OnInit {
   /** Pas terrible mais donne acces dans le template */
   TacticalRole = TacticalRole;
 
-  constructor(private utils: UtilsService,
+  constructor(
+              private route: ActivatedRoute,
+              private utils: UtilsService,
               public enumUtils:EnumUtilsService) {
-    this.unit = new Unit();
-    this.unit.dqm = Dice.D8;
-    this.unit.dc = Dice.D8;
     
     this.dices = this.utils.enumToKeyValue(Dice, enumUtils.diceToString);
     this.unitTypes = this.utils.enumToKeyValue(UnitType,  enumUtils.unitTypeToString);
@@ -36,7 +36,25 @@ export class EditUnitComponent implements OnInit {
     this.tacticalRoles = this.utils.enumToKeyValue(TacticalRole,enumUtils.tacticalRoleToString);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getUnit();
+  }
+
+  getUnit(): void {
+    const id = +this.route.snapshot.paramMap.get("id");
+    //if (id == 0) {
+      this.unit = this.buildBaseUnit();
+    /*} else {
+      this.unitService.getUnit(id).subscribe(unit => (this.unit = unit));
+    }*/
+  }
+
+  private buildBaseUnit(): Unit {
+    let unit = new Unit();
+    unit.dqm = Dice.D8;
+    unit.dc = Dice.D8;
+    return unit;
+  }
 
   onChangeTacticalRole() {
     if (this.unit.tacticalRole == TacticalRole.Civilian) {

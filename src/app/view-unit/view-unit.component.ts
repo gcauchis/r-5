@@ -18,7 +18,7 @@ import htmlToPdfmake from "html-to-pdfmake";
 @Component({
   selector: "app-view-unit",
   templateUrl: "./view-unit.component.html",
-  styleUrls: ["./view-unit.component.css"]
+  styleUrls: ["./view-unit.component.scss"]
 })
 export class ViewUnitComponent implements OnInit {
   @Input() unit: Unit;
