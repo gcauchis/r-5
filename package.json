@@ -61,6 +61,11 @@
   "build": {
     "appId": "com.github.gcauchis.r5",
     "productName": "R-5",
+    "publish": [
+      {
+        "provider": "github"
+      }
+    ],
     "files": [
       "main.js",
       "dist/demo"
