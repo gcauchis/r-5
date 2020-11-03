@@ -8,6 +8,7 @@
   },
   "copyright": "Copyright © 2020 gcauchis",
   "homepage": "https://github.com/gcauchis/r-5",
+  "license": "MIT",
   "main": "main.js",
   "private": true,
   "dependencies": {
