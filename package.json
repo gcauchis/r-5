@@ -1,6 +1,6 @@
 {
   "name": "r-5",
-  "version": "0.0.1-alpha2",
+  "version": "0.0.1-alpha3",
   "author": "gcauchis",
   "description": "The R-5 army unit builder",
   "main": "main.js",
