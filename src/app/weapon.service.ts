@@ -32,7 +32,9 @@ export class WeaponService {
   }
 
   public getRules(): string[] {
-    return this.weapons.flatMap(w => w.rule).filter((value, index, self) => self.indexOf(value) === index).sort();
+    return this.weapons.flatMap(w => w.rule)
+              .filter((value, index, self) => value != "" && self.indexOf(value) === index)
+              .sort();
   }
 
   public getWeapons(type: WeaponType = null): Weapon[] {

@@ -33,15 +33,26 @@
 
     <mat-form-field>
       <mat-label>Règle</mat-label>
-      <input type="text" matInput [formControl]="rulesControl" [matAutocomplete]="auto" placeholder="Choisisser une règle">
+      <input matInput type="text" placeholder="Choisisser une règle"
+            [formControl]="rulesControl" [matAutocomplete]="auto"
+            [(ngModel)]="currentRule" (keyup.enter)="addRule()">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let rule of rules | async" [value]="rule">{{rule}}</mat-option>
+        <mat-option *ngFor="let rule of rulesFilteredOptions | async" [value]="rule">{{rule}}</mat-option>
       </mat-autocomplete>
-    </mat-form-field><br>
+    </mat-form-field>
+    <button mat-raised-button (click)="addRule()">Ajouter la règle</button>
+    <br>
 
-    <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.assault">Assaut</mat-checkbox>
-    <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.heavy">Lourd</mat-checkbox>
-    <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.cover">Couverture</mat-checkbox><br>
+    <table border="0">
+      <tr *ngFor="let rule of weapon.rule">
+        <td>{{rule}}</td>
+        <td><button mat-raised-button (click)="removeRule(rule)">X</button></td>
+      </tr>
+    </table>
+
+    <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.assault"> Assaut </mat-checkbox>
+    <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.heavy"> Lourd </mat-checkbox>
+    <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.cover"> Couverture </mat-checkbox><br>
 
     <mat-form-field *ngIf="weapon.weaponType == WeaponType.Explosive || weapon.weaponType == WeaponType.Grenade">
       <mat-label>Gabarit</mat-label>
@@ -51,10 +62,9 @@
     </mat-form-field><br>
     
     <mat-checkbox [(ngModel)]="weapon.nonLethal">Mon mortelle</mat-checkbox>
-
   </mat-card-content>
-    <button mat-raised-button (click)="saveWeapon()">Save</button>
+    
   <mat-card-actions>
-
+    <button mat-raised-button (click)="saveWeapon()">Save</button>
   </mat-card-actions>
 </mat-card>

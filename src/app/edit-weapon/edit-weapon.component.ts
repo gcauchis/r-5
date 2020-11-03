@@ -23,6 +23,7 @@ export class EditWeaponComponent implements OnInit {
   weaponTypes: any[];
   weaponSizes: any[];
   rules: string[];
+  currentRule: string;
 
   rulesControl = new FormControl();
   rulesFilteredOptions: Observable<string[]>;
@@ -55,10 +56,18 @@ export class EditWeaponComponent implements OnInit {
   }
 
   private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.rules.filter(option => option.toLowerCase().includes(filterValue));
+    const filterRule = value.toLowerCase();
+    return this.rules.filter(rule => rule.toLowerCase().includes(filterRule));
   }
 
+  addRule(): void {
+    this.weapon.rule.push(this.currentRule);
+    this.currentRule = "";
+  }
+
+  removeRule(rule: string): void {
+    this.weapon.rule = this.weapon.rule.filter(r => r != rule)
+  }
 
   getWeapon() {
     const id = +this.route.snapshot.paramMap.get("id");
@@ -83,14 +92,14 @@ export class EditWeaponComponent implements OnInit {
 
   onChangecurrentWeaponType() {
     if (this.weapon.weaponType == WeaponType.Melee) {
-      this.weapon.range = null;
-      this.weapon.rangeMin = null;
-      this.weapon.assault = null;
-      this.weapon.heavy = null;
-      this.weapon.cover = null;
+      delete this.weapon.range;
+      delete this.weapon.rangeMin;
+      delete this.weapon.assault;
+      delete this.weapon.heavy;
+      delete this.weapon.cover;
     }
     if (this.weapon.weaponType != WeaponType.Explosive) {
-      this.weapon.size = null;
+      delete this.weapon.size;
     }
     this.weapon.rule = [];
   }
