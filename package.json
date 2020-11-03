@@ -61,14 +61,29 @@
   "build": {
     "appId": "com.github.gcauchis.r5",
     "productName": "R-5",
+    "copyright": "Copyright © 2020 gcauchis",
+    "files": [
+      "main.js",
+      "dist/demo"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable",
+        "zip"
+      ]
+    },
+    "linux" : {
+      "target": [
+        "AppImage",
+        "deb",
+        "tar.gz"
+      ]
+    },
     "publish": [
       {
         "provider": "github"
       }
-    ],
-    "files": [
-      "main.js",
-      "dist/demo"
     ]
   },
   "browser": {
