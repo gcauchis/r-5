@@ -1,8 +1,13 @@
 {
   "name": "r-5",
-  "version": "0.0.1-alpha3",
-  "author": "gcauchis",
   "description": "The R-5 army unit builder",
+  "version": "0.0.1-alpha3",
+  "author": {
+    "name": "gcauchis",
+    "email": "gabriel.cauchis@gmail.com"
+  },
+  "copyright": "Copyright © 2020 gcauchis",
+  "homepage": "https://github.com/gcauchis/r-5",
   "main": "main.js",
   "private": true,
   "dependencies": {
@@ -61,7 +66,6 @@
   "build": {
     "appId": "com.github.gcauchis.r5",
     "productName": "R-5",
-    "copyright": "Copyright © 2020 gcauchis",
     "files": [
       "main.js",
       "dist/demo"
