@@ -69,15 +69,17 @@ export class EditWeaponComponent implements OnInit {
     this.weapon.rule = this.weapon.rule.filter(r => r != rule)
   }
 
-  getWeapon() {
+  getWeapon(): void {
     const id = +this.route.snapshot.paramMap.get("id");
     if (id == 0) {
       this.weapon = new Weapon();
+      this.onChangecurrentWeaponType();
       this.weapon.editable = true;
     } else {
       this.weapon = this.weaponService.getWeapon(id);
       if (this.weapon == null) {
         this.weapon = new Weapon();
+        this.onChangecurrentWeaponType();
         this.weapon.editable = true;
       }
     }

@@ -43,10 +43,10 @@
     <button mat-raised-button (click)="addRule()">Ajouter la règle</button>
     <br>
 
-    <table border="0">
+    <table class="rules">
       <tr *ngFor="let rule of weapon.rule">
         <td>{{rule}}</td>
-        <td><button mat-raised-button (click)="removeRule(rule)">X</button></td>
+        <td><button mat-mini-fab (click)="removeRule(rule)" color="warn">x</button></td>
       </tr>
     </table>
 

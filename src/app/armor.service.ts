@@ -3,50 +3,29 @@ import { Injectable } from "@angular/core";
 import { Armor } from "./entities/armor";
 
 import jsonArmors from "./resources/armors.json";
+import { AbstractCrudService } from './abstract-crud-service';
 
 const LOCAL_KEY: string = "armors";
 
 @Injectable()
-export class ArmorService {
-  private armors: Armor[] = [];
+export class ArmorService extends AbstractCrudService<Armor>{
 
   constructor(localStorage: LocalStorageService) {
-    if (localStorage.isLocalStorageSupported) {
-      let tmpArmors = localStorage.get(LOCAL_KEY);
-      if (tmpArmors == null) {
-        console.log(
-          "Armors not found localy, retrieve from base configuration"
-        );
-        Object.assign(this.armors, jsonArmors);
-        this.storeArmors();
-      } else {
-        console.log("Armors retrieved");
-        this.armors = tmpArmors;
-      }
-    } else {
-      console.log("Armors from base configuration (no local persistance)");
-      Object.assign(this.armors, jsonArmors);
-    }
+    super(localStorage, LOCAL_KEY);
+  }
+
+  protected loadBaseData(): Armor[] {
+    let armors: Armor[] = [];
+    Object.assign(armors, jsonArmors);
+    return armors
+  }
+  
+  protected get minId(): number {
+    return 100
   }
 
   public getArmors(): Armor[] {
-    return this.armors;
+    return this.soredData;
   }
 
-  private storeArmors(): void {
-    if (localStorage.isLocalStorageSupported) {
-      localStorage.set(LOCAL_KEY, this.armors);
-      console.log("Armors stored");
-    }
-  }
-
-  private resetArmors(): void {
-    if (localStorage.isLocalStorageSupported) {
-      console.log("Reset Armors");
-      localStorage.remove(LOCAL_KEY);
-      console.log("Armors from base configuration");
-      Object.assign(this.armors, jsonArmors);
-      this.storeArmors();
-    }
-  }
 }

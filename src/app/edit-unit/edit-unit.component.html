@@ -1,4 +1,4 @@
-<mat-card class="unit-form">
+<mat-card>
   <mat-card-title>Edition : {{unit.name}}/{{enumUtils.tacticalRoleToString(unit.tacticalRole)}}</mat-card-title>
   <mat-card-content>
   <!--span class="unit-title">Image : </span>
@@ -81,4 +81,9 @@
 </mat-card>
 <app-weapon-selector [unit]="unit" enableAdd=true></app-weapon-selector>
 <app-armor-selector [unit]="unit"></app-armor-selector>
-<app-view-unit [unit]="unit" [showPdfButton]=true></app-view-unit>
+<mat-card>
+  <mat-card-title>Résultat</mat-card-title>
+  <mat-card-content>
+    <app-view-unit [unit]="unit" [showPdfButton]=true></app-view-unit>
+  </mat-card-content>
+</mat-card>

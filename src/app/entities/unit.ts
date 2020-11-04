@@ -1,3 +1,4 @@
+import { Identitfiable } from './identitfiable';
 import { Dice } from "./dice.enum";
 import { UnitType } from "./unit-type.enum";
 import { UnitSize } from "./unit-size.enum";
@@ -7,9 +8,7 @@ import { Weapon } from "./weapon";
 import { Armor } from "./armor";
 
 /** The representation of a figurine. */
-export class Unit {
-  /** The id */
-  id: number;
+export class Unit extends Identitfiable {
   /** The name (60 char) */
   name: string;
   /** The description (500 char) */

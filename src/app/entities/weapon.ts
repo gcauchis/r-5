@@ -1,8 +1,8 @@
+import { Identitfiable } from './identitfiable';
 import { WeaponType } from "./weapon-type.enum";
 import { ExposiveWeaponSize } from "./exposive-weapon-size.enum";
 
-export class Weapon {
-  id?: number;
+export class Weapon extends Identitfiable {
   /** the type of weapon */
   weaponType: WeaponType = WeaponType.Melee;
   /** The editable status */

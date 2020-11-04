@@ -1,5 +1,5 @@
-export class Armor {
-  id?: number;
+import { Identitfiable } from './identitfiable';
+export class Armor extends Identitfiable {
   /** The armor name */
   name: string;
   /** The protection of the armor on D6 */

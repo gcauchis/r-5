@@ -1,40 +1,43 @@
-<div class="card">
+<mat-card>
+  <mat-card-title>Armes</mat-card-title>
+  <mat-card-content>
 
-<mat-form-field>
-  <mat-label>Type</mat-label>
-  <mat-select [(ngModel)]="currentWeaponType" (ngModelChange)='onChangecurrentWeaponType()'>
-    <mat-option  *ngFor="let weaponType of weaponTypes" [value]="weaponType.value">{{weaponType.key}}</mat-option>
-  </mat-select>
-</mat-form-field>
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+    <mat-select [(ngModel)]="currentWeaponType" (ngModelChange)='onChangecurrentWeaponType()'>
+      <mat-option  *ngFor="let weaponType of weaponTypes" [value]="weaponType.value">{{weaponType.key}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<table>				
-  <tr>
-    <th>Type</th>
-    <th *ngIf="currentWeaponType != WeaponType.Melee">Portée (pouces)</th>
-    <th>Puissance</th>
-    <th>Règles spéciales</th>
-    <th *ngIf="currentWeaponType != WeaponType.Melee">Assaut</th>
-    <th *ngIf="currentWeaponType != WeaponType.Melee">Lourd</th>
-    <th *ngIf="currentWeaponType != WeaponType.Melee">Couverture</th>
-    <th *ngIf="currentWeaponType == WeaponType.Explosive ||currentWeaponType == WeaponType.Grenade">Gabarit</th>
-    <th *ngIf="unit">Valeur</th>
-  </tr>
-  <tr *ngFor="let weapon of selectableWeapon">
-    <td>{{weapon.name}}</td>
-    <td *ngIf="currentWeaponType != WeaponType.Melee"><span *ngIf="weapon.range; else NArange">
-      <span *ngIf="weapon.rangeMin">+{{weapon.rangeMin}}'' à </span>{{weapon.range}}''
-      </span><ng-template #NArange>NA</ng-template></td>
-    <td><span *ngIf="weapon.power; else NApower">{{weapon.power}}D<span *ngIf="weapon.superPower">++</span><span *ngIf="weapon.superSuperPower">[++</span></span><ng-template #NApower>NA</ng-template></td>
-    <td>{{weapon.rule}}</td>
-    <td *ngIf="currentWeaponType != WeaponType.Melee">{{weapon.assault}}</td>
-    <td *ngIf="currentWeaponType != WeaponType.Melee">{{weapon.heavy}}</td>
-    <td *ngIf="currentWeaponType != WeaponType.Melee">{{weapon.cover}}</td>
-    <td *ngIf="currentWeaponType == WeaponType.Explosive ||currentWeaponType == WeaponType.Grenade">{{enumUtils.exposiveWeaponSizeToString(weapon.size)}}</td>
-    <td *ngIf="unit">{{priceService.getPrice(weapon, unit)}}</td>
-    <td>
-      <button mat-raised-button *ngIf="enableAdd && unit" (click)="addWeapon(weapon)">Use</button>
-      <a mat-raised-button *ngIf="enableEdit && weapon.editable" routerLink="/editWeapon/{{weapon.id}}">Edit</a>
-    </td>
-  </tr>
-</table>
-</div>
+  <table class="weapons">				
+    <tr>
+      <th>Type</th>
+      <th *ngIf="currentWeaponType != WeaponType.Melee">Portée (pouces)</th>
+      <th>Puissance</th>
+      <th>Règles spéciales</th>
+      <th *ngIf="currentWeaponType != WeaponType.Melee">Assaut</th>
+      <th *ngIf="currentWeaponType != WeaponType.Melee">Lourd</th>
+      <th *ngIf="currentWeaponType != WeaponType.Melee">Couverture</th>
+      <th *ngIf="currentWeaponType == WeaponType.Explosive ||currentWeaponType == WeaponType.Grenade">Gabarit</th>
+      <th *ngIf="unit">Valeur</th>
+    </tr>
+    <tr *ngFor="let weapon of selectableWeapon">
+      <td>{{weapon.name}}</td>
+      <td *ngIf="currentWeaponType != WeaponType.Melee"><span *ngIf="weapon.range; else NArange">
+        <span *ngIf="weapon.rangeMin">+{{weapon.rangeMin}}'' à </span>{{weapon.range}}''
+        </span><ng-template #NArange>NA</ng-template></td>
+      <td><span *ngIf="weapon.power; else NApower">{{weapon.power}}D<span *ngIf="weapon.superPower">++</span><span *ngIf="weapon.superSuperPower">[++</span></span><ng-template #NApower>NA</ng-template></td>
+      <td>{{weapon.rule}}</td>
+      <td *ngIf="currentWeaponType != WeaponType.Melee">{{weapon.assault}}</td>
+      <td *ngIf="currentWeaponType != WeaponType.Melee">{{weapon.heavy}}</td>
+      <td *ngIf="currentWeaponType != WeaponType.Melee">{{weapon.cover}}</td>
+      <td *ngIf="currentWeaponType == WeaponType.Explosive ||currentWeaponType == WeaponType.Grenade">{{enumUtils.exposiveWeaponSizeToString(weapon.size)}}</td>
+      <td *ngIf="unit">{{priceService.getPrice(weapon, unit)}}</td>
+      <td>
+        <button mat-raised-button *ngIf="enableAdd && unit" (click)="addWeapon(weapon)">Use</button>
+        <a mat-raised-button *ngIf="enableEdit && weapon.editable" routerLink="/editWeapon/{{weapon.id}}">Edit</a>
+      </td>
+    </tr>
+  </table>
+</mat-card-content>
+</mat-card>

@@ -57,7 +57,7 @@
 {"id":137,"weaponType":1,"name":"Pylore lourd en tube","range":45,"power":3,"rule":["Modifiable","Rafale","Surprise","Anti-véhicule","Perce armure"],"assault":false,"heavy":true,"cover":true},
 {"id":138,"weaponType":1,"name":"Canon anal de précision","range":40,"power":1,"rule":["Modifiable","Anti-personnelle","Enflammé"],"assault":false,"heavy":false,"cover":false},
 {"id":139,"weaponType":1,"name":"Sphincter anal lourd","range":50,"power":1,"rule":["Modifiable","Anti-personnelle","Visée sûre","Gros calibre"],"assault":false,"heavy":true,"cover":false},
-{"id":140,"weaponType":1,"name":"Arc court","range":12,"power":1,"rule":[""],"assault":false,"heavy":false,"cover":true},
+{"id":140,"weaponType":1,"name":"Arc court","range":12,"power":1,"rule":[],"assault":false,"heavy":false,"cover":true},
 {"id":141,"weaponType":1,"name":"Arc standard","range":18,"power":1,"rule":["Tir en lobe"],"assault":false,"heavy":false,"cover":false},
 {"id":142,"weaponType":1,"name":"Arc long","range":22,"power":1,"rule":["Tir en lobe"],"assault":false,"heavy":false,"cover":false},
 {"id":143,"weaponType":1,"name":"Arbalète","range":18,"power":2,"rule":["Modifiable"],"assault":true,"heavy":false,"cover":false},

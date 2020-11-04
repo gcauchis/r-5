@@ -1,16 +1,19 @@
-<div class="card">
-  <table>
-    <tr>
-      <th>Type d’armure</th>
-      <th>Sauvegarde sur 1D6</th>
-      <th>Règles spéciales</th>
-      <th></th>
-    </tr>
-    <tr *ngFor="let armor of selectableArmors">
-      <td>{{armor.name}}</td>
-      <td>{{armor.protection}}</td>
-      <td>{{armor.rule}}</td>
-      <td><button *ngIf="armor != unit.armor" (click)="setArmor(armor)">Use</button></td>
-    </tr>
-  </table>
-</div>
+<mat-card>
+  <mat-card-title>Armures</mat-card-title>
+  <mat-card-content>
+    <table class="armors">
+      <tr>
+        <th>Type d’armure</th>
+        <th>Sauvegarde sur 1D6</th>
+        <th>Règles spéciales</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let armor of selectableArmors">
+        <td>{{armor.name}}</td>
+        <td>{{armor.protection}}</td>
+        <td>{{armor.rule}}</td>
+        <td><button mat-raised-button *ngIf="armor != unit.armor" (click)="setArmor(armor)">Use</button></td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>
