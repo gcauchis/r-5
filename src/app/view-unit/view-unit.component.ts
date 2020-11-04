@@ -1,3 +1,4 @@
+import { Weapon } from './../entities/weapon';
 import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
 import { Unit } from "../entities/unit";
 import { Dice } from "../entities/dice.enum";
@@ -14,6 +15,7 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import htmlToPdfmake from "html-to-pdfmake";
+import { WeaponType } from '../entities/weapon-type.enum';
 
 @Component({
   selector: "app-view-unit",
@@ -33,6 +35,27 @@ export class ViewUnitComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+
+  get meleeWeapons(): Weapon[] {
+
+    let result = this.unit.weapons == null ? null : this.unit.weapons.filter(w => w.weaponType == WeaponType.Melee);
+    return result == null || result.length <= 0 ? null : result;
+  }
+  
+  get shootWeapons(): Weapon[] {
+    let result =  this.unit.weapons == null ? null : this.unit.weapons.filter(w => w.weaponType == WeaponType.Shoot);
+    return result == null || result.length <= 0 ? null : result;
+  }
+  
+  get explosiveWeapons(): Weapon[] {
+    let result =  this.unit.weapons == null ? null : this.unit.weapons.filter(w => w.weaponType == WeaponType.Explosive);
+    return result == null || result.length <= 0 ? null : result;
+  }
+  
+  get grenadeWeapons(): Weapon[] {
+    let result =  this.unit.weapons == null ? null : this.unit.weapons.filter(w => w.weaponType == WeaponType.Grenade);
+    return result == null || result.length <= 0 ? null : result;
+  }
 
   public openPDF(): void {
     var html = htmlToPdfmake(this.unitCard.nativeElement.innerHTML, {

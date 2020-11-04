@@ -31,7 +31,7 @@ export abstract class AbstractCrudService<T extends Identitfiable> {
 
     protected abstract get minId(): number;
 
-    public get soredData(): T[] {
+    public get storedData(): T[] {
         return this.data;
     }
 
@@ -55,6 +55,11 @@ export abstract class AbstractCrudService<T extends Identitfiable> {
             value.id = this.genId();
             this.data.push(value);
         }
+        this.storeData();
+    }
+
+    public remove(value: T): void {
+        this.data = this.data.filter(d => d.id != value.id);
         this.storeData();
     }
 

@@ -1,19 +1,30 @@
 <mat-card>
   <mat-card-title>Armures</mat-card-title>
   <mat-card-content>
-    <table class="armors">
-      <tr>
-        <th>Type d’armure</th>
-        <th>Sauvegarde sur 1D6</th>
-        <th>Règles spéciales</th>
-        <th></th>
-      </tr>
-      <tr *ngFor="let armor of selectableArmors">
-        <td>{{armor.name}}</td>
-        <td>{{armor.protection}}</td>
-        <td>{{armor.rule}}</td>
-        <td><button mat-raised-button *ngIf="armor != unit.armor" (click)="setArmor(armor)">Use</button></td>
-      </tr>
+    <table mat-table [dataSource]="selectableArmors" class="armors">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Type d’armure</th>
+        <td mat-cell *matCellDef="let armor">{{armor.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="protection">
+        <th mat-header-cell *matHeaderCellDef>Sauvegarde sur 1D6</th>
+        <td mat-cell *matCellDef="let armor">{{armor.protection}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="rule">
+        <th mat-header-cell *matHeaderCellDef>Règles spéciales</th>
+        <td mat-cell *matCellDef="let armor">{{armor.rule}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="affect">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let armor"><button mat-raised-button *ngIf="armor != unit.armor" (click)="setArmor(armor)">Use</button></td>
+      </ng-container>
+     
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </mat-card-content>
 </mat-card>

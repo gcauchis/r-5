@@ -1,0 +1,25 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Unitées</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table mat-table [dataSource]="units">
+        
+      <ng-container matColumnDef="unit">
+        <th mat-header-cell *matHeaderCellDef>Unitée</th>
+        <td mat-cell *matCellDef="let unit"><app-view-unit [unit]="unit" [showPdfButton]=false></app-view-unit></td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let unit"><a mat-raised-button routerLink="/editUnit/{{unit.id}}">Edit</a></td>
+      </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-raised-button routerLink="/editUnit">Ajouter une nouvelle unitée</a>
+    </mat-card-actions>
+</mat-card>

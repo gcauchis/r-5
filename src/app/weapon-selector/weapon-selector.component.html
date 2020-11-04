@@ -1,43 +1,89 @@
 <mat-card>
-  <mat-card-title>Armes</mat-card-title>
+  <mat-card-header>
+    <mat-card-title>Armes</mat-card-title>
+  </mat-card-header>
   <mat-card-content>
 
-  <mat-form-field>
-    <mat-label>Type</mat-label>
-    <mat-select [(ngModel)]="currentWeaponType" (ngModelChange)='onChangecurrentWeaponType()'>
-      <mat-option  *ngFor="let weaponType of weaponTypes" [value]="weaponType.value">{{weaponType.key}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <mat-select [(ngModel)]="currentWeaponType" (ngModelChange)='onChangecurrentWeaponType()'>
+        <mat-option *ngFor="let weaponType of weaponTypes" [value]="weaponType.value">{{weaponType.key}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <table class="weapons">				
-    <tr>
-      <th>Type</th>
-      <th *ngIf="currentWeaponType != WeaponType.Melee">Portée (pouces)</th>
-      <th>Puissance</th>
-      <th>Règles spéciales</th>
-      <th *ngIf="currentWeaponType != WeaponType.Melee">Assaut</th>
-      <th *ngIf="currentWeaponType != WeaponType.Melee">Lourd</th>
-      <th *ngIf="currentWeaponType != WeaponType.Melee">Couverture</th>
-      <th *ngIf="currentWeaponType == WeaponType.Explosive ||currentWeaponType == WeaponType.Grenade">Gabarit</th>
-      <th *ngIf="unit">Valeur</th>
-    </tr>
-    <tr *ngFor="let weapon of selectableWeapon">
-      <td>{{weapon.name}}</td>
-      <td *ngIf="currentWeaponType != WeaponType.Melee"><span *ngIf="weapon.range; else NArange">
-        <span *ngIf="weapon.rangeMin">+{{weapon.rangeMin}}'' à </span>{{weapon.range}}''
-        </span><ng-template #NArange>NA</ng-template></td>
-      <td><span *ngIf="weapon.power; else NApower">{{weapon.power}}D<span *ngIf="weapon.superPower">++</span><span *ngIf="weapon.superSuperPower">[++</span></span><ng-template #NApower>NA</ng-template></td>
-      <td>{{weapon.rule}}</td>
-      <td *ngIf="currentWeaponType != WeaponType.Melee">{{weapon.assault}}</td>
-      <td *ngIf="currentWeaponType != WeaponType.Melee">{{weapon.heavy}}</td>
-      <td *ngIf="currentWeaponType != WeaponType.Melee">{{weapon.cover}}</td>
-      <td *ngIf="currentWeaponType == WeaponType.Explosive ||currentWeaponType == WeaponType.Grenade">{{enumUtils.exposiveWeaponSizeToString(weapon.size)}}</td>
-      <td *ngIf="unit">{{priceService.getPrice(weapon, unit)}}</td>
-      <td>
-        <button mat-raised-button *ngIf="enableAdd && unit" (click)="addWeapon(weapon)">Use</button>
-        <a mat-raised-button *ngIf="enableEdit && weapon.editable" routerLink="/editWeapon/{{weapon.id}}">Edit</a>
-      </td>
-    </tr>
-  </table>
-</mat-card-content>
+    <table mat-table [dataSource]="dataSourceWeapons" class="weapons">
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let weapon">{{weapon.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="range">
+        <th mat-header-cell *matHeaderCellDef>Portée (pouces)</th>
+        <td mat-cell *matCellDef="let weapon"><span *ngIf="weapon.range; else NArange">
+            <span *ngIf="weapon.rangeMin">+{{weapon.rangeMin}}'' à </span>{{weapon.range}}''
+          </span>
+          <ng-template #NArange>NA</ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="power">
+        <th mat-header-cell *matHeaderCellDef>Puissance</th>
+        <td mat-cell *matCellDef="let weapon"><span *ngIf="weapon.power; else NApower">{{weapon.power}}D<span
+              *ngIf="weapon.superPower">++</span><span *ngIf="weapon.superSuperPower">[++</span></span>
+          <ng-template #NApower>NA</ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rules">
+        <th mat-header-cell *matHeaderCellDef>Règles spéciales</th>
+        <td mat-cell *matCellDef="let weapon">{{weapon.rule}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="assault">
+        <th mat-header-cell *matHeaderCellDef>Assaut</th>
+        <td mat-cell *matCellDef="let weapon">{{weapon.assault ? "oui" : "non"}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="heavy">
+        <th mat-header-cell *matHeaderCellDef>Lourd</th>
+        <td mat-cell *matCellDef="let weapon">{{weapon.heavy ? "oui" : "non"}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="cover">
+        <th mat-header-cell *matHeaderCellDef>Couverture</th>
+        <td mat-cell *matCellDef="let weapon">{{weapon.cover ? "oui" : "non"}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="size">
+        <th mat-header-cell *matHeaderCellDef>Gabarit</th>
+        <td mat-cell *matCellDef="let weapon"> {{enumUtils.exposiveWeaponSizeToString(weapon.size)}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Valeur</th>
+        <td mat-cell *matCellDef="let weapon">{{priceService.getPrice(weapon, unit)}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actionAdd">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let weapon"><button mat-raised-button (click)="addWeapon(weapon)">Use</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="actionEdit">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let weapon">
+          <a mat-raised-button *ngIf="weapon.editable" routerLink="/editWeapon/{{weapon.id}}">Edit</a>
+          <button mat-mini-fab *ngIf="weapon.editable" (click)="removeWeapon(weapon)" color="warn">x</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-raised-button *ngIf="enableEdit" routerLink="/editWeapon">Ajouter une nouvelle arme</a>
+  </mat-card-actions>
 </mat-card>

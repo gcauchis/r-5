@@ -26,16 +26,16 @@ export class WeaponService extends AbstractCrudService<Weapon>{
   }
 
   public getRules(): string[] {
-    return this.soredData.flatMap(w => w.rule)
+    return this.storedData.flatMap(w => w.rule)
               .filter((value, index, self) => value != "" && self.indexOf(value) === index)
               .sort();
   }
 
   public getWeapons(type: WeaponType = null): Weapon[] {
     if (type != null) {
-      return this.soredData.filter(w => w.weaponType == type);
+      return this.storedData.filter(w => w.weaponType == type);
     } else {
-      return this.soredData;
+      return this.storedData;
     }
   }
 

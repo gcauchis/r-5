@@ -1,3 +1,4 @@
+import { UnitService } from './../unit.service';
 import { Component, OnInit, Output } from "@angular/core";
 import { Unit } from "../entities/unit";
 import { UtilsService } from "../utils.service";
@@ -8,6 +9,7 @@ import { MoveType } from "../entities/move-type.enum";
 import { TacticalRole } from "../entities/tactical-role.enum";
 import { EnumUtilsService } from "../enum-utils.service";
 import { ActivatedRoute } from '@angular/router';
+import { Location } from "@angular/common";
 
 @Component({
   selector: "app-edit-unit",
@@ -27,7 +29,9 @@ export class EditUnitComponent implements OnInit {
   constructor(
               private route: ActivatedRoute,
               private utils: UtilsService,
-              public enumUtils:EnumUtilsService) {
+              public enumUtils:EnumUtilsService,
+              private unitService: UnitService,
+              private location: Location) {
     
     this.dices = this.utils.enumToKeyValue(Dice, enumUtils.diceToString);
     this.unitTypes = this.utils.enumToKeyValue(UnitType,  enumUtils.unitTypeToString);
@@ -42,11 +46,14 @@ export class EditUnitComponent implements OnInit {
 
   getUnit(): void {
     const id = +this.route.snapshot.paramMap.get("id");
-    //if (id == 0) {
+    if (id == 0) {
       this.unit = this.buildBaseUnit();
-    /*} else {
-      this.unitService.getUnit(id).subscribe(unit => (this.unit = unit));
-    }*/
+    } else {
+      this.unit = this.unitService.get(id);
+      if (this.unit == null) {
+        this.unit = this.buildBaseUnit();
+      }
+    }
   }
 
   private buildBaseUnit(): Unit {
@@ -70,6 +77,15 @@ export class EditUnitComponent implements OnInit {
 
   logUnit(){
     console.log(JSON.stringify(this.unit));
+  }
+
+  saveUnit(): void {
+    this.unitService.save(this.unit);
+    this.goBack();
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

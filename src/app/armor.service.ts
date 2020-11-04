@@ -19,13 +19,13 @@ export class ArmorService extends AbstractCrudService<Armor>{
     Object.assign(armors, jsonArmors);
     return armors
   }
-  
+
   protected get minId(): number {
     return 100
   }
 
   public getArmors(): Armor[] {
-    return this.soredData;
+    return this.storedData;
   }
 
 }

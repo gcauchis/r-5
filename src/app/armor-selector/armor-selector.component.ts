@@ -11,6 +11,7 @@ import { Unit } from "../entities/unit";
 export class ArmorSelectorComponent implements OnInit {
   @Input() unit: Unit;
   selectableArmors: Armor[];
+  displayedColumns: string[] = [ 'name', 'protection', 'rule', 'affect' ];
 
   constructor(public armorService: ArmorService) {
     this.selectableArmors = this.armorService.getArmors();

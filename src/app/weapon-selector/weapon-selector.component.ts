@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { WeaponService } from "../weapon.service";
 import { Weapon } from "../entities/weapon";
 import { Unit } from "../entities/unit";
@@ -6,6 +6,8 @@ import { WeaponType } from "../entities/weapon-type.enum";
 import { UtilsService } from "../utils.service";
 import { EnumUtilsService } from "../enum-utils.service";
 import { PriceService } from "../price.service";
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: "app-weapon-selector",
@@ -21,7 +23,10 @@ export class WeaponSelectorComponent implements OnInit {
   /** Pas terrible mais donne acces dans le template */
   WeaponType = WeaponType;
 
-  selectableWeapon: Weapon[];
+  displayedColumns: string[] = [];
+  dataSourceWeapons: MatTableDataSource<Weapon>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   weaponTypes: any[];
 
   constructor(
@@ -35,10 +40,16 @@ export class WeaponSelectorComponent implements OnInit {
       WeaponType,
       enumUtils.weaponTypeToString
     );
-    this.onChangecurrentWeaponType();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.onChangecurrentWeaponType();
+    this.updateDisplayedColumns();
+  }
+
+  ngAfterViewInit() {
+    this.dataSourceWeapons.paginator = this.paginator;
+  }
 
   addWeapon(weapon: Weapon) {
     let weaponToAdd = new Weapon();
@@ -47,9 +58,38 @@ export class WeaponSelectorComponent implements OnInit {
     this.unit.weapons.push(weaponToAdd);
   }
 
+  removeWeapon(weapon: Weapon) {
+    this.weaponService.remove(weapon);
+    this.onChangecurrentWeaponType();
+  }
+
   onChangecurrentWeaponType() {
-    this.selectableWeapon = this.weaponService.getWeapons(
-      this.currentWeaponType
-    );
+    this.dataSourceWeapons = new MatTableDataSource<Weapon>(this.weaponService.getWeapons(this.currentWeaponType));
+    this.dataSourceWeapons.paginator = this.paginator;
+    this.updateDisplayedColumns();
+  }
+
+  updateDisplayedColumns(): void {
+    switch (this.currentWeaponType) {
+      case WeaponType.Melee:
+        this.displayedColumns = ['type', 'power', 'rules' ];
+        break;
+      case WeaponType.Shoot:
+        this.displayedColumns = ['type', 'range', 'power', 'rules', 'assault', 'heavy', 'cover' ];
+        break;
+      case WeaponType.Explosive:
+      case WeaponType.Grenade:
+      default:
+        this.displayedColumns = ['type', 'range', 'power', 'rules', 'assault', 'heavy', 'cover', 'size' ];
+        break;
+    }
+    if (this.unit != null) {
+      this.displayedColumns.push('price');
+      if (this.enableAdd) {
+        this.displayedColumns.push('actionAdd');
+      }
+    } else if (this.enableEdit) {
+      this.displayedColumns.push('actionEdit');
+    }
   }
 }

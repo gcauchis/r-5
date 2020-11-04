@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { WeaponService } from './../weapon.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -34,7 +35,8 @@ export class EditWeaponComponent implements OnInit {
     private route: ActivatedRoute,
     private weaponService: WeaponService,
     private utils: UtilsService,
-    public enumUtils: EnumUtilsService) {
+    public enumUtils: EnumUtilsService,
+    private location:Location) {
     this.weaponTypes = this.utils.enumToKeyValue(
       WeaponType,
       enumUtils.weaponTypeToString
@@ -90,6 +92,7 @@ export class EditWeaponComponent implements OnInit {
       this.weapon.nonLethal = null;
     }
     this.weaponService.saveWeapon(this.weapon);
+    this.goBack();
   }
 
   onChangecurrentWeaponType() {
@@ -104,6 +107,10 @@ export class EditWeaponComponent implements OnInit {
       delete this.weapon.size;
     }
     this.weapon.rule = [];
+  }
+  
+  goBack(): void {
+    this.location.back();
   }
 
 }

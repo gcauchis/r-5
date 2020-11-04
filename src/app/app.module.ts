@@ -13,6 +13,8 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
@@ -28,14 +30,15 @@ import { ArmorSelectorComponent } from './armor-selector/armor-selector.componen
 import { ArmorService } from './armor.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EditWeaponComponent } from './edit-weapon/edit-weapon.component';
+import { ListUnitsComponent } from './list-units/list-units.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/editUnit', pathMatch: 'full'  },
+  { path: '', redirectTo: '/units', pathMatch: 'full'  },
   { path: 'editUnit', component: EditUnitComponent },
   { path: 'editUnit/:id', component: EditUnitComponent },
   { path: 'editWeapon', component: EditWeaponComponent },
   { path: 'editWeapon/:id', component: EditWeaponComponent },
-  { path: 'unit', component: ViewUnitComponent },
+  { path: 'units', component: ListUnitsComponent },
   { path: 'weapons', component: WeaponSelectorComponent},
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -57,9 +60,11 @@ const appRoutes: Routes = [
     MatCardModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
-  declarations: [	
+  declarations: [		
     AppComponent,
     HelloComponent,
     ViewUnitComponent,
@@ -67,7 +72,8 @@ const appRoutes: Routes = [
     WeaponSelectorComponent,
     ArmorSelectorComponent,
     PageNotFoundComponent,
-    EditWeaponComponent
+    EditWeaponComponent,
+    ListUnitsComponent
    ],
   bootstrap: [
     AppComponent
