@@ -1,3 +1,6 @@
+import { ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { UnitService } from './../unit.service';
 import { Component, OnInit } from '@angular/core';
 import { Unit } from '../entities/unit';
@@ -9,15 +12,20 @@ import { Unit } from '../entities/unit';
 })
 export class ListUnitsComponent implements OnInit {
 
-  units: Unit[];
   displayedColumns: string[] = [ 'unit', 'edit' ];
+  dataSourceUnits: MatTableDataSource<Unit>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public unitService: UnitService) {
 
   }
 
   ngOnInit() {
-    this.units = this.unitService.storedData;
+    this.dataSourceUnits = new MatTableDataSource<Unit>(this.unitService.storedData);
+  }
+
+  ngAfterViewInit() {
+    this.dataSourceUnits.paginator = this.paginator;
   }
 
 }

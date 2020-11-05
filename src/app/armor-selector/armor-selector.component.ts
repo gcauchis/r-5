@@ -17,7 +17,8 @@ export class ArmorSelectorComponent implements OnInit {
     this.selectableArmors = this.armorService.getArmors();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   setArmor(armor:Armor) {
     this.unit.armor = armor;
