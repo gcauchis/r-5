@@ -1,3 +1,4 @@
+import { Weapon } from './../entities/weapon';
 import { Unit } from './../entities/unit';
 import { UnitService } from './../unit.service';
 import { Component, OnInit, Output } from "@angular/core";
@@ -12,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from "@angular/common";
 import { FormControl, Validators } from '@angular/forms';
 import { MaxSizeValidator } from '@angular-material-components/file-input';
+import { WeaponType } from '../entities/weapon-type.enum';
 
 @Component({
   selector: "app-edit-unit",
@@ -29,6 +31,8 @@ export class EditUnitComponent implements OnInit {
   TacticalRole = TacticalRole;
 
   accept: string = "image/*";
+
+  displayedWeaponColumns: string[] = [ 'weapon', 'remove' ];
 
   fileControl: FormControl;
   
@@ -103,9 +107,9 @@ export class EditUnitComponent implements OnInit {
       this.unit.mageLevel = 0;
     }
   }
-
-  logUnit(){
-    console.log(JSON.stringify(this.unit));
+  
+  removeWeapon(weapon: Weapon): void {
+    this.unit.weapons = this.unit.weapons.filter(r => r != weapon);
   }
 
   saveUnit(): void {

@@ -84,8 +84,7 @@
       "target": [
         "AppImage",
         "deb",
-        "tar.gz",
-        "apk"
+        "tar.gz"
       ]
     },
     "publish": [

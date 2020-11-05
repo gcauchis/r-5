@@ -91,7 +91,7 @@ export class EditWeaponComponent implements OnInit {
     if (!this.weapon.nonLethal) {
       this.weapon.nonLethal = null;
     }
-    this.weaponService.saveWeapon(this.weapon);
+    this.weaponService.save(this.weapon);
     this.goBack();
   }
 

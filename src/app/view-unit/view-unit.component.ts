@@ -1,11 +1,6 @@
 import { Weapon } from './../entities/weapon';
 import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
 import { Unit } from "../entities/unit";
-import { Dice } from "../entities/dice.enum";
-import { UnitType } from "../entities/unit-type.enum";
-import { TacticalRole } from "../entities/tactical-role.enum";
-import { UnitSize } from "../entities/unit-size.enum";
-import { MoveType } from "../entities/move-type.enum";
 import { EnumUtilsService } from "../enum-utils.service";
 import { PriceService } from "../price.service";
 import { UnitService } from "../unit.service";
@@ -62,7 +57,6 @@ export class ViewUnitComponent implements OnInit {
       window: window,
       tableAutoSize: true
     });
-    console.log(JSON.stringify(html, null, 2));
     pdfMake
       .createPdf({
         content: html,

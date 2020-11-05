@@ -1,7 +1,7 @@
 [
   {"id":1,"name":"Vêtement / sans protection","protection":"Aucune sauvegarde","rule":"Mobile"},
   {"id":2,"name":"Gilet pare-balle / Veste de combat simple / Casque léger","protection":"6+","rule":"Mobile"},
-  {"id":3,"name":"Veste de mitrailleur / pare éclat / Casque et armure","protection":"5+","rule":""},
+  {"id":3,"name":"Veste de mitrailleur / Pare éclat / Casque et armure","protection":"5+","rule":""},
   {"id":4,"name":"Armure légère de combat intégrale","protection":"4+","rule":""},
   {"id":5,"name":"Armure de combat intégrale","protection":"3+","rule":"Endurante"},
   {"id":6,"name":"Armure lourde de combat","protection":"4++","rule":"Endurante"}

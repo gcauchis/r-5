@@ -32,6 +32,7 @@ import { ArmorService } from './armor.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EditWeaponComponent } from './edit-weapon/edit-weapon.component';
 import { ListUnitsComponent } from './list-units/list-units.component';
+import { ViewWeaponComponent } from './view-weapon/view-weapon.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/units', pathMatch: 'full'  },
@@ -75,7 +76,8 @@ const appRoutes: Routes = [
     ArmorSelectorComponent,
     PageNotFoundComponent,
     EditWeaponComponent,
-    ListUnitsComponent
+    ListUnitsComponent,
+    ViewWeaponComponent
    ],
   bootstrap: [
     AppComponent

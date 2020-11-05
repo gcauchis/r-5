@@ -37,7 +37,7 @@
 
       <ng-container matColumnDef="rules">
         <th mat-header-cell *matHeaderCellDef>Règles spéciales</th>
-        <td mat-cell *matCellDef="let weapon">{{weapon.rule}}</td>
+        <td mat-cell *matCellDef="let weapon">{{weapon.rule.join(", ")}}</td>
       </ng-container>
 
       <ng-container matColumnDef="assault">
