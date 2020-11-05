@@ -1,6 +1,6 @@
+import { Unit } from './../entities/unit';
 import { UnitService } from './../unit.service';
 import { Component, OnInit, Output } from "@angular/core";
-import { Unit } from "../entities/unit";
 import { UtilsService } from "../utils.service";
 import { Dice } from "../entities/dice.enum";
 import { UnitType } from "../entities/unit-type.enum";
@@ -10,6 +10,8 @@ import { TacticalRole } from "../entities/tactical-role.enum";
 import { EnumUtilsService } from "../enum-utils.service";
 import { ActivatedRoute } from '@angular/router';
 import { Location } from "@angular/common";
+import { FormControl, Validators } from '@angular/forms';
+import { MaxSizeValidator } from '@angular-material-components/file-input';
 
 @Component({
   selector: "app-edit-unit",
@@ -26,6 +28,13 @@ export class EditUnitComponent implements OnInit {
   /** Pas terrible mais donne acces dans le template */
   TacticalRole = TacticalRole;
 
+  accept: string = "image/*";
+
+  fileControl: FormControl;
+  
+  maxSize= 16 * 1024;
+  imgPath: string;
+
   constructor(
               private route: ActivatedRoute,
               private utils: UtilsService,
@@ -38,10 +47,30 @@ export class EditUnitComponent implements OnInit {
     this.unitSizes = this.utils.enumToKeyValue(UnitSize,  enumUtils.unitSizeToString);
     this.moveTypes = this.utils.enumToKeyValue(MoveType,  enumUtils.moveTypeToString);
     this.tacticalRoles = this.utils.enumToKeyValue(TacticalRole,enumUtils.tacticalRoleToString);
+    
+    this.fileControl = new FormControl(this.imgPath, [
+      Validators.required,
+      MaxSizeValidator(this.maxSize * 1024)
+    ])
   }
 
   ngOnInit() {
     this.getUnit();
+    
+    this.fileControl.valueChanges.subscribe((file: any) => {
+      this.imgPath = file;
+      let fileReader: FileReader = new FileReader();
+      let self = this;
+      fileReader.onloadend = function (x) {
+        let blob = new Blob([fileReader.result], {type: file.type});
+        var readerBlob = new FileReader();
+        readerBlob.readAsDataURL(blob); 
+        readerBlob.onloadend = function() {
+            self.unit.imgBase64 = readerBlob.result;
+        }
+      }
+      fileReader.readAsArrayBuffer(file);
+    })
   }
 
   getUnit(): void {

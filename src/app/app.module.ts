@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
@@ -62,7 +63,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatAutocompleteModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxMatFileInputModule
   ],
   declarations: [		
     AppComponent,

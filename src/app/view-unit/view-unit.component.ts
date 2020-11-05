@@ -28,6 +28,7 @@ export class ViewUnitComponent implements OnInit {
 
   @ViewChild("unitCard") unitCard: ElementRef;
 
+
   constructor(
     public enumUtils: EnumUtilsService,
     public priceService: PriceService,
@@ -37,7 +38,6 @@ export class ViewUnitComponent implements OnInit {
   ngOnInit() {}
 
   get meleeWeapons(): Weapon[] {
-
     let result = this.unit.weapons == null ? null : this.unit.weapons.filter(w => w.weaponType == WeaponType.Melee);
     return result == null || result.length <= 0 ? null : result;
   }

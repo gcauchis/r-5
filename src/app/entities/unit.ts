@@ -35,7 +35,7 @@ export class Unit extends Identitfiable {
   weapons: Weapon[] = [];
   /** The unit armor */
   armor: Armor;
-  /** The image. */
-  img?: Blob;
+  /** The image in base64 format for direct insertion in img src. */
+  imgBase64?: any;
 
 }

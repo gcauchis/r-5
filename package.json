@@ -12,6 +12,7 @@
   "main": "main.js",
   "private": true,
   "dependencies": {
+    "@angular-material-components/file-input": "^4.0.1",
     "@angular/animations": "^10.0.9",
     "@angular/cdk": "^10.2.6",
     "@angular/common": "^10.0.9",
@@ -79,11 +80,12 @@
         "zip"
       ]
     },
-    "linux" : {
+    "linux": {
       "target": [
         "AppImage",
         "deb",
-        "tar.gz"
+        "tar.gz",
+        "apk"
       ]
     },
     "publish": [
