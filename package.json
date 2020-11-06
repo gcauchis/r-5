@@ -89,7 +89,7 @@
       "deleteAppDataOnUninstall": true
     },
     "linux": {
-      "icon": "src/assets/icones/R-5_256x256.ico",
+      "icon": "src/assets/icones/R-5_32x32.png",
       "target": [
         "AppImage",
         "deb",
@@ -97,7 +97,7 @@
       ]
     },
     "mac": {
-      "icon": "src/assets/icones/R-5_256x256.ico"
+      "icon": "src/assets/icones/R-5_512x512.icns"
     },
     "publish": [
       {
