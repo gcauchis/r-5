@@ -71,21 +71,33 @@
     "productName": "R-5",
     "files": [
       "main.js",
-      "dist/demo"
+      "dist/demo",
+      "src/assets",
+      "src/assets/icones"
     ],
     "win": {
+      "icon": "src/assets/icones/R-5_256x256.ico",
       "target": [
         "nsis",
         "portable",
         "zip"
       ]
     },
+    "nsis": {
+      "installerIcon": "src/assets/icones/R-5_256x256.ico",
+      "installerHeaderIcon": "src/assets/icones/R-5_256x256.ico",
+      "deleteAppDataOnUninstall": true
+    },
     "linux": {
+      "icon": "src/assets/icones/R-5_256x256.ico",
       "target": [
         "AppImage",
         "deb",
         "tar.gz"
       ]
+    },
+    "mac": {
+      "icon": "src/assets/icones/R-5_256x256.ico"
     },
     "publish": [
       {
