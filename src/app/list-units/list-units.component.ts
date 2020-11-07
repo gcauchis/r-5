@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { UnitService } from './../unit.service';
 import { Component, OnInit } from '@angular/core';
-import { Unit } from '../entities/unit';
+import { Unit } from "../entities/Unit";
 
 @Component({
   selector: 'app-list-units',

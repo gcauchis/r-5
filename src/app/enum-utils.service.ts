@@ -1,3 +1,4 @@
+import { VehicleType } from './entities/vehicle-type.enum';
 import { Injectable } from '@angular/core';
 import { Dice } from './entities/dice.enum';
 import { UnitType } from './entities/unit-type.enum';
@@ -114,5 +115,18 @@ export class EnumUtilsService {
           return null;
       }
   }
+
+  public vehicleTypeToString(value:any) : string {
+     switch(value) {
+       case VehicleType.TroopTransport:
+         return "Transport de troupe";
+       case VehicleType.Tank:
+         return "Blindée";
+       case VehicleType.Individual:
+         return "Individuel";
+       default:
+         return null;
+     }
+ }
 
 }

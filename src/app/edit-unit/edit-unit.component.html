@@ -14,13 +14,7 @@
           <textarea matInput [(ngModel)]="unit.desc" placeholder="Description"></textarea>
         </mat-form-field><br>
 
-        <mat-form-field>
-          <mat-label>Image</mat-label>
-          <ngx-mat-file-input [formControl]="fileControl" multiple=false [accept]="accept">
-            <mat-icon ngxMatFileInputIcon>folder</mat-icon>
-          </ngx-mat-file-input>
-        </mat-form-field>
-        <img *ngIf="unit.imgBase64" src="{{unit.imgBase64}}" alt="image" class="unit"><br>
+        <app-edit-image [imageContainer]="unit"></app-edit-image><br>
 
         <mat-form-field>
           <mat-label>Dé Qualité Martial (DQM)</mat-label>

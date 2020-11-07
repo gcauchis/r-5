@@ -1,4 +1,4 @@
-export class Identitfiable {
+export interface Identitfiable {
   /** The id */
   id?: number;
 }

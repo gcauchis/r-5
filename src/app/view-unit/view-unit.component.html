@@ -1,28 +1,20 @@
-<div *ngIf="unit" #unitCard>
-  <table class="unitcard">
-    <tr>
-      <td style="width: 75%;">
-        <p style="margin:0px"><span class="unit-title">{{unit.name}}/{{enumUtils.tacticalRoleToString(unit.tacticalRole)}}</span></p>
-        <p style="margin:0px"><span class="unit-title">Mouvement :</span> {{unit.tacticalMove}}’’/{{unitService.getRunMove(unit)}}’’ +1D4’’</p>
-        <p style="margin:0px"><span class="unit-title">DQM :</span> {{enumUtils.diceToString(unit.dqm)}}</p>
-        <div style="margin:0px" *ngIf="meleeWeapons"><span class="unit-title">Mélée :</span>
-          <app-view-weapon *ngFor="let weapon of meleeWeapons" [weapon]="weapon" [unit]="unit"></app-view-weapon>
-        </div>
-        <div style="margin:0px" *ngIf="shootWeapons"><span class="unit-title">Tir :</span>
-          <app-view-weapon *ngFor="let weapon of shootWeapons" [weapon]="weapon" [unit]="unit"></app-view-weapon>
-        </div>
-        <div style="margin:0px" *ngIf="explosiveWeapons"><span class="unit-title">Explosif :</span>
-          <app-view-weapon *ngFor="let weapon of explosiveWeapons" [weapon]="weapon" [unit]="unit"></app-view-weapon>
-        </div>
-        <div style="margin:0px" *ngIf="grenadeWeapons"><span class="unit-title">Grenade :</span>
-          <app-view-weapon *ngFor="let weapon of grenadeWeapons" [weapon]="weapon" [unit]="unit"></app-view-weapon>
-        </div>
-        <p style="margin:0px"><span class="unit-title">Sauvegarde :</span><span *ngIf="unit.armor; else noProtection"> {{unit.armor.protection}}</span><ng-template #noProtection> Aucune sauvegarde</ng-template> <span class="unit-title"> / PV :</span> {{unit.pv}}</p>
-        <p style="margin:0px"><span class="unit-title">Prix :</span> {{priceService.compute(unit)}}</p>
-        <p style="margin:0px" *ngIf="unit.desc"><span class="unit-title">Description :</span> {{unit.desc}}</p>
-      </td>
-      <td align="right" text-align=""><img *ngIf="unit.imgBase64" src="{{unit.imgBase64}}" alt="image" class="unitimg"></td>
-    </tr>
-  </table>
-</div>
-<button mat-raised-button *ngIf="showPdfButton" (click)="openPDF()">PDF</button>
+<app-view-imaged [imageContainer]="unit" [showPdfButton]="showPdfButton" [pdfName]="unit.name">
+  <p style="margin:0px"><span class="unit-title">{{unit.name}}/{{enumUtils.tacticalRoleToString(unit.tacticalRole)}}</span></p>
+  <p style="margin:0px"><span class="unit-title">Mouvement :</span> {{unit.tacticalMove}}’’/{{unitService.getRunMove(unit)}}’’ +1D4’’</p>
+  <p style="margin:0px"><span class="unit-title">DQM :</span> {{enumUtils.diceToString(unit.dqm)}}</p>
+  <div style="margin:0px" *ngIf="meleeWeapons"><span class="unit-title">Mélée :</span>
+    <app-view-weapon *ngFor="let weapon of meleeWeapons" [weapon]="weapon" [unit]="unit"></app-view-weapon>
+  </div>
+  <div style="margin:0px" *ngIf="shootWeapons"><span class="unit-title">Tir :</span>
+    <app-view-weapon *ngFor="let weapon of shootWeapons" [weapon]="weapon" [unit]="unit"></app-view-weapon>
+  </div>
+  <div style="margin:0px" *ngIf="explosiveWeapons"><span class="unit-title">Explosif :</span>
+    <app-view-weapon *ngFor="let weapon of explosiveWeapons" [weapon]="weapon" [unit]="unit"></app-view-weapon>
+  </div>
+  <div style="margin:0px" *ngIf="grenadeWeapons"><span class="unit-title">Grenade :</span>
+    <app-view-weapon *ngFor="let weapon of grenadeWeapons" [weapon]="weapon" [unit]="unit"></app-view-weapon>
+  </div>
+  <p style="margin:0px"><span class="unit-title">Sauvegarde :</span><span *ngIf="unit.armor; else noProtection"> {{unit.armor.protection}}</span><ng-template #noProtection> Aucune sauvegarde</ng-template> <span class="unit-title"> / PV :</span> {{unit.pv}}</p>
+  <p style="margin:0px"><span class="unit-title">Prix :</span> {{priceService.compute(unit)}}</p>
+  <p style="margin:0px" *ngIf="unit.desc"><span class="unit-title">Description :</span> {{unit.desc}}</p>
+</app-view-imaged>

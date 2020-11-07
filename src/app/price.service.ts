@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Weapon } from "./entities/weapon";
-import { Unit } from "./entities/unit";
+import { Unit } from "./entities/Unit.1";
 import { Dice } from "./entities/dice.enum";
 import { WeaponType } from "./entities/weapon-type.enum";
 import { UnitSize } from "./entities/unit-size.enum";

@@ -32,6 +32,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { EditWeaponComponent } from './edit-weapon/edit-weapon.component';
 import { ListUnitsComponent } from './list-units/list-units.component';
 import { ViewWeaponComponent } from './view-weapon/view-weapon.component';
+import { EditVehicleComponent } from './edit-vehicle/edit-vehicle.component';
+import { EditImageComponent } from './edit-image/edit-image.component';
+import { ViewImagedComponent } from './view-imaged/view-imaged.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/units', pathMatch: 'full'  },
@@ -67,7 +70,7 @@ const appRoutes: Routes = [
     MatPaginatorModule,
     NgxMatFileInputModule
   ],
-  declarations: [		
+  declarations: [				
     AppComponent,
     ViewUnitComponent,
     EditUnitComponent,
@@ -76,7 +79,10 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     EditWeaponComponent,
     ListUnitsComponent,
-    ViewWeaponComponent
+    ViewWeaponComponent,
+      EditVehicleComponent,
+      EditImageComponent,
+      ViewImagedComponent
    ],
   bootstrap: [
     AppComponent

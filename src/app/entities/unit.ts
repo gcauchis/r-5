@@ -1,3 +1,4 @@
+import { ImageContainer } from './image-container';
 import { Identitfiable } from './identitfiable';
 import { Dice } from "./dice.enum";
 import { UnitType } from "./unit-type.enum";
@@ -8,7 +9,9 @@ import { Weapon } from "./weapon";
 import { Armor } from "./armor";
 
 /** The representation of a figurine. */
-export class Unit extends Identitfiable {
+export class Unit implements Identitfiable, ImageContainer {
+  /** The id */
+  id?: number;
   /** The name (60 char) */
   name: string;
   /** The description (500 char) */
