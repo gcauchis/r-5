@@ -9,6 +9,7 @@ import { TacticalRole } from "./entities/tactical-role.enum";
 import { MoveType } from "./entities/move-type.enum";
 import { UnitService } from "./unit.service";
 import { ExposiveWeaponSize } from "./entities/exposive-weapon-size.enum";
+import { Vehicle } from './entities/vehicle';
 
 const DICE_VALUE: number = 10;
 
@@ -132,9 +133,12 @@ export class PriceService {
     return Math.round(result);
   }
 
-  public compute(unit: Unit): number {
-    let price = this.computeBase(unit);
-    for (let weapon of unit.weapons) price += this.getPrice(weapon, unit);
+  public compute(item: any): number {
+    let price = 0
+    if (item instanceof Unit) {
+      price = this.computeBase(item);
+      for (let weapon of item.weapons) price += this.getPrice(weapon, item);
+    }
     return price;
   }
 }

@@ -35,6 +35,7 @@ import { ViewWeaponComponent } from './view-weapon/view-weapon.component';
 import { EditVehicleComponent } from './edit-vehicle/edit-vehicle.component';
 import { EditImageComponent } from './edit-image/edit-image.component';
 import { ViewImagedComponent } from './view-imaged/view-imaged.component';
+import { ViewVehicleComponent } from './view-vehicle/view-vehicle.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/units', pathMatch: 'full'  },
@@ -44,7 +45,9 @@ const appRoutes: Routes = [
   { path: 'editWeapon', component: EditWeaponComponent },
   { path: 'editWeapon/:id', component: EditWeaponComponent },
   { path: 'units', component: ListUnitsComponent },
-  { path: 'weapons', component: WeaponSelectorComponent},
+  { path: 'weapons', component: WeaponSelectorComponent },
+  { path: 'editVehicle', component: EditVehicleComponent },
+  { path: 'editVehicle/:id', component: EditVehicleComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -82,7 +85,8 @@ const appRoutes: Routes = [
     ViewWeaponComponent,
       EditVehicleComponent,
       EditImageComponent,
-      ViewImagedComponent
+      ViewImagedComponent,
+      ViewVehicleComponent
    ],
   bootstrap: [
     AppComponent

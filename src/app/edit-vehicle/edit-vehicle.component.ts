@@ -36,6 +36,7 @@ export class EditVehicleComponent implements OnInit {
      }
 
   ngOnInit() {
+    this.getVehicle();
   }
 
   getVehicle(): void {
@@ -53,7 +54,14 @@ export class EditVehicleComponent implements OnInit {
   private buildBaseVehicle(): Vehicle {
     let vehicle = new Vehicle();
     vehicle.armor = Dice.D8;
+    vehicle.structure = 1;
+    vehicle.type = VehicleType.Tank;
     return vehicle;
+  }
+
+  save(): void {
+    this.vehicleService.save(this.vehicle);
+    this.goBack();
   }
 
   goBack(): void {

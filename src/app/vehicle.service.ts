@@ -21,4 +21,8 @@ export class VehicleService extends AbstractCrudService<Vehicle> {
   protected get minId(): number {
     return 100;
   }
+
+  public getRunMove(vehicle: Vehicle): number {
+    return Math.round(vehicle.tacticalMove * 1.6);
+  }
 }
