@@ -27,6 +27,8 @@ export class WeaponSelectorComponent implements OnInit {
   dataSourceWeapons: MatTableDataSource<Weapon>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  nameFilter: string;
+
   weaponTypes: any[];
 
   constructor(
@@ -56,6 +58,7 @@ export class WeaponSelectorComponent implements OnInit {
     Object.assign(weaponToAdd, weapon);
     weaponToAdd.id = null;
     this.unit.weapons.push(weaponToAdd);
+    this.unit.weapons = this.unit.weapons;
   }
 
   removeWeapon(weapon: Weapon) {
@@ -66,6 +69,9 @@ export class WeaponSelectorComponent implements OnInit {
   onChangecurrentWeaponType() {
     this.dataSourceWeapons = new MatTableDataSource<Weapon>(this.weaponService.getWeapons(this.currentWeaponType));
     this.dataSourceWeapons.paginator = this.paginator;
+    this.dataSourceWeapons.filterPredicate =
+     (data: Weapon, filter: string) => filter == null || filter.trim() == ""
+      ? true : data.name.toLowerCase().indexOf(filter.toLowerCase()) != -1;
     this.updateDisplayedColumns();
   }
 

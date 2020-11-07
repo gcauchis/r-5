@@ -12,7 +12,7 @@ import { Unit } from '../entities/unit';
 })
 export class ListUnitsComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'unit', 'edit' ];
+  displayedColumns: string[] = [ 'unit', 'edit', 'view' ];
   dataSourceUnits: MatTableDataSource<Unit>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

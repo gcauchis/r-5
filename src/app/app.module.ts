@@ -18,7 +18,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 import { AppComponent } from './app.component';
-import { HelloComponent } from './hello.component';
 import { ViewUnitComponent } from './view-unit/view-unit.component';
 import { UnitService } from './unit.service';
 import { EditUnitComponent } from './edit-unit/edit-unit.component';
@@ -38,6 +37,7 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/units', pathMatch: 'full'  },
   { path: 'editUnit', component: EditUnitComponent },
   { path: 'editUnit/:id', component: EditUnitComponent },
+  { path: 'viewUnit/:id', component: ViewUnitComponent },
   { path: 'editWeapon', component: EditWeaponComponent },
   { path: 'editWeapon/:id', component: EditWeaponComponent },
   { path: 'units', component: ListUnitsComponent },
@@ -69,7 +69,6 @@ const appRoutes: Routes = [
   ],
   declarations: [		
     AppComponent,
-    HelloComponent,
     ViewUnitComponent,
     EditUnitComponent,
     WeaponSelectorComponent,

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Weapon } from './../entities/weapon';
 import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
 import { Unit } from "../entities/unit";
@@ -25,12 +26,18 @@ export class ViewUnitComponent implements OnInit {
 
 
   constructor(
+    private route: ActivatedRoute,
     public enumUtils: EnumUtilsService,
     public priceService: PriceService,
     public unitService: UnitService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const id = +this.route.snapshot.paramMap.get("id");
+    if (id != 0) {
+      this.unit = this.unitService.get(id);
+    }
+  }
 
   get meleeWeapons(): Weapon[] {
     let result = this.unit.weapons == null ? null : this.unit.weapons.filter(w => w.weaponType == WeaponType.Melee);
@@ -57,15 +64,27 @@ export class ViewUnitComponent implements OnInit {
       window: window,
       tableAutoSize: true
     });
+
+    // on retire la bordure du tableau
+    html[0].layout = 'noBorders';
+    // on fait tenir l'image dans une caree de 150
+    html[0].table.body[0][1].stack[0].fit = [150, 150];
     pdfMake
       .createPdf({
         content: html,
         styles: {
           "unit-title": {
             bold: true
+          },
+          "unitcard": {
+            width: "100%",
+            layout: 'noBorders'
+          },
+          "unitimg": {
+            fit: ['25%', '25%']
           }
         }
       })
-      .download();
+      .download(this.unit.name + ".pdf");
   }
 }

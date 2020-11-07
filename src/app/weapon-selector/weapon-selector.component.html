@@ -10,6 +10,11 @@
         <mat-option *ngFor="let weaponType of weaponTypes" [value]="weaponType.value">{{weaponType.key}}</mat-option>
       </mat-select>
     </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Filtrage nom</mat-label>
+      <input matInput [(ngModel)]="dataSourceWeapons.filter" placeholder="Nom"/>
+    </mat-form-field>
 
     <table mat-table [dataSource]="dataSourceWeapons" class="weapons">
 
