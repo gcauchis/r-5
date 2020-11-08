@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { ArmorService } from "../armor.service";
 import { Armor } from "../entities/armor";
-import { Unit } from "../entities/Unit";
+import { Unit } from "../entities/unit";
 
 @Component({
   selector: "app-armor-selector",
