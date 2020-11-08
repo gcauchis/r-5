@@ -47,7 +47,7 @@ export class EditUnitComponent implements OnInit {
 
   ngOnInit() {
     this.getUnit();
-      }
+  }
 
   getUnit(): void {
     const id = +this.route.snapshot.paramMap.get("id");

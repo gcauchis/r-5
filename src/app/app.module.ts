@@ -36,14 +36,19 @@ import { EditVehicleComponent } from './edit-vehicle/edit-vehicle.component';
 import { EditImageComponent } from './edit-image/edit-image.component';
 import { ViewImagedComponent } from './view-imaged/view-imaged.component';
 import { ViewVehicleComponent } from './view-vehicle/view-vehicle.component';
+import { EditArmyComponent } from './edit-army/edit-army.component';
+import { ListArmyComponent } from './list-army/list-army.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/units', pathMatch: 'full'  },
+  { path: '', redirectTo: '/armies', pathMatch: 'full'  },
   { path: 'editUnit', component: EditUnitComponent },
   { path: 'editUnit/:id', component: EditUnitComponent },
+  { path: 'editArmy', component: EditArmyComponent },
+  { path: 'editArmy/:id', component: EditArmyComponent },
   { path: 'viewUnit/:id', component: ViewUnitComponent },
   { path: 'editWeapon', component: EditWeaponComponent },
   { path: 'editWeapon/:id', component: EditWeaponComponent },
+  { path: 'armies', component: ListArmyComponent },
   { path: 'units', component: ListUnitsComponent },
   { path: 'weapons', component: WeaponSelectorComponent },
   { path: 'editVehicle', component: EditVehicleComponent },
@@ -73,7 +78,7 @@ const appRoutes: Routes = [
     MatPaginatorModule,
     NgxMatFileInputModule
   ],
-  declarations: [				
+  declarations: [					
     AppComponent,
     ViewUnitComponent,
     EditUnitComponent,
@@ -86,7 +91,9 @@ const appRoutes: Routes = [
       EditVehicleComponent,
       EditImageComponent,
       ViewImagedComponent,
-      ViewVehicleComponent
+      ViewVehicleComponent,
+      EditArmyComponent,
+      ListArmyComponent
    ],
   bootstrap: [
     AppComponent
