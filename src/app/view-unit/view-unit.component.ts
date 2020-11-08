@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Weapon } from './../entities/weapon';
 import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
-import { Unit } from "../entities/Unit";
+import { Unit } from "../entities/unit";
 import { EnumUtilsService } from "../enum-utils.service";
 import { PriceService } from "../price.service";
 import { UnitService } from "../unit.service";
@@ -16,9 +16,6 @@ import { WeaponType } from '../entities/weapon-type.enum';
 export class ViewUnitComponent implements OnInit {
   @Input() unit: Unit;
   @Input() showPdfButton: boolean = false;
-
-  @ViewChild("unitCard") unitCard: ElementRef;
-
 
   constructor(
     private route: ActivatedRoute,

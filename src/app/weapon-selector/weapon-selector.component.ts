@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { WeaponService } from "../weapon.service";
 import { Weapon } from "../entities/weapon";
-import { Unit } from "../entities/Unit";
+import { Unit } from "../entities/unit";
 import { WeaponType } from "../entities/weapon-type.enum";
 import { UtilsService } from "../utils.service";
 import { EnumUtilsService } from "../enum-utils.service";

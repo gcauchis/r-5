@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { ElementRef } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { ImageContainer } from './../entities/image-container';

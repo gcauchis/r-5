@@ -1,5 +1,5 @@
 import { Weapon } from './../entities/weapon';
-import { Unit } from "./../entities/Unit";
+import { Unit } from "./../entities/unit";
 import { UnitService } from './../unit.service';
 import { Component, OnInit, Output } from "@angular/core";
 import { UtilsService } from "../utils.service";
@@ -11,8 +11,6 @@ import { TacticalRole } from "../entities/tactical-role.enum";
 import { EnumUtilsService } from "../enum-utils.service";
 import { ActivatedRoute } from '@angular/router';
 import { Location } from "@angular/common";
-import { FormControl, Validators } from '@angular/forms';
-import { MaxSizeValidator } from '@angular-material-components/file-input';
 
 
 @Component({
