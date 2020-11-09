@@ -24,8 +24,8 @@
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let unit">
           <mat-form-field style="width: 80px;">
-            <mat-label>Nombre</mat-label>
-            <input matInput type="number" min="0" [ngModel]="links[unit.id]" placeholder="Nombre" (ngModelChange)="updateLinks()" />
+            <mat-label>Nombre</mat-label> 
+            <input matInput type="number" min="0" [ngModel]="links[unit.id]" placeholder="Nombre" (ngModelChange)="updateLinks(unit.id, $event)" />
           </mat-form-field></td>
       </ng-container>
         

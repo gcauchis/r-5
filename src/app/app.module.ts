@@ -38,14 +38,16 @@ import { ViewImagedComponent } from './view-imaged/view-imaged.component';
 import { ViewVehicleComponent } from './view-vehicle/view-vehicle.component';
 import { EditArmyComponent } from './edit-army/edit-army.component';
 import { ListArmyComponent } from './list-army/list-army.component';
+import { ViewArmyComponent } from './view-army/view-army.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/armies', pathMatch: 'full'  },
   { path: 'editUnit', component: EditUnitComponent },
   { path: 'editUnit/:id', component: EditUnitComponent },
+  { path: 'viewUnit/:idUnit', component: ViewUnitComponent },
   { path: 'editArmy', component: EditArmyComponent },
   { path: 'editArmy/:id', component: EditArmyComponent },
-  { path: 'viewUnit/:id', component: ViewUnitComponent },
+  { path: 'viewArmy/:idArmy', component: ViewArmyComponent },
   { path: 'editWeapon', component: EditWeaponComponent },
   { path: 'editWeapon/:id', component: EditWeaponComponent },
   { path: 'armies', component: ListArmyComponent },
@@ -93,7 +95,8 @@ const appRoutes: Routes = [
       ViewImagedComponent,
       ViewVehicleComponent,
       EditArmyComponent,
-      ListArmyComponent
+      ListArmyComponent,
+      ViewArmyComponent
    ],
   bootstrap: [
     AppComponent

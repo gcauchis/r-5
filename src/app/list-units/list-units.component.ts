@@ -14,7 +14,7 @@ import { Army } from '../entities/army';
 })
 export class ListUnitsComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'unit', 'edit', 'view' ];
+  displayedColumns: string[] = [];
   dataSourceUnits: MatTableDataSource<Unit>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -30,7 +30,7 @@ export class ListUnitsComponent implements OnInit {
     if (this.army == null) {
       this.displayedColumns = [ 'unit', 'edit', 'view' ];
     } else {
-      this.dataSourceUnits.data.forEach(u => this.links[u.id] = 0);
+      this.unitService.storedData.forEach(u => this.links[u.id] = 0);
       this.army.units.forEach(l => this.links[l.id] = l.count);
       this.displayedColumns = [ 'unit', 'army', 'edit' ];
     }
@@ -40,12 +40,11 @@ export class ListUnitsComponent implements OnInit {
     this.dataSourceUnits.paginator = this.paginator;
   }
 
-  updateLinks(): void {
-    console.log(this.links);
+  updateLinks(id:number, value:number): void {
+    this.links[id] = value;
     this.army.units = [];
     this.unitService.storedData.forEach(unit => {
       if (this.links[unit.id] > 0) {
-        console.log("add " + unit.id + " to army (" + this.links[unit.id] +")");
         let link = new ArmyLink();
         link.id = unit.id;
         link.count = this.links[unit.id];

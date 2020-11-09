@@ -25,7 +25,7 @@ export class ViewUnitComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get("id");
+    const id = +this.route.snapshot.paramMap.get("idUnit");
     if (id != 0) {
       this.unit = this.unitService.get(id);
     }

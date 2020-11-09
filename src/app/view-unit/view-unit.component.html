@@ -1,4 +1,4 @@
-<app-view-imaged [imageContainer]="unit" [showPdfButton]="showPdfButton" [pdfName]="unit.name">
+<app-view-imaged *ngIf="unit" [imageContainer]="unit" [showPdfButton]="showPdfButton" [pdfName]="unit.name">
   <p style="margin:0px"><span class="unit-title">{{unit.name}} / {{enumUtils.tacticalRoleToString(unit.tacticalRole)}}</span></p>
   <p style="margin:0px"><span class="unit-title">Mouvement :</span> {{unit.tacticalMove}}’’/{{unitService.getRunMove(unit)}}’’ +1D4’’</p>
   <p style="margin:0px"><span class="unit-title">DQM :</span> {{enumUtils.diceToString(unit.dqm)}}</p>

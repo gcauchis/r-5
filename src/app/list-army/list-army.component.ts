@@ -12,7 +12,7 @@ import { Army } from '../entities/army';
 })
 export class ListArmyComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'army', 'edit', 'remove'];
+  displayedColumns: string[] = [ 'army', 'edit', 'view', 'remove'];
   dataSourceArmies: MatTableDataSource<Army>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
