@@ -21,12 +21,23 @@ export class ListUnitsComponent implements OnInit {
   @Input() army:Army
   links:any = {};
 
+  nameFilter: string;
+  factionFilter: string;
+
+  _filter = (data: Unit, filter: string) => {
+    let nameMatch = this.nameFilter == null || this.nameFilter.trim() == "" ? true : data.name.toLowerCase().indexOf(this.nameFilter.toLowerCase()) != -1;
+    let factionMatch = this.factionFilter == null || this.factionFilter.trim() == "" ? true : data.faction != null && data.faction.toLowerCase().indexOf(this.factionFilter.toLowerCase()) != -1;
+    return nameMatch && factionMatch;
+  };
+
+
   constructor(public unitService: UnitService) {
 
   }
 
   ngOnInit() {
     this.dataSourceUnits = new MatTableDataSource<Unit>(this.unitService.storedData);
+    this.dataSourceUnits.filterPredicate = this._filter;
     if (this.army == null) {
       this.displayedColumns = [ 'unit', 'edit', 'view' ];
     } else {
@@ -38,6 +49,10 @@ export class ListUnitsComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSourceUnits.paginator = this.paginator;
+  }
+  
+  onChangeFilter() {
+    this.dataSourceUnits.filter = this.nameFilter + this.factionFilter;
   }
 
   updateLinks(id:number, value:number): void {

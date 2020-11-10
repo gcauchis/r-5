@@ -23,4 +23,10 @@ export class UnitService extends AbstractCrudService<Unit> {
     return Math.round(unit.tacticalMove * 1.6);
   }
 
+  public getFactions(): string[] {
+    return this.storedData.map(u => u.faction)
+              .filter((value, index, self) => value && value != "" && self.indexOf(value) === index)
+              .sort();
+  }
+
 }

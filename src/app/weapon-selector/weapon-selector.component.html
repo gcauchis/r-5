@@ -13,7 +13,7 @@
     
     <mat-form-field>
       <mat-label>Filtrage nom</mat-label>
-      <input matInput [(ngModel)]="dataSourceWeapons.filter" placeholder="Nom"/>
+      <input matInput [(ngModel)]="nameFilter" placeholder="Nom" (ngModelChange)='onChangeFilter()' />
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSourceWeapons" class="weapons">

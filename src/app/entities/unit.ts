@@ -14,6 +14,8 @@ export class Unit implements Identitfiable, ImageContainer {
   id?: number;
   /** The name (60 char) */
   name: string;
+  /** The faction (500 char) */
+  faction?: string;
   /** The description (500 char) */
   desc: string;
   /** Dice Martial quality (DQM) */

@@ -5,6 +5,16 @@
       <mat-card-content>
 
         <mat-form-field class="unit-full-width">
+          <mat-label>Camps</mat-label>
+          <input matInput type="text" [(ngModel)]="unit.faction"
+                [formControl]="factionsControl" [matAutocomplete]="auto"
+                placeholder="Camps" />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let faction of factionsFilteredOptions | async" [value]="faction">{{faction}}</mat-option>
+          </mat-autocomplete>
+        </mat-form-field><br>
+
+        <mat-form-field class="unit-full-width">
           <mat-label>Nom</mat-label>
           <input matInput [(ngModel)]="unit.name" placeholder="Nom" />
         </mat-form-field><br>

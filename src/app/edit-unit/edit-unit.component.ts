@@ -1,3 +1,5 @@
+import { startWith, map } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 import { Weapon } from './../entities/weapon';
 import { Unit } from "./../entities/unit";
 import { UnitService } from './../unit.service';
@@ -11,6 +13,7 @@ import { TacticalRole } from "../entities/tactical-role.enum";
 import { EnumUtilsService } from "../enum-utils.service";
 import { ActivatedRoute } from '@angular/router';
 import { Location } from "@angular/common";
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -27,6 +30,10 @@ export class EditUnitComponent implements OnInit {
   tacticalRoles: any[];
   /** Pas terrible mais donne acces dans le template */
   TacticalRole = TacticalRole;
+
+  factions: string[];
+  factionsControl = new FormControl();
+  factionsFilteredOptions: Observable<string[]>;
 
   displayedWeaponColumns: string[] = [ 'weapon', 'remove' ];
 
@@ -47,6 +54,18 @@ export class EditUnitComponent implements OnInit {
 
   ngOnInit() {
     this.getUnit();
+    this.factions = this.unitService.getFactions();
+    this.factionsFilteredOptions = this.factionsControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filterFaction(value))
+      );
+  }
+  
+
+  private _filterFaction(value: string): string[] {
+    const filterFaction = value.toLowerCase();
+    return this.factions.filter(faction => faction.toLowerCase().includes(filterFaction));
   }
 
   getUnit(): void {

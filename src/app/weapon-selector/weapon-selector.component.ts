@@ -28,6 +28,8 @@ export class WeaponSelectorComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   nameFilter: string;
+  _filter = (data: Weapon, filter: string) => this.nameFilter == null || this.nameFilter.trim() == ""
+      ? true : data.name.toLowerCase().indexOf(this.nameFilter.toLowerCase()) != -1;
 
   weaponTypes: any[];
 
@@ -69,10 +71,13 @@ export class WeaponSelectorComponent implements OnInit {
   onChangecurrentWeaponType() {
     this.dataSourceWeapons = new MatTableDataSource<Weapon>(this.weaponService.getWeapons(this.currentWeaponType));
     this.dataSourceWeapons.paginator = this.paginator;
-    this.dataSourceWeapons.filterPredicate =
-     (data: Weapon, filter: string) => filter == null || filter.trim() == ""
-      ? true : data.name.toLowerCase().indexOf(filter.toLowerCase()) != -1;
+    this.dataSourceWeapons.filterPredicate = this._filter;
+    this.nameFilter = "";
     this.updateDisplayedColumns();
+  }
+
+  onChangeFilter() {
+    this.dataSourceWeapons.filter = this.nameFilter;
   }
 
   updateDisplayedColumns(): void {
