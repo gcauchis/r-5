@@ -16,6 +16,7 @@ import { WeaponType } from '../entities/weapon-type.enum';
 export class ViewUnitComponent implements OnInit {
   @Input() unit: Unit;
   @Input() showPdfButton: boolean = false;
+  @Input() unitCount: number;
 
   constructor(
     private route: ActivatedRoute,

@@ -1,9 +1,7 @@
-<div *ngIf="army">
+<div *ngIf="army" #armyCard>
     <p style="margin:0px"><span class="unit-title">{{army.name}}</span></p>
-    <table class="units">
-        <tr *ngFor="let unit of units">
-            <td><app-view-unit [unit]="unit"></app-view-unit></td>
-            <td>{{unitsCount[unit.id]}}</td>
-        </tr>
-    </table>
+    <div *ngFor="let unit of units" class="unit">
+        <app-view-unit [unit]="unit" [unitCount]="unitsCount[unit.id]"></app-view-unit>
+    </div>
 </div>
+<button mat-raised-button (click)="openPDF()">PDF</button>

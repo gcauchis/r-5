@@ -5,3 +5,7 @@
 table.units {
     width: 100%;
 }
+
+.unit {
+  margin-bottom: 30px;
+}
