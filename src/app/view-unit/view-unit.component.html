@@ -1,7 +1,7 @@
 <app-view-imaged *ngIf="unit" [imageContainer]="unit" [showPdfButton]="showPdfButton" [pdfName]="unit.name">
   <p style="margin:0px">
     <span class="unit-title">{{unit.name}} / {{enumUtils.tacticalRoleToString(unit.tacticalRole)}} <span *ngIf="unit.faction"> ({{unit.faction}})</span></span>
-    <span *ngIf="unitCount"><span class="unit-title" style="padding-left: 80px;">Nbr :</span> {{unitCount}}</span>
+    <span *ngIf="unitCount" class="unit-number"><span class="unit-title"> Nbr :</span> {{unitCount}}</span>
   </p>
   <p style="margin:0px"><span class="unit-title">Mouvement :</span> {{unit.tacticalMove}}’’/{{unitService.getRunMove(unit)}}’’ +1D4’’</p>
   <p style="margin:0px"><span class="unit-title">DQM :</span> {{enumUtils.diceToString(unit.dqm)}}</p>

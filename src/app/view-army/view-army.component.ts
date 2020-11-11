@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { ElementRef } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { UnitService } from './../unit.service';
@@ -54,8 +55,6 @@ export class ViewArmyComponent implements OnInit {
     }
   }
 
-  
-  
   public openPDF(): void {
     var html = htmlToPdfmake(this.armyCard.nativeElement.innerHTML, {
       window: window,
@@ -63,11 +62,9 @@ export class ViewArmyComponent implements OnInit {
     });
 
     console.log(html);
-    // on retire la bordure du tableau
-    //html[0].layout = 'noBorders';
-    // on fait tenir l'image dans une caree de 150
-    //html[0].table.body[0][1].stack[0].fit = [150, 150];
-  
+    this.changeHtmlPdfValueRecursively(html);
+    console.log(html);
+    
     pdfMake
       .createPdf({
         content: html,
@@ -75,16 +72,49 @@ export class ViewArmyComponent implements OnInit {
           "unit-title": {
             bold: true
           },
-          "unitcard": {
-            width: "100%",
-            layout: 'noBorders'
-          },
-          "unitimg": {
-            fit: ['25%', '25%']
+          "unit-number": {
+            margin: [ 0, 0, 0, 80]
           }
         }
       })
       .download(this.army.name + ".pdf");
+  }
+
+  /**
+   * Format the given pdfMake html content recursively.
+   * 
+   * @param html an array of elements
+   */
+  private changeHtmlPdfValueRecursively(html: any): void {
+    for (const props in html) {
+      let element = html[props];
+      if (element.nodeName) {
+
+        if (element.style && element.style instanceof Array) {
+          let styles: string[] = element.style;
+          if (styles.indexOf("imgcard") >= 0 && element.nodeName == "TABLE") {
+            element.layout = 'noBorders';
+          }
+          if (styles.indexOf("imgview") >= 0 && element.nodeName == "IMG") {
+            element.fit = [150, 150];
+          }
+          if (styles.indexOf("unit-number") >= 0) {
+            element.margin = [80, 0, 0, 0];
+          }
+        }
+        if (element.stack) {
+          this.changeHtmlPdfValueRecursively(element.stack);
+        } else if (element.text) {
+          this.changeHtmlPdfValueRecursively(element.text);
+        }
+        // two dim tab
+        if (element.table && element.table.body) {
+          for (const bodyProps in element.table.body) {
+            this.changeHtmlPdfValueRecursively(element.table.body[bodyProps]);
+          }
+        }
+      }
+    }
   }
 
 }

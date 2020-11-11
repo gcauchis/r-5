@@ -45,13 +45,6 @@ export class ViewImagedComponent implements OnInit {
         styles: {
           "unit-title": {
             bold: true
-          },
-          "unitcard": {
-            width: "100%",
-            layout: 'noBorders'
-          },
-          "unitimg": {
-            fit: ['25%', '25%']
           }
         }
       })
