@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { Weapon } from './../entities/weapon';
-import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Unit } from "../entities/unit";
 import { EnumUtilsService } from "../enum-utils.service";
 import { PriceService } from "../price.service";

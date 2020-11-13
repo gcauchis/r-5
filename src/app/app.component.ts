@@ -1,5 +1,5 @@
 import { ViewChild } from '@angular/core';
-import { Component, VERSION } from '@angular/core';
+import { Component} from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
@@ -10,6 +10,9 @@ import { MatMenuTrigger } from '@angular/material/menu';
 export class AppComponent  {
   name = "R-5";
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+
+  constructor () {
+  }
 
   openMenu() {
     this.trigger.openMenu();

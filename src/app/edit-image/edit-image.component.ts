@@ -42,4 +42,9 @@ export class EditImageComponent implements OnInit {
     })
   }
 
+  removeImage() : void {
+    this.imgPath = "";
+    this.imageContainer.imgBase64 = null;
+  }
+
 }

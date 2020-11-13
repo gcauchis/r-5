@@ -6,6 +6,6 @@ table.units {
     width: 100%;
 }
 
-.unit {
-  margin-bottom: 30px;
+.unit-div {
+  margin: 0 0 30px 0;
 }

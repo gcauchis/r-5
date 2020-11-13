@@ -18,7 +18,7 @@ export class WeaponSelectorComponent implements OnInit {
   @Input() unit: Unit;
   @Input() enableEdit: boolean = true;
   @Input() enableAdd: boolean = false;
-  currentWeaponType: WeaponType = WeaponType.Melee;
+  currentWeaponType: WeaponType;
 
   /** Pas terrible mais donne acces dans le template */
   WeaponType = WeaponType;
@@ -60,7 +60,6 @@ export class WeaponSelectorComponent implements OnInit {
     Object.assign(weaponToAdd, weapon);
     weaponToAdd.id = null;
     this.unit.weapons.push(weaponToAdd);
-    this.unit.weapons = this.unit.weapons;
   }
 
   removeWeapon(weapon: Weapon) {

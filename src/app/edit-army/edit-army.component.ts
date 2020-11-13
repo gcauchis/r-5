@@ -1,10 +1,8 @@
 import { ArmyService } from './../army.service';
 import { Location } from '@angular/common';
-import { UnitService } from './../unit.service';
 import { EnumUtilsService } from './../enum-utils.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Output } from '@angular/core';
-import { UtilsService } from '../utils.service';
 import { Army } from '../entities/army';
 
 @Component({

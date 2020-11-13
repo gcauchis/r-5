@@ -138,6 +138,8 @@ export class PriceService {
     if (item instanceof Unit) {
       price = this.computeBase(item);
       for (let weapon of item.weapons) price += this.getPrice(weapon, item);
+    } else if (item instanceof Vehicle) {
+      // TODO
     }
     return price;
   }

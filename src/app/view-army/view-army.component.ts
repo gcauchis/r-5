@@ -61,9 +61,9 @@ export class ViewArmyComponent implements OnInit {
       tableAutoSize: true
     });
 
-    console.log(html);
+    // console.log(html);
     this.changeHtmlPdfValueRecursively(html);
-    console.log(html);
+    // console.log(html);
     
     pdfMake
       .createPdf({
@@ -73,8 +73,11 @@ export class ViewArmyComponent implements OnInit {
             bold: true
           },
           "unit-number": {
-            margin: [ 0, 0, 0, 80]
-          }
+            margin: [ 80, 0, 0, 0]
+          }/*,
+          "unit-div": {
+            margin: [ 0, 0, 0, 30]
+          }*/
         }
       })
       .download(this.army.name + ".pdf");
@@ -98,9 +101,12 @@ export class ViewArmyComponent implements OnInit {
           if (styles.indexOf("imgview") >= 0 && element.nodeName == "IMG") {
             element.fit = [150, 150];
           }
-          if (styles.indexOf("unit-number") >= 0) {
+          /*if (styles.indexOf("unit-number") >= 0) {
             element.margin = [80, 0, 0, 0];
           }
+          if (styles.indexOf("unit-div") >= 0 && element.nodeName == "DIV") {
+            element.margin = [0, 0, 0, 30];
+          }*/
         }
         if (element.stack) {
           this.changeHtmlPdfValueRecursively(element.stack);

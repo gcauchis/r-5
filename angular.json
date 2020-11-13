@@ -98,5 +98,8 @@
       }
     }
   },
-  "defaultProject": "demo"
+  "defaultProject": "demo",
+  "cli": {
+    "analytics": "7c849bd2-3609-40a0-b813-7b1ef8c82ded"
+  }
 }
