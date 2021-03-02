@@ -15,6 +15,12 @@ export class UnitService extends AbstractCrudService<Unit> {
   protected loadBaseData(): Unit[] {
     return [];
   }
+
+  protected convertData(data:any): Unit[] {
+    let result: Unit[] = [];
+    Object.assign(result, data);
+    return result;
+  }
   protected get minId(): number {
     return 1000;
   }

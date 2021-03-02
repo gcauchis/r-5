@@ -52,4 +52,4 @@ export class ViewUnitComponent implements OnInit {
     return result == null || result.length <= 0 ? null : result;
   }
 
-}
+ }

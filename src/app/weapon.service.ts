@@ -16,8 +16,12 @@ export class WeaponService extends AbstractCrudService<Weapon>{
   }
   
   protected loadBaseData(): Weapon[] {
+    return this.convertData(jsonWeapons);
+  }
+
+  protected convertData(data:any): Weapon[] {
     let result: Weapon[] = [];
-    Object.assign(result, jsonWeapons);
+    Object.assign(result, data);
     return result;
   }
 
@@ -47,5 +51,9 @@ export class WeaponService extends AbstractCrudService<Weapon>{
     if (weapon.editable) {
       super.save(weapon)
    }
+  }
+
+  public get exportableData(): Weapon[] {
+    return this.storedData.filter(w => w.editable);
   }
 }

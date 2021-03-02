@@ -15,9 +15,13 @@ export class ArmorService extends AbstractCrudService<Armor>{
   }
 
   protected loadBaseData(): Armor[] {
-    let armors: Armor[] = [];
-    Object.assign(armors, jsonArmors);
-    return armors
+    return this.convertData(jsonArmors);
+  }
+
+  protected convertData(data:any): Armor[] {
+    let result: Armor[] = [];
+    Object.assign(result, data);
+    return result;
   }
 
   protected get minId(): number {

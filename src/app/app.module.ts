@@ -39,6 +39,8 @@ import { ViewVehicleComponent } from './view-vehicle/view-vehicle.component';
 import { EditArmyComponent } from './edit-army/edit-army.component';
 import { ListArmyComponent } from './list-army/list-army.component';
 import { ViewArmyComponent } from './view-army/view-army.component';
+import { MemoryOfServiceComponent } from './memory-of-service/memory-of-service.component';
+import { MemoryManagerComponent } from './memory-manager/memory-manager.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/armies', pathMatch: 'full'  },
@@ -55,6 +57,7 @@ const appRoutes: Routes = [
   { path: 'weapons', component: WeaponSelectorComponent },
   { path: 'editVehicle', component: EditVehicleComponent },
   { path: 'editVehicle/:id', component: EditVehicleComponent },
+  { path: 'manageMemory', component: MemoryManagerComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -80,7 +83,7 @@ const appRoutes: Routes = [
     MatPaginatorModule,
     NgxMatFileInputModule
   ],
-  declarations: [					
+  declarations: [							
     AppComponent,
     ViewUnitComponent,
     EditUnitComponent,
@@ -96,7 +99,9 @@ const appRoutes: Routes = [
       ViewVehicleComponent,
       EditArmyComponent,
       ListArmyComponent,
-      ViewArmyComponent
+      ViewArmyComponent,
+      MemoryOfServiceComponent,
+      MemoryManagerComponent
    ],
   bootstrap: [
     AppComponent

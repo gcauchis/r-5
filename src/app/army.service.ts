@@ -17,6 +17,13 @@ export class ArmyService extends AbstractCrudService<Army> {
   protected loadBaseData(): Army[] {
     return [];
   }
+
+  protected convertData(data:any): Army[] {
+    let result: Army[] = [];
+    Object.assign(result, data);
+    return result;
+  }
+  
   protected get minId(): number {
     return 100;
   }

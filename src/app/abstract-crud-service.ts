@@ -6,7 +6,7 @@ export abstract class AbstractCrudService<T extends Identitfiable> {
     private data: T[];
 
     constructor(private localStorage: LocalStorageService, private storageKey: string) {
-        if (this.localStorage.isLocalStorageSupported) {
+        if (this.isLocalStorageSupported) {
             let tmpData = this.localStorage.get(this.storageKey);
             if (tmpData == null) {
                 console.log(this.storageKey + " not found localy, retrieve from base configuration");
@@ -64,14 +64,14 @@ export abstract class AbstractCrudService<T extends Identitfiable> {
     }
 
     public storeData(): void {
-        if (this.localStorage.isLocalStorageSupported) {
+        if (this.isLocalStorageSupported) {
             this.localStorage.set(this.storageKey, this.data);
             console.log(this.storageKey + " stored");
         }
     }
 
     public resetData(): void {
-        if (this.localStorage.isLocalStorageSupported) {
+        if (this.isLocalStorageSupported) {
             console.log("Reset " + this.storageKey);
             this.localStorage.remove(this.storageKey);
             console.log(this.storageKey + "from base configuration");
@@ -79,5 +79,28 @@ export abstract class AbstractCrudService<T extends Identitfiable> {
             this.storeData();
         }
     }
+
+    public get isLocalStorageSupported(): boolean {
+        return this.localStorage.isLocalStorageSupported;
+    }
+
+    public get exportableData(): T[] {
+        return this.data;
+    }
+
+    public importData(data:any): void {
+        console.log("try import:");
+        console.log(data);
+        let imported = this.convertData(data);
+        console.log("imported:");
+        console.log(imported);
+        imported.forEach(e => {
+            e.id = this.genId();
+            this.save(e);
+        });
+        this.storeData();
+    }
+
+    protected abstract convertData(data:any): T[];
 
 }

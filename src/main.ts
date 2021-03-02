@@ -8,7 +8,7 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 
-if (environment && environment.production) {
+if (environment.production) {
   enableProdMode();
 }
 
