@@ -26,16 +26,9 @@ export class MemoryOfServiceComponent<T extends Identitfiable> implements OnInit
       let fileReader: FileReader = new FileReader();
       let self = this;
       fileReader.onloadend = function (x) {
-        let blob = new Blob([fileReader.result], {type: file.type});
-        console.log(blob);
-        var readerBlob = new FileReader();
-        readerBlob.readAsDataURL(blob); 
-        readerBlob.onloadend = function() {
-            console.log(readerBlob);
-            self.service.importData(readerBlob.result);
-        }
+        self.service.importData(JSON.parse(String(fileReader.result)));
       }
-      fileReader.readAsArrayBuffer(file);
+      fileReader.readAsText(file);
     })
   }
 

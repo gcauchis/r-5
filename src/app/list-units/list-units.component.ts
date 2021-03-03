@@ -39,7 +39,7 @@ export class ListUnitsComponent implements OnInit {
     this.dataSourceUnits = new MatTableDataSource<Unit>(this.unitService.storedData);
     this.dataSourceUnits.filterPredicate = this._filter;
     if (this.army == null) {
-      this.displayedColumns = [ 'unit', 'edit', 'view' ];
+      this.displayedColumns = [ 'unit', 'edit', 'view', 'remove' ];
     } else {
       this.unitService.storedData.forEach(u => this.links[u.id] = 0);
       this.army.units.forEach(l => this.links[l.id] = l.count);
@@ -66,6 +66,12 @@ export class ListUnitsComponent implements OnInit {
         this.army.units.push(link)
       }
     });
+  }
+
+  remove(unit: Unit):void {
+    this.unitService.remove(unit);
+    this.dataSourceUnits = new MatTableDataSource<Unit>(this.unitService.storedData);
+    this.dataSourceUnits.paginator = this.paginator;
   }
 
 }
