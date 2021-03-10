@@ -92,7 +92,7 @@
     },
     "linux": {
       "icon": "src/assets/icones/R-5_256x256.png",
-     "category": "Game",
+      "category": "Game",
       "target": [
         "AppImage",
         "deb",
