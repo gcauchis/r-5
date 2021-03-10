@@ -71,6 +71,7 @@
   "build": {
     "appId": "com.github.gcauchis.r5",
     "productName": "R-5",
+    "category": "Game",
     "files": [
       "main.js",
       "dist/demo",
