@@ -71,7 +71,6 @@
   "build": {
     "appId": "com.github.gcauchis.r5",
     "productName": "R-5",
-    "category": "Game",
     "files": [
       "main.js",
       "dist/demo",
@@ -93,6 +92,7 @@
     },
     "linux": {
       "icon": "src/assets/icones/R-5_256x256.png",
+     "category": "Game",
       "target": [
         "AppImage",
         "deb",
