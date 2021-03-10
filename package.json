@@ -95,7 +95,8 @@
       "target": [
         "AppImage",
         "deb",
-        "tar.gz"
+        "tar.gz",
+        "apk"
       ]
     },
     "mac": {
