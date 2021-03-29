@@ -7,7 +7,6 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
-import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatPaginatorModule } from "@angular/material/paginator";
@@ -16,6 +15,7 @@ import { MatTableModule } from "@angular/material/table";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule, Routes } from "@angular/router";
+import { IconsModule } from "./../icons/icons.module";
 import { PageNotFoundComponent } from "./../page-not-found/page-not-found.component";
 import { ArmorSelectorComponent } from "./components/armor-selector/armor-selector.component";
 import { EditArmyComponent } from "./components/edit-army/edit-army.component";
@@ -86,7 +86,6 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatIconModule,
     MatMenuModule,
     MatInputModule,
     MatSelectModule,
@@ -102,6 +101,7 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only as true
     ),
+    IconsModule,
   ],
   exports: [
     ViewUnitComponent,

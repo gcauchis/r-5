@@ -1,8 +1,8 @@
 <mat-form-field>
   <mat-label>Image</mat-label>
   <ngx-mat-file-input [formControl]="fileControl" multiple=false [accept]="accept">
-    <mat-icon ngxMatFileInputIcon>folder</mat-icon>
+    <app-icon-folder></app-icon-folder>
   </ngx-mat-file-input>
 </mat-form-field>
 <img *ngIf="imageContainer.imgBase64" src="{{imageContainer.imgBase64}}" alt="image" class="imgContent">
-<button *ngIf="imageContainer.imgBase64" mat-mini-fab (click)="removeImage()" color="warn"><mat-icon>clear</mat-icon></button>
+<button *ngIf="imageContainer.imgBase64" mat-mini-fab (click)="removeImage()" color="warn"><app-icon-delete></app-icon-delete></button>

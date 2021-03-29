@@ -101,7 +101,7 @@
       </tr>
       <tr *ngFor="let weapon of unit.weapons">
         <td><app-view-weapon [weapon]="weapon" [unit]="unit"></app-view-weapon></td>
-        <td><button mat-mini-fab (click)="removeWeapon(weapon)" color="warn"><mat-icon>clear</mat-icon></button></td>
+        <td><button mat-mini-fab (click)="removeWeapon(weapon)" color="warn"><app-icon-delete></app-icon-delete></button></td>
       </tr>
     </table>
   
