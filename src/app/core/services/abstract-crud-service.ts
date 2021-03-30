@@ -1,4 +1,4 @@
-import { Identitfiable } from "../models/identitfiable";
+import { Identitfiable } from "../interfaces/identitfiable";
 import { LocalStorageService } from "./local-storage.service";
 
 export abstract class AbstractCrudService<T extends Identitfiable> {

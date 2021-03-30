@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { Identitfiable } from "../../interfaces/identitfiable";
 import { AbstractCrudService } from "../../services/abstract-crud-service";
-import { Identitfiable } from "./../../models/identitfiable";
 
 @Component({
   selector: "app-memory-of-service",

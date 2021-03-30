@@ -1,4 +1,4 @@
-import { Identitfiable } from './identitfiable';
+import { Identitfiable } from "../interfaces/identitfiable";
 export class Armor implements Identitfiable {
   /** The id */
   id?: number;

@@ -1,11 +1,11 @@
+import { Identitfiable } from "../interfaces/identitfiable";
+import { ImageContainer } from "../interfaces/image-container";
 import { Dice } from "./../enums/dice.enum";
 import { MoveType } from "./../enums/move-type.enum";
 import { TacticalRole } from "./../enums/tactical-role.enum";
 import { UnitSize } from "./../enums/unit-size.enum";
 import { UnitType } from "./../enums/unit-type.enum";
 import { Armor } from "./armor";
-import { Identitfiable } from "./identitfiable";
-import { ImageContainer } from "./image-container";
 import { Weapon } from "./weapon";
 
 /** The representation of a figurine. */

@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import htmlToPdfmake from "html-to-pdfmake";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-import { ImageContainer } from "./../../models/image-container";
+import { ImageContainer } from "../../interfaces/image-container";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 

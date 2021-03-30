@@ -1,7 +1,7 @@
 import { MaxSizeValidator } from "@angular-material-components/file-input";
 import { Component, Input, OnInit } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
-import { ImageContainer } from "./../../models/image-container";
+import { ImageContainer } from "../../interfaces/image-container";
 
 @Component({
   selector: "app-edit-image",

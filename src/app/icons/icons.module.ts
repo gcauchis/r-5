@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { MatIconModule } from "@angular/material/icon";
+import { MaterialModule } from "./../material/material.module";
 import { IconDeleteComponent } from "./components/icon-delete/icon-delete.component";
 import { IconEditComponent } from "./components/icon-edit/icon-edit.component";
 import { IconFolderComponent } from "./components/icon-folder/icon-folder.component";
@@ -15,7 +15,7 @@ import { IconSeeComponent } from "./components/icon-see/icon-see.component";
     IconNavComponent,
     IconFolderComponent,
   ],
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MaterialModule],
   exports: [
     IconDeleteComponent,
     IconEditComponent,
