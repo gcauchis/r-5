@@ -5,7 +5,7 @@
 [Edit on StackBlitz ⚡️](https://stackblitz.com/edit/r-5)
 
 # Getting started
-Require `npm` to be installed.
+Require `npm` to be installed. See [https://nodejs.org]().
 ## Install dependency
 `npm install`
 ## Run
@@ -18,4 +18,12 @@ Then open [http://localhost:4200/]().
 
 The Electron container will be opened.
 ## Build
+### Localy
 `npm run build:prod:electron` will build an executable for your current environnement.
+
+### Windows and unix using Docker (work in progress)
+Required `docker` to be installed. See [https://www.docker.com]().
+#### From local
+`docker run -v ${PWD}:/project electronuserland/builder:wine /bin/bash -c "npm install && npm run build:prod:electron:win:linux"`
+#### From GitHub
+`docker run -v ~/.cache/electron:/root/.cache/electron -v ~/.cache/electron-builder:/root/.cache/electron-builder electronuserland/builder:wine /bin/bash -c "git clone https://github.com/gcauchis/r-5.git && cd r-5 && npm install && npm run build:prod:electron:win:linux"`

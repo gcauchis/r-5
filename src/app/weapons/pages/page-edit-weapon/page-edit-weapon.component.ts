@@ -4,19 +4,19 @@ import { FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
-import { ExposiveWeaponSize } from "./../../enums/exposive-weapon-size.enum";
-import { WeaponType } from "./../../enums/weapon-type.enum";
-import { Weapon } from "./../../models/weapon";
-import { EnumUtilsService } from "./../../services/enum-utils.service";
-import { UtilsService } from "./../../services/utils.service";
-import { WeaponService } from "./../../services/weapon.service";
+import { ExposiveWeaponSize } from "./../../../core/enums/exposive-weapon-size.enum";
+import { WeaponType } from "./../../../core/enums/weapon-type.enum";
+import { Weapon } from "./../../../core/models/weapon";
+import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
+import { UtilsService } from "./../../../core/services/utils.service";
+import { WeaponService } from "./../../../core/services/weapon.service";
 
 @Component({
-  selector: "app-edit-weapon",
-  templateUrl: "./edit-weapon.component.html",
-  styleUrls: ["./edit-weapon.component.scss"],
+  selector: "app-page-edit-weapon",
+  templateUrl: "./page-edit-weapon.component.html",
+  styleUrls: ["./page-edit-weapon.component.css"],
 })
-export class EditWeaponComponent implements OnInit {
+export class PageEditWeaponComponent implements OnInit {
   /** Pas terrible mais donne acces dans le template */
   WeaponType = WeaponType;
 

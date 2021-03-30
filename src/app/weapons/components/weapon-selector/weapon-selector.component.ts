@@ -1,13 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { WeaponType } from "./../../enums/weapon-type.enum";
-import { Unit } from "./../../models/unit";
-import { Weapon } from "./../../models/weapon";
-import { EnumUtilsService } from "./../../services/enum-utils.service";
-import { PriceService } from "./../../services/price.service";
-import { UtilsService } from "./../../services/utils.service";
-import { WeaponService } from "./../../services/weapon.service";
+import { WeaponType } from "./../../../core/enums/weapon-type.enum";
+import { Unit } from "./../../../core/models/unit";
+import { Weapon } from "./../../../core/models/weapon";
+import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
+import { PriceService } from "./../../../core/services/price.service";
+import { UtilsService } from "./../../../core/services/utils.service";
+import { WeaponService } from "./../../../core/services/weapon.service";
 
 @Component({
   selector: "app-weapon-selector",
