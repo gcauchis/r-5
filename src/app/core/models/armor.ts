@@ -1,5 +1,5 @@
-import { Identitfiable } from "../interfaces/identitfiable";
-export class Armor implements Identitfiable {
+import { IdentitfiableInterface } from "../interfaces/identitfiable-interface";
+export class Armor implements IdentitfiableInterface {
   /** The id */
   id?: number;
   /** The armor name */

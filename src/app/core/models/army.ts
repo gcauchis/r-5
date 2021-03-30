@@ -1,6 +1,6 @@
-import { Identitfiable } from "../interfaces/identitfiable";
+import { IdentitfiableInterface } from "../interfaces/identitfiable-interface";
 import { ArmyLink } from "./army-link";
-export class Army implements Identitfiable {
+export class Army implements IdentitfiableInterface {
   /** The id */
   id?: number;
   /** The name (60 char) */

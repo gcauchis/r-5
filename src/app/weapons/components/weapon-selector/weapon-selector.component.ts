@@ -1,8 +1,15 @@
-import { Component, Input, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { WeaponType } from "./../../../core/enums/weapon-type.enum";
-import { Unit } from "./../../../core/models/unit";
+import { PriceableInterface } from "./../../../core/interfaces/priceable-interface";
 import { Weapon } from "./../../../core/models/weapon";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 import { PriceService } from "./../../../core/services/price.service";
@@ -15,7 +22,8 @@ import { WeaponService } from "./../../../core/services/weapon.service";
   styleUrls: ["./weapon-selector.component.css"],
 })
 export class WeaponSelectorComponent implements OnInit {
-  @Input() unit: Unit;
+  @Output() askAddWeapon = new EventEmitter<Weapon>();
+  @Input() priceable!: PriceableInterface;
   @Input() enableEdit: boolean = true;
   @Input() enableAdd: boolean = false;
   currentWeaponType: WeaponType;
@@ -61,7 +69,7 @@ export class WeaponSelectorComponent implements OnInit {
     let weaponToAdd = new Weapon();
     Object.assign(weaponToAdd, weapon);
     weaponToAdd.id = null;
-    this.unit.weapons.push(weaponToAdd);
+    this.askAddWeapon.emit(weaponToAdd);
   }
 
   removeWeapon(weapon: Weapon) {
@@ -114,7 +122,7 @@ export class WeaponSelectorComponent implements OnInit {
         ];
         break;
     }
-    if (this.unit != null) {
+    if (this.priceable != null) {
       this.displayedColumns.push("price");
       if (this.enableAdd) {
         this.displayedColumns.push("actionAdd");

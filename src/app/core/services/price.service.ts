@@ -1,10 +1,7 @@
 import { Injectable } from "@angular/core";
+import { PriceableInterface } from "../interfaces/priceable-interface";
 import { Dice } from "./../enums/dice.enum";
 import { ExposiveWeaponSize } from "./../enums/exposive-weapon-size.enum";
-import { MoveType } from "./../enums/move-type.enum";
-import { TacticalRole } from "./../enums/tactical-role.enum";
-import { UnitSize } from "./../enums/unit-size.enum";
-import { UnitType } from "./../enums/unit-type.enum";
 import { WeaponType } from "./../enums/weapon-type.enum";
 import { Unit } from "./../models/unit";
 import { Vehicle } from "./../models/vehicle";
@@ -43,13 +40,14 @@ export class PriceService {
     return this.computeDQM(dice) * 1.2;
   }
 
-  public computeBase(unit: Unit): number {
+  public computeBase(priceable: PriceableInterface): number {
+    //TODO !!!!!!
+    /*
     let dqmPrice = this.computeDQM(unit.dqm);
     let dcPrive = this.computeDC(unit.dc);
     let baseUnit = dqmPrice + dcPrive;
     let pvPrice = baseUnit * unit.pv;
-    let movePrice =
-      (unit.tacticalMove + this.unitService.getRunMove(unit)) * 10;
+    let movePrice = (priceable.unit + this.unitService.getRunMove(unit)) * 10;
     let result = pvPrice + movePrice;
     switch (unit.size) {
       case UnitSize.Small:
@@ -83,10 +81,12 @@ export class PriceService {
         break;
     }
     return result;
+    */
+    return 0;
   }
 
-  public getPrice(weapon: Weapon, unit: Unit): number {
-    let unitBase = this.computeBase(unit);
+  public getPrice(weapon: Weapon, priceable: PriceableInterface): number {
+    let unitBase = this.computeBase(priceable);
     let result = 0;
     let powerCoef = weapon.power;
     if (weapon.superPower) powerCoef *= 2;
@@ -121,7 +121,8 @@ export class PriceService {
         }
         let baseVp = 0;
         // Se base sur la regle et mon unit
-        if (!weapon.nonLethal) baseVp = this.computeDC(unit.dc);
+        //TODO
+        // if (!weapon.nonLethal) baseVp = this.computeDC(priceable.dc);
 
         result = baseSize * baseVp * powerCoef + baseExp * unitBase;
         break;

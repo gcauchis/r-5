@@ -1,28 +1,16 @@
 <app-template-full-width>
-  <div class="tr-title">Armes</div>
+  <span class="tr-title">Armes</span>
   <div class="tr-content">
     <mat-form-field>
       <mat-label>Type</mat-label>
-      <mat-select
-        [(ngModel)]="currentWeaponType"
-        (ngModelChange)="onChangecurrentWeaponType()"
-      >
-        <mat-option
-          *ngFor="let weaponType of weaponTypes"
-          [value]="weaponType.value"
-          >{{ weaponType.key }}</mat-option
-        >
+      <mat-select [(ngModel)]="currentWeaponType" (ngModelChange)="onChangecurrentWeaponType()">
+        <mat-option *ngFor="let weaponType of weaponTypes" [value]="weaponType.value">{{ weaponType.key }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Filtrage nom</mat-label>
-      <input
-        matInput
-        [(ngModel)]="nameFilter"
-        placeholder="Nom"
-        (ngModelChange)="onChangeFilter()"
-      />
+      <input matInput [(ngModel)]="nameFilter" placeholder="Nom" (ngModelChange)="onChangeFilter()" />
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSourceWeapons" class="weapons">
@@ -35,8 +23,7 @@
         <th mat-header-cell *matHeaderCellDef>Portée (pouces)</th>
         <td mat-cell *matCellDef="let weapon">
           <span *ngIf="weapon.range; else NArange">
-            <span *ngIf="weapon.rangeMin">+{{ weapon.rangeMin }}'' à </span
-            >{{ weapon.range }}''
+            <span *ngIf="weapon.rangeMin">+{{ weapon.rangeMin }}'' à </span>{{ weapon.range }}''
           </span>
           <ng-template #NArange>NA</ng-template>
         </td>
@@ -45,10 +32,8 @@
       <ng-container matColumnDef="power">
         <th mat-header-cell *matHeaderCellDef>Puissance</th>
         <td mat-cell *matCellDef="let weapon">
-          <span *ngIf="weapon.power; else NApower"
-            >{{ weapon.power }}D<span *ngIf="weapon.superPower">++</span
-            ><span *ngIf="weapon.superSuperPower">[++</span></span
-          >
+          <span *ngIf="weapon.power; else NApower">{{ weapon.power }}D<span *ngIf="weapon.superPower">++</span><span
+              *ngIf="weapon.superSuperPower">[++</span></span>
           <ng-template #NApower>NA</ng-template>
         </td>
       </ng-container>
@@ -89,7 +74,7 @@
       <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef>Valeur</th>
         <td mat-cell *matCellDef="let weapon">
-          {{ priceService.getPrice(weapon, unit) }}
+          {{ priceService.getPrice(weapon, priceable) }}
         </td>
       </ng-container>
 
@@ -103,18 +88,8 @@
       <ng-container matColumnDef="actionEdit">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let weapon">
-          <a
-            mat-raised-button
-            *ngIf="weapon.editable"
-            routerLink="/weapons/edit/{{ weapon.id }}"
-            >Edit</a
-          >
-          <button
-            mat-mini-fab
-            *ngIf="weapon.editable"
-            (click)="removeWeapon(weapon)"
-            color="warn"
-          >
+          <a mat-raised-button *ngIf="weapon.editable" routerLink="/weapons/edit/{{ weapon.id }}">Edit</a>
+          <button mat-mini-fab *ngIf="weapon.editable" (click)="removeWeapon(weapon)" color="warn">
             x
           </button>
         </td>
@@ -123,14 +98,9 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-    <mat-paginator
-      [pageSizeOptions]="[10, 20, 50, 100]"
-      showFirstLastButtons
-    ></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
   </div>
   <div class="tr-actions">
-    <a mat-raised-button *ngIf="enableEdit" routerLink="/weapons/edit"
-      >Ajouter une nouvelle arme</a
-    >
+    <a mat-raised-button *ngIf="enableEdit" routerLink="/weapons/edit">Ajouter une nouvelle arme</a>
   </div>
 </app-template-full-width>

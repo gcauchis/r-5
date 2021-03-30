@@ -1,7 +1,7 @@
-import { Identitfiable } from "../interfaces/identitfiable";
+import { IdentitfiableInterface } from "../interfaces/identitfiable-interface";
 import { LocalStorageService } from "./local-storage.service";
 
-export abstract class AbstractCrudService<T extends Identitfiable> {
+export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
   private data: T[];
 
   constructor(

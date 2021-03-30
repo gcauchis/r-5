@@ -1,5 +1,6 @@
-import { Identitfiable } from "../interfaces/identitfiable";
-import { ImageContainer } from "../interfaces/image-container";
+import { IdentitfiableInterface } from "../interfaces/identitfiable-interface";
+import { ImageContainerInterface } from "../interfaces/image-container-interface";
+import { PriceableInterface } from "../interfaces/priceable-interface";
 import { Dice } from "./../enums/dice.enum";
 import { MoveType } from "./../enums/move-type.enum";
 import { TacticalRole } from "./../enums/tactical-role.enum";
@@ -9,7 +10,11 @@ import { Armor } from "./armor";
 import { Weapon } from "./weapon";
 
 /** The representation of a figurine. */
-export class Unit implements Identitfiable, ImageContainer {
+export class Unit
+  implements
+    IdentitfiableInterface,
+    ImageContainerInterface,
+    PriceableInterface {
   /** The id */
   id?: number;
   /** The name (60 char) */

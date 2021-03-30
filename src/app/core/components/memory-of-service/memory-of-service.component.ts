@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { Identitfiable } from "../../interfaces/identitfiable";
+import { IdentitfiableInterface } from "../../interfaces/identitfiable-interface";
 import { AbstractCrudService } from "../../services/abstract-crud-service";
 
 @Component({
@@ -8,7 +8,7 @@ import { AbstractCrudService } from "../../services/abstract-crud-service";
   templateUrl: "./memory-of-service.component.html",
   styleUrls: ["./memory-of-service.component.scss"],
 })
-export class MemoryOfServiceComponent<T extends Identitfiable>
+export class MemoryOfServiceComponent<T extends IdentitfiableInterface>
   implements OnInit {
   fileControl: FormControl;
   @Input() service: AbstractCrudService<T>;

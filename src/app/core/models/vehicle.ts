@@ -1,12 +1,17 @@
+import { IdentitfiableInterface } from "../interfaces/identitfiable-interface";
+import { ImageContainerInterface } from "../interfaces/image-container-interface";
 import { Dice } from "./../enums/dice.enum";
 import { MoveType } from "./../enums/move-type.enum";
 import { VehicleType } from "./../enums/vehicle-type.enum";
-import { Identitfiable } from "./../interfaces/identitfiable";
-import { ImageContainer } from "./../interfaces/image-container";
+import { PriceableInterface } from "./../interfaces/priceable-interface";
 import { Weapon } from "./weapon";
 
 /** The representation of a vehicle */
-export class Vehicle implements Identitfiable, ImageContainer {
+export class Vehicle
+  implements
+    IdentitfiableInterface,
+    ImageContainerInterface,
+    PriceableInterface {
   /** The id */
   id?: number;
   /** The name (50 char) */

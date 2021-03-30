@@ -1,8 +1,8 @@
-import { Identitfiable } from "../interfaces/identitfiable";
+import { IdentitfiableInterface } from "../interfaces/identitfiable-interface";
 import { ExposiveWeaponSize } from "./../enums/exposive-weapon-size.enum";
 import { WeaponType } from "./../enums/weapon-type.enum";
 
-export class Weapon implements Identitfiable {
+export class Weapon implements IdentitfiableInterface {
   /** The id */
   id?: number;
   /** the type of weapon */
