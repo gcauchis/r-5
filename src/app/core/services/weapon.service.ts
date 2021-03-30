@@ -29,7 +29,7 @@ export class WeaponService extends AbstractCrudService<Weapon> {
 
   public getRules(): string[] {
     return this.storedData
-      .flatMap((w) => w.rule)
+      .reduce((acc, value) => acc.concat(value.rule), [])
       .filter(
         (value, index, self) => value != "" && self.indexOf(value) === index
       )
