@@ -14,9 +14,6 @@ init:
   - git config --global core.autocrlf input
 
 install:
-  # Get the latest stable version of Node.js or io.js
-  - ps: Install-Product node 14
-  # install modules
   - npm install
 
 build_script:
