@@ -11,7 +11,13 @@ import { ViewImagedComponent } from "./components/view-imaged/view-imaged.compon
 
 @NgModule({
   declarations: [ViewImagedComponent, EditImageComponent],
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    IconsModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   exports: [
     BrowserModule,
     IconsModule,

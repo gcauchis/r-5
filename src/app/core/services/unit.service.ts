@@ -1,13 +1,17 @@
 import { Injectable } from "@angular/core";
 import { Unit } from "./../models/unit";
 import { AbstractCrudService } from "./abstract-crud-service";
+import { FactionService } from "./faction.service";
 import { LocalStorageService } from "./local-storage.service";
 
 const LOCAL_KEY: string = "units";
 
 @Injectable()
 export class UnitService extends AbstractCrudService<Unit> {
-  constructor(localStorage: LocalStorageService) {
+  constructor(
+    localStorage: LocalStorageService,
+    private factionService: FactionService
+  ) {
     super(localStorage, LOCAL_KEY);
   }
 
@@ -29,12 +33,6 @@ export class UnitService extends AbstractCrudService<Unit> {
   }
 
   public getFactions(): string[] {
-    return this.storedData
-      .map((u) => u.faction)
-      .filter(
-        (value, index, self) =>
-          value && value != "" && self.indexOf(value) === index
-      )
-      .sort();
+    return this.factionService.getFactions(this.storedData);
   }
 }

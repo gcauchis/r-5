@@ -1,7 +1,10 @@
 <div *ngIf="army" #armyCard>
     <h1>{{army.name}}</h1>
-    <div *ngFor="let unit of units" class="unit-div">
+    <div *ngFor="let unit of units" class="army-div">
         <app-page-view-unit [unit]="unit" [unitCount]="unitsCount[unit.id]"></app-page-view-unit>
+    </div>
+    <div *ngFor="let vehicle of vehicles" class="army-div">
+        <app-page-view-vehicle [vehicle]="vehicle" [vehicleCount]="vehiclesCount[vehicle.id]"></app-page-view-vehicle>
     </div>
 </div>
 <!--button mat-raised-button (click)="openPDF()">PDF</button-->

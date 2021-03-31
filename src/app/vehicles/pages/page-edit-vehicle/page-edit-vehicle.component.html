@@ -4,6 +4,16 @@
             <span class="tr-title">Edition : {{vehicle.name}}/{{enumUtils.vehicleTypeToString(vehicle.type)}}</span>
             <div class="tr-content">
 
+                <mat-form-field class="vehicle-full-width">
+                    <mat-label>Camps</mat-label>
+                    <input matInput type="text" [(ngModel)]="vehicle.faction" [formControl]="factionsControl"
+                        [matAutocomplete]="auto" placeholder="Camps" />
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let faction of factionsFilteredOptions | async" [value]="faction">
+                            {{faction}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field><br>
 
                 <mat-form-field class="vehicle-full-width">
                     <mat-label>Nom</mat-label>
@@ -55,13 +65,42 @@
                     <mat-label>Nombre de places de transport</mat-label>
                     <input matInput type="number" min="1" max="500" [(ngModel)]="vehicle.transportSpace"
                         placeholder="Places" />
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Dé Combat (DC)</mat-label>
+                    <mat-select [(ngModel)]="vehicle.dc">
+                        <mat-option *ngFor="let dice of dices" [value]="dice.value">{{dice.key}}</mat-option>
+                    </mat-select>
                 </mat-form-field><br>
 
             </div>
             <div class="tr-actions"></div>
         </app-template-full-width>
 
-        <app-page-view-vehicle [vehicle]="vehicle" showPdfButton=true></app-page-view-vehicle>
+        <app-weapon-selector [priceable]="vehicle" (askAddWeapon)="addWeapon($event)" enableAdd=true enableEdit=false>
+        </app-weapon-selector>
+
+        <table class="weapons">
+            <tr>
+                <th>Arme de l'unité</th>
+                <th></th>
+            </tr>
+            <tr *ngFor="let weapon of vehicle.weapons">
+                <td>
+                    <app-page-view-weapon [weapon]="weapon" [priceable]="vehicle"></app-page-view-weapon>
+                </td>
+                <td><button mat-mini-fab (click)="removeWeapon(weapon)" color="warn">
+                        <app-icon-delete></app-icon-delete>
+                    </button></td>
+            </tr>
+        </table>
+
+        <app-template-full-width>
+            <span class="tr-title">Résultat</span>
+            <app-page-view-vehicle class="tr-content" [vehicle]="vehicle" showPdfButton=true></app-page-view-vehicle>
+        </app-template-full-width>
+
     </div>
     <div class="tr-actions">
         <button mat-raised-button (click)="save()">Save</button>

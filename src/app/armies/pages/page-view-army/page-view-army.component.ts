@@ -5,8 +5,10 @@ import { ActivatedRoute } from "@angular/router";
 // import { pdfFonts } from "pdfmake/build/vfs_fonts";
 import { Army } from "./../../../core/models/army";
 import { Unit } from "./../../../core/models/unit";
+import { Vehicle } from "./../../../core/models/vehicle";
 import { ArmyService } from "./../../../core/services/army.service";
 import { UnitService } from "./../../../core/services/unit.service";
+import { VehicleService } from "./../../../core/services/vehicle.service";
 
 // pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -19,18 +21,23 @@ export class PageViewArmyComponent implements OnInit {
   @Input() army: Army;
   units: Unit[] = [];
   unitsCount: any = {};
+  vehicles: Vehicle[] = [];
+  vehiclesCount: any = {};
 
   @ViewChild("armyCard") armyCard: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
     public armyService: ArmyService,
-    public unitService: UnitService
+    public unitService: UnitService,
+    public vehicleService: VehicleService
   ) {}
 
   ngOnInit(): void {
     this.units = [];
     this.unitsCount = {};
+    this.vehicles = [];
+    this.vehiclesCount = {};
     const id = +this.route.snapshot.paramMap.get("idArmy");
     if (id != 0) {
       this.army = this.armyService.get(id);
@@ -41,6 +48,15 @@ export class PageViewArmyComponent implements OnInit {
             if (unit != null) {
               this.units.push(unit);
               this.unitsCount[link.id] = link.count;
+            }
+          });
+        }
+        if (this.army.vehicles != null) {
+          this.army.vehicles.forEach((link) => {
+            let vehicle = this.vehicleService.get(link.id);
+            if (vehicle != null) {
+              this.vehicles.push(vehicle);
+              this.vehiclesCount[link.id] = link.count;
             }
           });
         }

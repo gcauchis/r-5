@@ -43,7 +43,8 @@
     "build:prod:electron": "ng build --prod --base-href ./ && electron-builder",
     "build:prod:electron:win:linux": "ng build --prod --base-href ./ && electron-builder --linux --win",
     "release": "ng build --prod --base-href ./ && electron-builder",
-    "doc": "compodoc -p tsconfig.json -o -s"
+    "doc": "compodoc -p tsconfig.json -o -s",
+    "analyze": "ng build --prod --stats-json && webpack-bundle-analyzer dist/demo/stats.json"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1002.3",
@@ -68,7 +69,8 @@
     "protractor": "^7.0.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "^3.9.9"
+    "typescript": "^3.9.9",
+    "webpack-bundle-analyzer": "^4.4.0"
   },
   "build": {
     "appId": "com.github.gcauchis.r5",

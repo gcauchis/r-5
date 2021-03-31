@@ -9,6 +9,8 @@ import { PageEditUnitComponent } from "./units/pages/page-edit-unit/page-edit-un
 import { PageListUnitsComponent } from "./units/pages/page-list-units/page-list-units.component";
 import { PageViewUnitComponent } from "./units/pages/page-view-unit/page-view-unit.component";
 import { PageEditVehicleComponent } from "./vehicles/pages/page-edit-vehicle/page-edit-vehicle.component";
+import { PageListVehiclesComponent } from "./vehicles/pages/page-list-vehicles/page-list-vehicles.component";
+import { PageViewVehicleComponent } from "./vehicles/pages/page-view-vehicle/page-view-vehicle.component";
 import { WeaponSelectorComponent } from "./weapons/components/weapon-selector/weapon-selector.component";
 import { PageEditWeaponComponent } from "./weapons/pages/page-edit-weapon/page-edit-weapon.component";
 
@@ -25,8 +27,10 @@ const routes: Routes = [
   { path: "weapons/edit/:id", component: PageEditWeaponComponent },
   { path: "armies", component: PageListArmiesComponent },
   { path: "units", component: PageListUnitsComponent },
+  { path: "vehicles", component: PageListVehiclesComponent },
   { path: "editVehicle", component: PageEditVehicleComponent },
   { path: "editVehicle/:id", component: PageEditVehicleComponent },
+  { path: "viewVehicle/:id", component: PageViewVehicleComponent },
   { path: "manageMemory", component: MemoryManagerComponent },
   { path: "**", component: PageNotFoundComponent },
 ];

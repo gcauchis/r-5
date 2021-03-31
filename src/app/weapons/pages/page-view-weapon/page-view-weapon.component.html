@@ -1,7 +1,9 @@
-<div *ngIf="weapon" >{{weapon.name}}
+<div *ngIf="weapon">{{weapon.name}}
     <span *ngIf="hasRange">
         <span *ngIf="weapon.rangeMin">+{{weapon.rangeMin}}'' à </span>{{weapon.range}}''
     </span>
-    {{weapon.power}}<span *ngIf="unit; else NoUnit">{{enumUtils.diceToString(unit.dc)}}</span><ng-template #NoUnit>D</ng-template><span *ngIf="weapon.superPower">++</span><span *ngIf="weapon.superSuperPower">[++</span> 
+    {{weapon.power}}<span *ngIf="priceable; else NoUnit">{{enumUtils.diceToString(priceable.dc)}}</span>
+    <ng-template #NoUnit>D</ng-template><span *ngIf="weapon.superPower">++</span><span
+        *ngIf="weapon.superSuperPower">[++</span>
     <span *ngIf="hasRule"> ({{weapon.rule.join(", ")}})</span>
 </div>

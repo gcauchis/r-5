@@ -1,14 +1,22 @@
 <app-view-imaged [imageContainer]="vehicle" [showPdfButton]="showPdfButton" [pdfName]="vehicle.name">
-    <p style="margin:0px"><span class="unit-title">{{vehicle.name}} /
-            {{enumUtils.vehicleTypeToString(vehicle.type)}}</span></p>
-    <p style="margin:0px"><span class="unit-title">Type de mouvement :</span>
+    <p style="margin:0px"><span class="vehicle-title">{{vehicle.name}} /
+            {{enumUtils.vehicleTypeToString(vehicle.type)}}</span><span *ngIf="vehicle.faction">
+            ({{vehicle.faction}})</span>
+        <span *ngIf="vehicleCount" class="vehicle-number"><span class="vehicle-title"> Nbr :</span>
+            {{vehicleCount}}</span>
+    </p>
+    <p style="margin:0px"><span class="vehicle-title">Type de mouvement :</span>
         {{enumUtils.moveTypeToString(vehicle.moveType)}}</p>
-    <p style="margin:0px"><span class="unit-title">Mouvement :</span> {{vehicle.tacticalMove}}’’ /
+    <p style="margin:0px"><span class="vehicle-title">Mouvement :</span> {{vehicle.tacticalMove}}’’ /
         {{vehicleService.getRunMove(vehicle)}}’’</p>
-    <p style="margin:0px" *ngIf="vehicle.type == VehicleType.TroopTransport"><span class="unit-title">Place disponible
+    <p style="margin:0px" *ngIf="vehicle.type == VehicleType.TroopTransport"><span class="vehicle-title">Place
+            disponible
             pour le transport :</span> {{vehicle.transportSpace}}</p>
-    <p style="margin:0px"><span class="unit-title">Armes :</span> TODO</p>
-    <p style="margin:0px"><span class="unit-title">Blindage :</span>{{enumUtils.diceToString(vehicle.armor)}} <span
-            class="unit-title"> / PS :</span> {{vehicle.structure}}</p>
-    <p style="margin:0px"><span class="unit-title">Prix :</span> {{priceService.compute(vehicle)}}</p>
+    <p style="margin:0px"><span class="vehicle-title">Blindage :</span>{{enumUtils.diceToString(vehicle.armor)}} <span
+            class="vehicle-title"> / PS :</span> {{vehicle.structure}}</p>
+    <p style="margin:0px"><span class="vehicle-title">Prix :</span> {{priceService.compute(vehicle)}}</p>
+    <div style="margin:0px" *ngIf="vehicle"><span class="vehicle-title">Armes :</span>
+        <app-page-view-weapon *ngFor="let weapon of vehicle.weapons" [weapon]="weapon" [priceable]="vehicle">
+        </app-page-view-weapon>
+    </div>
 </app-view-imaged>

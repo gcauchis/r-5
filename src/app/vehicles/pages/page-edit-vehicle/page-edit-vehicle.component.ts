@@ -1,10 +1,14 @@
 import { Location } from "@angular/common";
 import { Component, OnInit, Output } from "@angular/core";
+import { FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
+import { map, startWith } from "rxjs/operators";
 import { Dice } from "./../../../core/enums/dice.enum";
 import { MoveType } from "./../../../core/enums/move-type.enum";
 import { VehicleType } from "./../../../core/enums/vehicle-type.enum";
 import { Vehicle } from "./../../../core/models/vehicle";
+import { Weapon } from "./../../../core/models/weapon";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 import { UtilsService } from "./../../../core/services/utils.service";
 import { VehicleService } from "./../../../core/services/vehicle.service";
@@ -22,6 +26,12 @@ export class PageEditVehicleComponent implements OnInit {
 
   /** Pas terrible mais donne acces dans le template */
   VehicleType = VehicleType;
+
+  factions: string[];
+  factionsControl = new FormControl();
+  factionsFilteredOptions: Observable<string[]>;
+
+  displayedWeaponColumns: string[] = ["weapon", "remove"];
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +53,18 @@ export class PageEditVehicleComponent implements OnInit {
 
   ngOnInit() {
     this.getVehicle();
+    this.factions = this.vehicleService.getFactions();
+    this.factionsFilteredOptions = this.factionsControl.valueChanges.pipe(
+      startWith(""),
+      map((value) => this._filterFaction(value))
+    );
+  }
+
+  private _filterFaction(value: string): string[] {
+    const filterFaction = value.toLowerCase();
+    return this.factions.filter((faction) =>
+      faction.toLowerCase().includes(filterFaction)
+    );
   }
 
   getVehicle(): void {
@@ -63,6 +85,14 @@ export class PageEditVehicleComponent implements OnInit {
     vehicle.structure = 1;
     vehicle.type = VehicleType.Tank;
     return vehicle;
+  }
+
+  removeWeapon(weapon: Weapon): void {
+    this.vehicle.weapons = this.vehicle.weapons.filter((r) => r != weapon);
+  }
+
+  addWeapon(weapon: Weapon) {
+    this.vehicle.weapons.push(weapon);
   }
 
   save(): void {
