@@ -8,9 +8,16 @@ import { TemplatesModule } from "./../templates/templates.module";
 import { WeaponsRoutingModule } from "./../weapons/weapons-routing.module";
 import { EditImageComponent } from "./components/edit-image/edit-image.component";
 import { ViewImagedComponent } from "./components/view-imaged/view-imaged.component";
+import { PriceCombatUnitPipe } from "./pipes/price-combat-unit.pipe";
+import { PriceWeaponPipe } from "./pipes/price-weapon.pipe";
 
 @NgModule({
-  declarations: [ViewImagedComponent, EditImageComponent],
+  declarations: [
+    ViewImagedComponent,
+    EditImageComponent,
+    PriceCombatUnitPipe,
+    PriceWeaponPipe,
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -28,6 +35,8 @@ import { ViewImagedComponent } from "./components/view-imaged/view-imaged.compon
     MaterialModule,
     ViewImagedComponent,
     EditImageComponent,
+    PriceCombatUnitPipe,
+    PriceWeaponPipe,
   ],
 })
 export class SharedModule {}

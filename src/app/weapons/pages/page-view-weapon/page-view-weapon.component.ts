@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { CombatUnitInterface } from "../../../core/interfaces/combat-unit-interface";
 import { WeaponType } from "./../../../core/enums/weapon-type.enum";
-import { PriceableInterface } from "./../../../core/interfaces/priceable-interface";
 import { Weapon } from "./../../../core/models/weapon";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 
@@ -11,7 +11,7 @@ import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 })
 export class PageViewWeaponComponent implements OnInit {
   @Input() weapon: Weapon;
-  @Input() priceable: PriceableInterface;
+  @Input() priceable: CombatUnitInterface;
   @Input() showRules: boolean = true;
 
   /** Pas terrible mais donne acces dans le template */

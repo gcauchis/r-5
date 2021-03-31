@@ -1,10 +1,10 @@
+import { CombatUnitInterface } from "../interfaces/combat-unit-interface";
 import { IdentitfiableInterface } from "../interfaces/identitfiable-interface";
 import { ImageContainerInterface } from "../interfaces/image-container-interface";
 import { Dice } from "./../enums/dice.enum";
 import { MoveType } from "./../enums/move-type.enum";
 import { VehicleType } from "./../enums/vehicle-type.enum";
 import { FactionableInterface } from "./../interfaces/factionable-interface";
-import { PriceableInterface } from "./../interfaces/priceable-interface";
 import { Weapon } from "./weapon";
 
 /** The representation of a vehicle */
@@ -12,7 +12,7 @@ export class Vehicle
   implements
     IdentitfiableInterface,
     ImageContainerInterface,
-    PriceableInterface,
+    CombatUnitInterface,
     FactionableInterface {
   /** The id */
   id?: number;

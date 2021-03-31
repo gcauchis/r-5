@@ -1,6 +1,6 @@
+import { CombatUnitInterface } from "../interfaces/combat-unit-interface";
 import { IdentitfiableInterface } from "../interfaces/identitfiable-interface";
 import { ImageContainerInterface } from "../interfaces/image-container-interface";
-import { PriceableInterface } from "../interfaces/priceable-interface";
 import { Dice } from "./../enums/dice.enum";
 import { MoveType } from "./../enums/move-type.enum";
 import { TacticalRole } from "./../enums/tactical-role.enum";
@@ -15,7 +15,7 @@ export class Unit
   implements
     IdentitfiableInterface,
     ImageContainerInterface,
-    PriceableInterface,
+    CombatUnitInterface,
     FactionableInterface {
   /** The id */
   id?: number;

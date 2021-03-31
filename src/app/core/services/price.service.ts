@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { PriceableInterface } from "../interfaces/priceable-interface";
+import { CombatUnitInterface } from "../interfaces/combat-unit-interface";
 import { Dice } from "./../enums/dice.enum";
 import { ExposiveWeaponSize } from "./../enums/exposive-weapon-size.enum";
 import { MoveType } from "./../enums/move-type.enum";
@@ -8,7 +8,6 @@ import { UnitSize } from "./../enums/unit-size.enum";
 import { UnitType } from "./../enums/unit-type.enum";
 import { WeaponType } from "./../enums/weapon-type.enum";
 import { Unit } from "./../models/unit";
-import { Vehicle } from "./../models/vehicle";
 import { Weapon } from "./../models/weapon";
 import { UnitService } from "./unit.service";
 
@@ -46,11 +45,11 @@ export class PriceService {
     return this.computeDQM(dice) * 1.2;
   }
 
-  public computeBase(priceable: PriceableInterface): number {
-    let dcPrive = this.computeDC(priceable.dc);
+  public computeBase(combatUnit: CombatUnitInterface): number {
+    let dcPrive = this.computeDC(combatUnit.dc);
     let result = 0;
-    if (priceable instanceof Unit) {
-      let unit = new Unit(priceable);
+    if (combatUnit instanceof Unit) {
+      let unit = new Unit(combatUnit);
 
       let dqmPrice = this.computeDQM(unit.dqm);
       let baseUnit = dqmPrice + dcPrive;
@@ -92,8 +91,8 @@ export class PriceService {
     return result;
   }
 
-  public getPrice(weapon: Weapon, priceable: PriceableInterface): number {
-    let unitBase = this.computeBase(priceable);
+  public getPrice(weapon: Weapon, combatUnit: CombatUnitInterface): number {
+    let unitBase = this.computeBase(combatUnit);
     let result = 0;
     let powerCoef = weapon.power;
     if (weapon.superPower) powerCoef *= 2;
@@ -128,7 +127,7 @@ export class PriceService {
         }
         let baseVp = 0;
         // Se base sur la regle et mon unit
-        if (!weapon.nonLethal) baseVp = this.computeDC(priceable.dc);
+        if (!weapon.nonLethal) baseVp = this.computeDC(combatUnit.dc);
 
         result = baseSize * baseVp * powerCoef + baseExp * unitBase;
         break;
@@ -138,13 +137,12 @@ export class PriceService {
     return Math.round(result);
   }
 
-  public compute(item: any): number {
-    let price = 0;
-    if (item instanceof Unit) {
-      price = this.computeBase(item);
-      for (let weapon of item.weapons) price += this.getPrice(weapon, item);
-    } else if (item instanceof Vehicle) {
-      // TODO
+  public compute(item: CombatUnitInterface): number {
+    let price = this.computeBase(item);
+    if (item.weapons) {
+      for (let weapon of item.weapons) {
+        price += this.getPrice(weapon, item);
+      }
     }
     return price;
   }

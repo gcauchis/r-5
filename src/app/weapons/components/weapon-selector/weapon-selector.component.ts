@@ -8,8 +8,8 @@ import {
 } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import { CombatUnitInterface } from "../../../core/interfaces/combat-unit-interface";
 import { WeaponType } from "./../../../core/enums/weapon-type.enum";
-import { PriceableInterface } from "./../../../core/interfaces/priceable-interface";
 import { Weapon } from "./../../../core/models/weapon";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 import { PriceService } from "./../../../core/services/price.service";
@@ -23,7 +23,7 @@ import { WeaponService } from "./../../../core/services/weapon.service";
 })
 export class WeaponSelectorComponent implements OnInit {
   @Output() askAddWeapon = new EventEmitter<Weapon>();
-  @Input() priceable!: PriceableInterface;
+  @Input() priceable!: CombatUnitInterface;
   @Input() enableEdit: boolean = true;
   @Input() enableAdd: boolean = false;
   currentWeaponType: WeaponType;
