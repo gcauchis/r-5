@@ -2,6 +2,10 @@ import { Injectable } from "@angular/core";
 import { PriceableInterface } from "../interfaces/priceable-interface";
 import { Dice } from "./../enums/dice.enum";
 import { ExposiveWeaponSize } from "./../enums/exposive-weapon-size.enum";
+import { MoveType } from "./../enums/move-type.enum";
+import { TacticalRole } from "./../enums/tactical-role.enum";
+import { UnitSize } from "./../enums/unit-size.enum";
+import { UnitType } from "./../enums/unit-type.enum";
 import { WeaponType } from "./../enums/weapon-type.enum";
 import { Unit } from "./../models/unit";
 import { Vehicle } from "./../models/vehicle";
@@ -10,7 +14,9 @@ import { UnitService } from "./unit.service";
 
 const DICE_VALUE: number = 10;
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class PriceService {
   constructor(private unitService: UnitService) {}
 
@@ -41,48 +47,49 @@ export class PriceService {
   }
 
   public computeBase(priceable: PriceableInterface): number {
-    //TODO !!!!!!
-    /*
-    let dqmPrice = this.computeDQM(unit.dqm);
-    let dcPrive = this.computeDC(unit.dc);
-    let baseUnit = dqmPrice + dcPrive;
-    let pvPrice = baseUnit * unit.pv;
-    let movePrice = (priceable.unit + this.unitService.getRunMove(unit)) * 10;
-    let result = pvPrice + movePrice;
-    switch (unit.size) {
-      case UnitSize.Small:
-        result += pvPrice / 10;
-        break;
-      case UnitSize.Big:
-        result += pvPrice / 10;
-        break;
-      default:
-        break;
-    }
-    switch (unit.tacticalRole) {
-      case TacticalRole.Officer:
-        result += baseUnit * 0.1;
-        break;
-      default:
-        break;
-    }
-    switch (unit.unitType) {
-      case UnitType.Droide:
-        result += dcPrive;
-        break;
-      default:
-        break;
-    }
-    switch (unit.moveType) {
-      case MoveType.Fly:
-        result += dcPrive;
-        break;
-      default:
-        break;
+    let dcPrive = this.computeDC(priceable.dc);
+    let result = 0;
+    if (priceable instanceof Unit) {
+      let unit = new Unit(priceable);
+
+      let dqmPrice = this.computeDQM(unit.dqm);
+      let baseUnit = dqmPrice + dcPrive;
+      let pvPrice = baseUnit * unit.pv;
+      let movePrice = (baseUnit + this.unitService.getRunMove(unit)) * 10;
+      result = pvPrice + movePrice;
+      switch (unit.size) {
+        case UnitSize.Small:
+          result += pvPrice / 10;
+          break;
+        case UnitSize.Big:
+          result += pvPrice / 10;
+          break;
+        default:
+          break;
+      }
+      switch (unit.tacticalRole) {
+        case TacticalRole.Officer:
+          result += baseUnit * 0.1;
+          break;
+        default:
+          break;
+      }
+      switch (unit.unitType) {
+        case UnitType.Droide:
+          result += dcPrive;
+          break;
+        default:
+          break;
+      }
+      switch (unit.moveType) {
+        case MoveType.Fly:
+          result += dcPrive;
+          break;
+        default:
+          break;
+      }
     }
     return result;
-    */
-    return 0;
   }
 
   public getPrice(weapon: Weapon, priceable: PriceableInterface): number {
@@ -121,8 +128,7 @@ export class PriceService {
         }
         let baseVp = 0;
         // Se base sur la regle et mon unit
-        //TODO
-        // if (!weapon.nonLethal) baseVp = this.computeDC(priceable.dc);
+        if (!weapon.nonLethal) baseVp = this.computeDC(priceable.dc);
 
         result = baseSize * baseVp * powerCoef + baseExp * unitBase;
         break;

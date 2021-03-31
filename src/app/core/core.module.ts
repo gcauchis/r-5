@@ -12,12 +12,6 @@ import { WeaponsModule } from "./../weapons/weapons.module";
 import { MemoryManagerComponent } from "./components/memory-manager/memory-manager.component";
 import { MemoryOfServiceComponent } from "./components/memory-of-service/memory-of-service.component";
 import { NavComponent } from "./components/nav/nav.component";
-import { ArmorService } from "./services/armor.service";
-import { EnumUtilsService } from "./services/enum-utils.service";
-import { PriceService } from "./services/price.service";
-import { UnitService } from "./services/unit.service";
-import { UtilsService } from "./services/utils.service";
-import { WeaponService } from "./services/weapon.service";
 
 @NgModule({
   declarations: [
@@ -42,14 +36,6 @@ import { WeaponService } from "./services/weapon.service";
     TemplatesModule,
     PageNotFoundModule,
     ArmiesModule,
-  ],
-  providers: [
-    UnitService,
-    UtilsService,
-    WeaponService,
-    PriceService,
-    EnumUtilsService,
-    ArmorService,
   ],
 })
 export class CoreModule {}

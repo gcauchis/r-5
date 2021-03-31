@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
-import { AbstractCrudService } from "./abstract-crud-service";
 import jsonArmors from "../../resources/armors.json";
 import { Armor } from "../models/armor";
+import { AbstractCrudService } from "./abstract-crud-service";
 import { LocalStorageService } from "./local-storage.service";
 
 const LOCAL_KEY: string = "armors";
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class ArmorService extends AbstractCrudService<Armor> {
   constructor(localStorage: LocalStorageService) {
     super(localStorage, LOCAL_KEY);

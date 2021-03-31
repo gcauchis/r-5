@@ -6,7 +6,9 @@ import { LocalStorageService } from "./local-storage.service";
 
 const LOCAL_KEY: string = "units";
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class UnitService extends AbstractCrudService<Unit> {
   constructor(
     localStorage: LocalStorageService,

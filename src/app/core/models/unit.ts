@@ -49,4 +49,9 @@ export class Unit
   armor: Armor;
   /** The image in base64 format for direct insertion in img src. */
   imgBase64?: any;
+  constructor(param?: Partial<Unit>) {
+    if (param) {
+      Object.assign(this, param);
+    }
+  }
 }

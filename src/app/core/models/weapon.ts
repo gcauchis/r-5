@@ -33,4 +33,9 @@ export class Weapon implements IdentitfiableInterface {
   size?: ExposiveWeaponSize = null;
   /** If non lethal weapon */
   nonLethal?: boolean;
+  constructor(param?: Partial<Weapon>) {
+    if (param) {
+      Object.assign(this, param);
+    }
+  }
 }

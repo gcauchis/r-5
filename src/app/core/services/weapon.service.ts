@@ -7,7 +7,9 @@ import { LocalStorageService } from "./local-storage.service";
 
 const LOCAL_KEY: string = "weapons";
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class WeaponService extends AbstractCrudService<Weapon> {
   constructor(localStorage: LocalStorageService) {
     super(localStorage, LOCAL_KEY);

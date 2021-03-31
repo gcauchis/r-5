@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { VehicleService } from "../../services/vehicle.service";
 import { ArmyService } from "./../../services/army.service";
 import { UnitService } from "./../../services/unit.service";
 import { WeaponService } from "./../../services/weapon.service";
@@ -12,6 +13,7 @@ export class MemoryManagerComponent implements OnInit {
   constructor(
     public weaponService: WeaponService,
     public unitService: UnitService,
+    public vehicleService: VehicleService,
     public armyService: ArmyService
   ) {}
 

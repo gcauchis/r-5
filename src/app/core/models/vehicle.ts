@@ -40,4 +40,9 @@ export class Vehicle
   weapons?: Weapon[] = [];
   /** The image in base64 format for direct insertion in img src. */
   imgBase64?: any;
+  constructor(param?: Partial<Vehicle>) {
+    if (param) {
+      Object.assign(this, param);
+    }
+  }
 }

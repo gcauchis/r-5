@@ -8,4 +8,9 @@ export class Armor implements IdentitfiableInterface {
   protection: string;
   /** The special rule of the armor */
   rule: string = "";
+  constructor(param?: Partial<Armor>) {
+    if (param) {
+      Object.assign(this, param);
+    }
+  }
 }

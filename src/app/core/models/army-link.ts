@@ -3,4 +3,10 @@ export class ArmyLink {
   id: number;
   /** Number of linked items */
   count: number;
+
+  constructor(param?: Partial<ArmyLink>) {
+    if (param) {
+      Object.assign(this, param);
+    }
+  }
 }

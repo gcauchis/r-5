@@ -8,7 +8,9 @@ import { UnitType } from "./../enums/unit-type.enum";
 import { VehicleType } from "./../enums/vehicle-type.enum";
 import { WeaponType } from "./../enums/weapon-type.enum";
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class EnumUtilsService {
   constructor() {}
 

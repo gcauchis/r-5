@@ -11,4 +11,10 @@ export class Army implements IdentitfiableInterface {
   units: ArmyLink[] = [];
   /** The vehicles */
   vehicles: ArmyLink[] = [];
+
+  constructor(param?: Partial<Army>) {
+    if (param) {
+      Object.assign(this, param);
+    }
+  }
 }
