@@ -1,7 +1,7 @@
 {
   "name": "r-5",
   "description": "The R-5 army unit builder",
-  "version": "0.0.2",
+  "version": "0.0.3-SNAPSHOT",
   "author": {
     "name": "gcauchis",
     "email": "gabriel.cauchis@gmail.com"
@@ -24,8 +24,7 @@
     "@angular/platform-browser-dynamic": "^10.2.4",
     "@angular/router": "^10.2.4",
     "file-saver": "^2.0.5",
-    "html-to-pdfmake": "^2.1.5",
-    "pdfmake": "^0.1.70",
+    "pdf-lib": "^1.16.0",
     "rxjs": "^6.6.6",
     "tslib": "^2.0.1",
     "zone.js": "^0.10.3"

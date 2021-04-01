@@ -1,4 +1,4 @@
-<app-view-imaged [imageContainer]="vehicle" [showPdfButton]="showPdfButton" [pdfName]="vehicle.name">
+<app-view-imaged [imageContainer]="vehicle" [pdfName]="vehicle.name">
     <p style="margin:0px"><span class="vehicle-title">{{vehicle.name}} /
             {{enumUtils.vehicleTypeToString(vehicle.type)}}</span><span *ngIf="vehicle.faction">
             ({{vehicle.faction}})</span>
@@ -15,8 +15,5 @@
     <p style="margin:0px"><span class="vehicle-title">Blindage :</span>{{enumUtils.diceToString(vehicle.armor)}} <span
             class="vehicle-title"> / PS :</span> {{vehicle.structure}}</p>
     <p style="margin:0px"><span class="vehicle-title">Prix :</span> {{priceService.compute(vehicle)}}</p>
-    <div style="margin:0px" *ngIf="vehicle"><span class="vehicle-title">Armes :</span>
-        <app-page-view-weapon *ngFor="let weapon of vehicle.weapons" [weapon]="weapon" [priceable]="vehicle">
-        </app-page-view-weapon>
-    </div>
+    <app-view-weapons [combatUnit]="vehicle"></app-view-weapons>
 </app-view-imaged>

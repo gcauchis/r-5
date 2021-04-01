@@ -13,7 +13,6 @@ import { VehicleService } from "./../../../core/services/vehicle.service";
 })
 export class PageViewVehicleComponent implements OnInit {
   @Input() vehicle: Vehicle;
-  @Input() showPdfButton: boolean = false;
   @Input() vehicleCount: number;
 
   VehicleType = VehicleType;

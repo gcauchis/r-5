@@ -11,7 +11,7 @@ import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 })
 export class PageViewWeaponComponent implements OnInit {
   @Input() weapon: Weapon;
-  @Input() priceable: CombatUnitInterface;
+  @Input() combatUnit: CombatUnitInterface;
   @Input() showRules: boolean = true;
 
   /** Pas terrible mais donne acces dans le template */
