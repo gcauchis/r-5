@@ -1,0 +1,11 @@
+.weapon-title {
+  font-weight: bold;
+}
+
+.weapon-line {
+  margin: 0;
+}
+
+.weapon-number {
+  padding-left: 80px;
+}

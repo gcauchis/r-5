@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { VehicleType } from "../enums/vehicle-type.enum";
-import { WeaponType } from "../enums/weapon-type.enum";
 import { Army } from "../models/army";
+import { VehicleType } from "./../enums/vehicle-type.enum";
+import { WeaponType } from "./../enums/weapon-type.enum";
 import { CombatUnitInterface } from "./../interfaces/combat-unit-interface";
 import { PdfDrawContext } from "./../models/pdf-draw-context";
 import { Unit } from "./../models/unit";
@@ -27,12 +27,17 @@ export class PdfService {
 
   public async printArmy(army: Army) {
     const context = await PdfDrawContext.create();
+    console.log(context);
+
     this.appendArmy(context, army);
     this.savePDF(await context.save(), `${army.name}.pdf`);
   }
 
   private async appendArmy(context: PdfDrawContext, army: Army) {
-    context.basicDrawTestLine(army.name);
+    context.fontSize = 20;
+    context.drawText(army.name, true);
+    context.lineBreak();
+    context.fontSize = 12;
     if (army.desc) {
       context.basicDrawTestLine(army.desc);
     }
@@ -52,35 +57,51 @@ export class PdfService {
   }
 
   private async appendUnit(context: PdfDrawContext, unit: Unit, nb?: number) {
-    let title = `${unit.name} / ${this.enumUtils.tacticalRoleToString(
-      unit.tacticalRole
-    )}`;
+    context.drawText(
+      `${unit.name} / ${this.enumUtils.tacticalRoleToString(
+        unit.tacticalRole
+      )}`,
+      true
+    );
     if (unit.faction) {
-      title += ` (${unit.faction})`;
+      context.drawText(` (${unit.faction})`, true);
     }
     if (nb) {
-      title += `\tNbr : ${nb}`;
+      context.addHorizontalGap(40);
+      context.drawText("Nbr : ", true);
+      context.drawText(`${nb}`);
     }
-    context.basicDrawTestLine(title);
-    context.basicDrawTestLine(`Prix : ${this.priceService.compute(unit)}`);
-    if (unit.desc) {
-      context.basicDrawTestLine(`Description : ${unit.desc}`);
-    }
-    context.basicDrawTestLine(
-      `Mouvement : ${unit.tacticalMove}’’/${this.unitService.getRunMove(
-        unit
-      )}’’ +1D4’’`
-    );
-    context.basicDrawTestLine(`DQM : ${this.enumUtils.diceToString(unit.dqm)}`);
+    context.lineBreak();
 
-    let protection = "Sauvegarde : ";
-    if (unit.armor) {
-      protection += unit.armor.protection;
-    } else {
-      protection += "Aucune sauvegarde";
+    context.drawText("Prix : ", true);
+    context.drawText(`${this.priceService.compute(unit)}`);
+    context.lineBreak();
+    if (unit.desc) {
+      context.drawText("Description : ", true);
+      context.drawText(`${unit.desc}`);
+      context.lineBreak();
     }
-    protection += ` / PV : ${unit.pv}`;
-    context.basicDrawTestLine(protection);
+
+    context.drawText("Mouvement : ", true);
+    context.drawText(
+      `${unit.tacticalMove}’’/${this.unitService.getRunMove(unit)}’’ +1D4’’`
+    );
+    context.lineBreak();
+
+    context.drawText("DQM : ", true);
+    context.drawText(`${this.enumUtils.diceToString(unit.dqm)}`);
+    context.lineBreak();
+
+    context.drawText("Sauvegarde : ", true);
+
+    if (unit.armor) {
+      context.drawText(unit.armor.protection);
+    } else {
+      context.drawText("Aucune sauvegarde");
+    }
+    context.drawText(" / PV : ", true);
+    context.drawText(`${unit.pv}`);
+    context.lineBreak();
 
     this.appendWeapons(context, unit);
     //TODO IMAGE
@@ -97,35 +118,46 @@ export class PdfService {
     vehicle: Vehicle,
     nb?: number
   ) {
-    let title = `${vehicle.name} / ${this.enumUtils.vehicleTypeToString(
-      vehicle.type
-    )}`;
+    context.drawText(
+      `${vehicle.name} / ${this.enumUtils.vehicleTypeToString(vehicle.type)}`,
+      true
+    );
     if (vehicle.faction) {
-      title += ` (${vehicle.faction})`;
+      context.drawText(` (${vehicle.faction})`, true);
     }
     if (nb) {
-      title += `\tNbr : ${nb}`;
+      context.addHorizontalGap(40);
+      context.drawText("Nbr : ", true);
+      context.drawText(`${nb}`);
     }
-    context.basicDrawTestLine(title);
-    context.basicDrawTestLine(`Prix : ${this.priceService.compute(vehicle)}`);
-    context.basicDrawTestLine(
-      `Type de mouvement : ${this.enumUtils.moveTypeToString(vehicle.moveType)}`
+    context.lineBreak();
+
+    context.drawText("Prix : ", true);
+    context.drawText(`${this.priceService.compute(vehicle)}`);
+    context.lineBreak();
+
+    context.drawText("Type de mouvement : ", true);
+    context.drawText(`${this.enumUtils.moveTypeToString(vehicle.moveType)}`);
+    context.lineBreak();
+
+    context.drawText("Mouvement : ", true);
+    context.drawText(
+      `${vehicle.tacticalMove}’’/${this.vehicleService.getRunMove(vehicle)}’’`
     );
-    context.basicDrawTestLine(
-      `Mouvement : ${vehicle.tacticalMove}’’/${this.vehicleService.getRunMove(
-        vehicle
-      )}’’`
-    );
+    context.lineBreak();
+
     if (vehicle.type == VehicleType.TroopTransport) {
-      context.basicDrawTestLine(
-        `Place disponible pour le transport : ${vehicle.transportSpace}`
-      );
+      context.drawText("Place disponible pour le transport : ", true);
+      context.drawText(`${vehicle.transportSpace}`);
+      context.lineBreak();
     }
-    context.basicDrawTestLine(
-      `Blindage : ${this.enumUtils.diceToString(vehicle.armor)} / PS : ${
-        vehicle.structure
-      }`
-    );
+
+    context.drawText("Blindage : ", true);
+    context.drawText(`${this.enumUtils.diceToString(vehicle.armor)}`);
+    context.drawText(" / PS :  : ", true);
+    context.drawText(`${vehicle.structure}`);
+    context.lineBreak();
+
     this.appendWeapons(context, vehicle);
 
     //TODO IMAGE
@@ -141,14 +173,13 @@ export class PdfService {
     context: PdfDrawContext,
     unit: CombatUnitInterface
   ): void {
-    console.log(unit.weapons);
     if (unit.weapons) {
       let meleeWeapons = unit.weapons.filter(
         (w) => w.weaponType == WeaponType.Melee
       );
       if (meleeWeapons.length > 0) {
         context.addVerticalGap(5);
-        context.basicDrawTestLine("Mélée :");
+        context.basicDrawTestLine("Mélée :", true);
         for (let weapon of meleeWeapons) {
           this.appendWeapon(context, weapon, unit);
         }
@@ -159,7 +190,7 @@ export class PdfService {
       );
       if (shootWeapons.length > 0) {
         context.addVerticalGap(5);
-        context.basicDrawTestLine("Tir :");
+        context.basicDrawTestLine("Tir :", true);
         for (let weapon of shootWeapons) {
           this.appendWeapon(context, weapon, unit);
         }
@@ -170,7 +201,7 @@ export class PdfService {
       );
       if (explosiveWeapons.length > 0) {
         context.addVerticalGap(5);
-        context.basicDrawTestLine("Explosif :");
+        context.basicDrawTestLine("Explosif :", true);
         for (let weapon of explosiveWeapons) {
           this.appendWeapon(context, weapon, unit);
         }
@@ -181,7 +212,7 @@ export class PdfService {
       );
       if (grenadeWeapons.length > 0) {
         context.addVerticalGap(5);
-        context.basicDrawTestLine("Grenade :");
+        context.basicDrawTestLine("Grenade :", true);
         for (let weapon of grenadeWeapons) {
           this.appendWeapon(context, weapon, unit);
         }

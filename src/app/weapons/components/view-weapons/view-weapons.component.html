@@ -1,17 +1,17 @@
 <div *ngIf="combatUnit" style="margin:0px">
-    <div style="margin:0px" *ngIf="meleeWeapons"><span class="unit-title">Mélée :</span>
+    <div style="margin:0px" *ngIf="meleeWeapons"><span class="weapon-title">Mélée :</span>
         <app-page-view-weapon *ngFor="let weapon of meleeWeapons" [weapon]="weapon" [combatUnit]="combatUnit">
         </app-page-view-weapon>
     </div>
-    <div style="margin:0px" *ngIf="shootWeapons"><span class="unit-title">Tir :</span>
+    <div style="margin:0px" *ngIf="shootWeapons"><span class="weapon-title">Tir :</span>
         <app-page-view-weapon *ngFor="let weapon of shootWeapons" [weapon]="weapon" [combatUnit]="combatUnit">
         </app-page-view-weapon>
     </div>
-    <div style="margin:0px" *ngIf="explosiveWeapons"><span class="unit-title">Explosif :</span>
+    <div style="margin:0px" *ngIf="explosiveWeapons"><span class="weapon-title">Explosif :</span>
         <app-page-view-weapon *ngFor="let weapon of explosiveWeapons" [weapon]="weapon" [combatUnit]="combatUnit">
         </app-page-view-weapon>
     </div>
-    <div style="margin:0px" *ngIf="grenadeWeapons"><span class="unit-title">Grenade :</span>
+    <div style="margin:0px" *ngIf="grenadeWeapons"><span class="weapon-title">Grenade :</span>
         <app-page-view-weapon *ngFor="let weapon of grenadeWeapons" [weapon]="weapon" [combatUnit]="combatUnit">
         </app-page-view-weapon>
     </div>
