@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { Router, RouterModule, Routes } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 import { PageEditArmyComponent } from "./armies/pages/page-edit-army/page-edit-army.component";
 import { PageListArmiesComponent } from "./armies/pages/page-list-armies/page-list-armies.component";
 import { PageViewArmyComponent } from "./armies/pages/page-view-army/page-view-army.component";
@@ -43,11 +43,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-  constructor(private router: Router) {
-    // Use a custom replacer to display function names in the route configs
-    const replacer = (key: any, value: any) =>
-      typeof value === "function" ? value.name : value;
-    console.log("Routes: ", JSON.stringify(router.config, replacer, 2));
-  }
-}
+export class AppRoutingModule {}

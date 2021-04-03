@@ -14,6 +14,7 @@ export class PdfDrawContext implements PdfDrawContextInterface {
   currentX: number;
   currentY: number;
   _curentFont: PDFFont;
+  interLine = 2;
 
   public static create(
     obj?: Partial<PdfDrawContextInterface>
@@ -108,7 +109,7 @@ export class PdfDrawContext implements PdfDrawContextInterface {
 
   public lineBreak(): void {
     this.currentX = this._pageMargin;
-    this.currentY = this.currentY - this.fontSize;
+    this.currentY = this.currentY - this.fontSize - this.interLine;
   }
 
   public drawText(text: string, bold?: boolean): void {

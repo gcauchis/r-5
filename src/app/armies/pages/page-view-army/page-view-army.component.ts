@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { PdfDrawContext } from "src/app/core/models/pdf-draw-context";
 import { Army } from "./../../../core/models/army";
 import { Unit } from "./../../../core/models/unit";
 import { Vehicle } from "./../../../core/models/vehicle";
@@ -21,6 +22,7 @@ export class PageViewArmyComponent implements OnInit {
   vehiclesCount: any = {};
 
   @ViewChild("armyCard") armyCard: ElementRef;
+  public pdfDrawContext: PdfDrawContext;
 
   constructor(
     private route: ActivatedRoute,
@@ -59,9 +61,8 @@ export class PageViewArmyComponent implements OnInit {
         }
       }
     }
-  }
-
-  public openPDF(): void {
-    this.pdfService.printArmy(this.army);
+    this.pdfService
+      .printArmy(this.army)
+      .then((res) => (this.pdfDrawContext = res));
   }
 }

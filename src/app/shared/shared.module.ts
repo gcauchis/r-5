@@ -10,6 +10,7 @@ import { EditImageComponent } from "./components/edit-image/edit-image.component
 import { ViewImagedComponent } from "./components/view-imaged/view-imaged.component";
 import { PriceCombatUnitPipe } from "./pipes/price-combat-unit.pipe";
 import { PriceWeaponPipe } from "./pipes/price-weapon.pipe";
+import { ShowPdfComponent } from './components/show-pdf/show-pdf.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PriceWeaponPipe } from "./pipes/price-weapon.pipe";
     EditImageComponent,
     PriceCombatUnitPipe,
     PriceWeaponPipe,
+    ShowPdfComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { PriceWeaponPipe } from "./pipes/price-weapon.pipe";
     EditImageComponent,
     PriceCombatUnitPipe,
     PriceWeaponPipe,
+    ShowPdfComponent,
   ],
 })
 export class SharedModule {}

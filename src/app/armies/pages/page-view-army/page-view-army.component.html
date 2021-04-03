@@ -6,5 +6,6 @@
     <div *ngFor="let vehicle of vehicles" class="army-div">
         <app-page-view-vehicle [vehicle]="vehicle" [vehicleCount]="vehiclesCount[vehicle.id]"></app-page-view-vehicle>
     </div>
+
+    <app-show-pdf [pdfDrawContext]="pdfDrawContext" pdfName="{{army.name}}.pdf"></app-show-pdf>
 </div>
-<button mat-raised-button (click)="openPDF()">PDF</button>

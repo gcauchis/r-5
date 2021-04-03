@@ -15,3 +15,4 @@
     <p style="margin:0px"><span class="unit-title">Prix :</span> {{priceService.compute(unit)}}</p>
     <p style="margin:0px" *ngIf="unit.desc"><span class="unit-title">Description :</span> {{unit.desc}}</p>
 </app-view-imaged>
+<app-show-pdf *ngIf="showPdf && pdfContext" [pdfDrawContext]="pdfContext" pdfName="{{unit.name}}.pdf"></app-show-pdf>

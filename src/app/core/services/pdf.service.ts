@@ -25,12 +25,22 @@ export class PdfService {
     public priceService: PriceService
   ) {}
 
-  public async printArmy(army: Army) {
+  public async printArmy(army: Army): Promise<PdfDrawContext> {
     const context = await PdfDrawContext.create();
-    console.log(context);
-
     this.appendArmy(context, army);
-    this.savePDF(await context.save(), `${army.name}.pdf`);
+    return context;
+  }
+
+  public async printUnit(unit: Unit): Promise<PdfDrawContext> {
+    const context = await PdfDrawContext.create();
+    this.appendUnit(context, unit);
+    return context;
+  }
+
+  public async printVehicle(vehicle: Vehicle): Promise<PdfDrawContext> {
+    const context = await PdfDrawContext.create();
+    this.appendVehicle(context, vehicle);
+    return context;
   }
 
   private async appendArmy(context: PdfDrawContext, army: Army) {
@@ -249,9 +259,15 @@ export class PdfService {
     context.basicDrawTestLine(weaponStr);
   }
 
-  private savePDF(content: Uint8Array, name: string) {
-    var blob = new Blob([content], { type: "application/json" });
-    var FileSaver = require("file-saver");
-    FileSaver.saveAs(blob, name);
+  public savePDF(context: PdfDrawContext, name: string) {
+    context.save().then((content) => {
+      let blob = new Blob([content], { type: "application/json" });
+      let FileSaver = require("file-saver");
+      FileSaver.saveAs(blob, name);
+    });
+  }
+
+  public saveAsBase64(context: PdfDrawContext): Promise<string> {
+    return context.document.saveAsBase64({ dataUri: true });
   }
 }
