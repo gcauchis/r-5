@@ -26,4 +26,8 @@ export class ArmyService extends AbstractCrudService<Army> {
   protected get minId(): number {
     return 100;
   }
+
+  protected castJsonObject(obj: Army): Army {
+    return new Army(obj);
+  }
 }

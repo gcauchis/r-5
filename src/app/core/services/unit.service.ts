@@ -37,4 +37,8 @@ export class UnitService extends AbstractCrudService<Unit> {
   public getFactions(): string[] {
     return this.factionService.getFactions(this.storedData);
   }
+
+  protected castJsonObject(obj: Unit): Unit {
+    return new Unit(obj);
+  }
 }

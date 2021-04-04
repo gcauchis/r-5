@@ -38,4 +38,8 @@ export class VehicleService extends AbstractCrudService<Vehicle> {
   public getFactions(): string[] {
     return this.factionService.getFactions(this.storedData);
   }
+
+  protected castJsonObject(obj: Vehicle): Vehicle {
+    return new Vehicle(obj);
+  }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import jsonWeaponsRulesValues from "../../resources/weapons-rules-values.json";
 import { CombatUnitInterface } from "../interfaces/combat-unit-interface";
 import { Dice } from "./../enums/dice.enum";
 import { ExposiveWeaponSize } from "./../enums/exposive-weapon-size.enum";
@@ -11,7 +12,25 @@ import { Unit } from "./../models/unit";
 import { Weapon } from "./../models/weapon";
 import { UnitService } from "./unit.service";
 
-const DICE_VALUE: number = 10;
+const DICE_VALUE: number = 4;
+const DICE_D6_VALUE: number = DICE_VALUE * (3 / 6);
+const DICE_D8_VALUE: number = DICE_VALUE * (5 / 8);
+const DICE_D10_VALUE: number = DICE_VALUE * (7 / 10);
+const DICE_D12_VALUE: number = DICE_VALUE * (9 / 12);
+
+const POWER_DICE_COEF: number = 1;
+const POWER_SUPER_DICE_COEF: number = 1.2;
+
+const ASSAULT_VALUE: number = 2;
+const HEAVY_VALUE: number = 1;
+const COVER_VALUE: number = 2;
+
+const SIZE_SMALL: number = 3;
+const SIZE_MEDIUM: number = 13;
+const SIZE_BIG: number = 28;
+const SIZE_CONE: number = 17;
+
+const WEAPONS_RULES_VALUES = jsonWeaponsRulesValues;
 
 @Injectable({
   providedIn: "root",
@@ -19,35 +38,33 @@ const DICE_VALUE: number = 10;
 export class PriceService {
   constructor(private unitService: UnitService) {}
 
-  public computeDQM(dice: Dice): number {
-    let result = DICE_VALUE;
+  public computeDice(dice: Dice): number {
     switch (dice) {
       case Dice.D6:
-        result *= 3 / 6;
-        break;
+        return DICE_D6_VALUE;
       case Dice.D8:
-        result *= 5 / 8;
-        break;
+        return DICE_D8_VALUE;
       case Dice.D10:
-        result *= 7 / 10;
-        break;
+        return DICE_D10_VALUE;
       case Dice.D12:
-        result *= 9 / 12;
-        break;
+        return DICE_D12_VALUE;
       default:
-        result = 0;
-        break;
+        return DICE_VALUE;
     }
-    return result;
+  }
+
+  public computeDQM(dice: Dice): number {
+    return this.computeDice(dice);
   }
 
   public computeDC(dice: Dice): number {
-    return this.computeDQM(dice) * 1.2;
+    return this.computeDice(dice);
   }
 
   public computeBase(combatUnit: CombatUnitInterface): number {
     let dcPrive = this.computeDC(combatUnit.dc);
     let result = 0;
+    console.log(combatUnit);
     if (combatUnit instanceof Unit) {
       let unit = new Unit(combatUnit);
 

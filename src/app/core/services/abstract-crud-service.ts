@@ -27,6 +27,7 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
       );
       this.data = this.loadBaseData();
     }
+    this.data = this.data.map((d) => this.castJsonObject(d));
     console.log(this.data);
   }
 
@@ -111,4 +112,6 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
   }
 
   protected abstract convertData(data: any): T[];
+
+  protected abstract castJsonObject(obj: T): T;
 }
