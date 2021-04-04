@@ -1,0 +1,109 @@
+<app-template-full-width *ngIf="vehicle">
+    <div class="tr-content">
+        <app-template-full-width>
+            <span class="tr-title">Edition : {{vehicle.name}}/{{enumUtils.vehicleTypeToString(vehicle.type)}}</span>
+            <div class="tr-content">
+
+                <mat-form-field class="vehicle-full-width">
+                    <mat-label>Camps</mat-label>
+                    <input matInput type="text" [(ngModel)]="vehicle.faction" [formControl]="factionsControl"
+                        [matAutocomplete]="auto" placeholder="Camps" />
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let faction of factionsFilteredOptions | async" [value]="faction">
+                            {{faction}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field><br>
+
+                <mat-form-field class="vehicle-full-width">
+                    <mat-label>Nom</mat-label>
+                    <input matInput [(ngModel)]="vehicle.name" placeholder="Nom" />
+                </mat-form-field><br>
+
+                <app-edit-image [imageContainer]="vehicle"></app-edit-image><br>
+
+                <mat-form-field>
+                    <mat-label>Type de véhicule</mat-label>
+                    <mat-select [(ngModel)]="vehicle.type">
+                        <mat-option *ngFor="let type of vehicleType" [value]="type.value">{{type.key}}</mat-option>
+                    </mat-select>
+                </mat-form-field><br>
+
+                <mat-form-field>
+                    <mat-label>Type de mouvement</mat-label>
+                    <mat-select [(ngModel)]="vehicle.moveType">
+                        <mat-option *ngFor="let moveType of moveTypes" [value]="moveType.value">{{moveType.key}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Mouvement tactique</mat-label>
+                    <input matInput type="number" min="0" max="100" [(ngModel)]="vehicle.tacticalMove"
+                        placeholder="Mouvement" />
+                </mat-form-field><br>
+
+                <mat-form-field>
+                    <mat-label>Point de structure</mat-label>
+                    <input matInput type="number" min="1" max="10" [(ngModel)]="vehicle.structure"
+                        placeholder="Structure" />
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Type de blindage</mat-label>
+                    <mat-select [(ngModel)]="vehicle.armor">
+                        <mat-option *ngFor="let dice of dices" [value]="dice.value">{{dice.key}}</mat-option>
+                    </mat-select>
+                </mat-form-field><br>
+
+                <mat-form-field>
+                    <mat-label>Équipage</mat-label>
+                    <input matInput type="number" min="1" max="6" [(ngModel)]="vehicle.crew" placeholder="Équipage" />
+                </mat-form-field>
+
+                <mat-form-field *ngIf="vehicle.type == VehicleType.TroopTransport">
+                    <mat-label>Nombre de places de transport</mat-label>
+                    <input matInput type="number" min="1" max="500" [(ngModel)]="vehicle.transportSpace"
+                        placeholder="Places" />
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Dé Combat (DC)</mat-label>
+                    <mat-select [(ngModel)]="vehicle.dc">
+                        <mat-option *ngFor="let dice of dices" [value]="dice.value">{{dice.key}}</mat-option>
+                    </mat-select>
+                </mat-form-field><br>
+
+            </div>
+            <div class="tr-actions"></div>
+        </app-template-full-width>
+
+        <app-weapon-selector [priceable]="vehicle" (askAddWeapon)="addWeapon($event)" enableAdd=true enableEdit=false>
+        </app-weapon-selector>
+
+        <table class="weapons">
+            <tr>
+                <th>Arme de l'unité</th>
+                <th></th>
+            </tr>
+            <tr *ngFor="let weapon of vehicle.weapons">
+                <td>
+                    <app-view-weapon [weapon]="weapon" [combatUnit]="vehicle"></app-view-weapon>
+                </td>
+                <td><button mat-mini-fab (click)="removeWeapon(weapon)" color="warn">
+                        <app-icon-delete></app-icon-delete>
+                    </button></td>
+            </tr>
+        </table>
+
+        <app-template-full-width>
+            <span class="tr-title">Résultat</span>
+            <app-view-vehicle class="tr-content" [vehicle]="vehicle"></app-view-vehicle>
+        </app-template-full-width>
+
+    </div>
+    <div class="tr-actions">
+        <button mat-raised-button (click)="save()">Save</button>
+        <button mat-raised-button (click)="goBack()">Back</button>
+    </div>
+</app-template-full-width>
