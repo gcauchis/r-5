@@ -12,8 +12,6 @@ import { PriceService } from "./price.service";
 import { UnitService } from "./unit.service";
 import { VehicleService } from "./vehicle.service";
 
-const PAGE_MARGIN = 40;
-
 @Injectable({
   providedIn: "root",
 })

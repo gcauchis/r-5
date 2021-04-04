@@ -4,7 +4,7 @@ import { Subject } from "rxjs";
 const KEY_PREFIX: string = "R-5.storage.";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class LocalStorageService {
   localStorage: Storage;
@@ -17,7 +17,11 @@ export class LocalStorageService {
 
   get(key: string): any {
     if (this.isLocalStorageSupported) {
-      return JSON.parse(this.localStorage.getItem(KEY_PREFIX + key));
+      let stored = this.localStorage.getItem(KEY_PREFIX + key);
+      console.log(stored);
+      if (stored && stored != "undefined")
+        return JSON.parse(this.localStorage.getItem(KEY_PREFIX + key));
+      else return null;
     }
     return null;
   }
@@ -29,7 +33,7 @@ export class LocalStorageService {
       this.changes$.next({
         type: "set",
         usedKey,
-        value
+        value,
       });
       return true;
     }
@@ -42,7 +46,7 @@ export class LocalStorageService {
       this.localStorage.removeItem(usedKey);
       this.changes$.next({
         type: "remove",
-        usedKey
+        usedKey,
       });
       return true;
     }

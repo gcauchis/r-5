@@ -5,6 +5,7 @@ import { ViewWeaponComponent } from "./components/view-weapon/view-weapon.compon
 import { ViewWeaponsComponent } from "./components/view-weapons/view-weapons.component";
 import { WeaponSelectorComponent } from "./components/weapon-selector/weapon-selector.component";
 import { PageEditWeaponComponent } from "./pages/page-edit-weapon/page-edit-weapon.component";
+import { EditWeaponComponent } from './components/edit-weapon/edit-weapon.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { PageEditWeaponComponent } from "./pages/page-edit-weapon/page-edit-weap
     WeaponSelectorComponent,
     ViewWeaponsComponent,
     ViewWeaponComponent,
+    EditWeaponComponent,
   ],
   imports: [CommonModule, SharedModule],
   exports: [WeaponSelectorComponent, ViewWeaponsComponent, ViewWeaponComponent],
