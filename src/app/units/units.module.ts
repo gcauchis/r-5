@@ -7,12 +7,14 @@ import { PageEditUnitComponent } from "./pages/page-edit-unit/page-edit-unit.com
 import { PageListUnitsComponent } from "./pages/page-list-units/page-list-units.component";
 import { PageViewUnitComponent } from "./pages/page-view-unit/page-view-unit.component";
 import { UnitsRoutingModule } from "./units-routing.module";
+import { ViewUnitComponent } from './components/view-unit/view-unit.component';
 
 @NgModule({
   declarations: [
     PageEditUnitComponent,
     PageViewUnitComponent,
     PageListUnitsComponent,
+    ViewUnitComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { UnitsRoutingModule } from "./units-routing.module";
     PageListUnitsComponent,
     WeaponsModule,
     ArmorsModule,
+    ViewUnitComponent,
   ],
 })
 export class UnitsModule {}

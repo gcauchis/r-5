@@ -67,6 +67,15 @@ export class PdfService {
   }
 
   private async appendUnit(context: PdfDrawContext, unit: Unit, nb?: number) {
+    // if (unit.imgBase64) {
+    //   console.log(unit.imgBase64);
+    //   console.log(atob(unit.imgBase64));
+    //   const image = await fetch(unit.imgBase64);
+    //   console.log(image);
+    //   // const pdfImage = await context.document.embedJpg(image.arrayBuffer);
+    //   // context.currentPage.drawImage(pdfImage);
+    // }
+
     context.drawText(
       `${unit.name} / ${this.enumUtils.tacticalRoleToString(
         unit.tacticalRole
@@ -114,13 +123,6 @@ export class PdfService {
     context.lineBreak();
 
     this.appendWeapons(context, unit);
-    //TODO IMAGE
-
-    // if (unit.imgBase64) {
-    //   const image = await fetch(unit.imgBase64);
-    //   const pdfImage = await context.document.embedJpg(image.arrayBuffer);
-    //   context.currentPage.drawImage(pdfImage);
-    // }
   }
 
   private async appendVehicle(

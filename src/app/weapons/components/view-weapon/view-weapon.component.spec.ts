@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageViewWeaponComponent } from './page-view-weapon.component';
+import { ViewWeaponComponent } from './view-weapon.component';
 
-describe('PageViewWeaponComponent', () => {
-  let component: PageViewWeaponComponent;
-  let fixture: ComponentFixture<PageViewWeaponComponent>;
+describe('ViewWeaponComponent', () => {
+  let component: ViewWeaponComponent;
+  let fixture: ComponentFixture<ViewWeaponComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PageViewWeaponComponent ]
+      declarations: [ ViewWeaponComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PageViewWeaponComponent);
+    fixture = TestBed.createComponent(ViewWeaponComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

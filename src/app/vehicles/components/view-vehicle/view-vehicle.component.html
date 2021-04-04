@@ -1,0 +1,20 @@
+<app-view-imaged [imageContainer]="vehicle" [pdfName]="vehicle.name">
+    <p style="margin:0px"><span class="vehicle-title">{{vehicle.name}} /
+            {{enumUtils.vehicleTypeToString(vehicle.type)}}</span><span *ngIf="vehicle.faction">
+            ({{vehicle.faction}})</span>
+        <span *ngIf="vehicleCount" class="vehicle-number"><span class="vehicle-title"> Nbr :</span>
+            {{vehicleCount}}</span>
+    </p>
+    <p style="margin:0px"><span class="vehicle-title">Type de mouvement :</span>
+        {{enumUtils.moveTypeToString(vehicle.moveType)}}</p>
+    <p style="margin:0px"><span class="vehicle-title">Mouvement :</span> {{vehicle.tacticalMove}}’’ /
+        {{vehicleService.getRunMove(vehicle)}}’’</p>
+    <p style="margin:0px" *ngIf="vehicle.type == VehicleType.TroopTransport"><span class="vehicle-title">Place
+            disponible
+            pour le transport :</span> {{vehicle.transportSpace}}</p>
+    <p style="margin:0px"><span class="vehicle-title">Blindage :</span>{{enumUtils.diceToString(vehicle.armor)}} <span
+            class="vehicle-title"> / PS :</span> {{vehicle.structure}}</p>
+    <p style="margin:0px"><span class="vehicle-title">Prix :</span> {{priceService.compute(vehicle)}}</p>
+    <app-view-weapons [combatUnit]="vehicle"></app-view-weapons>
+</app-view-imaged>
+<app-show-pdf *ngIf="showPdf && pdfContext" [pdfDrawContext]="pdfContext" pdfName="{{vehicle.name}}.pdf"></app-show-pdf>

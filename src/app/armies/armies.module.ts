@@ -7,12 +7,14 @@ import { ArmiesRoutingModule } from "./armies-routing.module";
 import { PageEditArmyComponent } from "./pages/page-edit-army/page-edit-army.component";
 import { PageListArmiesComponent } from "./pages/page-list-armies/page-list-armies.component";
 import { PageViewArmyComponent } from "./pages/page-view-army/page-view-army.component";
+import { ViewArmyComponent } from './components/view-army/view-army.component';
 
 @NgModule({
   declarations: [
     PageListArmiesComponent,
     PageEditArmyComponent,
     PageViewArmyComponent,
+    ViewArmyComponent,
   ],
   imports: [
     CommonModule,

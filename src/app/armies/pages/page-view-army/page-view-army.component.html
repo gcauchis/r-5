@@ -1,11 +1,1 @@
-<div *ngIf="army" #armyCard>
-    <h1>{{army.name}}</h1>
-    <div *ngFor="let unit of units" class="army-div">
-        <app-page-view-unit [unit]="unit" [unitCount]="unitsCount[unit.id]"></app-page-view-unit>
-    </div>
-    <div *ngFor="let vehicle of vehicles" class="army-div">
-        <app-page-view-vehicle [vehicle]="vehicle" [vehicleCount]="vehiclesCount[vehicle.id]"></app-page-view-vehicle>
-    </div>
-
-    <app-show-pdf [pdfDrawContext]="pdfDrawContext" pdfName="{{army.name}}.pdf"></app-show-pdf>
-</div>
+<app-view-army *ngIf="army" [army]="army" [showPdf]="true"></app-view-army>

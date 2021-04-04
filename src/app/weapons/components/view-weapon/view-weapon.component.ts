@@ -1,15 +1,15 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { CombatUnitInterface } from "../../../core/interfaces/combat-unit-interface";
 import { WeaponType } from "./../../../core/enums/weapon-type.enum";
+import { CombatUnitInterface } from "./../../../core/interfaces/combat-unit-interface";
 import { Weapon } from "./../../../core/models/weapon";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 
 @Component({
-  selector: "app-page-view-weapon",
-  templateUrl: "./page-view-weapon.component.html",
-  styleUrls: ["./page-view-weapon.component.css"],
+  selector: "app-view-weapon",
+  templateUrl: "./view-weapon.component.html",
+  styleUrls: ["./view-weapon.component.css"],
 })
-export class PageViewWeaponComponent implements OnInit {
+export class ViewWeaponComponent implements OnInit {
   @Input() weapon: Weapon;
   @Input() combatUnit: CombatUnitInterface;
   @Input() showRules: boolean = true;

@@ -6,12 +6,14 @@ import { PageEditVehicleComponent } from "./pages/page-edit-vehicle/page-edit-ve
 import { PageListVehiclesComponent } from "./pages/page-list-vehicles/page-list-vehicles.component";
 import { PageViewVehicleComponent } from "./pages/page-view-vehicle/page-view-vehicle.component";
 import { VehiclesRoutingModule } from "./vehicles-routing.module";
+import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle.component';
 
 @NgModule({
   declarations: [
     PageEditVehicleComponent,
     PageViewVehicleComponent,
     PageListVehiclesComponent,
+    ViewVehicleComponent,
   ],
   imports: [CommonModule, VehiclesRoutingModule, SharedModule, WeaponsModule],
   exports: [
@@ -19,6 +21,7 @@ import { VehiclesRoutingModule } from "./vehicles-routing.module";
     PageViewVehicleComponent,
     PageListVehiclesComponent,
     WeaponsModule,
+    ViewVehicleComponent,
   ],
 })
 export class VehiclesModule {}
