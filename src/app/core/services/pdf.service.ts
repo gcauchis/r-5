@@ -53,14 +53,18 @@ export class PdfService {
     }
     for (let unit of army.units) {
       context.addVerticalGap(10);
-      await this.appendUnit(context, this.unitService.get(unit.id), unit.count);
+      await this.appendUnit(
+        context,
+        await this.unitService.get(unit.id).toPromise(),
+        unit.count
+      );
     }
 
     for (let vehicle of army.vehicles) {
       context.addVerticalGap(10);
       await this.appendVehicle(
         context,
-        this.vehicleService.get(vehicle.id),
+        await this.vehicleService.get(vehicle.id).toPromise(),
         vehicle.count
       );
     }

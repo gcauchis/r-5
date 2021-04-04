@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { map } from "rxjs/operators";
 import jsonWeapons from "../../resources/weapons.json";
 import { WeaponType } from "./../enums/weapon-type.enum";
 import { Weapon } from "./../models/weapon";
@@ -11,8 +13,20 @@ const LOCAL_KEY: string = "weapons";
   providedIn: "root",
 })
 export class WeaponService extends AbstractCrudService<Weapon> {
+  private rules$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+
   constructor(localStorage: LocalStorageService) {
     super(localStorage, LOCAL_KEY);
+    this.collection.subscribe((weapons) =>
+      this.rules$.next(
+        weapons
+          .reduce((acc, value) => acc.concat(value.rule), [])
+          .filter(
+            (value, index, self) => value != "" && self.indexOf(value) === index
+          )
+          .sort()
+      )
+    );
   }
 
   protected loadBaseData(): Weapon[] {
@@ -29,24 +43,21 @@ export class WeaponService extends AbstractCrudService<Weapon> {
     return 5000;
   }
 
-  public getRules(): string[] {
-    return this.storedData
-      .reduce((acc, value) => acc.concat(value.rule), [])
-      .filter(
-        (value, index, self) => value != "" && self.indexOf(value) === index
-      )
-      .sort();
+  public getRules(): Subject<string[]> {
+    return this.rules$;
   }
 
-  public getWeapons(type: WeaponType = null): Weapon[] {
+  public getWeapons(type: WeaponType = null): Observable<Weapon[]> {
     if (type != null) {
-      return this.storedData.filter((w) => w.weaponType == type);
+      return this.collection.pipe(
+        map((res) => res.filter((w) => w.weaponType == type))
+      );
     } else {
-      return this.storedData;
+      return this.collection.asObservable();
     }
   }
 
-  public getWeapon(id: number): Weapon {
+  public getWeapon(id: number): Observable<Weapon> {
     return this.get(id);
   }
 

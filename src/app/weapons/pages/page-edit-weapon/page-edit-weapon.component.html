@@ -1,4 +1,4 @@
-<app-template-full-width>
+<app-template-full-width *ngIf="weapon$ | async as weapon">
     <span class="tr-title">Edit {{weapon.name}} {{weapon.range}}’’ {{weapon.power}}D<span
             *ngIf="weapon.superPower">++</span><span *ngIf="weapon.superSuperPower">[++</span></span>
     <div class="tr-content">

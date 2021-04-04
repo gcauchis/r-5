@@ -2,7 +2,7 @@ import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { ExposiveWeaponSize } from "./../../../core/enums/exposive-weapon-size.enum";
 import { WeaponType } from "./../../../core/enums/weapon-type.enum";
@@ -22,13 +22,14 @@ export class PageEditWeaponComponent implements OnInit {
 
   weaponTypes: any[];
   weaponSizes: any[];
-  rules: string[];
+  rules$: Subject<string[]>;
+  currentRules$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   currentRule: string;
 
   rulesControl = new FormControl();
   rulesFilteredOptions: Observable<string[]>;
 
-  weapon: Weapon;
+  weapon$: Observable<Weapon>;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,11 +50,15 @@ export class PageEditWeaponComponent implements OnInit {
 
   ngOnInit() {
     this.getWeapon();
-    this.rules = this.weaponService.getRules();
+    this.rules$ = this.weaponService.getRules();
     this.rulesFilteredOptions = this.rulesControl.valueChanges.pipe(
       startWith(""),
       map((value) => this._filter(value))
     );
+  }
+
+  private refreshCurrentRules(): void {
+    this.rules$.subscribe((rules) => this.currentRules$.next());
   }
 
   private _filter(value: string): string[] {

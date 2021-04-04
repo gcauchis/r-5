@@ -1,8 +1,9 @@
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { IdentitfiableInterface } from "../interfaces/identitfiable-interface";
 import { LocalStorageService } from "./local-storage.service";
 
 export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
-  private data: T[];
+  private data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
 
   constructor(
     private localStorage: LocalStorageService,
@@ -15,66 +16,74 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
           this.storageKey +
             " not found localy, retrieve from base configuration"
         );
-        this.data = this.loadBaseData();
+        this.data$.next(this.loadBaseData());
         this.storeData();
       } else {
         console.log(this.storageKey + " retrieved");
-        this.data = tmpData;
+        this.data$.next(tmpData);
       }
     } else {
       console.log(
         this.storageKey + " from base configuration (no local persistance)"
       );
-      this.data = this.loadBaseData();
+      this.data$.next(this.loadBaseData());
     }
-    console.log(this.data);
+    console.log(this.data$.value);
+    // TODO see if works
+    this.data$.subscribe((res) => this.storeData());
+    // or test
+    // this.data$ = this.data$.pipe(tap((res) => this.storeData()));
   }
 
   protected abstract loadBaseData(): T[];
 
   private genId(): number {
-    return this.data.length > 0
-      ? Math.max(...this.data.map((w) => w.id)) + 1
+    return this.data$.value.length > 0
+      ? Math.max(...this.data$.value.map((w) => w.id)) + 1
       : this.minId;
   }
 
   protected abstract get minId(): number;
 
-  public get storedData(): T[] {
-    return this.data;
+  public get collection(): Subject<T[]> {
+    return this.data$;
   }
 
-  public get(id: number): T {
-    if (id != null) {
-      return this.data.find((w) => w.id == id);
-    } else {
-      return null;
-    }
+  public get(id: number): Observable<T> {
+    return new Observable<T>((obs) => {
+      if (id != null) {
+        obs.next(this.data$.value.find((w) => w.id == id));
+      } else {
+        obs.next(null);
+      }
+      obs.complete();
+    });
   }
 
   public save(value: T): void {
     if (value.id) {
-      let found: T = this.get(value.id);
-      if (found) {
-        Object.assign(found, value);
-      } else {
-        this.data.push(value);
-      }
+      this.get(value.id).subscribe((found) => {
+        if (found) {
+          Object.assign(found, value);
+        } else {
+          this.data$.value.push(value);
+        }
+        this.data$.next(this.data$.value);
+      });
     } else {
       value.id = this.genId();
-      this.data.push(value);
+      this.data$.value.push(value);
+      this.data$.next(this.data$.value);
     }
-    this.storeData();
   }
 
   public remove(value: T): void {
-    this.data = this.data.filter((d) => d.id != value.id);
-    this.storeData();
+    this.data$.next(this.data$.value.filter((d) => d.id != value.id));
   }
 
   public storeData(): void {
     if (this.isLocalStorageSupported) {
-      this.localStorage.set(this.storageKey, this.data);
+      this.localStorage.set(this.storageKey, this.data$.value);
       console.log(this.storageKey + " stored");
     }
   }
@@ -84,7 +93,7 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
       console.log("Reset " + this.storageKey);
       this.localStorage.remove(this.storageKey);
       console.log(this.storageKey + "from base configuration");
-      this.data = this.loadBaseData();
+      this.data$.next(this.loadBaseData());
       this.storeData();
     }
   }
@@ -94,7 +103,11 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
   }
 
   public get exportableData(): T[] {
-    return this.data;
+    return this.storedData;
+  }
+
+  protected get storedData(): T[] {
+    return this.data$.value;
   }
 
   public importData(data: any): void {
