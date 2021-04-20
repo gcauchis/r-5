@@ -1,7 +1,7 @@
 {
   "name": "r-5",
   "description": "The R-5 army unit builder",
-  "version": "0.0.3-SNAPSHOT",
+  "version": "0.0.3",
   "author": {
     "name": "gcauchis",
     "email": "gabriel.cauchis@gmail.com"
