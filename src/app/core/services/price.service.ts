@@ -64,7 +64,7 @@ export class PriceService {
   public computeBase(combatUnit: CombatUnitInterface): number {
     let dcPrive = this.computeDC(combatUnit.dc);
     let result = 0;
-    console.log(combatUnit);
+    //console.log(combatUnit);
     if (combatUnit instanceof Unit) {
       let unit = new Unit(combatUnit);
 

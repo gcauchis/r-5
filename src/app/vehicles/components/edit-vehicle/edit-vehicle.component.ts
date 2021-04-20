@@ -1,6 +1,7 @@
 import { Location } from "@angular/common";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
@@ -12,6 +13,8 @@ import { Weapon } from "./../../../core/models/weapon";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 import { UtilsService } from "./../../../core/services/utils.service";
 import { VehicleService } from "./../../../core/services/vehicle.service";
+import { BasicDialogComponent } from "./../../../shared/components/basic-dialog/basic-dialog.component";
+import { DialogRulesSelectorComponent } from "./../../../weapons/components/dialog-rules-selector/dialog-rules-selector.component";
 
 @Component({
   selector: "app-edit-vehicle",
@@ -39,7 +42,8 @@ export class EditVehicleComponent implements OnInit {
     private utils: UtilsService,
     public enumUtils: EnumUtilsService,
     private location: Location,
-    private vehicleService: VehicleService
+    private vehicleService: VehicleService,
+    public dialog: MatDialog
   ) {
     this.vehicleType = this.utils.enumToKeyValue(
       VehicleType,
@@ -67,20 +71,38 @@ export class EditVehicleComponent implements OnInit {
     );
   }
 
-  private buildBaseVehicle(): Vehicle {
-    let vehicle = new Vehicle();
-    vehicle.armor = Dice.D8;
-    vehicle.structure = 1;
-    vehicle.type = VehicleType.Tank;
-    return vehicle;
-  }
-
   removeWeapon(weapon: Weapon): void {
     this.vehicle.weapons = this.vehicle.weapons.filter((r) => r != weapon);
   }
 
   addWeapon(weapon: Weapon) {
-    this.vehicle.weapons.push(weapon);
+    if (this.vehicle.weapons.length >= this.vehicle.crew) {
+      this.dialog.open(BasicDialogComponent, {
+        data: {
+          title: "Armes",
+          message: `Pas plus de ${this.vehicle.crew} armes`,
+          cancel: false,
+          ok: true,
+        },
+      });
+    } else {
+      if (weapon.rule && weapon.rule.length > 0) {
+        const dialogRef = this.dialog.open(DialogRulesSelectorComponent, {
+          data: {
+            title: `Choisisez les règles pour ${weapon.name}`,
+            rules: weapon.rule,
+          },
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result) {
+            weapon.rule = result;
+            this.vehicle.weapons.push(weapon);
+          }
+        });
+      } else {
+        this.vehicle.weapons.push(weapon);
+      }
+    }
   }
 
   save(): void {

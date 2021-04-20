@@ -1,6 +1,7 @@
 import { Location } from "@angular/common";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
@@ -14,6 +15,7 @@ import { Weapon } from "./../../../core/models/weapon";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 import { UnitService } from "./../../../core/services/unit.service";
 import { UtilsService } from "./../../../core/services/utils.service";
+import { DialogRulesSelectorComponent } from "./../../../weapons/components/dialog-rules-selector/dialog-rules-selector.component";
 
 @Component({
   selector: "app-edit-unit",
@@ -42,7 +44,8 @@ export class EditUnitComponent implements OnInit {
     private utils: UtilsService,
     public enumUtils: EnumUtilsService,
     private unitService: UnitService,
-    private location: Location
+    private location: Location,
+    public dialog: MatDialog
   ) {
     this.dices = this.utils.enumToKeyValue(Dice, enumUtils.diceToString);
     this.unitTypes = this.utils.enumToKeyValue(
@@ -114,7 +117,22 @@ export class EditUnitComponent implements OnInit {
   }
 
   addWeapon(weapon: Weapon) {
-    this.unit.weapons.push(weapon);
+    if (weapon.rule && weapon.rule.length > 0) {
+      const dialogRef = this.dialog.open(DialogRulesSelectorComponent, {
+        data: {
+          title: `Choisisez les règles pour ${weapon.name}`,
+          rules: weapon.rule,
+        },
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          weapon.rule = result;
+          this.unit.weapons.push(weapon);
+        }
+      });
+    } else {
+      this.unit.weapons.push(weapon);
+    }
   }
 
   saveUnit(): void {
