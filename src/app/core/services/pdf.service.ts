@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { PDFImage } from "pdf-lib";
 import { Army } from "../models/army";
 import { VehicleType } from "./../enums/vehicle-type.enum";
 import { WeaponType } from "./../enums/weapon-type.enum";
@@ -65,14 +66,24 @@ export class PdfService {
   }
 
   private async appendUnit(context: PdfDrawContext, unit: Unit, nb?: number) {
-    // if (unit.imgBase64) {
-    //   console.log(unit.imgBase64);
-    //   console.log(atob(unit.imgBase64));
-    //   const image = await fetch(unit.imgBase64);
-    //   console.log(image);
-    //   // const pdfImage = await context.document.embedJpg(image.arrayBuffer);
-    //   // context.currentPage.drawImage(pdfImage);
-    // }
+    if (unit.imgBase64) {
+      const image = await this.convertToEmbedecImage(context, unit.imgBase64);
+      if (image != null) {
+        let imgWidth = 100;
+        let imgHeight = 100;
+        if (image.width > image.height) {
+          imgHeight = (image.height / image.width) * imgWidth;
+        } else if (image.height > image.width) {
+          imgWidth = (image.width / image.height) * imgHeight;
+        }
+        context.currentPage.drawImage(image, {
+          x: context.pageWidth - context.pageMargin - imgWidth,
+          y: context.currentY - imgHeight,
+          width: imgWidth,
+          height: imgHeight,
+        });
+      }
+    }
 
     context.drawText(
       `${unit.name} / ${this.enumUtils.tacticalRoleToString(
@@ -128,6 +139,28 @@ export class PdfService {
     vehicle: Vehicle,
     nb?: number
   ) {
+    if (vehicle.imgBase64) {
+      const image = await this.convertToEmbedecImage(
+        context,
+        vehicle.imgBase64
+      );
+      if (image != null) {
+        let imgWidth = 100;
+        let imgHeight = 100;
+        if (image.width > image.height) {
+          imgHeight = (image.height / image.width) * imgWidth;
+        } else if (image.height > image.width) {
+          imgWidth = (image.width / image.height) * imgHeight;
+        }
+        context.currentPage.drawImage(image, {
+          x: context.pageWidth - context.pageMargin - imgWidth,
+          y: context.currentY - imgHeight,
+          width: imgWidth,
+          height: imgHeight,
+        });
+      }
+    }
+
     context.drawText(
       `${vehicle.name} / ${this.enumUtils.vehicleTypeToString(vehicle.type)}`,
       true
@@ -169,14 +202,6 @@ export class PdfService {
     context.lineBreak();
 
     this.appendWeapons(context, vehicle);
-
-    //TODO IMAGE
-
-    // if (unit.imgBase64) {
-    //   const image = await fetch(unit.imgBase64);
-    //   const pdfImage = await context.document.embedJpg(image.arrayBuffer);
-    //   context.currentPage.drawImage(pdfImage);
-    // }
   }
 
   private appendWeapons(
@@ -269,5 +294,26 @@ export class PdfService {
 
   public saveAsBase64(context: PdfDrawContext): Promise<string> {
     return context.document.saveAsBase64({ dataUri: true });
+  }
+
+  private async convertToEmbedecImage(
+    context: PdfDrawContext,
+    imgBase64: any
+  ): Promise<PDFImage> {
+    let result: Promise<PDFImage> = null;
+    console.log(imgBase64);
+    if (imgBase64.includes("image/png"))
+      result = context.document.embedPng(imgBase64);
+    else if (
+      imgBase64.includes("image/jpg") ||
+      imgBase64.includes("image/jpeg")
+    )
+      result = context.document.embedJpg(imgBase64);
+    else
+      result = new Promise<PDFImage>((resolve, reject) =>
+        reject("Unsuported image type")
+      );
+
+    return result;
   }
 }

@@ -22,7 +22,7 @@ export class ShowPdfComponent implements OnInit {
   ngOnChanges() {
     if (this.pdfDrawContext) {
       this.pdfService.saveAsBase64(this.pdfDrawContext).then((data) => {
-        console.log(data);
+        //console.log(data);
         this.pdf.nativeElement.src = data;
       });
     }
