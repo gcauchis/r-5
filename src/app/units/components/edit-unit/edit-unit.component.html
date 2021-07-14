@@ -1,7 +1,7 @@
 <app-template-full-width *ngIf="unit">
     <div class="tr-content">
         <app-template-full-width>
-            <span class="tr-title">Edition : {{unit.name}}/{{enumUtils.tacticalRoleToString(unit.tacticalRole)}}</span>
+            <span class="tr-title">Edition : {{unit.name}}/{{unit.tacticalRole | tacticalRoleToString}}</span>
             <div class="tr-content">
                 <mat-form-field class="unit-full-width">
                     <mat-label>Camps</mat-label>
@@ -32,7 +32,7 @@
                         <mat-option *ngFor="let dice of dices" [value]="dice.value">{{dice.key}}</mat-option>
                     </mat-select>
                     <ng-template #showDQM>
-                        <input matInput placeholder="DQM" [value]="enumUtils.diceToString(unit.dqm)" disabled />
+                        <input matInput placeholder="DQM" [value]="unit.dqm | diceToString" disabled />
                     </ng-template>
                 </mat-form-field>
 
@@ -42,7 +42,7 @@
                         <mat-option *ngFor="let dice of dices" [value]="dice.value">{{dice.key}}</mat-option>
                     </mat-select>
                     <ng-template #showDC>
-                        <input matInput placeholder="DC" [value]="enumUtils.diceToString(unit.dc)" disabled />
+                        <input matInput placeholder="DC" [value]="unit.dc | diceToString" disabled />
                     </ng-template>
                 </mat-form-field>
 

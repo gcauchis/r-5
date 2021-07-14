@@ -9,7 +9,7 @@ import { PriceService } from "./../../core/services/price.service";
 export class PriceWeaponPipe implements PipeTransform {
   constructor(private priceService: PriceService) {}
 
-  transform(weapon: Weapon, combatUnit: CombatUnitInterface): unknown {
+  transform(weapon: Weapon, combatUnit: CombatUnitInterface): number {
     return this.priceService.getPrice(weapon, combatUnit);
   }
 }

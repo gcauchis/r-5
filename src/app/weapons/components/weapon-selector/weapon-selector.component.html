@@ -74,7 +74,7 @@
       <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef>Valeur</th>
         <td mat-cell *matCellDef="let weapon">
-          {{ priceService.getPrice(weapon, priceable) }}
+          {{ weapon | priceWeapon : priceable }}
         </td>
       </ng-container>
 

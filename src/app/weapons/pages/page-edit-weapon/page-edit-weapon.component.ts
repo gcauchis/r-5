@@ -3,7 +3,6 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Weapon } from "./../../../core/models/weapon";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
-import { UtilsService } from "./../../../core/services/utils.service";
 import { WeaponService } from "./../../../core/services/weapon.service";
 
 @Component({
@@ -17,7 +16,6 @@ export class PageEditWeaponComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private weaponService: WeaponService,
-    private utils: UtilsService,
     public enumUtils: EnumUtilsService,
     private location: Location
   ) {}

@@ -127,16 +127,16 @@ export class PriceService {
         let baseSize = 0;
         switch (weapon.size) {
           case ExposiveWeaponSize.Small:
-            baseSize = 3.14; //(Math.pow(1, 2) * Math.PI);
+            baseSize = SIZE_SMALL;
             break;
           case ExposiveWeaponSize.Medium:
-            baseSize = 13.53; //(Math.pow(2, 2) * Math.PI);
+            baseSize = SIZE_MEDIUM;
             break;
           case ExposiveWeaponSize.Big:
-            baseSize = Math.pow(3, 2) * Math.PI;
+            baseSize = SIZE_BIG;
             break;
           case ExposiveWeaponSize.Cone:
-            baseSize = 17;
+            baseSize = SIZE_CONE;
             break;
 
           default:

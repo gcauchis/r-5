@@ -1,7 +1,7 @@
 <app-template-full-width *ngIf="vehicle">
     <div class="tr-content">
         <app-template-full-width>
-            <span class="tr-title">Edition : {{vehicle.name}}/{{enumUtils.vehicleTypeToString(vehicle.type)}}</span>
+            <span class="tr-title">Edition : {{vehicle.name}}/{{vehicle.type | vehicleTypeToString}}</span>
             <div class="tr-content">
 
                 <mat-form-field class="vehicle-full-width">

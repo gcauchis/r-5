@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from "@angular/core";
 import { WeaponType } from "./../../../core/enums/weapon-type.enum";
 import { CombatUnitInterface } from "./../../../core/interfaces/combat-unit-interface";
 import { Weapon } from "./../../../core/models/weapon";
-import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 
 @Component({
   selector: "app-view-weapon",
@@ -17,7 +16,7 @@ export class ViewWeaponComponent implements OnInit {
   /** Pas terrible mais donne acces dans le template */
   WeaponType = WeaponType;
 
-  constructor(public enumUtils: EnumUtilsService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 
