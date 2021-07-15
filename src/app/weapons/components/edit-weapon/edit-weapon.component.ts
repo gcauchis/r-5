@@ -1,7 +1,5 @@
-import { Location } from "@angular/common";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { ExposiveWeaponSize } from "./../../../core/enums/exposive-weapon-size.enum";
@@ -28,15 +26,14 @@ export class EditWeaponComponent implements OnInit {
   rulesFilteredOptions: Observable<string[]>;
 
   @Output() submited: EventEmitter<Weapon> = new EventEmitter<Weapon>();
+  @Output() canceled: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() weapon: Weapon;
 
   constructor(
-    private route: ActivatedRoute,
     private weaponService: WeaponService,
     private utils: UtilsService,
-    public enumUtils: EnumUtilsService,
-    private location: Location
+    public enumUtils: EnumUtilsService
   ) {
     this.weaponTypes = this.utils.enumToKeyValue(
       WeaponType,
@@ -72,29 +69,11 @@ export class EditWeaponComponent implements OnInit {
     this.weapon.rule = this.weapon.rule.filter((r) => r != rule);
   }
 
-  getWeapon(): void {
-    const id = +this.route.snapshot.paramMap.get("id");
-    if (id == 0) {
-      this.weapon = new Weapon();
-      this.onChangecurrentWeaponType();
-      this.weapon.editable = true;
-    } else {
-      this.weapon = this.weaponService.getWeapon(id);
-      if (this.weapon == null) {
-        this.weapon = new Weapon();
-        this.onChangecurrentWeaponType();
-        this.weapon.editable = true;
-      }
-    }
-  }
-
-  saveWeapon(): void {
+  submit(): void {
     if (!this.weapon.nonLethal) {
       this.weapon.nonLethal = null;
     }
     this.submited.emit(this.weapon);
-    this.weaponService.save(this.weapon);
-    this.goBack();
   }
 
   onChangecurrentWeaponType() {
@@ -111,7 +90,7 @@ export class EditWeaponComponent implements OnInit {
     this.weapon.rule = [];
   }
 
-  goBack(): void {
-    this.location.back();
+  cancel(): void {
+    this.canceled.emit();
   }
 }

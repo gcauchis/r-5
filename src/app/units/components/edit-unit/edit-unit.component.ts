@@ -1,8 +1,6 @@
-import { Location } from "@angular/common";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
-import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { Dice } from "./../../../core/enums/dice.enum";
@@ -25,6 +23,7 @@ import { DialogRulesSelectorComponent } from "./../../../weapons/components/dial
 export class EditUnitComponent implements OnInit {
   @Input() unit: Unit;
   @Output() submited: EventEmitter<Unit> = new EventEmitter<Unit>();
+  @Output() canceled: EventEmitter<any> = new EventEmitter<any>();
   dices: any[];
   unitTypes: any[];
   unitSizes: any[];
@@ -40,11 +39,9 @@ export class EditUnitComponent implements OnInit {
   displayedWeaponColumns: string[] = ["weapon", "remove"];
 
   constructor(
-    private route: ActivatedRoute,
     private utils: UtilsService,
     public enumUtils: EnumUtilsService,
     private unitService: UnitService,
-    private location: Location,
     public dialog: MatDialog
   ) {
     this.dices = this.utils.enumToKeyValue(Dice, enumUtils.diceToString);
@@ -79,25 +76,6 @@ export class EditUnitComponent implements OnInit {
     return this.factions.filter((faction) =>
       faction.toLowerCase().includes(filterFaction)
     );
-  }
-
-  getUnit(): void {
-    const id = +this.route.snapshot.paramMap.get("id");
-    if (id == 0) {
-      this.unit = this.buildBaseUnit();
-    } else {
-      this.unit = this.unitService.get(id);
-      if (this.unit == null) {
-        this.unit = this.buildBaseUnit();
-      }
-    }
-  }
-
-  private buildBaseUnit(): Unit {
-    let unit = new Unit();
-    unit.dqm = Dice.D8;
-    unit.dc = Dice.D8;
-    return unit;
   }
 
   onChangeTacticalRole() {
@@ -135,11 +113,11 @@ export class EditUnitComponent implements OnInit {
     }
   }
 
-  saveUnit(): void {
+  submit(): void {
     this.submited.emit(this.unit);
   }
 
-  goBack(): void {
-    this.location.back();
+  cancel(): void {
+    this.canceled.emit();
   }
 }

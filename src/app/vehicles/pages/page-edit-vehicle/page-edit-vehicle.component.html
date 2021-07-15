@@ -1,1 +1,2 @@
-<app-edit-vehicle *ngIf="vehicle" [vehicle]="vehicle" (submited)="save($event)"></app-edit-vehicle>
+<app-edit-vehicle *ngIf="vehicle" [vehicle]="vehicle" (submited)="save($event)" (canceled)="goBack()">
+</app-edit-vehicle>

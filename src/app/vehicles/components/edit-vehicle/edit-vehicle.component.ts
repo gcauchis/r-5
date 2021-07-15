@@ -1,8 +1,6 @@
-import { Location } from "@angular/common";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
-import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { Dice } from "./../../../core/enums/dice.enum";
@@ -24,6 +22,7 @@ import { DialogRulesSelectorComponent } from "./../../../weapons/components/dial
 export class EditVehicleComponent implements OnInit {
   @Input() vehicle: Vehicle;
   @Output() submited: EventEmitter<Vehicle> = new EventEmitter<Vehicle>();
+  @Output() canceled: EventEmitter<any> = new EventEmitter<any>();
   vehicleType: any[];
   moveTypes: any[];
   dices: any[];
@@ -38,10 +37,8 @@ export class EditVehicleComponent implements OnInit {
   displayedWeaponColumns: string[] = ["weapon", "remove"];
 
   constructor(
-    private route: ActivatedRoute,
     private utils: UtilsService,
     public enumUtils: EnumUtilsService,
-    private location: Location,
     private vehicleService: VehicleService,
     public dialog: MatDialog
   ) {
@@ -105,11 +102,11 @@ export class EditVehicleComponent implements OnInit {
     }
   }
 
-  save(): void {
+  submit(): void {
     this.submited.emit(this.vehicle);
   }
 
-  goBack(): void {
-    this.location.back();
+  cancel(): void {
+    this.canceled.emit();
   }
 }

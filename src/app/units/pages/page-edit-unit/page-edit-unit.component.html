@@ -1,1 +1,1 @@
-<app-edit-unit *ngIf="unit" [unit]="unit" (submited)="saveUnit($event)"></app-edit-unit>
+<app-edit-unit *ngIf="unit" [unit]="unit" (submited)="saveUnit($event)" (canceled)="goBack()"></app-edit-unit>

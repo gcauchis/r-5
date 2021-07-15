@@ -54,10 +54,12 @@
             </tr>
         </table>
 
-        <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.assault"> Assaut </mat-checkbox>
-        <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.heavy"> Lourd </mat-checkbox>
-        <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.cover"> Couverture
-        </mat-checkbox><br>
+        <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.assault">Assaut</mat-checkbox>
+        &nbsp;
+        <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.heavy">Lourd</mat-checkbox>
+        &nbsp;
+        <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.cover">Couverture</mat-checkbox>
+        <br>
 
         <mat-form-field *ngIf="weapon.weaponType == WeaponType.Explosive || weapon.weaponType == WeaponType.Grenade">
             <mat-label>Gabarit</mat-label>
@@ -70,7 +72,7 @@
         <mat-checkbox [(ngModel)]="weapon.nonLethal">Mon mortelle</mat-checkbox>
     </div>
     <div class="tr-actions">
-        <button mat-raised-button (click)="saveWeapon()">Save</button>
-        <button mat-raised-button (click)="goBack()">Back</button>
+        <button mat-raised-button (click)="submit()">Valider</button>
+        <button mat-raised-button (click)="cancel()">Annuler</button>
     </div>
 </app-template-full-width>
