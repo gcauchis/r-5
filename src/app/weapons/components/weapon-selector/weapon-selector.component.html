@@ -14,13 +14,15 @@
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSourceWeapons" class="weapons">
+      <caption></caption>
+
       <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">Type</th>
         <td mat-cell *matCellDef="let weapon">{{ weapon.name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="range">
-        <th mat-header-cell *matHeaderCellDef>Portée (pouces)</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">Portée (pouces)</th>
         <td mat-cell *matCellDef="let weapon">
           <span *ngIf="weapon.range; else NArange">
             <span *ngIf="weapon.rangeMin">+{{ weapon.rangeMin }}'' à </span>{{ weapon.range }}''
@@ -30,7 +32,7 @@
       </ng-container>
 
       <ng-container matColumnDef="power">
-        <th mat-header-cell *matHeaderCellDef>Puissance</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">Puissance</th>
         <td mat-cell *matCellDef="let weapon">
           <span *ngIf="weapon.power; else NApower">{{ weapon.power }}D<span *ngIf="weapon.superPower">++</span><span
               *ngIf="weapon.superSuperPower">[++</span></span>
@@ -39,54 +41,54 @@
       </ng-container>
 
       <ng-container matColumnDef="rules">
-        <th mat-header-cell *matHeaderCellDef>Règles spéciales</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">Règles spéciales</th>
         <td mat-cell *matCellDef="let weapon">{{ weapon.rule.join(", ") }}</td>
       </ng-container>
 
       <ng-container matColumnDef="assault">
-        <th mat-header-cell *matHeaderCellDef>Assaut</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">Assaut</th>
         <td mat-cell *matCellDef="let weapon">
           {{ weapon.assault ? "oui" : "non" }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="heavy">
-        <th mat-header-cell *matHeaderCellDef>Lourd</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">Lourd</th>
         <td mat-cell *matCellDef="let weapon">
           {{ weapon.heavy ? "oui" : "non" }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="cover">
-        <th mat-header-cell *matHeaderCellDef>Couverture</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">Couverture</th>
         <td mat-cell *matCellDef="let weapon">
           {{ weapon.cover ? "oui" : "non" }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="size">
-        <th mat-header-cell *matHeaderCellDef>Gabarit</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">Gabarit</th>
         <td mat-cell *matCellDef="let weapon">
           {{ enumUtils.exposiveWeaponSizeToString(weapon.size) }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>Valeur</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">Valeur</th>
         <td mat-cell *matCellDef="let weapon">
           {{ weapon | priceWeapon : priceable }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="actionAdd">
-        <th mat-header-cell *matHeaderCellDef></th>
+        <th mat-header-cell *matHeaderCellDef scope="col"></th>
         <td mat-cell *matCellDef="let weapon">
           <button mat-raised-button (click)="addWeapon(weapon)">Use</button>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="actionEdit">
-        <th mat-header-cell *matHeaderCellDef></th>
+        <th mat-header-cell *matHeaderCellDef scope="col"></th>
         <td mat-cell *matCellDef="let weapon">
           <a mat-raised-button *ngIf="weapon.editable" routerLink="/weapons/edit/{{ weapon.id }}">Edit</a>
           <button mat-mini-fab *ngIf="weapon.editable" (click)="removeWeapon(weapon)" color="warn">

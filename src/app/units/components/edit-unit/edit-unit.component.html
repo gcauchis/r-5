@@ -102,9 +102,10 @@
         </app-weapon-selector>
 
         <table class="weapons">
+            <caption></caption>
             <tr>
-                <th>Arme de l'unité</th>
-                <th></th>
+                <th scope="col">Arme de l'unité</th>
+                <th scope="col"></th>
             </tr>
             <tr *ngFor="let weapon of unit.weapons">
                 <td>
