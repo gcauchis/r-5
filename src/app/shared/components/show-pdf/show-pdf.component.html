@@ -1,5 +1,8 @@
 <div *ngIf="pdfDrawContext" class="fullSize">
     <!-- <button mat-raised-button (click)="openPDF()">PDF</button> -->
 
-    <iframe #pdf class="fullSize" title="pdfView"></iframe>
+    <app-template-collapsible-container class="fullSize">
+        <span class="tr-title">PDF</span>
+        <iframe #pdf class="tr-content fullSize" title="pdfView"></iframe>
+    </app-template-collapsible-container>
 </div>
