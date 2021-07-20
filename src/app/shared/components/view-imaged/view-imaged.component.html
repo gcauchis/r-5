@@ -1,12 +1,7 @@
-<div *ngIf="imageContainer" #imgCard>
-    <table class="imgcard">
-        <tr>
-            <td style="width: 75%;">
-                <ng-content></ng-content>
-            </td>
-            <td align="right">
-                <img *ngIf="imageContainer.imgBase64" src="{{imageContainer.imgBase64}}" alt="image" class="imgview">
-            </td>
-        </tr>
-    </table>
+<div *ngIf="imageContainer" #imgCard class="row">
+    <div class="columnLeft">
+        <ng-content></ng-content>
+    </div>
+    <div class="columnRight"><img *ngIf="imageContainer.imgBase64" src="{{imageContainer.imgBase64}}" alt="image"
+            class="imgview"></div>
 </div>

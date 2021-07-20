@@ -3,5 +3,9 @@
 }
 
 .vehicle-line {
-  margin: 0;
+  margin: 0px;
+}
+
+.vehicle-number {
+  padding-left: 80px;
 }
