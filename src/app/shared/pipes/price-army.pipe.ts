@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { Army } from "src/app/core/models/army";
+import { Army } from "./../../core/models/army";
 import { PriceService } from "./../../core/services/price.service";
 
 @Pipe({
