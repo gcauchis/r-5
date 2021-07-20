@@ -44,7 +44,10 @@ export class PdfService {
 
   private async appendArmy(context: PdfDrawContext, army: Army) {
     context.fontSize = 20;
-    context.drawText(army.name, true);
+    context.drawText(
+      army.name + " (Prix: " + this.priceService.computeArmy(army) + ")",
+      true
+    );
     context.lineBreak();
     context.fontSize = 12;
     if (army.desc) {

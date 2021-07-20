@@ -13,6 +13,7 @@ import { ViewImagedComponent } from "./components/view-imaged/view-imaged.compon
 import { DiceToStringPipe } from "./pipes/dice-to-string.pipe";
 import { ExplosiveWeaponSizeToStringPipe } from "./pipes/explosive-weapon-size-to-string.pipe";
 import { MoveTypeToStringPipe } from "./pipes/move-type-to-string.pipe";
+import { PriceArmyPipe } from "./pipes/price-army.pipe";
 import { PriceCombatUnitPipe } from "./pipes/price-combat-unit.pipe";
 import { PriceWeaponPipe } from "./pipes/price-weapon.pipe";
 import { TacticalRoleToStringPipe } from "./pipes/tactical-role-to-string.pipe";
@@ -37,6 +38,7 @@ import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
     WeaponTypeToStringPipe,
     ExplosiveWeaponSizeToStringPipe,
     VehicleTypeToStringPipe,
+    PriceArmyPipe,
   ],
   imports: [
     CommonModule,
@@ -67,6 +69,7 @@ import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
     WeaponTypeToStringPipe,
     ExplosiveWeaponSizeToStringPipe,
     VehicleTypeToStringPipe,
+    PriceArmyPipe,
   ],
 })
 export class SharedModule {}

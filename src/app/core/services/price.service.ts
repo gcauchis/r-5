@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import jsonWeaponsRulesValues from "../../resources/weapons-rules-values.json";
 import { CombatUnitInterface } from "../interfaces/combat-unit-interface";
+import { Army } from "../models/army";
 import { Dice } from "./../enums/dice.enum";
 import { ExposiveWeaponSize } from "./../enums/exposive-weapon-size.enum";
 import { MoveType } from "./../enums/move-type.enum";
@@ -11,6 +12,7 @@ import { WeaponType } from "./../enums/weapon-type.enum";
 import { Unit } from "./../models/unit";
 import { Weapon } from "./../models/weapon";
 import { UnitService } from "./unit.service";
+import { VehicleService } from "./vehicle.service";
 
 const DICE_VALUE: number = 4;
 const DICE_D6_VALUE: number = DICE_VALUE * (3 / 6);
@@ -36,7 +38,10 @@ const WEAPONS_RULES_VALUES = jsonWeaponsRulesValues;
   providedIn: "root",
 })
 export class PriceService {
-  constructor(private unitService: UnitService) {}
+  constructor(
+    private unitService: UnitService,
+    private vehicleService: VehicleService
+  ) {}
 
   public computeDice(dice: Dice): number {
     switch (dice) {
@@ -162,5 +167,23 @@ export class PriceService {
       }
     }
     return price;
+  }
+
+  public computeArmy(army: Army): number {
+    let result = 0;
+    if (army.units) {
+      for (let unitlink of army.units) {
+        result +=
+          unitlink.count * this.compute(this.unitService.get(unitlink.id));
+      }
+    }
+    if (army.vehicles) {
+      for (let vehiclelink of army.vehicles) {
+        result +=
+          vehiclelink.count *
+          this.compute(this.vehicleService.get(vehiclelink.id));
+      }
+    }
+    return result;
   }
 }
