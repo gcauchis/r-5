@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { saveAs } from "file-saver";
 import { PDFImage } from "pdf-lib";
 import { Army } from "../models/army";
 import { VehicleType } from "./../enums/vehicle-type.enum";
@@ -290,8 +291,7 @@ export class PdfService {
   public savePDF(context: PdfDrawContext, name: string) {
     context.save().then((content) => {
       let blob = new Blob([content], { type: "application/json" });
-      let FileSaver = require("file-saver");
-      FileSaver.saveAs(blob, name);
+      saveAs(blob, name);
     });
   }
 

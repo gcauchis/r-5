@@ -8,10 +8,9 @@ import { PdfService } from "./../../../core/services/pdf.service";
   styleUrls: ["./show-pdf.component.css"],
 })
 export class ShowPdfComponent implements OnInit {
-  @Input()
-  public pdfDrawContext: PdfDrawContext;
-  @Input()
-  public pdfName: string;
+  @Input() public pdfDrawContext: PdfDrawContext;
+  @Input() public pdfName: string;
+  @Input() public displayPDF: boolean = true;
 
   @ViewChild("pdf") pdf: ElementRef;
 
