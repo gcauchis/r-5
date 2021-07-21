@@ -50,12 +50,12 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
     return this.data$;
   }
 
-  public get(id: number): Observable<T> {
+  public get(id: number, defaultValue: T = null): Observable<T> {
     return new Observable<T>((obs) => {
       if (id != null) {
         obs.next(this.data$.value.find((w) => w.id == id));
       } else {
-        obs.next(null);
+        obs.next(defaultValue);
       }
       obs.complete();
     });

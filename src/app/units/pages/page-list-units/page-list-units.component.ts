@@ -40,17 +40,17 @@ export class PageListUnitsComponent implements OnInit {
   constructor(public unitService: UnitService) {}
 
   ngOnInit() {
-    this.dataSourceUnits = new MatTableDataSource<Unit>(
-      this.unitService.storedData
-    );
-    this.dataSourceUnits.filterPredicate = this._filter;
-    if (this.army == null) {
-      this.displayedColumns = ["unit", "edit", "view", "remove"];
-    } else {
-      this.unitService.storedData.forEach((u) => (this.links[u.id] = 0));
-      this.army.units.forEach((l) => (this.links[l.id] = l.count));
-      this.displayedColumns = ["unit", "army", "edit"];
-    }
+    this.unitService.collection.subscribe((res) => {
+      this.dataSourceUnits = new MatTableDataSource<Unit>(res);
+      this.dataSourceUnits.filterPredicate = this._filter;
+      if (this.army == null) {
+        this.displayedColumns = ["unit", "edit", "view", "remove"];
+      } else {
+        res.forEach((u) => (this.links[u.id] = 0));
+        this.army.units.forEach((l) => (this.links[l.id] = l.count));
+        this.displayedColumns = ["unit", "army", "edit"];
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -64,21 +64,19 @@ export class PageListUnitsComponent implements OnInit {
   updateLinks(id: number, value: number): void {
     this.links[id] = value;
     this.army.units = [];
-    this.unitService.storedData.forEach((unit) => {
-      if (this.links[unit.id] > 0) {
-        let link = new ArmyLink();
-        link.id = unit.id;
-        link.count = this.links[unit.id];
-        this.army.units.push(link);
-      }
-    });
+    this.unitService.collection.asObservable().subscribe((res) =>
+      res.forEach((unit) => {
+        if (this.links[unit.id] > 0) {
+          let link = new ArmyLink();
+          link.id = unit.id;
+          link.count = this.links[unit.id];
+          this.army.units.push(link);
+        }
+      })
+    );
   }
 
   remove(unit: Unit): void {
     this.unitService.remove(unit);
-    this.dataSourceUnits = new MatTableDataSource<Unit>(
-      this.unitService.storedData
-    );
-    this.dataSourceUnits.paginator = this.paginator;
   }
 }

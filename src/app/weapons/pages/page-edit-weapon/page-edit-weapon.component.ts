@@ -33,7 +33,7 @@ export class PageEditWeaponComponent implements OnInit {
         obs.complete();
       });
     } else {
-      this.weapon$ = this.weaponService.getWeapon(id);
+      this.weapon$ = this.weaponService.get(id, this.buildBaseWeapon());
     }
   }
 

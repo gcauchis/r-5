@@ -1,3 +1,4 @@
+import { Observable } from "rxjs";
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Unit } from "./../../../core/models/unit";
@@ -9,14 +10,14 @@ import { UnitService } from "./../../../core/services/unit.service";
   styleUrls: ["./page-view-unit.component.css"],
 })
 export class PageViewUnitComponent implements OnInit {
-  @Input() unit: Unit;
+  unit$: Observable<Unit>;
 
   constructor(private route: ActivatedRoute, public unitService: UnitService) {}
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get("idUnit");
     if (id != 0) {
-      this.unit = this.unitService.get(id);
+      this.unit$ = this.unitService.get(id);
     }
   }
 }

@@ -76,13 +76,13 @@ export class WeaponSelectorComponent implements OnInit {
   }
 
   onChangecurrentWeaponType() {
-    this.dataSourceWeapons = new MatTableDataSource<Weapon>(
-      this.weaponService.getWeapons(this.currentWeaponType)
-    );
-    this.dataSourceWeapons.paginator = this.paginator;
-    this.dataSourceWeapons.filterPredicate = this._filter;
-    this.nameFilter = "";
-    this.updateDisplayedColumns();
+    this.weaponService.getWeapons(this.currentWeaponType).subscribe((res) => {
+      this.dataSourceWeapons = new MatTableDataSource<Weapon>(res);
+      this.dataSourceWeapons.paginator = this.paginator;
+      this.dataSourceWeapons.filterPredicate = this._filter;
+      this.nameFilter = "";
+      this.updateDisplayedColumns();
+    });
   }
 
   onChangeFilter() {

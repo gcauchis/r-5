@@ -1,11 +1,11 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
 import { Dice } from "./../../../core/enums/dice.enum";
 import { Unit } from "./../../../core/models/unit";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 import { UnitService } from "./../../../core/services/unit.service";
-import { UtilsService } from "./../../../core/services/utils.service";
 
 @Component({
   selector: "app-page-edit-unit",
@@ -13,11 +13,10 @@ import { UtilsService } from "./../../../core/services/utils.service";
   styleUrls: ["./page-edit-unit.component.css"],
 })
 export class PageEditUnitComponent implements OnInit {
-  unit: Unit;
+  unit$: Observable<Unit>;
 
   constructor(
     private route: ActivatedRoute,
-    private utils: UtilsService,
     public enumUtils: EnumUtilsService,
     private unitService: UnitService,
     private location: Location
@@ -30,12 +29,12 @@ export class PageEditUnitComponent implements OnInit {
   getUnit(): void {
     const id = +this.route.snapshot.paramMap.get("id");
     if (id == 0) {
-      this.unit = this.buildBaseUnit();
+      this.unit$ = new Observable((obs) => {
+        obs.next(this.buildBaseUnit());
+        obs.complete();
+      });
     } else {
-      this.unit = this.unitService.get(id);
-      if (this.unit == null) {
-        this.unit = this.buildBaseUnit();
-      }
+      this.unit$ = this.unitService.get(id);
     }
   }
 
