@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { saveAs } from "file-saver";
 import { IdentitfiableInterface } from "../../interfaces/identitfiable-interface";
 import { AbstractCrudService } from "../../services/abstract-crud-service";
 
@@ -9,7 +10,8 @@ import { AbstractCrudService } from "../../services/abstract-crud-service";
   styleUrls: ["./memory-of-service.component.scss"],
 })
 export class MemoryOfServiceComponent<T extends IdentitfiableInterface>
-  implements OnInit {
+  implements OnInit
+{
   fileControl: FormControl;
   @Input() service: AbstractCrudService<T>;
   @Input() name: string;
@@ -41,9 +43,7 @@ export class MemoryOfServiceComponent<T extends IdentitfiableInterface>
   public exportData(fileName = this.name + ".json"): void {
     let content = JSON.stringify(this.service.exportableData);
     var blob = new Blob([content], { type: "application/json" });
-
-    var FileSaver = require("file-saver");
-    FileSaver.saveAs(blob, fileName);
+    saveAs(blob, fileName);
   }
 
   public blobToFile(blob: Blob, fileName: string): File {
