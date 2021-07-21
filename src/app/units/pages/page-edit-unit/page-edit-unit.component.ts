@@ -3,9 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Dice } from "./../../../core/enums/dice.enum";
 import { Unit } from "./../../../core/models/unit";
-import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 import { UnitService } from "./../../../core/services/unit.service";
-import { UtilsService } from "./../../../core/services/utils.service";
 
 @Component({
   selector: "app-page-edit-unit",
@@ -17,8 +15,6 @@ export class PageEditUnitComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private utils: UtilsService,
-    public enumUtils: EnumUtilsService,
     private unitService: UnitService,
     private location: Location
   ) {}

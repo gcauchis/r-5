@@ -3,7 +3,6 @@ import { Army } from "./../../../core/models/army";
 import { PdfDrawContext } from "./../../../core/models/pdf-draw-context";
 import { Unit } from "./../../../core/models/unit";
 import { Vehicle } from "./../../../core/models/vehicle";
-import { ArmyService } from "./../../../core/services/army.service";
 import { PdfService } from "./../../../core/services/pdf.service";
 import { UnitService } from "./../../../core/services/unit.service";
 import { VehicleService } from "./../../../core/services/vehicle.service";
@@ -26,9 +25,8 @@ export class ViewArmyComponent implements OnInit {
   public pdfDrawContext: PdfDrawContext;
 
   constructor(
-    public armyService: ArmyService,
-    public unitService: UnitService,
-    public vehicleService: VehicleService,
+    private unitService: UnitService,
+    private vehicleService: VehicleService,
     private pdfService: PdfService
   ) {}
 

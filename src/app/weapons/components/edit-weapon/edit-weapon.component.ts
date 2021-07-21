@@ -33,15 +33,15 @@ export class EditWeaponComponent implements OnInit {
   constructor(
     private weaponService: WeaponService,
     private utils: UtilsService,
-    public enumUtils: EnumUtilsService
+    private enumUtils: EnumUtilsService
   ) {
     this.weaponTypes = this.utils.enumToKeyValue(
       WeaponType,
-      enumUtils.weaponTypeToString
+      this.enumUtils.weaponTypeToString
     );
     this.weaponSizes = this.utils.enumToKeyValue(
       ExposiveWeaponSize,
-      enumUtils.exposiveWeaponSizeToString
+      this.enumUtils.exposiveWeaponSizeToString
     );
   }
 

@@ -3,7 +3,6 @@ import { Component, OnInit, Output } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Army } from "./../../../core/models/army";
 import { ArmyService } from "./../../../core/services/army.service";
-import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 
 @Component({
   selector: "app-page-edit-army",
@@ -15,7 +14,6 @@ export class PageEditArmyComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public enumUtils: EnumUtilsService,
     private armyService: ArmyService,
     private location: Location
   ) {}

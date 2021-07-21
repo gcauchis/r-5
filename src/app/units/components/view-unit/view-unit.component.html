@@ -5,7 +5,7 @@
         <span *ngIf="unitCount" class="unit-number"><span class="unit-title"> Nbr :</span> {{unitCount}}</span>
     </p>
     <p class="unit-line"><span class="unit-title">Mouvement :</span>
-        {{unit.tacticalMove}}’’/{{unitService.getRunMove(unit)}}’’ +1D4’’</p>
+        {{unit.tacticalMove}}’’/{{unit | unitRunMove}}’’ +1D4’’</p>
     <p class="unit-line"><span class="unit-title">DQM :</span> {{unit.dqm | diceToString}}</p>
     <app-view-weapons [combatUnit]="unit"></app-view-weapons>
     <p class="unit-line"><span class="unit-title">Sauvegarde :</span><span *ngIf="unit.armor; else noProtection">

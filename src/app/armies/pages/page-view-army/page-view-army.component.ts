@@ -11,7 +11,10 @@ import { ArmyService } from "./../../../core/services/army.service";
 export class PageViewArmyComponent implements OnInit {
   army: Army;
 
-  constructor(private route: ActivatedRoute, public armyService: ArmyService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private armyService: ArmyService
+  ) {}
 
   ngOnInit(): void {
     // TODO observables

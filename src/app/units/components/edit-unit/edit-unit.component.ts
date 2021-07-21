@@ -40,26 +40,26 @@ export class EditUnitComponent implements OnInit {
 
   constructor(
     private utils: UtilsService,
-    public enumUtils: EnumUtilsService,
+    private enumUtils: EnumUtilsService,
     private unitService: UnitService,
-    public dialog: MatDialog
+    private dialog: MatDialog
   ) {
     this.dices = this.utils.enumToKeyValue(Dice, enumUtils.diceToString);
     this.unitTypes = this.utils.enumToKeyValue(
       UnitType,
-      enumUtils.unitTypeToString
+      this.enumUtils.unitTypeToString
     );
     this.unitSizes = this.utils.enumToKeyValue(
       UnitSize,
-      enumUtils.unitSizeToString
+      this.enumUtils.unitSizeToString
     );
     this.moveTypes = this.utils.enumToKeyValue(
       MoveType,
-      enumUtils.moveTypeToString
+      this.enumUtils.moveTypeToString
     );
     this.tacticalRoles = this.utils.enumToKeyValue(
       TacticalRole,
-      enumUtils.tacticalRoleToString
+      this.enumUtils.tacticalRoleToString
     );
   }
 

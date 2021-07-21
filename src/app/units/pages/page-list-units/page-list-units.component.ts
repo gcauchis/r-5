@@ -37,7 +37,7 @@ export class PageListUnitsComponent implements OnInit {
     return nameMatch && factionMatch;
   };
 
-  constructor(public unitService: UnitService) {}
+  constructor(private unitService: UnitService) {}
 
   ngOnInit() {
     this.dataSourceUnits = new MatTableDataSource<Unit>(

@@ -38,19 +38,19 @@ export class EditVehicleComponent implements OnInit {
 
   constructor(
     private utils: UtilsService,
-    public enumUtils: EnumUtilsService,
+    private enumUtils: EnumUtilsService,
     private vehicleService: VehicleService,
-    public dialog: MatDialog
+    private dialog: MatDialog
   ) {
     this.vehicleType = this.utils.enumToKeyValue(
       VehicleType,
-      enumUtils.vehicleTypeToString
+      this.enumUtils.vehicleTypeToString
     );
     this.moveTypes = this.utils.enumToKeyValue(
       MoveType,
-      enumUtils.moveTypeToString
+      this.enumUtils.moveTypeToString
     );
-    this.dices = this.utils.enumToKeyValue(Dice, enumUtils.diceToString);
+    this.dices = this.utils.enumToKeyValue(Dice, this.enumUtils.diceToString);
   }
 
   ngOnInit(): void {

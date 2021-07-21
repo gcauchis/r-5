@@ -43,14 +43,14 @@ export class WeaponSelectorComponent implements OnInit {
   weaponTypes: any[];
 
   constructor(
-    public weaponService: WeaponService,
+    private weaponService: WeaponService,
     private utils: UtilsService,
-    public enumUtils: EnumUtilsService
+    private enumUtils: EnumUtilsService
   ) {
     this.currentWeaponType = WeaponType.Melee;
     this.weaponTypes = this.utils.enumToKeyValue(
       WeaponType,
-      enumUtils.weaponTypeToString
+      this.enumUtils.weaponTypeToString
     );
   }
 
