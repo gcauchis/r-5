@@ -46,4 +46,8 @@ export class VehicleService extends AbstractCrudService<Vehicle> {
   public get factions(): Subject<string[]> {
     return this.factions$;
   }
+
+  protected castJsonObject(obj: Vehicle): Vehicle {
+    return new Vehicle(obj);
+  }
 }

@@ -46,4 +46,8 @@ export class UnitService extends AbstractCrudService<Unit> {
   public get factions(): Subject<string[]> {
     return this.factions$;
   }
+
+  protected castJsonObject(obj: Unit): Unit {
+    return new Unit(obj);
+  }
 }

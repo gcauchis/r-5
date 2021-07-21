@@ -26,8 +26,9 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
       console.log(
         this.storageKey + " from base configuration (no local persistance)"
       );
-      this.data$.next(this.loadBaseData());
+      this.data$.next(this.loadBaseData().map((d) => this.castJsonObject(d)));
     }
+
     console.log(this.data$.value);
     // TODO see if works
     this.data$.subscribe((res) => this.storeData());
@@ -124,4 +125,6 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
   }
 
   protected abstract convertData(data: any): T[];
+
+  protected abstract castJsonObject(obj: T): T;
 }

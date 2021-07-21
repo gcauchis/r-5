@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { PdfDrawContext } from "src/app/core/models/pdf-draw-context";
 import { VehicleType } from "./../../../core/enums/vehicle-type.enum";
+import { PdfDrawContext } from "./../../../core/models/pdf-draw-context";
 import { Vehicle } from "./../../../core/models/vehicle";
-import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 import { PdfService } from "./../../../core/services/pdf.service";
-import { PriceService } from "./../../../core/services/price.service";
 import { VehicleService } from "./../../../core/services/vehicle.service";
 
 @Component({
@@ -21,8 +19,6 @@ export class ViewVehicleComponent implements OnInit {
   VehicleType = VehicleType;
 
   constructor(
-    public enumUtils: EnumUtilsService,
-    public priceService: PriceService,
     public vehicleService: VehicleService,
     public pdfService: PdfService
   ) {}

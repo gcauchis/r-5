@@ -70,4 +70,8 @@ export class WeaponService extends AbstractCrudService<Weapon> {
   public get exportableData(): Weapon[] {
     return this.storedData.filter((w) => w.editable);
   }
+
+  protected castJsonObject(obj: Weapon): Weapon {
+    return new Weapon(obj);
+  }
 }

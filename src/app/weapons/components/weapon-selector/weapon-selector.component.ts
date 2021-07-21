@@ -12,7 +12,6 @@ import { CombatUnitInterface } from "../../../core/interfaces/combat-unit-interf
 import { WeaponType } from "./../../../core/enums/weapon-type.enum";
 import { Weapon } from "./../../../core/models/weapon";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
-import { PriceService } from "./../../../core/services/price.service";
 import { UtilsService } from "./../../../core/services/utils.service";
 import { WeaponService } from "./../../../core/services/weapon.service";
 
@@ -46,8 +45,7 @@ export class WeaponSelectorComponent implements OnInit {
   constructor(
     public weaponService: WeaponService,
     private utils: UtilsService,
-    public enumUtils: EnumUtilsService,
-    public priceService: PriceService
+    public enumUtils: EnumUtilsService
   ) {
     this.currentWeaponType = WeaponType.Melee;
     this.weaponTypes = this.utils.enumToKeyValue(

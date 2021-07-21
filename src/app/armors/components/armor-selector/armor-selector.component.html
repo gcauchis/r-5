@@ -2,24 +2,25 @@
   <span class="tr-title">Armures</span>
   <div class="tr-content">
     <table mat-table [dataSource]="selectableArmors" class="armors">
+      <caption></caption>
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Type d’armure</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">Type d’armure</th>
         <td mat-cell *matCellDef="let armor">{{armor.name}}</td>
       </ng-container>
 
       <ng-container matColumnDef="protection">
-        <th mat-header-cell *matHeaderCellDef>Sauvegarde sur 1D6</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">Sauvegarde sur 1D6</th>
         <td mat-cell *matCellDef="let armor">{{armor.protection}}</td>
       </ng-container>
 
       <ng-container matColumnDef="rule">
-        <th mat-header-cell *matHeaderCellDef>Règles spéciales</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">Règles spéciales</th>
         <td mat-cell *matCellDef="let armor">{{armor.rule}}</td>
       </ng-container>
 
       <ng-container matColumnDef="affect">
-        <th mat-header-cell *matHeaderCellDef></th>
+        <th mat-header-cell *matHeaderCellDef scope="col"></th>
         <td mat-cell *matCellDef="let armor"><button mat-raised-button
             *ngIf="unit.armor == null || armor.id != unit.armor.id" (click)="setArmor(armor)">Use</button></td>
       </ng-container>

@@ -8,6 +8,7 @@ import { PageListUnitsComponent } from "./pages/page-list-units/page-list-units.
 import { PageViewUnitComponent } from "./pages/page-view-unit/page-view-unit.component";
 import { UnitsRoutingModule } from "./units-routing.module";
 import { ViewUnitComponent } from './components/view-unit/view-unit.component';
+import { EditUnitComponent } from './components/edit-unit/edit-unit.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ViewUnitComponent } from './components/view-unit/view-unit.component';
     PageViewUnitComponent,
     PageListUnitsComponent,
     ViewUnitComponent,
+    EditUnitComponent,
   ],
   imports: [
     CommonModule,

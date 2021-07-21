@@ -1,0 +1,13 @@
+<app-template-dialog>
+    <span *ngIf="data.title" class="tr-title">{{data.title}}</span>
+    <div class="tr-content" *ngIf="data.rules">
+        <div *ngFor="let rule of data.rules">
+            <mat-checkbox (change)="ruleSelection(rule, $event.checked)">{{rule}}
+            </mat-checkbox>
+        </div>
+    </div>
+    <div class="tr-actions">
+        <button mat-raised-button mat-button (click)="close()">Annuler</button>
+        <button mat-raised-button [mat-dialog-close]="rules" cdkFocusInitial>Ok</button>
+    </div>
+</app-template-dialog>

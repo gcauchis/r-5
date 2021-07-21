@@ -1,0 +1,13 @@
+<app-template-dialog>
+    <span *ngIf="data.title" class="tr-title">{{data.title}}</span>
+    <div class="tr-content">
+        <div *ngIf="data.message">{{data.message}}</div>
+        <div *ngIf="data.component">
+            <ng-container *ngComponentOutlet="data.component"></ng-container>
+        </div>
+    </div>
+    <div class="tr-actions">
+        <button mat-raised-button *ngIf="data.cancel" mat-button (click)="close()">Annuler</button>
+        <button mat-raised-button *ngIf="data.ok" [mat-dialog-close]="data.message" cdkFocusInitial>Ok</button>
+    </div>
+</app-template-dialog>

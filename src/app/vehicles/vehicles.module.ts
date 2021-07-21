@@ -7,6 +7,7 @@ import { PageListVehiclesComponent } from "./pages/page-list-vehicles/page-list-
 import { PageViewVehicleComponent } from "./pages/page-view-vehicle/page-view-vehicle.component";
 import { VehiclesRoutingModule } from "./vehicles-routing.module";
 import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle.component';
+import { EditVehicleComponent } from './components/edit-vehicle/edit-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle.com
     PageViewVehicleComponent,
     PageListVehiclesComponent,
     ViewVehicleComponent,
+    EditVehicleComponent,
   ],
   imports: [CommonModule, VehiclesRoutingModule, SharedModule, WeaponsModule],
   exports: [

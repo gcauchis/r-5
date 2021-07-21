@@ -1,0 +1,21 @@
+[
+    {"rule":"Option mêlée", "value":2},
+    {"rule":"Strangulation", "value":2},
+    {"rule":"Arme de protection", "value":2},
+    {"rule":"Perce-armure", "value":2},
+    {"rule":"Anti-véhicule", "value":4},
+    {"rule":"Tir en lobe", "value":2},
+    {"rule":"Surprise", "value":1},
+    {"rule":"Gros calibre", "value":1},
+    {"rule":"Visée sûre", "value":1},
+    {"rule":"Lunette de visée", "value":1},
+    {"rule":"Modifiable", "value":1},
+    {"rule":"Rafale", "value":2},
+    {"rule":"Enflammé", "value":2},
+    {"rule":"Fumigène", "value":1},
+    {"rule":"Mobile", "value":1},
+    {"rule":"Endurante", "value":1},
+    {"rule":"Option magique", "value":2},
+    {"rule":"Arme sainte", "value":1},
+    {"rule":"Arme bénis de Dieu", "value":2}
+]

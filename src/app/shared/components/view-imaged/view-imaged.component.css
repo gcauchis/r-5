@@ -1,8 +1,20 @@
-  table.imgcard {
-    width: 100%;
-    border: 0
-  }
-  
-  img.imgview {
-    max-width: 100%
-  }
+img.imgview {
+  max-width: 100%;
+}
+
+.columnLeft {
+  float: left;
+  width: 75%;
+}
+.columnRight {
+  float: left;
+  text-align: right;
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

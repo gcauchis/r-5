@@ -6,11 +6,21 @@ import { IconsModule } from "./../icons/icons.module";
 import { MaterialModule } from "./../material/material.module";
 import { TemplatesModule } from "./../templates/templates.module";
 import { WeaponsRoutingModule } from "./../weapons/weapons-routing.module";
+import { BasicDialogComponent } from "./components/basic-dialog/basic-dialog.component";
 import { EditImageComponent } from "./components/edit-image/edit-image.component";
+import { ShowPdfComponent } from "./components/show-pdf/show-pdf.component";
 import { ViewImagedComponent } from "./components/view-imaged/view-imaged.component";
+import { DiceToStringPipe } from "./pipes/dice-to-string.pipe";
+import { ExplosiveWeaponSizeToStringPipe } from "./pipes/explosive-weapon-size-to-string.pipe";
+import { MoveTypeToStringPipe } from "./pipes/move-type-to-string.pipe";
+import { PriceArmyPipe } from "./pipes/price-army.pipe";
 import { PriceCombatUnitPipe } from "./pipes/price-combat-unit.pipe";
 import { PriceWeaponPipe } from "./pipes/price-weapon.pipe";
-import { ShowPdfComponent } from './components/show-pdf/show-pdf.component';
+import { TacticalRoleToStringPipe } from "./pipes/tactical-role-to-string.pipe";
+import { UnitSizeToStringPipe } from "./pipes/unit-size-to-string.pipe";
+import { UnitTypeToStringPipe } from "./pipes/unit-type-to-string.pipe";
+import { VehicleTypeToStringPipe } from "./pipes/vehicle-type-to-string.pipe";
+import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
 
 @NgModule({
   declarations: [
@@ -19,6 +29,16 @@ import { ShowPdfComponent } from './components/show-pdf/show-pdf.component';
     PriceCombatUnitPipe,
     PriceWeaponPipe,
     ShowPdfComponent,
+    BasicDialogComponent,
+    DiceToStringPipe,
+    UnitTypeToStringPipe,
+    UnitSizeToStringPipe,
+    MoveTypeToStringPipe,
+    TacticalRoleToStringPipe,
+    WeaponTypeToStringPipe,
+    ExplosiveWeaponSizeToStringPipe,
+    VehicleTypeToStringPipe,
+    PriceArmyPipe,
   ],
   imports: [
     CommonModule,
@@ -26,6 +46,7 @@ import { ShowPdfComponent } from './components/show-pdf/show-pdf.component';
     IconsModule,
     FormsModule,
     ReactiveFormsModule,
+    TemplatesModule,
   ],
   exports: [
     BrowserModule,
@@ -40,6 +61,15 @@ import { ShowPdfComponent } from './components/show-pdf/show-pdf.component';
     PriceCombatUnitPipe,
     PriceWeaponPipe,
     ShowPdfComponent,
+    DiceToStringPipe,
+    UnitTypeToStringPipe,
+    UnitSizeToStringPipe,
+    MoveTypeToStringPipe,
+    TacticalRoleToStringPipe,
+    WeaponTypeToStringPipe,
+    ExplosiveWeaponSizeToStringPipe,
+    VehicleTypeToStringPipe,
+    PriceArmyPipe,
   ],
 })
 export class SharedModule {}

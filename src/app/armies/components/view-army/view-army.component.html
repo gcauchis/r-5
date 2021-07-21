@@ -1,11 +1,10 @@
 <div *ngIf="army" #armyCard>
-    <h1>{{army.name}}</h1>
+    <h1>{{army.name}} (Prix: {{army | priceArmy}})</h1>
     <div *ngFor="let unit of units" class="army-div">
         <app-view-unit [unit]="unit" [unitCount]="unitsCount[unit.id]"></app-view-unit>
     </div>
     <div *ngFor="let vehicle of vehicles" class="army-div">
         <app-view-vehicle [vehicle]="vehicle" [vehicleCount]="vehiclesCount[vehicle.id]"></app-view-vehicle>
     </div>
-
-    <app-show-pdf [pdfDrawContext]="pdfDrawContext" pdfName="{{army.name}}.pdf"></app-show-pdf>
 </div>
+<app-show-pdf [pdfDrawContext]="pdfDrawContext" pdfName="{{army.name}}.pdf"></app-show-pdf>
