@@ -4,7 +4,6 @@ import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { Dice } from "./../../../core/enums/dice.enum";
 import { Unit } from "./../../../core/models/unit";
-import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 import { UnitService } from "./../../../core/services/unit.service";
 
 @Component({
@@ -17,7 +16,6 @@ export class PageEditUnitComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public enumUtils: EnumUtilsService,
     private unitService: UnitService,
     private location: Location
   ) {}

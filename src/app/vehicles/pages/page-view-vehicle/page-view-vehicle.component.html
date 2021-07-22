@@ -1,1 +1,1 @@
-<app-view-vehicle *ngIf="vehicle" [vehicle]="vehicle" [showPdf]="true"></app-view-vehicle>
+<app-view-vehicle *ngIf="vehicle$ | async as vehicle" [vehicle]="vehicle" [showPdf]="true"></app-view-vehicle>

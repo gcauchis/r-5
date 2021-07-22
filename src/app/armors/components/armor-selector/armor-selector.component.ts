@@ -13,7 +13,7 @@ export class ArmorSelectorComponent implements OnInit {
   selectableArmors: Armor[];
   displayedColumns: string[] = ["name", "protection", "rule", "affect"];
 
-  constructor(public armorService: ArmorService) {
+  constructor(private armorService: ArmorService) {
     this.selectableArmors = this.armorService.getArmors();
   }
 

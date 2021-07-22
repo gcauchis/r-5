@@ -1,19 +1,2 @@
-<app-template-full-width>
-    <div class="tr-content">
-        <app-template-full-width>
-            <span class="tr-title">Edition : {{army.name}}</span>
-            <div class="tr-content">
-                <mat-form-field class="army-full-width">
-                    <mat-label>Nom</mat-label>
-                    <input matInput [(ngModel)]="army.name" placeholder="Nom" />
-                </mat-form-field>
-            </div>
-        </app-template-full-width>
-        <app-page-list-units [army]="army"></app-page-list-units>
-        <app-page-list-vehicles [army]="army"></app-page-list-vehicles>
-    </div>
-    <div class="tr-actions">
-        <button mat-raised-button (click)="save()">Save</button>
-        <button mat-raised-button (click)="goBack()">Back</button>
-    </div>
-</app-template-full-width>
+<app-edit-army *ngIf="army$ | async as army" [army]="army" (submited)="save($event)" (canceled)="goBack()">
+</app-edit-army>

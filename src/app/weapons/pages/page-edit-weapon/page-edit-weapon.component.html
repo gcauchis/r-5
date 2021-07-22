@@ -1,2 +1,3 @@
-<app-edit-weapon *ngIf="weapon$" [weapon]="weapon$" (submited)="saveWeapon($event)" (canceled)="goBack()">
+<app-edit-weapon *ngIf="weapon$ | async as weapon" [weapon]="weapon" (submited)="saveWeapon($event)"
+    (canceled)="goBack()">
 </app-edit-weapon>

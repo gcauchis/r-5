@@ -1,17 +1,22 @@
-.rules {
+.card {
   width: fit-content;
 }
 
-.rulerow::after {
+.header {
+  text-align: center;
+  font-weight: bold;
+}
+
+.row::after {
   content: "";
   clear: both;
   display: table;
 }
 
-.rule {
+.weapon {
   float: left;
 }
 
-.ruleicon {
+.icon {
   float: right;
 }

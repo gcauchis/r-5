@@ -1,5 +1,5 @@
 <div *ngIf="army" #armyCard>
-    <h1>{{army.name}} (Prix: {{army | priceArmy}})</h1>
+    <h1>{{army.name}} (Prix: {{army | priceArmy | async}})</h1>
     <div *ngFor="let unit of units" class="army-div">
         <app-view-unit [unit]="unit" [unitCount]="unitsCount[unit.id]"></app-view-unit>
     </div>

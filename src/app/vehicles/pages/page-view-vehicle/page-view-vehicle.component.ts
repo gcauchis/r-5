@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
 import { Vehicle } from "./../../../core/models/vehicle";
 import { VehicleService } from "./../../../core/services/vehicle.service";
 
@@ -9,7 +10,7 @@ import { VehicleService } from "./../../../core/services/vehicle.service";
   styleUrls: ["./page-view-vehicle.component.css"],
 })
 export class PageViewVehicleComponent implements OnInit {
-  @Input() vehicle: Vehicle;
+  vehicle$: Observable<Vehicle>;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,7 +20,7 @@ export class PageViewVehicleComponent implements OnInit {
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get("id");
     if (id != 0) {
-      this.vehicle = this.vehicleService.get(id);
+      this.vehicle$ = this.vehicleService.get(id);
     }
   }
 }

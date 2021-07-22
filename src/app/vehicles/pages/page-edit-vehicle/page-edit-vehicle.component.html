@@ -1,2 +1,3 @@
-<app-edit-vehicle *ngIf="vehicle" [vehicle]="vehicle" (submited)="save($event)" (canceled)="goBack()">
+<app-edit-vehicle *ngIf="vehicle$ | async as vehicle" [vehicle]="vehicle" (submited)="save($event)"
+    (canceled)="goBack()">
 </app-edit-vehicle>

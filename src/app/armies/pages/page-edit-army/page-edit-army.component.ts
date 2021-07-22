@@ -1,9 +1,9 @@
 import { Location } from "@angular/common";
-import { Component, OnInit, Output } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
 import { Army } from "./../../../core/models/army";
 import { ArmyService } from "./../../../core/services/army.service";
-import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 
 @Component({
   selector: "app-page-edit-army",
@@ -11,11 +11,10 @@ import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
   styleUrls: ["./page-edit-army.component.css"],
 })
 export class PageEditArmyComponent implements OnInit {
-  @Output() army: Army;
+  army$: Observable<Army>;
 
   constructor(
     private route: ActivatedRoute,
-    public enumUtils: EnumUtilsService,
     private armyService: ArmyService,
     private location: Location
   ) {}
@@ -27,12 +26,12 @@ export class PageEditArmyComponent implements OnInit {
   getArmy(): void {
     const id = +this.route.snapshot.paramMap.get("id");
     if (id == 0) {
-      this.army = this.buildBaseArmy();
+      this.army$ = new Observable((obs) => {
+        obs.next(this.buildBaseArmy());
+        obs.complete();
+      });
     } else {
-      this.army = this.armyService.get(id);
-      if (this.army == null) {
-        this.army = this.buildBaseArmy();
-      }
+      this.army$ = this.armyService.get(id, this.buildBaseArmy());
     }
   }
 
@@ -44,8 +43,8 @@ export class PageEditArmyComponent implements OnInit {
     return army;
   }
 
-  save(): void {
-    this.armyService.save(this.army);
+  save(army: Army): void {
+    this.armyService.save(army);
     this.goBack();
   }
 

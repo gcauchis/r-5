@@ -169,19 +169,22 @@ export class PriceService {
     return price;
   }
 
-  public computeArmy(army: Army): number {
+  public async computeArmy(army: Army): Promise<number> {
     let result = 0;
     if (army.units) {
       for (let unitlink of army.units) {
         result +=
-          unitlink.count * this.compute(this.unitService.get(unitlink.id));
+          unitlink.count *
+          this.compute(await this.unitService.get(unitlink.id).toPromise());
       }
     }
     if (army.vehicles) {
       for (let vehiclelink of army.vehicles) {
         result +=
           vehiclelink.count *
-          this.compute(this.vehicleService.get(vehiclelink.id));
+          this.compute(
+            await this.vehicleService.get(vehiclelink.id).toPromise()
+          );
       }
     }
     return result;

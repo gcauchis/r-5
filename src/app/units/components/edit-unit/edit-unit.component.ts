@@ -40,31 +40,31 @@ export class EditUnitComponent implements OnInit {
 
   constructor(
     private utils: UtilsService,
-    public enumUtils: EnumUtilsService,
+    private enumUtils: EnumUtilsService,
     private unitService: UnitService,
-    public dialog: MatDialog
+    private dialog: MatDialog
   ) {
     this.dices = this.utils.enumToKeyValue(Dice, enumUtils.diceToString);
     this.unitTypes = this.utils.enumToKeyValue(
       UnitType,
-      enumUtils.unitTypeToString
+      this.enumUtils.unitTypeToString
     );
     this.unitSizes = this.utils.enumToKeyValue(
       UnitSize,
-      enumUtils.unitSizeToString
+      this.enumUtils.unitSizeToString
     );
     this.moveTypes = this.utils.enumToKeyValue(
       MoveType,
-      enumUtils.moveTypeToString
+      this.enumUtils.moveTypeToString
     );
     this.tacticalRoles = this.utils.enumToKeyValue(
       TacticalRole,
-      enumUtils.tacticalRoleToString
+      this.enumUtils.tacticalRoleToString
     );
   }
 
   ngOnInit(): void {
-    this.factions = this.unitService.getFactions();
+    this.unitService.factions.subscribe((res) => (this.factions = res));
     this.factionsFilteredOptions = this.factionsControl.valueChanges.pipe(
       startWith(""),
       map((value) => this._filterFaction(value))
@@ -88,10 +88,6 @@ export class EditUnitComponent implements OnInit {
     } else {
       this.unit.mageLevel = 0;
     }
-  }
-
-  removeWeapon(weapon: Weapon): void {
-    this.unit.weapons = this.unit.weapons.filter((r) => r != weapon);
   }
 
   addWeapon(weapon: Weapon) {

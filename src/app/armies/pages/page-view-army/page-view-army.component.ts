@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
 import { Army } from "./../../../core/models/army";
 import { ArmyService } from "./../../../core/services/army.service";
 
@@ -9,9 +10,12 @@ import { ArmyService } from "./../../../core/services/army.service";
   styleUrls: ["./page-view-army.component.css"],
 })
 export class PageViewArmyComponent implements OnInit {
-  army: Army;
+  army$: Observable<Army>;
 
-  constructor(private route: ActivatedRoute, public armyService: ArmyService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private armyService: ArmyService
+  ) {}
 
   ngOnInit(): void {
     // TODO observables
@@ -20,7 +24,7 @@ export class PageViewArmyComponent implements OnInit {
     // );
     const id = +this.route.snapshot.paramMap.get("idArmy");
     if (id != 0) {
-      this.army = this.armyService.get(id);
+      this.army$ = this.armyService.get(id);
     }
   }
 }

@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from "@angular/core";
 import { PdfDrawContext } from "./../../../core/models/pdf-draw-context";
 import { Unit } from "./../../../core/models/unit";
 import { PdfService } from "./../../../core/services/pdf.service";
-import { UnitService } from "./../../../core/services/unit.service";
 
 @Component({
   selector: "app-view-unit",
@@ -15,7 +14,7 @@ export class ViewUnitComponent implements OnInit {
   @Input() showPdf: boolean = false;
   pdfContext: PdfDrawContext;
 
-  constructor(public unitService: UnitService, public pdfService: PdfService) {}
+  constructor(private pdfService: PdfService) {}
 
   ngOnInit(): void {}
 

@@ -17,9 +17,10 @@ export class PageListArmiesComponent implements OnInit {
   constructor(private armyService: ArmyService) {}
 
   ngOnInit(): void {
-    this.dataSourceArmies = new MatTableDataSource<Army>(
-      this.armyService.storedData
-    );
+    this.armyService.collection.subscribe((res) => {
+      this.dataSourceArmies = new MatTableDataSource<Army>(res);
+      this.dataSourceArmies.paginator = this.paginator;
+    });
   }
 
   ngAfterViewInit() {
@@ -28,9 +29,5 @@ export class PageListArmiesComponent implements OnInit {
 
   remove(army: Army): void {
     this.armyService.remove(army);
-    this.dataSourceArmies = new MatTableDataSource<Army>(
-      this.armyService.storedData
-    );
-    this.dataSourceArmies.paginator = this.paginator;
   }
 }

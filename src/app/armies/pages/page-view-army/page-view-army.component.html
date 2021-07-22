@@ -1,1 +1,1 @@
-<app-view-army *ngIf="army" [army]="army" [showPdf]="true"></app-view-army>
+<app-view-army *ngIf="army$ | async as army" [army]="army" [showPdf]="true"></app-view-army>

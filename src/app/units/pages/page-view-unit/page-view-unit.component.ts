@@ -12,7 +12,10 @@ import { UnitService } from "./../../../core/services/unit.service";
 export class PageViewUnitComponent implements OnInit {
   unit$: Observable<Unit>;
 
-  constructor(private route: ActivatedRoute, public unitService: UnitService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private unitService: UnitService
+  ) {}
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get("idUnit");

@@ -40,17 +40,17 @@ export class PageListVehiclesComponent implements OnInit {
   constructor(public vehicleService: VehicleService) {}
 
   ngOnInit(): void {
-    this.dataSourceVehicle = new MatTableDataSource<Vehicle>(
-      this.vehicleService.storedData
-    );
-    this.dataSourceVehicle.filterPredicate = this._filter;
-    if (this.army == null) {
-      this.displayedColumns = ["vehicle", "edit", "view", "remove"];
-    } else {
-      this.vehicleService.storedData.forEach((u) => (this.links[u.id] = 0));
-      this.army.vehicles.forEach((l) => (this.links[l.id] = l.count));
-      this.displayedColumns = ["vehicle", "army", "edit"];
-    }
+    this.vehicleService.collection.subscribe((vehicles) => {
+      this.dataSourceVehicle = new MatTableDataSource<Vehicle>(vehicles);
+      this.dataSourceVehicle.filterPredicate = this._filter;
+      if (this.army == null) {
+        this.displayedColumns = ["vehicle", "edit", "view", "remove"];
+      } else {
+        vehicles.forEach((u) => (this.links[u.id] = 0));
+        this.army.vehicles.forEach((l) => (this.links[l.id] = l.count));
+        this.displayedColumns = ["vehicle", "army", "edit"];
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -64,21 +64,19 @@ export class PageListVehiclesComponent implements OnInit {
   updateLinks(id: number, value: number): void {
     this.links[id] = value;
     this.army.vehicles = [];
-    this.vehicleService.storedData.forEach((unit) => {
-      if (this.links[unit.id] > 0) {
-        let link = new ArmyLink();
-        link.id = unit.id;
-        link.count = this.links[unit.id];
-        this.army.vehicles.push(link);
-      }
-    });
+    this.vehicleService.collection.asObservable().subscribe((res) =>
+      res.forEach((unit) => {
+        if (this.links[unit.id] > 0) {
+          let link = new ArmyLink();
+          link.id = unit.id;
+          link.count = this.links[unit.id];
+          this.army.vehicles.push(link);
+        }
+      })
+    );
   }
 
   remove(vehicle: Vehicle): void {
     this.vehicleService.remove(vehicle);
-    this.dataSourceVehicle = new MatTableDataSource<Vehicle>(
-      this.vehicleService.storedData
-    );
-    this.dataSourceVehicle.paginator = this.paginator;
   }
 }

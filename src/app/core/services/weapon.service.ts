@@ -43,7 +43,7 @@ export class WeaponService extends AbstractCrudService<Weapon> {
     return 5000;
   }
 
-  public getRules(): Subject<string[]> {
+  public get rules(): Subject<string[]> {
     return this.rules$;
   }
 
@@ -62,6 +62,8 @@ export class WeaponService extends AbstractCrudService<Weapon> {
   }
 
   public save(weapon: Weapon): void {
+    console.log("save");
+    console.log(weapon);
     if (weapon.editable) {
       super.save(weapon);
     }

@@ -1,1 +1,2 @@
-<app-edit-unit *ngIf="unit" [unit]="unit" (submited)="saveUnit($event)" (canceled)="goBack()"></app-edit-unit>
+<app-edit-unit *ngIf="unit$ | async as unit" [unit]="unit" (submited)="saveUnit($event)" (canceled)="goBack()">
+</app-edit-unit>

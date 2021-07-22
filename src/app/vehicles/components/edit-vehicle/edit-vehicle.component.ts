@@ -38,23 +38,23 @@ export class EditVehicleComponent implements OnInit {
 
   constructor(
     private utils: UtilsService,
-    public enumUtils: EnumUtilsService,
+    private enumUtils: EnumUtilsService,
     private vehicleService: VehicleService,
-    public dialog: MatDialog
+    private dialog: MatDialog
   ) {
     this.vehicleType = this.utils.enumToKeyValue(
       VehicleType,
-      enumUtils.vehicleTypeToString
+      this.enumUtils.vehicleTypeToString
     );
     this.moveTypes = this.utils.enumToKeyValue(
       MoveType,
-      enumUtils.moveTypeToString
+      this.enumUtils.moveTypeToString
     );
-    this.dices = this.utils.enumToKeyValue(Dice, enumUtils.diceToString);
+    this.dices = this.utils.enumToKeyValue(Dice, this.enumUtils.diceToString);
   }
 
   ngOnInit(): void {
-    this.factions = this.vehicleService.getFactions();
+    this.vehicleService.factions.subscribe((res) => (this.factions = res));
     this.factionsFilteredOptions = this.factionsControl.valueChanges.pipe(
       startWith(""),
       map((value) => this._filterFaction(value))
@@ -66,10 +66,6 @@ export class EditVehicleComponent implements OnInit {
     return this.factions.filter((faction) =>
       faction.toLowerCase().includes(filterFaction)
     );
-  }
-
-  removeWeapon(weapon: Weapon): void {
-    this.vehicle.weapons = this.vehicle.weapons.filter((r) => r != weapon);
   }
 
   addWeapon(weapon: Weapon) {

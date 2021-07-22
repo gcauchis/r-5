@@ -3,7 +3,6 @@ import { Army } from "./../../../core/models/army";
 import { PdfDrawContext } from "./../../../core/models/pdf-draw-context";
 import { Unit } from "./../../../core/models/unit";
 import { Vehicle } from "./../../../core/models/vehicle";
-import { ArmyService } from "./../../../core/services/army.service";
 import { PdfService } from "./../../../core/services/pdf.service";
 import { UnitService } from "./../../../core/services/unit.service";
 import { VehicleService } from "./../../../core/services/vehicle.service";
@@ -26,9 +25,8 @@ export class ViewArmyComponent implements OnInit {
   public pdfDrawContext: PdfDrawContext;
 
   constructor(
-    public armyService: ArmyService,
-    public unitService: UnitService,
-    public vehicleService: VehicleService,
+    private unitService: UnitService,
+    private vehicleService: VehicleService,
     private pdfService: PdfService
   ) {}
 
@@ -42,20 +40,22 @@ export class ViewArmyComponent implements OnInit {
       this.vehiclesCount = {};
       if (this.army.units != null) {
         this.army.units.forEach((link) => {
-          let unit = this.unitService.get(link.id);
-          if (unit != null) {
-            this.units.push(unit);
-            this.unitsCount[link.id] = link.count;
-          }
+          this.unitService.get(link.id).subscribe((unit) => {
+            if (unit != null) {
+              this.units.push(unit);
+              this.unitsCount[link.id] = link.count;
+            }
+          });
         });
       }
       if (this.army.vehicles != null) {
         this.army.vehicles.forEach((link) => {
-          let vehicle = this.vehicleService.get(link.id);
-          if (vehicle != null) {
-            this.vehicles.push(vehicle);
-            this.vehiclesCount[link.id] = link.count;
-          }
+          this.vehicleService.get(link.id).subscribe((vehicle) => {
+            if (vehicle != null) {
+              this.vehicles.push(vehicle);
+              this.vehiclesCount[link.id] = link.count;
+            }
+          });
         });
       }
       this.pdfService

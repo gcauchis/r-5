@@ -3,7 +3,8 @@ import { IdentitfiableInterface } from "../interfaces/identitfiable-interface";
 import { LocalStorageService } from "./local-storage.service";
 
 export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
-  private data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+  private _values: T[] = [];
+  private data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>(this._values);
 
   constructor(
     private localStorage: LocalStorageService,
@@ -16,31 +17,40 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
           this.storageKey +
             " not found localy, retrieve from base configuration"
         );
-        this.data$.next(this.loadBaseData());
+        this.values = this.loadBaseData();
         this.storeData();
       } else {
         console.log(this.storageKey + " retrieved");
-        this.data$.next(tmpData);
+        this.values = tmpData;
       }
     } else {
       console.log(
         this.storageKey + " from base configuration (no local persistance)"
       );
-      this.data$.next(this.loadBaseData().map((d) => this.castJsonObject(d)));
+      this.values = this.loadBaseData().map((d) => this.castJsonObject(d));
     }
 
-    console.log(this.data$.value);
+    console.log(this.values);
     // TODO see if works
     this.data$.subscribe((res) => this.storeData());
     // or test
     // this.data$ = this.data$.pipe(tap((res) => this.storeData()));
   }
 
+  private set values(values: T[]) {
+    this._values = values;
+    this.data$.next(this._values);
+  }
+
+  private get values(): T[] {
+    return this._values;
+  }
+
   protected abstract loadBaseData(): T[];
 
   private genId(): number {
-    return this.data$.value.length > 0
-      ? Math.max(...this.data$.value.map((w) => w.id)) + 1
+    return this.values.length > 0
+      ? Math.max(...this.values.map((w) => w.id)) + 1
       : this.minId;
   }
 
@@ -53,7 +63,7 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
   public get(id: number, defaultValue: T = null): Observable<T> {
     return new Observable<T>((obs) => {
       if (id != null) {
-        obs.next(this.data$.value.find((w) => w.id == id));
+        obs.next(this.values.find((w) => w.id == id));
       } else {
         obs.next(defaultValue);
       }
@@ -64,27 +74,29 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
   public save(value: T): void {
     if (value.id) {
       this.get(value.id).subscribe((found) => {
+        let vals = this.values;
         if (found) {
           Object.assign(found, value);
         } else {
-          this.data$.value.push(value);
+          vals.push(value);
         }
-        this.data$.next(this.data$.value);
+        this.values = vals;
       });
     } else {
       value.id = this.genId();
-      this.data$.value.push(value);
-      this.data$.next(this.data$.value);
+      let vals = this.values;
+      vals.push(value);
+      this.values = vals;
     }
   }
 
   public remove(value: T): void {
-    this.data$.next(this.data$.value.filter((d) => d.id != value.id));
+    this.values = this.values.filter((d) => d.id != value.id);
   }
 
   public storeData(): void {
     if (this.isLocalStorageSupported) {
-      this.localStorage.set(this.storageKey, this.data$.value);
+      this.localStorage.set(this.storageKey, this.values);
       console.log(this.storageKey + " stored");
     }
   }
@@ -94,8 +106,7 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
       console.log("Reset " + this.storageKey);
       this.localStorage.remove(this.storageKey);
       console.log(this.storageKey + "from base configuration");
-      this.data$.next(this.loadBaseData());
-      this.storeData();
+      this.values = this.loadBaseData();
     }
   }
 
@@ -108,7 +119,7 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
   }
 
   protected get storedData(): T[] {
-    return this.data$.value;
+    return this.values;
   }
 
   public importData(data: any): void {

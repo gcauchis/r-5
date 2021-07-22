@@ -17,8 +17,10 @@ import { PriceArmyPipe } from "./pipes/price-army.pipe";
 import { PriceCombatUnitPipe } from "./pipes/price-combat-unit.pipe";
 import { PriceWeaponPipe } from "./pipes/price-weapon.pipe";
 import { TacticalRoleToStringPipe } from "./pipes/tactical-role-to-string.pipe";
+import { UnitRunMovePipe } from "./pipes/unit-run-move.pipe";
 import { UnitSizeToStringPipe } from "./pipes/unit-size-to-string.pipe";
 import { UnitTypeToStringPipe } from "./pipes/unit-type-to-string.pipe";
+import { VehicleRunMovePipe } from "./pipes/vehicle-run-move.pipe";
 import { VehicleTypeToStringPipe } from "./pipes/vehicle-type-to-string.pipe";
 import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
 
@@ -39,6 +41,8 @@ import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
     ExplosiveWeaponSizeToStringPipe,
     VehicleTypeToStringPipe,
     PriceArmyPipe,
+    UnitRunMovePipe,
+    VehicleRunMovePipe,
   ],
   imports: [
     CommonModule,
@@ -70,6 +74,8 @@ import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
     ExplosiveWeaponSizeToStringPipe,
     VehicleTypeToStringPipe,
     PriceArmyPipe,
+    UnitRunMovePipe,
+    VehicleRunMovePipe,
   ],
 })
 export class SharedModule {}

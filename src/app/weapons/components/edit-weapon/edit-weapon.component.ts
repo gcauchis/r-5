@@ -33,27 +33,29 @@ export class EditWeaponComponent implements OnInit {
   constructor(
     private weaponService: WeaponService,
     private utils: UtilsService,
-    public enumUtils: EnumUtilsService
+    private enumUtils: EnumUtilsService
   ) {
     this.weaponTypes = this.utils.enumToKeyValue(
       WeaponType,
-      enumUtils.weaponTypeToString
+      this.enumUtils.weaponTypeToString
     );
     this.weaponSizes = this.utils.enumToKeyValue(
       ExposiveWeaponSize,
-      enumUtils.exposiveWeaponSizeToString
+      this.enumUtils.exposiveWeaponSizeToString
     );
   }
 
   ngOnInit(): void {
-    this.rules = this.weaponService.getRules();
+    this.weaponService.rules.subscribe((res) => (this.rules = res));
     this.rulesFilteredOptions = this.rulesControl.valueChanges.pipe(
       startWith(""),
       map((value) => this._filter(value))
     );
   }
 
-  ngOnChanges() {}
+  ngOnChanges() {
+    console.log(this.weapon);
+  }
 
   private _filter(value: string): string[] {
     const filterRule = value.toLowerCase();

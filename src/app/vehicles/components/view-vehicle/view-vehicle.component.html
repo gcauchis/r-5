@@ -8,7 +8,7 @@
     <p class="vehicle-line"><span class="vehicle-title">Type de mouvement :</span>
         {{ vehicle.moveType | moveTypeToString}}</p>
     <p class="vehicle-line"><span class="vehicle-title">Mouvement :</span> {{vehicle.tacticalMove}}’’ /
-        {{vehicleService.getRunMove(vehicle)}}’’</p>
+        {{vehicle | vehicleRunMove}}’’</p>
     <p class="vehicle-line" *ngIf="vehicle.type == VehicleType.TroopTransport"><span class="vehicle-title">Place
             disponible
             pour le transport :</span> {{vehicle.transportSpace}}</p>

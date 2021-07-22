@@ -8,6 +8,7 @@ import { PageEditArmyComponent } from "./pages/page-edit-army/page-edit-army.com
 import { PageListArmiesComponent } from "./pages/page-list-armies/page-list-armies.component";
 import { PageViewArmyComponent } from "./pages/page-view-army/page-view-army.component";
 import { ViewArmyComponent } from './components/view-army/view-army.component';
+import { EditArmyComponent } from './components/edit-army/edit-army.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ViewArmyComponent } from './components/view-army/view-army.component';
     PageEditArmyComponent,
     PageViewArmyComponent,
     ViewArmyComponent,
+    EditArmyComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { ViewArmyComponent } from './components/view-army/view-army.component';
     PageViewArmyComponent,
     UnitsModule,
     VehiclesModule,
+    EditArmyComponent,
   ],
 })
 export class ArmiesModule {}
