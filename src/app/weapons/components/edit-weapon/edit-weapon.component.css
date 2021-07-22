@@ -1,0 +1,17 @@
+.rules {
+  width: fit-content;
+}
+
+.rulerow::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.rule {
+  float: left;
+}
+
+.ruleicon {
+  float: right;
+}
