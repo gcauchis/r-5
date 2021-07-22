@@ -68,10 +68,6 @@ export class EditVehicleComponent implements OnInit {
     );
   }
 
-  removeWeapon(weapon: Weapon): void {
-    this.vehicle.weapons = this.vehicle.weapons.filter((r) => r != weapon);
-  }
-
   addWeapon(weapon: Weapon) {
     if (this.vehicle.weapons.length >= this.vehicle.crew) {
       this.dialog.open(BasicDialogComponent, {

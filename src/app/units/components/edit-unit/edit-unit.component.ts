@@ -90,10 +90,6 @@ export class EditUnitComponent implements OnInit {
     }
   }
 
-  removeWeapon(weapon: Weapon): void {
-    this.unit.weapons = this.unit.weapons.filter((r) => r != weapon);
-  }
-
   addWeapon(weapon: Weapon) {
     if (weapon.rule && weapon.rule.length > 0) {
       const dialogRef = this.dialog.open(DialogRulesSelectorComponent, {

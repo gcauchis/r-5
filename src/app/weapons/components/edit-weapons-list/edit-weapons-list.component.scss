@@ -1,0 +1,22 @@
+.card {
+  width: fit-content;
+}
+
+.header {
+  text-align: center;
+  font-weight: bold;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.weapon {
+  float: left;
+}
+
+.icon {
+  float: right;
+}
