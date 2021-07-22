@@ -57,10 +57,6 @@ export class WeaponService extends AbstractCrudService<Weapon> {
     }
   }
 
-  public getWeapon(id: number): Observable<Weapon> {
-    return this.get(id);
-  }
-
   public save(weapon: Weapon): void {
     if (weapon.editable) {
       super.save(weapon);
