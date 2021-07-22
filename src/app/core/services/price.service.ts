@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import jsonWeaponsRulesValues from "../../resources/weapons-rules-values.json";
 import { CombatUnitInterface } from "../interfaces/combat-unit-interface";
 import { Army } from "../models/army";
+import { Vehicle } from "../models/vehicle";
 import { Dice } from "./../enums/dice.enum";
 import { ExposiveWeaponSize } from "./../enums/exposive-weapon-size.enum";
 import { MoveType } from "./../enums/move-type.enum";
@@ -109,15 +110,22 @@ export class PriceService {
         default:
           break;
       }
+    } else if (combatUnit instanceof Vehicle) {
+      result = 42;
     }
+
     return result;
   }
 
   public getPrice(weapon: Weapon, combatUnit: CombatUnitInterface): number {
     let unitBase = this.computeBase(combatUnit);
     let result = 0;
-    let powerCoef = weapon.power * POWER_DICE_COEF;
-    if (weapon.superPower) powerCoef *= POWER_SUPER_DICE_COEF;
+    let powerCoef = weapon.power;
+    if (weapon.superPower) powerCoef *= POWER_DICE_COEF;
+    if (weapon.superSuperPower) powerCoef *= POWER_SUPER_DICE_COEF;
+    if (weapon.assault) unitBase += ASSAULT_VALUE;
+    if (weapon.heavy) unitBase += HEAVY_VALUE;
+    if (weapon.cover) unitBase += COVER_VALUE;
 
     switch (weapon.weaponType) {
       case WeaponType.Melee:
@@ -150,9 +158,6 @@ export class PriceService {
         let baseVp = 0;
         // Se base sur la regle et mon unit
         if (!weapon.nonLethal) baseVp += this.computeDC(combatUnit.dc);
-        if (weapon.assault) baseVp += ASSAULT_VALUE;
-        if (weapon.heavy) baseVp += HEAVY_VALUE;
-        if (weapon.cover) baseVp += COVER_VALUE;
 
         for (let rule of weapon.rule) {
           let val = WEAPONS_RULES_VALUES.filter((v) => v.rule == rule);

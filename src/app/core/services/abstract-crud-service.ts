@@ -35,14 +35,12 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
     }
 
     if (!environment.production) console.log(this.values);
-    // TODO see if works
+    // on backup a chaque update
     this.data$.subscribe((res) => this.storeData());
-    // or test
-    // this.data$ = this.data$.pipe(tap((res) => this.storeData()));
   }
 
   private set values(values: T[]) {
-    this._values = values;
+    this._values = values.map((d) => this.castJsonObject(d));
     this.data$.next(this._values);
   }
 
