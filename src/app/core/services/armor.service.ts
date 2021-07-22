@@ -28,10 +28,6 @@ export class ArmorService extends AbstractCrudService<Armor> {
     return 100;
   }
 
-  public getArmors(): Armor[] {
-    return this.storedData;
-  }
-
   protected castJsonObject(obj: Armor): Armor {
     return new Armor(obj);
   }

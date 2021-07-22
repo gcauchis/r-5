@@ -1,5 +1,6 @@
 import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { IdentitfiableInterface } from "../interfaces/identitfiable-interface";
+import { environment } from "./../../../environments/environment";
 import { LocalStorageService } from "./local-storage.service";
 
 export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
@@ -13,24 +14,27 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
     if (this.isLocalStorageSupported) {
       let tmpData = this.localStorage.get(this.storageKey);
       if (tmpData == null) {
-        console.log(
-          this.storageKey +
-            " not found localy, retrieve from base configuration"
-        );
+        if (!environment.production)
+          console.log(
+            this.storageKey +
+              " not found localy, retrieve from base configuration"
+          );
         this.values = this.loadBaseData();
         this.storeData();
       } else {
-        console.log(this.storageKey + " retrieved");
+        if (!environment.production)
+          console.log(this.storageKey + " retrieved");
         this.values = tmpData;
       }
     } else {
-      console.log(
-        this.storageKey + " from base configuration (no local persistance)"
-      );
+      if (!environment.production)
+        console.log(
+          this.storageKey + " from base configuration (no local persistance)"
+        );
       this.values = this.loadBaseData().map((d) => this.castJsonObject(d));
     }
 
-    console.log(this.values);
+    if (!environment.production) console.log(this.values);
     // TODO see if works
     this.data$.subscribe((res) => this.storeData());
     // or test
@@ -97,15 +101,16 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
   public storeData(): void {
     if (this.isLocalStorageSupported) {
       this.localStorage.set(this.storageKey, this.values);
-      console.log(this.storageKey + " stored");
+      if (!environment.production) console.log(this.storageKey + " stored");
     }
   }
 
   public resetData(): void {
     if (this.isLocalStorageSupported) {
-      console.log("Reset " + this.storageKey);
+      if (!environment.production) console.log("Reset " + this.storageKey);
       this.localStorage.remove(this.storageKey);
-      console.log(this.storageKey + "from base configuration");
+      if (!environment.production)
+        console.log(this.storageKey + "from base configuration");
       this.values = this.loadBaseData();
     }
   }
@@ -123,11 +128,15 @@ export abstract class AbstractCrudService<T extends IdentitfiableInterface> {
   }
 
   public importData(data: any): void {
-    console.log("try import:");
-    console.log(data);
+    if (!environment.production) {
+      console.log("try import:");
+      console.log(data);
+    }
     let imported = this.convertData(data);
-    console.log("imported:");
-    console.log(imported);
+    if (!environment.production) {
+      console.log("imported:");
+      console.log(imported);
+    }
     imported.forEach((e) => {
       e.id = this.genId();
       this.save(e);

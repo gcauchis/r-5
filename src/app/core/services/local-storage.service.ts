@@ -18,7 +18,6 @@ export class LocalStorageService {
   get(key: string): any {
     if (this.isLocalStorageSupported) {
       let stored = this.localStorage.getItem(KEY_PREFIX + key);
-      console.log(stored);
       if (stored && stored != "undefined")
         return JSON.parse(this.localStorage.getItem(KEY_PREFIX + key));
       else return null;
@@ -60,7 +59,6 @@ export class LocalStorageService {
   clear(): void {
     if (this.isLocalStorageSupported) {
       this.localStorage.clear();
-      console.log("clear local storage");
     }
   }
 }

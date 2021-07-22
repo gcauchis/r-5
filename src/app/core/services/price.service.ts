@@ -9,6 +9,7 @@ import { TacticalRole } from "./../enums/tactical-role.enum";
 import { UnitSize } from "./../enums/unit-size.enum";
 import { UnitType } from "./../enums/unit-type.enum";
 import { WeaponType } from "./../enums/weapon-type.enum";
+import { RuleValue } from "./../interfaces/rule-value";
 import { Unit } from "./../models/unit";
 import { Weapon } from "./../models/weapon";
 import { UnitService } from "./unit.service";
@@ -32,7 +33,7 @@ const SIZE_MEDIUM: number = 13;
 const SIZE_BIG: number = 28;
 const SIZE_CONE: number = 17;
 
-const WEAPONS_RULES_VALUES = jsonWeaponsRulesValues;
+const WEAPONS_RULES_VALUES: RuleValue[] = jsonWeaponsRulesValues;
 
 @Injectable({
   providedIn: "root",
@@ -69,7 +70,6 @@ export class PriceService {
   public computeBase(combatUnit: CombatUnitInterface): number {
     let dcPrive = this.computeDC(combatUnit.dc);
     let result = 0;
-    //console.log(combatUnit);
     if (combatUnit instanceof Unit) {
       let unit = new Unit(combatUnit);
 
@@ -116,8 +116,8 @@ export class PriceService {
   public getPrice(weapon: Weapon, combatUnit: CombatUnitInterface): number {
     let unitBase = this.computeBase(combatUnit);
     let result = 0;
-    let powerCoef = weapon.power;
-    if (weapon.superPower) powerCoef *= 2;
+    let powerCoef = weapon.power * POWER_DICE_COEF;
+    if (weapon.superPower) powerCoef *= POWER_SUPER_DICE_COEF;
 
     switch (weapon.weaponType) {
       case WeaponType.Melee:
@@ -149,7 +149,15 @@ export class PriceService {
         }
         let baseVp = 0;
         // Se base sur la regle et mon unit
-        if (!weapon.nonLethal) baseVp = this.computeDC(combatUnit.dc);
+        if (!weapon.nonLethal) baseVp += this.computeDC(combatUnit.dc);
+        if (weapon.assault) baseVp += ASSAULT_VALUE;
+        if (weapon.heavy) baseVp += HEAVY_VALUE;
+        if (weapon.cover) baseVp += COVER_VALUE;
+
+        for (let rule of weapon.rule) {
+          let val = WEAPONS_RULES_VALUES.filter((v) => v.rule == rule);
+          if (val.length > 0) baseVp += val.pop().value;
+        }
 
         result = baseSize * baseVp * powerCoef + baseExp * unitBase;
         break;

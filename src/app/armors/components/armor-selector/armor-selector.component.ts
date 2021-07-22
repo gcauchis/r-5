@@ -13,11 +13,13 @@ export class ArmorSelectorComponent implements OnInit {
   selectableArmors: Armor[];
   displayedColumns: string[] = ["name", "protection", "rule", "affect"];
 
-  constructor(private armorService: ArmorService) {
-    this.selectableArmors = this.armorService.getArmors();
-  }
+  constructor(private armorService: ArmorService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.armorService.collection.subscribe(
+      (res) => (this.selectableArmors = res)
+    );
+  }
 
   setArmor(armor: Armor) {
     this.unit.armor = armor;

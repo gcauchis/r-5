@@ -62,8 +62,6 @@ export class WeaponService extends AbstractCrudService<Weapon> {
   }
 
   public save(weapon: Weapon): void {
-    console.log("save");
-    console.log(weapon);
     if (weapon.editable) {
       super.save(weapon);
     }

@@ -18,10 +18,6 @@ export class PageViewArmyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // TODO observables
-    // this.army$ = this.route.paramMap.pipe(
-    //   switchMap((params) => this.armyService.get(Number(params.get("idArmy"))))
-    // );
     const id = +this.route.snapshot.paramMap.get("idArmy");
     if (id != 0) {
       this.army$ = this.armyService.get(id);

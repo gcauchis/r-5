@@ -308,7 +308,6 @@ export class PdfService {
     imgBase64: any
   ): Promise<PDFImage> {
     let result: Promise<PDFImage> = null;
-    console.log(imgBase64);
     if (imgBase64.includes("image/png"))
       result = context.document.embedPng(imgBase64);
     else if (
