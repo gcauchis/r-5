@@ -23,6 +23,7 @@ import { UnitTypeToStringPipe } from "./pipes/unit-type-to-string.pipe";
 import { VehicleRunMovePipe } from "./pipes/vehicle-run-move.pipe";
 import { VehicleTypeToStringPipe } from "./pipes/vehicle-type-to-string.pipe";
 import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
+import { WeaponRulesToStringPipe } from './pipes/weapon-rules-to-string.pipe';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
     PriceArmyPipe,
     UnitRunMovePipe,
     VehicleRunMovePipe,
+    WeaponRulesToStringPipe,
   ],
   imports: [
     CommonModule,
@@ -76,6 +78,7 @@ import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
     PriceArmyPipe,
     UnitRunMovePipe,
     VehicleRunMovePipe,
+    WeaponRulesToStringPipe,
   ],
 })
 export class SharedModule {}

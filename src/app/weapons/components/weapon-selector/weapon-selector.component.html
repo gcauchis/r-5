@@ -92,7 +92,7 @@
         <td mat-cell *matCellDef="let weapon">
           <a mat-raised-button *ngIf="weapon.editable" routerLink="/weapons/edit/{{ weapon.id }}">Edit</a>
           <button mat-mini-fab *ngIf="weapon.editable" (click)="removeWeapon(weapon)" color="warn">
-            x
+            <app-icon-delete></app-icon-delete>
           </button>
         </td>
       </ng-container>

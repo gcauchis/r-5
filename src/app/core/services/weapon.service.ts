@@ -70,4 +70,17 @@ export class WeaponService extends AbstractCrudService<Weapon> {
   protected castJsonObject(obj: Weapon): Weapon {
     return new Weapon(obj);
   }
+
+  public retrieveRules(weapon: Weapon): string[] {
+    let rules = [];
+    if (weapon) {
+      if (weapon.assault) rules.push("Assaut");
+      if (weapon.heavy) rules.push("Lourd");
+      if (weapon.cover) rules.push("Couverture");
+      if (weapon.nonLethal) rules.push("Non mortelle");
+      if (weapon.rule) weapon.rule.forEach((rule) => rules.push(rule));
+    }
+    if (rules.length <= 0) rules = null;
+    return rules;
+  }
 }

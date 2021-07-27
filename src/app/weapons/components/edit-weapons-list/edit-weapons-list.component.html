@@ -1,9 +1,11 @@
-<div *ngIf="combatUnit" class="card">
-  <div class="header">Arme de l'unité</div>
-  <div *ngFor="let weapon of combatUnit.weapons" class="row">
-    <app-view-weapon [weapon]="weapon" [combatUnit]="combatUnit" class="weapon"></app-view-weapon>
-    <button mat-mini-fab (click)="removeWeapon(weapon)" color="warn" class="icon">
-      <app-icon-delete></app-icon-delete>
-    </button>
+<app-template-full-width *ngIf="combatUnit" class="card">
+  <div class="tr-title">Armes sélectionées</div>
+  <div class="tr-content card">
+    <div *ngFor="let weapon of combatUnit.weapons" class="row">
+      <app-view-weapon [weapon]="weapon" [combatUnit]="combatUnit" class="weapon"></app-view-weapon>
+      <button mat-mini-fab (click)="removeWeapon(weapon)" color="warn" class="icon">
+        <app-icon-delete></app-icon-delete>
+      </button>
+    </div>
   </div>
-</div>
+</app-template-full-width>

@@ -1,6 +1,6 @@
-import { Observable } from "rxjs";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
 import { Unit } from "./../../../core/models/unit";
 import { UnitService } from "./../../../core/services/unit.service";
 

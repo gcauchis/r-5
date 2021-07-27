@@ -43,23 +43,26 @@
             </mat-autocomplete>
         </mat-form-field>
         <button mat-raised-button (click)="addRule()">Ajouter la règle</button>
-        <br>
 
         <div class="rules">
             <div class="rulerow" *ngFor="let rule of weapon.rule">
                 <span class="rule">{{rule}}</span>
                 <button mat-mini-fab (click)="removeRule(rule)" color="warn" class="ruleicon">
-                    <mat-icon>clear</mat-icon>
+                    <app-icon-delete></app-icon-delete>
                 </button>
             </div>
         </div>
 
-        <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.assault">Assaut</mat-checkbox>
-        &nbsp;
-        <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.heavy">Lourd</mat-checkbox>
-        &nbsp;
-        <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.cover">Couverture</mat-checkbox>
-        <br>
+        <div>
+            <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.assault">
+                Assaut
+            </mat-checkbox>
+            &nbsp;
+            <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.heavy">Lourd</mat-checkbox>
+            &nbsp;
+            <mat-checkbox *ngIf="weapon.weaponType != WeaponType.Melee" [(ngModel)]="weapon.cover">Couverture
+            </mat-checkbox>
+        </div>
 
         <mat-form-field *ngIf="weapon.weaponType == WeaponType.Explosive || weapon.weaponType == WeaponType.Grenade">
             <mat-label>Gabarit</mat-label>
@@ -67,9 +70,11 @@
                 <mat-option *ngFor="let weaponSize of weaponSizes" [value]="weaponSize.value">{{weaponSize.key}}
                 </mat-option>
             </mat-select>
-        </mat-form-field><br>
+        </mat-form-field>
 
-        <mat-checkbox [(ngModel)]="weapon.nonLethal">Mon mortelle</mat-checkbox>
+        <div>
+            <mat-checkbox [(ngModel)]="weapon.nonLethal">Non mortelle</mat-checkbox>
+        </div>
     </div>
     <div class="tr-actions">
         <button mat-raised-button (click)="submit()">Valider</button>

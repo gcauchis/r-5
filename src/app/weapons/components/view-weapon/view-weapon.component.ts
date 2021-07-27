@@ -27,8 +27,4 @@ export class ViewWeaponComponent implements OnInit {
       this.weapon.weaponType != WeaponType.Melee
     );
   }
-
-  get hasRule(): boolean {
-    return this.showRules && this.weapon.rule && this.weapon.rule.length > 0;
-  }
 }

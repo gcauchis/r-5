@@ -2,11 +2,6 @@
   width: fit-content;
 }
 
-.header {
-  text-align: center;
-  font-weight: bold;
-}
-
 .row::after {
   content: "";
   clear: both;
@@ -15,9 +10,6 @@
 
 .weapon {
   float: left;
-  height: 100%;
-  vertical-align: center;
-  text-align: center;
 }
 
 .icon {

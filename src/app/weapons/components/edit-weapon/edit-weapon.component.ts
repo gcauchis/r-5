@@ -53,8 +53,6 @@ export class EditWeaponComponent implements OnInit {
     );
   }
 
-  ngOnChanges() {}
-
   private _filter(value: string): string[] {
     const filterRule = value.toLowerCase();
     return this.rules.filter((rule) => rule.toLowerCase().includes(filterRule));
