@@ -10,7 +10,7 @@
 
 # Getting started
 
-Require `npm` to be installed. See [https://nodejs.org]().
+Require `npm` to be installed. See [https://nodejs.org](https://nodejs.org).
 
 ## Install dependency
 
