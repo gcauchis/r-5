@@ -8,6 +8,6 @@ import { PriceService } from "./../../core/services/price.service";
 export class PriceArmyPipe implements PipeTransform {
   constructor(private priceService: PriceService) {}
   async transform(army: Army): Promise<number> {
-    return await this.priceService.computeArmy(army);
+    return this.priceService.computeArmy(army);
   }
 }
