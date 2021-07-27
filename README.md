@@ -10,7 +10,7 @@
 
 # Getting started
 
-Require `npm` to be installed. See [https://nodejs.org]().
+Require `npm` to be installed. See [https://nodejs.org](https://nodejs.org).
 
 ## Install dependency
 
@@ -22,7 +22,7 @@ Require `npm` to be installed. See [https://nodejs.org]().
 
 `npm run start:standard`
 
-Then open [http://localhost:4200/]().
+Then open [http://localhost:4200/](http://localhost:4200/).
 
 ### Run in Electron
 
