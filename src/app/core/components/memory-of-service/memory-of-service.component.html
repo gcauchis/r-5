@@ -3,7 +3,7 @@
   <button mat-raised-button (click)="exportData()">Exporter</button>
   <mat-form-field>
     <mat-label>Importer</mat-label>
-    <ngx-mat-file-input [formControl]="fileControl" multiple=false [accept]="accept">
+    <ngx-mat-file-input [formControl]="fileControl" multiple="false" [accept]="accept">
       <mat-icon ngxMatFileInputIcon>folder</mat-icon>
     </ngx-mat-file-input>
   </mat-form-field>

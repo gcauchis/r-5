@@ -10,7 +10,7 @@ import { ArmyService } from "./../../../core/services/army.service";
   styleUrls: ["./page-list-armies.component.css"],
 })
 export class PageListArmiesComponent implements OnInit {
-  displayedColumns: string[] = ["army", "edit", "view", "remove"];
+  displayedColumns: string[] = ["army", "price", "edit", "view", "remove"];
   dataSourceArmies: MatTableDataSource<Army>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

@@ -5,7 +5,12 @@
             <caption></caption>
             <ng-container matColumnDef="army">
                 <th mat-header-cell *matHeaderCellDef scope="col">Armée</th>
-                <td mat-cell *matCellDef="let army">{{army.name}} (Prix: {{army | priceArmy | async}})</td>
+                <td mat-cell *matCellDef="let army">{{army.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef scope="col">Prix</th>
+                <td mat-cell *matCellDef="let army">{{army | priceArmy | async}}</td>
             </ng-container>
 
             <ng-container matColumnDef="edit">
