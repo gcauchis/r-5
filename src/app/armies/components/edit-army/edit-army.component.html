@@ -14,10 +14,10 @@
                     </mat-form-field><br>
                 </div>
             </app-template-full-width>
-            <app-page-list-units [army]="army" (onLinksChange)="form.controls.units.setValue($event)">
-            </app-page-list-units>
-            <app-page-list-vehicles [army]="army" (onLinksChange)="form.controls.vehicles.setValue($event)">
-            </app-page-list-vehicles>
+            <app-list-units [army]="army" (onLinksChange)="form.controls.units.setValue($event)">
+            </app-list-units>
+            <app-list-vehicles [army]="army" (onLinksChange)="form.controls.vehicles.setValue($event)">
+            </app-list-vehicles>
         </div>
         <div class="tr-actions">
             <button mat-raised-button type="submit">Valider</button>
