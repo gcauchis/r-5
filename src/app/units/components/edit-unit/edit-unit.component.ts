@@ -8,7 +8,6 @@ import { TacticalRole } from "./../../../core/enums/tactical-role.enum";
 import { UnitSize } from "./../../../core/enums/unit-size.enum";
 import { UnitType } from "./../../../core/enums/unit-type.enum";
 import { Unit } from "./../../../core/models/unit";
-import { Weapon } from "./../../../core/models/weapon";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 import { UnitService } from "./../../../core/services/unit.service";
 import { UtilsService } from "./../../../core/services/utils.service";
