@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Army } from "./../../../core/models/army";
 
 @Component({
@@ -18,7 +18,7 @@ export class EditArmyComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       id: [this.army.id],
-      name: [this.army.name],
+      name: [this.army.name, [Validators.required, Validators.minLength(2)]],
       desc: [this.army.desc],
       units: [this.army.units],
       vehicles: [this.army.vehicles],

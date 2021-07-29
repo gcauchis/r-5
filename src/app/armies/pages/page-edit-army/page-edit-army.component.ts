@@ -37,7 +37,6 @@ export class PageEditArmyComponent implements OnInit {
 
   private buildBaseArmy(): Army {
     let army = new Army();
-    army.name = "Nouvelle armée";
     army.units = [];
     army.vehicles = [];
     return army;

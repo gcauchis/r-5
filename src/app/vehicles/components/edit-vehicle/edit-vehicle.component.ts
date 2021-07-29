@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { Dice } from "./../../../core/enums/dice.enum";
@@ -56,7 +61,7 @@ export class EditVehicleComponent implements OnInit {
     );
     this.form = this.fb.group({
       id: [this.vehicle.id],
-      name: [this.vehicle.name],
+      name: [this.vehicle.name, [Validators.required, Validators.minLength(2)]],
       faction: [this.vehicle.faction],
       type: [this.vehicle.type],
       moveType: [this.vehicle.moveType],
