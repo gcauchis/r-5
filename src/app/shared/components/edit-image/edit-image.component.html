@@ -4,5 +4,7 @@
     <app-icon-folder></app-icon-folder>
   </ngx-mat-file-input>
 </mat-form-field>
-<img *ngIf="imageContainer.imgBase64" src="{{imageContainer.imgBase64}}" alt="image" class="imgContent">
-<button *ngIf="imageContainer.imgBase64" mat-mini-fab (click)="removeImage()" color="warn"><app-icon-delete></app-icon-delete></button>
+<img *ngIf="imgBase64" src="{{imgBase64}}" alt="image" class="imgContent">
+<button *ngIf="imgBase64" mat-mini-fab (click)="removeImage()" color="warn">
+  <app-icon-delete></app-icon-delete>
+</button>

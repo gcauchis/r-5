@@ -1,6 +1,7 @@
 import { MaxSizeValidator } from "@angular-material-components/file-input";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Output } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
+import { BehaviorSubject } from "rxjs";
 import { ImageContainerInterface } from "./../../../core/interfaces/image-container-interface";
 
 @Component({
@@ -11,6 +12,10 @@ import { ImageContainerInterface } from "./../../../core/interfaces/image-contai
 export class EditImageComponent implements OnInit {
   fileControl: FormControl;
   @Input() imageContainer: ImageContainerInterface;
+  @Output() onImageBase64Change: BehaviorSubject<any> = new BehaviorSubject(
+    null
+  );
+  public imgBase64: any = null;
   maxSize = 16 * 1024;
   imgPath: string;
 
@@ -24,6 +29,9 @@ export class EditImageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.imgBase64 = this.imageContainer.imgBase64;
+    this.onImageBase64Change.next(this.imgBase64);
+
     this.fileControl.valueChanges.subscribe((file: any) => {
       this.imgPath = file;
       let fileReader: FileReader = new FileReader();
@@ -33,7 +41,8 @@ export class EditImageComponent implements OnInit {
         var readerBlob = new FileReader();
         readerBlob.readAsDataURL(blob);
         readerBlob.onloadend = function () {
-          self.imageContainer.imgBase64 = readerBlob.result;
+          self.imgBase64 = readerBlob.result;
+          self.onImageBase64Change.next(self.imgBase64);
         };
       };
       fileReader.readAsArrayBuffer(file);
@@ -42,6 +51,7 @@ export class EditImageComponent implements OnInit {
 
   removeImage(): void {
     this.imgPath = "";
-    this.imageContainer.imgBase64 = null;
+    this.imgBase64 = null;
+    this.onImageBase64Change.next(this.imgBase64);
   }
 }

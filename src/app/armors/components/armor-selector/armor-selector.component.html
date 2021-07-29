@@ -22,7 +22,8 @@
       <ng-container matColumnDef="affect">
         <th mat-header-cell *matHeaderCellDef scope="col"></th>
         <td mat-cell *matCellDef="let armor"><button mat-raised-button
-            *ngIf="unit.armor == null || armor.id != unit.armor.id" (click)="setArmor(armor)">Use</button></td>
+            *ngIf="onArmorSelectionChange.value == null || armor.id != onArmorSelectionChange.value.id"
+            (click)="setArmor(armor)">Use</button></td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

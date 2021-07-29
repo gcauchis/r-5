@@ -1,18 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormControl } from "@angular/forms";
-import { MatDialog } from "@angular/material/dialog";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { Dice } from "./../../../core/enums/dice.enum";
 import { MoveType } from "./../../../core/enums/move-type.enum";
 import { VehicleType } from "./../../../core/enums/vehicle-type.enum";
 import { Vehicle } from "./../../../core/models/vehicle";
-import { Weapon } from "./../../../core/models/weapon";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 import { UtilsService } from "./../../../core/services/utils.service";
 import { VehicleService } from "./../../../core/services/vehicle.service";
-import { BasicDialogComponent } from "./../../../shared/components/basic-dialog/basic-dialog.component";
-import { DialogRulesSelectorComponent } from "./../../../weapons/components/dialog-rules-selector/dialog-rules-selector.component";
 
 @Component({
   selector: "app-edit-vehicle",
@@ -23,6 +19,7 @@ export class EditVehicleComponent implements OnInit {
   @Input() vehicle: Vehicle;
   @Output() submited: EventEmitter<Vehicle> = new EventEmitter<Vehicle>();
   @Output() canceled: EventEmitter<any> = new EventEmitter<any>();
+  public form: FormGroup;
   vehicleType: any[];
   moveTypes: any[];
   dices: any[];
@@ -34,13 +31,11 @@ export class EditVehicleComponent implements OnInit {
   factionsControl = new FormControl();
   factionsFilteredOptions: Observable<string[]>;
 
-  displayedWeaponColumns: string[] = ["weapon", "remove"];
-
   constructor(
     private utils: UtilsService,
     private enumUtils: EnumUtilsService,
     private vehicleService: VehicleService,
-    private dialog: MatDialog
+    private fb: FormBuilder
   ) {
     this.vehicleType = this.utils.enumToKeyValue(
       VehicleType,
@@ -59,6 +54,21 @@ export class EditVehicleComponent implements OnInit {
       startWith(""),
       map((value) => this._filterFaction(value))
     );
+    this.form = this.fb.group({
+      id: [this.vehicle.id],
+      name: [this.vehicle.name],
+      faction: [this.vehicle.faction],
+      type: [this.vehicle.type],
+      moveType: [this.vehicle.moveType],
+      tacticalMove: [this.vehicle.tacticalMove],
+      structure: [this.vehicle.structure],
+      armor: [this.vehicle.armor],
+      dc: [this.vehicle.dc],
+      crew: [this.vehicle.crew],
+      transportSpace: [this.vehicle.transportSpace],
+      weapons: [this.vehicle.weapons],
+      imgBase64: [this.vehicle.imgBase64],
+    });
   }
 
   private _filterFaction(value: string): string[] {
@@ -68,38 +78,8 @@ export class EditVehicleComponent implements OnInit {
     );
   }
 
-  addWeapon(weapon: Weapon) {
-    if (this.vehicle.weapons.length >= this.vehicle.crew) {
-      this.dialog.open(BasicDialogComponent, {
-        data: {
-          title: "Armes",
-          message: `Pas plus de ${this.vehicle.crew} armes`,
-          cancel: false,
-          ok: true,
-        },
-      });
-    } else {
-      if (weapon.rule && weapon.rule.length > 0) {
-        const dialogRef = this.dialog.open(DialogRulesSelectorComponent, {
-          data: {
-            title: `Choisisez les règles pour ${weapon.name}`,
-            rules: weapon.rule,
-          },
-        });
-        dialogRef.afterClosed().subscribe((result) => {
-          if (result) {
-            weapon.rule = result;
-            this.vehicle.weapons.push(weapon);
-          }
-        });
-      } else {
-        this.vehicle.weapons.push(weapon);
-      }
-    }
-  }
-
   submit(): void {
-    this.submited.emit(this.vehicle);
+    this.submited.emit(new Vehicle(this.form.value));
   }
 
   cancel(): void {

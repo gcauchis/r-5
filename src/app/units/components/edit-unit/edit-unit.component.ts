@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormControl } from "@angular/forms";
-import { MatDialog } from "@angular/material/dialog";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { Dice } from "./../../../core/enums/dice.enum";
@@ -13,7 +12,6 @@ import { Weapon } from "./../../../core/models/weapon";
 import { EnumUtilsService } from "./../../../core/services/enum-utils.service";
 import { UnitService } from "./../../../core/services/unit.service";
 import { UtilsService } from "./../../../core/services/utils.service";
-import { DialogRulesSelectorComponent } from "./../../../weapons/components/dialog-rules-selector/dialog-rules-selector.component";
 
 @Component({
   selector: "app-edit-unit",
@@ -36,13 +34,13 @@ export class EditUnitComponent implements OnInit {
   factionsControl = new FormControl();
   factionsFilteredOptions: Observable<string[]>;
 
-  displayedWeaponColumns: string[] = ["weapon", "remove"];
+  public form: FormGroup;
 
   constructor(
     private utils: UtilsService,
     private enumUtils: EnumUtilsService,
     private unitService: UnitService,
-    private dialog: MatDialog
+    private fb: FormBuilder
   ) {
     this.dices = this.utils.enumToKeyValue(Dice, enumUtils.diceToString);
     this.unitTypes = this.utils.enumToKeyValue(
@@ -69,6 +67,25 @@ export class EditUnitComponent implements OnInit {
       startWith(""),
       map((value) => this._filterFaction(value))
     );
+
+    this.form = this.fb.group({
+      id: [this.unit.id],
+      name: [this.unit.name],
+      faction: [this.unit.faction],
+      desc: [this.unit.desc],
+      dqm: [this.unit.dqm],
+      dc: [this.unit.dc],
+      pv: [this.unit.pv],
+      unitType: [this.unit.unitType],
+      size: [this.unit.size],
+      moveType: [this.unit.moveType],
+      tacticalMove: [this.unit.tacticalMove],
+      tacticalRole: [this.unit.tacticalRole],
+      mageLevel: [this.unit.mageLevel],
+      weapons: [this.unit.weapons],
+      armor: [this.unit.armor],
+      imgBase64: [this.unit.imgBase64],
+    });
   }
 
   private _filterFaction(value: string): string[] {
@@ -79,38 +96,19 @@ export class EditUnitComponent implements OnInit {
   }
 
   onChangeTacticalRole() {
-    if (this.unit.tacticalRole == TacticalRole.Civilian) {
-      this.unit.dqm = Dice.D6;
-      this.unit.dc = Dice.D6;
+    if (this.form.controls.tacticalRole.value == TacticalRole.Civilian) {
+      this.form.controls.dqm.setValue(Dice.D6);
+      this.form.controls.dc.setValue(Dice.D6);
     }
-    if (this.unit.tacticalRole == TacticalRole.Mage) {
-      this.unit.mageLevel = 1;
+    if (this.form.controls.tacticalRole.value == TacticalRole.Mage) {
+      this.form.controls.mageLevel.setValue(1);
     } else {
-      this.unit.mageLevel = 0;
-    }
-  }
-
-  addWeapon(weapon: Weapon) {
-    if (weapon.rule && weapon.rule.length > 0) {
-      const dialogRef = this.dialog.open(DialogRulesSelectorComponent, {
-        data: {
-          title: `Choisisez les règles pour ${weapon.name}`,
-          rules: weapon.rule,
-        },
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          weapon.rule = result;
-          this.unit.weapons.push(weapon);
-        }
-      });
-    } else {
-      this.unit.weapons.push(weapon);
+      this.form.controls.mageLevel.setValue(0);
     }
   }
 
   submit(): void {
-    this.submited.emit(this.unit);
+    this.submited.emit(new Unit(this.form.value));
   }
 
   cancel(): void {

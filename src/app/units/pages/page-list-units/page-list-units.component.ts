@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from "@angular/core";
+import { Component, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import { BehaviorSubject } from "rxjs";
 import { Army } from "./../../../core/models/army";
 import { ArmyLink } from "./../../../core/models/army-link";
 import { Unit } from "./../../../core/models/unit";
@@ -18,6 +19,10 @@ export class PageListUnitsComponent implements OnInit {
 
   @Input() army: Army;
   links: any = {};
+  armyLinks: ArmyLink[] = [];
+  @Output() onLinksChange: BehaviorSubject<ArmyLink[]> = new BehaviorSubject(
+    this.armyLinks
+  );
 
   nameFilter: string;
   factionFilter: string;
@@ -40,6 +45,8 @@ export class PageListUnitsComponent implements OnInit {
   constructor(private unitService: UnitService) {}
 
   ngOnInit() {
+    this.armyLinks = this.army.units.filter((r) => r != null);
+    this.onLinksChange.next(this.armyLinks);
     this.unitService.collection.subscribe((res) => {
       this.dataSourceUnits = new MatTableDataSource<Unit>(res);
       this.dataSourceUnits.filterPredicate = this._filter;
@@ -47,8 +54,9 @@ export class PageListUnitsComponent implements OnInit {
         this.displayedColumns = ["unit", "edit", "view", "remove"];
       } else {
         res.forEach((u) => (this.links[u.id] = 0));
-        this.army.units.forEach((l) => (this.links[l.id] = l.count));
+        this.armyLinks.forEach((l) => (this.links[l.id] = l.count));
         this.displayedColumns = ["unit", "army", "edit"];
+        this.onLinksChange.next(this.armyLinks);
       }
     });
   }
@@ -63,17 +71,18 @@ export class PageListUnitsComponent implements OnInit {
 
   updateLinks(id: number, value: number): void {
     this.links[id] = value;
-    this.army.units = [];
-    this.unitService.collection.asObservable().subscribe((res) =>
+    this.armyLinks = [];
+    this.unitService.collection.asObservable().subscribe((res) => {
       res.forEach((unit) => {
         if (this.links[unit.id] > 0) {
           let link = new ArmyLink();
           link.id = unit.id;
           link.count = this.links[unit.id];
-          this.army.units.push(link);
+          this.armyLinks.push(link);
         }
-      })
-    );
+      });
+      this.onLinksChange.next(this.armyLinks);
+    });
   }
 
   remove(unit: Unit): void {

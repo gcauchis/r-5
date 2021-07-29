@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { Army } from "./../../../core/models/army";
-import { ArmyService } from "./../../../core/services/army.service";
 
 @Component({
   selector: "app-edit-army",
@@ -11,13 +11,22 @@ export class EditArmyComponent implements OnInit {
   @Input() army: Army;
   @Output() submited: EventEmitter<Army> = new EventEmitter<Army>();
   @Output() canceled: EventEmitter<any> = new EventEmitter<any>();
+  public form: FormGroup;
 
-  constructor(private armyService: ArmyService) {}
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      id: [this.army.id],
+      name: [this.army.name],
+      desc: [this.army.desc],
+      units: [this.army.units],
+      vehicles: [this.army.vehicles],
+    });
+  }
 
   submit(): void {
-    this.submited.emit(this.army);
+    this.submited.emit(new Army(this.form.value));
   }
 
   cancel(): void {

@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { ExposiveWeaponSize } from "./../../../core/enums/exposive-weapon-size.enum";
@@ -19,7 +24,7 @@ export class EditWeaponComponent implements OnInit {
 
   weaponTypes: any[];
   weaponSizes: any[];
-  rules: string[];
+  possibleRules: string[];
   currentRule: string;
 
   rulesControl = new FormControl();
@@ -29,11 +34,13 @@ export class EditWeaponComponent implements OnInit {
   @Output() canceled: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() weapon: Weapon;
+  public form: FormGroup;
 
   constructor(
     private weaponService: WeaponService,
     private utils: UtilsService,
-    private enumUtils: EnumUtilsService
+    private enumUtils: EnumUtilsService,
+    private fb: FormBuilder
   ) {
     this.weaponTypes = this.utils.enumToKeyValue(
       WeaponType,
@@ -46,46 +53,71 @@ export class EditWeaponComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.weaponService.rules.subscribe((res) => (this.rules = res));
+    this.weaponService.rules.subscribe((res) => (this.possibleRules = res));
     this.rulesFilteredOptions = this.rulesControl.valueChanges.pipe(
       startWith(""),
       map((value) => this._filter(value))
     );
+    this.form = this.fb.group({
+      id: [this.weapon.id],
+      weaponType: [this.weapon.weaponType],
+      editable: [this.weapon.editable],
+      name: [this.weapon.name, [Validators.required, Validators.minLength(2)]],
+      power: [this.weapon.power],
+      superPower: [this.weapon.superPower],
+      rule: [this.weapon.rule.filter((r) => r != null)],
+      superSuperPower: [this.weapon.superSuperPower],
+      rangeMin: [this.weapon.rangeMin],
+      range: [this.weapon.range],
+      assault: [this.weapon.assault],
+      heavy: [this.weapon.heavy],
+      cover: [this.weapon.cover],
+      size: [this.weapon.size],
+      nonLethal: [this.weapon.nonLethal],
+    });
   }
 
   private _filter(value: string): string[] {
     const filterRule = value.toLowerCase();
-    return this.rules.filter((rule) => rule.toLowerCase().includes(filterRule));
+    return this.possibleRules.filter((rule) =>
+      rule.toLowerCase().includes(filterRule)
+    );
   }
 
   addRule(): void {
-    this.weapon.rule.push(this.currentRule);
-    this.currentRule = "";
+    if (this.currentRule && this.currentRule.length > 0) {
+      this.form.controls.rule.value.push(this.currentRule);
+      this.currentRule = "";
+    }
   }
 
   removeRule(rule: string): void {
-    this.weapon.rule = this.weapon.rule.filter((r) => r != rule);
+    this.form.controls.rule.setValue(
+      this.form.controls.rule.value.filter((r) => r != rule)
+    );
   }
 
   submit(): void {
-    if (!this.weapon.nonLethal) {
-      this.weapon.nonLethal = null;
+    let result = new Weapon(this.form.value);
+    if (!result.nonLethal) {
+      delete result.nonLethal;
     }
-    this.submited.emit(this.weapon);
-  }
-
-  onChangecurrentWeaponType() {
-    if (this.weapon.weaponType == WeaponType.Melee) {
-      delete this.weapon.range;
-      delete this.weapon.rangeMin;
-      delete this.weapon.assault;
-      delete this.weapon.heavy;
-      delete this.weapon.cover;
+    if (result.weaponType == WeaponType.Melee) {
+      delete result.range;
+      delete result.rangeMin;
+      delete result.assault;
+      delete result.heavy;
+      delete result.cover;
     }
-    if (this.weapon.weaponType != WeaponType.Explosive) {
-      delete this.weapon.size;
+    if (
+      !(
+        result.weaponType == WeaponType.Explosive ||
+        result.weaponType == WeaponType.Grenade
+      )
+    ) {
+      delete result.size;
     }
-    this.weapon.rule = [];
+    this.submited.emit(result);
   }
 
   cancel(): void {

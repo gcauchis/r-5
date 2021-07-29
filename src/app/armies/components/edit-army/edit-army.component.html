@@ -1,19 +1,27 @@
-<app-template-full-width>
-    <div class="tr-content">
-        <app-template-full-width>
-            <span class="tr-title">Edition : {{army.name}}</span>
-            <div class="tr-content">
-                <mat-form-field class="army-full-width">
-                    <mat-label>Nom</mat-label>
-                    <input matInput [(ngModel)]="army.name" placeholder="Nom" />
-                </mat-form-field>
-            </div>
-        </app-template-full-width>
-        <app-page-list-units [army]="army"></app-page-list-units>
-        <app-page-list-vehicles [army]="army"></app-page-list-vehicles>
-    </div>
-    <div class="tr-actions">
-        <button mat-raised-button (click)="submit()">Valider</button>
-        <button mat-raised-button (click)="cancel()">Annuler</button>
-    </div>
-</app-template-full-width>
+<form *ngIf="army" [formGroup]="form" (ngSubmit)="submit()">
+    <app-template-full-width>
+        <div class="tr-content">
+            <app-template-full-width>
+                <span class="tr-title">Edition : {{form.controls.name.value}}</span>
+                <div class="tr-content">
+                    <mat-form-field class="army-full-width">
+                        <mat-label for="name">Nom</mat-label>
+                        <input matInput formControlName="name" placeholder="Nom" />
+                    </mat-form-field>
+                    <mat-form-field class="army-full-width">
+                        <mat-label for="desc">Description</mat-label>
+                        <textarea matInput formControlName="desc" placeholder="Description"></textarea>
+                    </mat-form-field><br>
+                </div>
+            </app-template-full-width>
+            <app-page-list-units [army]="army" (onLinksChange)="form.controls.units.setValue($event)">
+            </app-page-list-units>
+            <app-page-list-vehicles [army]="army" (onLinksChange)="form.controls.vehicles.setValue($event)">
+            </app-page-list-vehicles>
+        </div>
+        <div class="tr-actions">
+            <button mat-raised-button type="submit">Valider</button>
+            <button mat-raised-button type="button" (click)="cancel()">Annuler</button>
+        </div>
+    </app-template-full-width>
+</form>
