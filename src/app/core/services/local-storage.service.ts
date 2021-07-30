@@ -12,7 +12,6 @@ export class LocalStorageService {
 
   constructor() {
     this.localStorage = window.localStorage;
-    //this.clear();
   }
 
   get(key: string): any {

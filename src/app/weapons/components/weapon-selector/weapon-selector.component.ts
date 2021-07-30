@@ -95,33 +95,17 @@ export class WeaponSelectorComponent implements OnInit {
         this.displayedColumns = ["type", "power", "rules"];
         break;
       case WeaponType.Shoot:
-        this.displayedColumns = [
-          "type",
-          "range",
-          "power",
-          "rules",
-          "assault",
-          "heavy",
-          "cover",
-        ];
+        this.displayedColumns = ["type", "range", "power", "rules"];
         break;
       case WeaponType.Explosive:
       case WeaponType.Grenade:
       default:
-        this.displayedColumns = [
-          "type",
-          "range",
-          "power",
-          "rules",
-          "assault",
-          "heavy",
-          "cover",
-          "size",
-        ];
+        this.displayedColumns = ["type", "range", "power", "rules", "size"];
         break;
     }
     if (this.priceable != null) {
-      this.displayedColumns.push("price");
+      // Not realy dynamic for now
+      // this.displayedColumns.push("price");
       if (this.enableAdd) {
         this.displayedColumns.push("actionAdd");
       }

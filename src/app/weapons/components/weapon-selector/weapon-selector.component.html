@@ -42,28 +42,7 @@
 
       <ng-container matColumnDef="rules">
         <th mat-header-cell *matHeaderCellDef scope="col">Règles spéciales</th>
-        <td mat-cell *matCellDef="let weapon">{{ weapon.rule.join(", ") }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="assault">
-        <th mat-header-cell *matHeaderCellDef scope="col">Assaut</th>
-        <td mat-cell *matCellDef="let weapon">
-          {{ weapon.assault ? "oui" : "non" }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="heavy">
-        <th mat-header-cell *matHeaderCellDef scope="col">Lourd</th>
-        <td mat-cell *matCellDef="let weapon">
-          {{ weapon.heavy ? "oui" : "non" }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="cover">
-        <th mat-header-cell *matHeaderCellDef scope="col">Couverture</th>
-        <td mat-cell *matCellDef="let weapon">
-          {{ weapon.cover ? "oui" : "non" }}
-        </td>
+        <td mat-cell *matCellDef="let weapon">{{ weapon | weaponRulesToString : false}}</td>
       </ng-container>
 
       <ng-container matColumnDef="size">

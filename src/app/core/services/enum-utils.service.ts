@@ -12,8 +12,6 @@ import { WeaponType } from "./../enums/weapon-type.enum";
   providedIn: "root",
 })
 export class EnumUtilsService {
-  constructor() {}
-
   public diceToString(value: any): string {
     switch (value) {
       case Dice.D6:
