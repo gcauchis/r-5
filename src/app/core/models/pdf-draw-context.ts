@@ -21,7 +21,6 @@ export class PdfDrawContext implements PdfDrawContextInterface {
   ): Promise<PdfDrawContext> {
     return new Promise((resolve, reject) => {
       const result = new PdfDrawContext(obj);
-      // TODO : prendre en compte les entrer
       PDFDocument.create()
         .then((document) => (result.document = document))
         .then(() => result.document.embedFont(StandardFonts.TimesRoman))

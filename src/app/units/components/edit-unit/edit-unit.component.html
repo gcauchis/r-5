@@ -2,13 +2,14 @@
     <app-template-full-width *ngIf="unit">
         <div class="tr-content">
             <app-template-full-width>
-                <span class="tr-title">Edition : {{form.controls.name.value}}/{{form.controls.tacticalRole.value|
+                <span class="tr-title"><span i18n="@@Label.Edit">Edit</span>:
+                    {{form.controls.name.value}}/{{form.controls.tacticalRole.value|
                     tacticalRoleToString}}</span>
                 <div class="tr-content">
                     <mat-form-field class="unit-full-width">
-                        <mat-label for="faction">Camps</mat-label>
+                        <mat-label for="faction" i18n="@@Label.Faction">Faction</mat-label>
                         <input matInput type="text" formControlName="faction" [formControl]="factionsControl"
-                            [matAutocomplete]="auto" placeholder="Camps" />
+                            [matAutocomplete]="auto" i18n-placeholder="@@Label.Faction" placeholder="Faction" />
                         <mat-autocomplete #auto="matAutocomplete">
                             <mat-option *ngFor="let faction of factionsFilteredOptions | async" [value]="faction">
                                 {{faction}}
@@ -17,44 +18,47 @@
                     </mat-form-field><br>
 
                     <mat-form-field class="unit-full-width">
-                        <mat-label for="name">Nom</mat-label>
-                        <input matInput formControlName="name" placeholder="Nom" />
+                        <mat-label for="name" i18n="@@Label.Name">Name</mat-label>
+                        <input matInput formControlName="name" i18n-placeholder="@@Label.Name" placeholder="Name" />
                     </mat-form-field><br>
 
                     <mat-form-field class="unit-full-width">
-                        <mat-label for="desc">Description</mat-label>
-                        <textarea matInput formControlName="desc" placeholder="Description"></textarea>
+                        <mat-label for="desc" i18n="@@Label.Description">Description</mat-label>
+                        <textarea matInput formControlName="desc" i18n-placeholder="@@Label.Description"
+                            placeholder="Description"></textarea>
                     </mat-form-field><br>
 
                     <app-edit-image [imageContainer]="unit"
                         (onImageBase64Change)="form.controls.imgBase64.setValue($event)"></app-edit-image><br>
 
                     <mat-form-field>
-                        <mat-label for="dqm">Dé Qualité Martial (DQM)</mat-label>
+                        <mat-label for="dqm" i18n="@@Label.Long.DQM">Martial Quality Dice (DQM)</mat-label>
                         <mat-select *ngIf="form.controls.tacticalRole.value != TacticalRole.Civilian; else showDQM"
                             formControlName="dqm">
                             <mat-option *ngFor="let dice of dices" [value]="dice.value">{{dice.key}}</mat-option>
                         </mat-select>
                         <ng-template #showDQM>
-                            <input matInput placeholder="DQM" [value]="form.controls.dqm.value | diceToString"
-                                disabled />
+                            <input matInput i18n-placeholder="@@Label.DQM" placeholder="DQM"
+                                [value]="form.controls.dqm.value | diceToString" disabled />
                         </ng-template>
                     </mat-form-field>
 
                     <mat-form-field>
-                        <mat-label for="dc">Dé Combat (DC)</mat-label>
+                        <mat-label for="dc" i18n="@@Label.Long.DC">Combat Dice (DC)</mat-label>
                         <mat-select *ngIf="form.controls.tacticalRole.value != TacticalRole.Civilian; else showDC"
                             formControlName="dc">
                             <mat-option *ngFor="let dice of dices" [value]="dice.value">{{dice.key}}</mat-option>
                         </mat-select>
                         <ng-template #showDC>
-                            <input matInput placeholder="DC" [value]="form.controls.dc.value | diceToString" disabled />
+                            <input matInput i18n-placeholder="@@Label.DC" placeholder="DC"
+                                [value]="form.controls.dc.value | diceToString" disabled />
                         </ng-template>
                     </mat-form-field>
 
                     <mat-form-field>
-                        <mat-label for="pv">Nombre de point de vie</mat-label>
-                        <input matInput type="number" min="1" max="5" formControlName="pv" placeholder="PV" />
+                        <mat-label for="pv" i18n="@@Label.Long.HP">Number of health point</mat-label>
+                        <input matInput type="number" min="1" max="5" formControlName="pv" i18n-placeholder="@@Label.HP"
+                            placeholder="HP" />
                     </mat-form-field><br>
 
                     <mat-form-field>

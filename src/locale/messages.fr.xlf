@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="Label.Edit" datatype="html">
+        <source>Edit</source>
+        <target>Edition</target>
+      </trans-unit>
+      <trans-unit id="Label.Faction" datatype="html">
+        <source>Faction</source>
+        <target>Camp</target>
+      </trans-unit>
+      <trans-unit id="Label.Name" datatype="html">
+        <source>Name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="Label.Description" datatype="html">
+        <source>Description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="Label.DQM" datatype="html">
+        <source>DQM</source>
+        <target>DQM</target>
+      </trans-unit>
+      <trans-unit id="Label.Long.DQM" datatype="html">
+        <source>Martial Quality Dice (DQM)</source>
+        <target>Dé Qualité Martial (DQM)</target>
+      </trans-unit>
+      <trans-unit id="Label.DC" datatype="html">
+        <source>DC</source>
+        <target>DC</target>
+      </trans-unit>
+      <trans-unit id="Label.Long.DC" datatype="html">
+        <source>Combat Dice (DC)</source>
+        <target>Dé Combat (DC)</target>
+      </trans-unit>
+      <trans-unit id="Label.HP" datatype="html">
+        <source>HP</source>
+        <target>PV</target>
+      </trans-unit>
+      <trans-unit id="Label.Long.HP" datatype="html">
+        <source>Number of health point</source>
+        <target>Nombre de point de vie </target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

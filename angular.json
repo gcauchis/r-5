@@ -9,10 +9,18 @@
       "projectType": "application",
       "prefix": "app",
       "schematics": {},
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "fr": "src/locale/messages.fr.xlf"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
+            "aot": true,
             "outputPath": "dist/demo",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -45,6 +53,9 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+            "fr": {
+              "localize": ["fr"]
             }
           }
         },
@@ -56,6 +67,9 @@
           "configurations": {
             "production": {
               "browserTarget": "demo:build:production"
+            },
+            "fr": {
+              "browserTarget": "demo:build:fr"
             }
           }
         },
