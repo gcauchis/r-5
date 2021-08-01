@@ -42,6 +42,130 @@
         <source>Number of health point</source>
         <target>Nombre de point de vie </target>
       </trans-unit>
+      <trans-unit id="Label.UnitType" datatype="html">
+        <source>Unit type</source>
+        <target>Type d’unité</target>
+      </trans-unit>
+      <trans-unit id="Label.UnitSize" datatype="html">
+        <source>Unit size</source>
+        <target>Taille de figurine</target>
+      </trans-unit>
+      <trans-unit id="Label.MoveType" datatype="html">
+        <source>Move type</source>
+        <target>Type de mouvement</target>
+      </trans-unit>
+      <trans-unit id="Label.TacticalMove" datatype="html">
+        <source>Tactical move</source>
+        <target>Mouvement tactique</target>
+      </trans-unit>
+      <trans-unit id="Label.TacticalRole" datatype="html">
+        <source>Tactical role</source>
+        <target>Rôle tactique</target>
+      </trans-unit>
+      <trans-unit id="Label.MageLevel" datatype="html">
+        <source>Mage level</source>
+        <target>Niveau de Mage</target>
+      </trans-unit>
+      <trans-unit id="Label.Validate" datatype="html">
+        <source>Validate</source>
+        <target>Valider</target>
+      </trans-unit>
+      <trans-unit id="Label.Cancel" datatype="html">
+        <source>Cancel</source>
+        <target>Annuler</target>
+      </trans-unit>
+      <trans-unit id="Label.Image" datatype="html">
+        <source>Image</source>
+        <target>Image</target>
+      </trans-unit>
+      <trans-unit id="Label.SelectedWeapons" datatype="html">
+        <source>Selected weapons</source>
+        <target>Armes sélectionées</target>
+      </trans-unit>
+      <trans-unit id="Label.Type" datatype="html">
+        <source>Type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="Label.NameFilter" datatype="html">
+        <source>Name filter</source>
+        <target>Filtrage nom</target>
+      </trans-unit>
+      <trans-unit id="Label.Range" datatype="html">
+        <source>Range</source>
+        <target>Portée</target>
+      </trans-unit>
+      <trans-unit id="Label.MinimumRange" datatype="html">
+        <source>Minimum range</source>
+        <target>Portée minimum</target>
+      </trans-unit>
+      <trans-unit id="Label.RangeInch" datatype="html">
+        <source>Range (inch)</source>
+        <target>Portée (pouces)</target>
+      </trans-unit>
+      <trans-unit id="Label.RangeTo" datatype="html">
+        <source>to</source>
+        <target>à</target>
+      </trans-unit>
+      <trans-unit id="Label.NA" datatype="html">
+        <source>NA</source>
+        <target>NA</target>
+      </trans-unit>
+      <trans-unit id="Label.Power" datatype="html">
+        <source>Power</source>
+        <target>Puissance</target>
+      </trans-unit>
+      <trans-unit id="Label.SpecialRules" datatype="html">
+        <source>Special rules</source>
+        <target>Règles spéciales</target>
+      </trans-unit>
+      <trans-unit id="Label.ChooseARule" datatype="html">
+        <source>Choose a rule</source>
+        <target>Choisisser une règle</target>
+      </trans-unit>
+      <trans-unit id="Label.AddARule" datatype="html">
+        <source>Add a rule</source>
+        <target>Ajouter la règle</target>
+      </trans-unit>
+      <trans-unit id="Label.ExplosiveWeaponSize" datatype="html">
+        <source>Size</source>
+        <target>Gabarit</target>
+      </trans-unit>
+      <trans-unit id="Label.UnitPrice" datatype="html">
+        <source>Price</source>
+        <target>Prix</target>
+      </trans-unit>
+      <trans-unit id="Label.Use" datatype="html">
+        <source>Use</source>
+        <target>Utiliser</target>
+      </trans-unit>
+      <trans-unit id="Label.AddNewWeapon" datatype="html">
+        <source>Add new weapon</source>
+        <target>Ajouter une nouvelle arme</target>
+      </trans-unit>
+      <trans-unit id="Label.Power" datatype="html">
+        <source>Power</source>
+        <target>Puissance</target>
+      </trans-unit>
+      <trans-unit id="Label.SuperPower" datatype="html">
+        <source>Super power</source>
+        <target>Super puissance</target>
+      </trans-unit>
+      <trans-unit id="Label.Assault" datatype="html">
+        <source>Assault</source>
+        <target>Assaut</target>
+      </trans-unit>
+      <trans-unit id="Label.Heavy" datatype="html">
+        <source>Heavy</source>
+        <target>Lourd</target>
+      </trans-unit>
+      <trans-unit id="Label.Cover" datatype="html">
+        <source>Cover</source>
+        <target>Couverture</target>
+      </trans-unit>
+      <trans-unit id="Label.NonLethal" datatype="html">
+        <source>Non lethal</source>
+        <target>Non mortelle</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

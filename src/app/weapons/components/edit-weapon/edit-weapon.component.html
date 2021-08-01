@@ -1,10 +1,10 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
     <app-template-full-width *ngIf="weapon">
-        <span class="tr-title">Edit {{form.controls.name.value}}</span>
+        <span class="tr-title"><span i18n="@@Label.Edit">Edit</span> {{form.controls.name.value}}</span>
         <div class="tr-content">
 
             <mat-form-field>
-                <mat-label for="weaponType">Type</mat-label>
+                <mat-label for="weaponType" i18n="@@Label.Type">Type</mat-label>
                 <mat-select formControlName="weaponType">
                     <mat-option *ngFor="let weaponType of weaponTypes" [value]="weaponType.value">{{weaponType.key}}
                     </mat-option>
@@ -12,39 +12,39 @@
             </mat-form-field><br>
 
             <mat-form-field class="weapon-full-width">
-                <mat-label for="name">Nom</mat-label>
-                <input matInput formControlName="name" placeholder="Nom" />
-                <div *ngIf="form.controls.name.invalid && form.controls.name.touched" class="alert alert-danger">
-                    Champ invalide</div>
+                <mat-label for="name" i18n="@@Label.Name">Name</mat-label>
+                <input matInput formControlName="name" i18n-placeholder="@@Label.Name" placeholder="Name" />
             </mat-form-field><br>
 
             <mat-form-field *ngIf="form.controls.weaponType.value != WeaponType.Melee">
-                <mat-label for="range">Portée</mat-label>
+                <mat-label for="range" i18n="@@Label.Range">Range</mat-label>
                 <input matInput type="number" min="0" max="100" formControlName="range" placeholder="Portée" />
             </mat-form-field>
 
             <mat-form-field *ngIf="form.controls.weaponType.value == WeaponType.Explosive">
-                <mat-label for="rangeMin">Portée minimum</mat-label>
+                <mat-label for="rangeMin" i18n="@@Label.MinimumRange">Minimum range</mat-label>
                 <input matInput type="number" min="0" [max]="form.controls.range.value" formControlName="rangeMin"
                     placeholder="Portée minimum" />
             </mat-form-field><br>
 
             <mat-form-field>
-                <mat-label for="power">Puissance</mat-label>
-                <input matInput type="number" min="1" max="3" formControlName="power" placeholder="Puissance" />
+                <mat-label for="power" i18n="@@Label.Power">Power</mat-label>
+                <input matInput type="number" min="1" max="3" formControlName="power" i18n-placeholder="@@Label.Power"
+                    placeholder="Power" />
             </mat-form-field>
 
-            <mat-checkbox formControlName="superPower">Super puissance</mat-checkbox><br>
+            <mat-checkbox formControlName="superPower" i18n="@@Label.SuperPower">Super power</mat-checkbox><br>
 
             <mat-form-field>
-                <mat-label>Règle</mat-label>
-                <input matInput type="text" placeholder="Choisisser une règle" [formControl]="rulesControl"
-                    [matAutocomplete]="auto" [(ngModel)]="currentRule" (keyup.enter)="addRule()">
+                <mat-label i18n="@@Label.SpecialRules">Special rules</mat-label>
+                <input matInput type="text" i18n-placeholder="@@Label.ChooseARule" placeholder="Choose a rule"
+                    [formControl]="rulesControl" [matAutocomplete]="auto" [(ngModel)]="currentRule"
+                    (keyup.enter)="addRule()">
                 <mat-autocomplete #auto="matAutocomplete">
                     <mat-option *ngFor="let rule of rulesFilteredOptions | async" [value]="rule">{{rule}}</mat-option>
                 </mat-autocomplete>
             </mat-form-field>
-            <button mat-raised-button (click)="addRule()" type="button">Ajouter la règle</button>
+            <button mat-raised-button (click)="addRule()" type="button" i18n="@@Label.AddARule">Add a rule</button>
 
             <div class="rules">
                 <div class="rulerow" *ngFor="let rule of form.controls.rule.value">
@@ -56,22 +56,25 @@
             </div>
 
             <div>
-                <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="assault">
-                    Assaut
+                <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="assault"
+                    i18n="@@Label.Assault">
+                    Assault
                 </mat-checkbox>
                 &nbsp;
-                <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="heavy">
-                    Lourd
+                <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="heavy"
+                    i18n="@@Label.Heavy">
+                    Heavy
                 </mat-checkbox>
                 &nbsp;
-                <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="cover">
-                    Couverture
+                <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="cover"
+                    i18n="@@Label.Cover">
+                    Cover
                 </mat-checkbox>
             </div>
 
             <mat-form-field
                 *ngIf="form.controls.weaponType.value == WeaponType.Explosive || form.controls.weaponType.value == WeaponType.Grenade">
-                <mat-label for="size">Gabarit</mat-label>
+                <mat-label for="size" i18n="@@Label.ExplosiveWeaponSize">Size</mat-label>
                 <mat-select formControlName="size">
                     <mat-option *ngFor="let weaponSize of weaponSizes" [value]="weaponSize.value">{{weaponSize.key}}
                     </mat-option>
@@ -79,12 +82,12 @@
             </mat-form-field>
 
             <div>
-                <mat-checkbox formControlName="nonLethal">Non mortelle</mat-checkbox>
+                <mat-checkbox formControlName="nonLethal" i18n="@@Label.NonLethal">Non lethal</mat-checkbox>
             </div>
         </div>
         <div class="tr-actions">
-            <button mat-raised-button type="submit" [disabled]="form.invalid">Valider</button>
-            <button mat-raised-button type="button" (click)="cancel()">Annuler</button>
+            <button mat-raised-button type="submit" [disabled]="form.invalid" i18n="@@Label.Validate">Validate</button>
+            <button mat-raised-button type="button" (click)="cancel()" i18n="@@Label.Cancel">Cancel</button>
         </div>
     </app-template-full-width>
 </form>

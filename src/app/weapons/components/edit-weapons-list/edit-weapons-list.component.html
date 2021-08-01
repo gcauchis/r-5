@@ -2,7 +2,7 @@
   enableEdit=false>
 </app-weapon-selector>
 <app-template-full-width *ngIf="combatUnit" class="card">
-  <div class="tr-title">Armes sélectionées</div>
+  <div class="tr-title" i18n="@@Label.SelectedWeapons">Selected weapons</div>
   <div class="tr-content card">
     <div *ngFor="let weapon of onWeaponsChanged.value" class="row">
       <app-view-weapon [weapon]="weapon" [combatUnit]="combatUnit" class="weapon"></app-view-weapon>
