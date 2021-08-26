@@ -2,12 +2,13 @@
     <app-template-full-width *ngIf="vehicle">
         <div class="tr-content">
             <app-template-full-width>
-                <span class="tr-title">Edition : {{form.controls.name.value}}/{{form.controls.type.value |
+                <span class="tr-title"><span i18n="@@Label.Edit">Edit</span><span i18n="@@Label.DbDot">:</span>
+                    {{form.controls.name.value}}/{{form.controls.type.value |
                     vehicleTypeToString}}</span>
                 <div class="tr-content">
 
                     <mat-form-field class="vehicle-full-width">
-                        <mat-label for="faction">Camps</mat-label>
+                        <mat-label for="faction" i18n="@@Label.Faction">Faction</mat-label>
                         <input matInput type="text" formControlName="faction" [formControl]="factionsControl"
                             [matAutocomplete]="auto" placeholder="Camps" />
                         <mat-autocomplete #auto="matAutocomplete">
@@ -18,22 +19,22 @@
                     </mat-form-field><br>
 
                     <mat-form-field class="vehicle-full-width">
-                        <mat-label for="name">Nom</mat-label>
-                        <input matInput formControlName="name" placeholder="Nom" />
+                        <mat-label for="name" i18n="@@Label.Name">Name</mat-label>
+                        <input matInput formControlName="name" i18n-placeholder="@@Label.Name" placeholder="Name" />
                     </mat-form-field><br>
 
                     <app-edit-image [imageContainer]="vehicle"
                         (onImageBase64Change)="form.controls.imgBase64.setValue($event)"></app-edit-image><br>
 
                     <mat-form-field>
-                        <mat-label for="type">Type de véhicule</mat-label>
+                        <mat-label for="type" i18n="@@Label.VehicleType">Vehicle type</mat-label>
                         <mat-select formControlName="type">
                             <mat-option *ngFor="let type of vehicleType" [value]="type.value">{{type.key}}</mat-option>
                         </mat-select>
                     </mat-form-field><br>
 
                     <mat-form-field>
-                        <mat-label for="moveType">Type de mouvement</mat-label>
+                        <mat-label for="moveType" i18n="@@Label.MoveType">Move type</mat-label>
                         <mat-select formControlName="moveType">
                             <mat-option *ngFor="let moveType of moveTypes" [value]="moveType.value">{{moveType.key}}
                             </mat-option>
@@ -41,37 +42,39 @@
                     </mat-form-field>
 
                     <mat-form-field>
-                        <mat-label for="tacticalMove">Mouvement tactique</mat-label>
+                        <mat-label for="tacticalMove" i18n="@@Label.TacticalMove">Tactical move</mat-label>
                         <input matInput type="number" min="0" max="100" formControlName="tacticalMove"
-                            placeholder="Mouvement" />
+                            i18n-placeholder="@@Label.Move" placeholder="Move" />
                     </mat-form-field><br>
 
                     <mat-form-field>
-                        <mat-label for="structure">Point de structure</mat-label>
+                        <mat-label for="structure" i18n="@@Label.StructurePoint">Structure point</mat-label>
                         <input matInput type="number" min="1" max="10" formControlName="structure"
-                            placeholder="Structure" />
+                            i18n-placeholder="@@Label.Structure" placeholder="Structure" />
                     </mat-form-field>
 
                     <mat-form-field>
-                        <mat-label for="armor">Type de blindage</mat-label>
+                        <mat-label for="armor" i18n="@@Label.ArmorType">Armor type</mat-label>
                         <mat-select formControlName="armor">
                             <mat-option *ngFor="let dice of dices" [value]="dice.value">{{dice.key}}</mat-option>
                         </mat-select>
                     </mat-form-field><br>
 
                     <mat-form-field>
-                        <mat-label for="crew">Équipage</mat-label>
-                        <input matInput type="number" min="1" max="6" formControlName="crew" placeholder="Équipage" />
+                        <mat-label for="crew" i18n="@@Label.Crew">Crew</mat-label>
+                        <input matInput type="number" min="1" max="6" formControlName="crew"
+                            i18n-placeholder="@@Label.Crew" placeholder="Crew" />
                     </mat-form-field>
 
                     <mat-form-field *ngIf="form.controls.type.value == VehicleType.TroopTransport">
-                        <mat-label for="transportSpace">Nombre de places de transport</mat-label>
+                        <mat-label for="transportSpace" i18n="@@Label.TransportSpace">Transport space
+                        </mat-label>
                         <input matInput type="number" min="1" max="500" formControlName="transportSpace"
-                            placeholder="Places" />
+                            i18n-placeholder="@@Label.TransportSpots" placeholder="Spots" />
                     </mat-form-field>
 
                     <mat-form-field>
-                        <mat-label for="dc">Dé Combat (DC)</mat-label>
+                        <mat-label for="dc" i18n="@@Label.Long.DC">Combat Dice (DC)</mat-label>
                         <mat-select formControlName="dc">
                             <mat-option *ngFor="let dice of dices" [value]="dice.value">{{dice.key}}</mat-option>
                         </mat-select>
@@ -86,8 +89,8 @@
 
         </div>
         <div class="tr-actions">
-            <button mat-raised-button type="submit" [disabled]="form.invalid">Valider</button>
-            <button mat-raised-button type="button" (click)="cancel()">Annuler</button>
+            <button mat-raised-button type="submit" [disabled]="form.invalid" i18n="@@Label.Validate">Validate</button>
+            <button mat-raised-button type="button" (click)="cancel()" i18n="@@Label.Cancel">Cancel</button>
         </div>
     </app-template-full-width>
 </form>

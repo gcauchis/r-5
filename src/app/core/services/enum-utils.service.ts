@@ -30,15 +30,15 @@ export class EnumUtilsService {
   public unitTypeToString(value: any): string {
     switch (value) {
       case UnitType.Alive:
-        return "Vivant";
-      case UnitType.Droide:
-        return "Droïde";
+        return $localize`:@@Label.Alive:Alive`;
+      case UnitType.Droid:
+        return $localize`:@@Label.Droid:Droid`;
       case UnitType.Robot:
-        return "Robot";
+        return $localize`:@@Label.Robot:Robot`;
       case UnitType.FightDrone:
-        return "FightDrone";
-      case UnitType.IA:
-        return "IA";
+        return $localize`:@@Label.FightDrone:Fight drone`;
+      case UnitType.AI:
+        return $localize`:@@Label.AI:AI`;
       default:
         return null;
     }
@@ -47,11 +47,11 @@ export class EnumUtilsService {
   public unitSizeToString(value: any): string {
     switch (value) {
       case UnitSize.Small:
-        return "Petit";
+        return $localize`:@@Label.Small:Small`;
       case UnitSize.Standard:
-        return "Standard";
+        return $localize`:@@Label.Standard:Standard`;
       case UnitSize.Big:
-        return "Grand";
+        return $localize`:@@Label.Big:Big`;
       default:
         return null;
     }
@@ -60,9 +60,9 @@ export class EnumUtilsService {
   public moveTypeToString(value: any): string {
     switch (value) {
       case MoveType.Ground:
-        return "Sol";
+        return $localize`:@@Label.Ground:Ground`;
       case MoveType.Fly:
-        return "Vol";
+        return $localize`:@@Label.Fly:Fly`;
       default:
         return null;
     }
@@ -71,15 +71,15 @@ export class EnumUtilsService {
   public tacticalRoleToString(value: any): string {
     switch (value) {
       case TacticalRole.Troop:
-        return "Troupe";
+        return $localize`:@@Label.Troop:Troop`;
       case TacticalRole.TacticalSupport:
-        return "Soutient tactique";
+        return $localize`:@@Label.TacticalSupport:Tactical support`;
       case TacticalRole.Officer:
-        return "Officier supérieur";
+        return $localize`:@@Label.Officer:Officer`;
       case TacticalRole.Mage:
-        return "Mage";
+        return $localize`:@@Label.Mage:Mage`;
       case TacticalRole.Civilian:
-        return "Civile";
+        return $localize`:@@Label.Civilian:Civilian`;
       default:
         return null;
     }
@@ -88,13 +88,13 @@ export class EnumUtilsService {
   public weaponTypeToString(value: any): string {
     switch (value) {
       case WeaponType.Melee:
-        return "Mélée";
+        return $localize`:@@Label.Melee:Melee`;
       case WeaponType.Shoot:
-        return "Tir";
+        return $localize`:@@Label.Shoot:Shoot`;
       case WeaponType.Explosive:
-        return "Explosif";
+        return $localize`:@@Label.Explosive:Explosive`;
       case WeaponType.Grenade:
-        return "Grenade";
+        return $localize`:@@Label.Grenade:Grenade`;
       default:
         return null;
     }
@@ -103,13 +103,13 @@ export class EnumUtilsService {
   public exposiveWeaponSizeToString(value: any): string {
     switch (value) {
       case ExposiveWeaponSize.Small:
-        return "Petit";
+        return $localize`:@@Label.Small:Small`;
       case ExposiveWeaponSize.Medium:
-        return "Moyen";
+        return $localize`:@@Label.Medium:Medium`;
       case ExposiveWeaponSize.Big:
-        return "Grand";
+        return $localize`:@@Label.Big:Big`;
       case ExposiveWeaponSize.Cone:
-        return "Cône";
+        return $localize`:@@Label.Cone:Cone`;
       default:
         return null;
     }
@@ -118,11 +118,11 @@ export class EnumUtilsService {
   public vehicleTypeToString(value: any): string {
     switch (value) {
       case VehicleType.TroopTransport:
-        return "Transport de troupe";
+        return $localize`:@@Label.TroopTransport:Troop transport`;
       case VehicleType.Tank:
-        return "Blindée";
+        return $localize`:@@Label.Tank:Tank`;
       case VehicleType.Individual:
-        return "Individuel";
+        return $localize`:@@Label.Individual:Individual`;
       default:
         return null;
     }

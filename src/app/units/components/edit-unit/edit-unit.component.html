@@ -2,7 +2,7 @@
     <app-template-full-width *ngIf="unit">
         <div class="tr-content">
             <app-template-full-width>
-                <span class="tr-title"><span i18n="@@Label.Edit">Edit</span>
+                <span class="tr-title"><span i18n="@@Label.Edit">Edit</span><span i18n="@@Label.DbDot">:</span>
                     {{form.controls.name.value}}/{{form.controls.tacticalRole.value|
                     tacticalRoleToString}}</span>
                 <div class="tr-content">
@@ -88,7 +88,7 @@
                     <mat-form-field>
                         <mat-label for="tacticalMove" i18n="@@Label.TacticalMove">Tactical move</mat-label>
                         <input matInput type="number" min="0" max="100" formControlName="tacticalMove"
-                            placeholder="Mouvement" />
+                            i18n-placeholder="@@Label.Move" placeholder="Move" />
                     </mat-form-field><br>
 
                     <mat-form-field>

@@ -2,15 +2,17 @@
     <app-template-full-width>
         <div class="tr-content">
             <app-template-full-width>
-                <span class="tr-title">Edition : {{form.controls.name.value}}</span>
+                <span class="tr-title"><span i18n="@@Label.Edit">Edit</span><span i18n="@@Label.DbDot">:</span>
+                    {{form.controls.name.value}}</span>
                 <div class="tr-content">
                     <mat-form-field class="army-full-width">
-                        <mat-label for="name">Nom</mat-label>
-                        <input matInput formControlName="name" placeholder="Nom" />
+                        <mat-label for="name" i18n="@@Label.Name">Name</mat-label>
+                        <input matInput formControlName="name" i18n-placeholder="@@Label.Name" placeholder="Name" />
                     </mat-form-field>
                     <mat-form-field class="army-full-width">
-                        <mat-label for="desc">Description</mat-label>
-                        <textarea matInput formControlName="desc" placeholder="Description"></textarea>
+                        <mat-label for="desc" i18n="@@Label.Description">Description</mat-label>
+                        <textarea matInput formControlName="desc" i18n-placeholder="@@Label.Description"
+                            placeholder="Description"></textarea>
                     </mat-form-field><br>
                 </div>
             </app-template-full-width>
@@ -20,8 +22,8 @@
             </app-list-vehicles>
         </div>
         <div class="tr-actions">
-            <button mat-raised-button type="submit" [disabled]="form.invalid">Valider</button>
-            <button mat-raised-button type="button" (click)="cancel()">Annuler</button>
+            <button mat-raised-button type="submit" [disabled]="form.invalid" i18n="@@Label.Validate">Validate</button>
+            <button mat-raised-button type="button" (click)="cancel()" i18n="@@Label.Cancel">Cancel</button>
         </div>
     </app-template-full-width>
 </form>

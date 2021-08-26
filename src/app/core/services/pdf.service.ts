@@ -47,7 +47,10 @@ export class PdfService {
     context.fontSize = 20;
     context.drawText(
       army.name +
-        " (Prix: " +
+        " (" +
+        $localize`:@@Label.UnitPrice:Price` +
+        $localize`:@@Label.DbDot::` +
+        " " +
         (await this.priceService.computeArmy(army)) +
         ")",
       true
@@ -107,38 +110,63 @@ export class PdfService {
     }
     if (nb) {
       context.addHorizontalGap(40);
-      context.drawText("Nbr : ", true);
+      context.drawText(
+        $localize`:@@Label.Nbr:Nbr` + $localize`:@@Label.DbDot::` + " ",
+        true
+      );
       context.drawText(`${nb}`);
     }
     context.lineBreak();
 
-    context.drawText("Prix : ", true);
+    context.drawText(
+      $localize`:@@Label.UnitPrice:Price` + $localize`:@@Label.DbDot::` + " ",
+      true
+    );
     context.drawText(`${this.priceService.compute(unit)}`);
     context.lineBreak();
     if (unit.desc) {
-      context.drawText("Description : ", true);
+      context.drawText(
+        $localize`:@@Label.Description:Description` +
+          $localize`:@@Label.DbDot::` +
+          " ",
+        true
+      );
       context.drawText(`${unit.desc}`);
       context.lineBreak();
     }
 
-    context.drawText("Mouvement : ", true);
+    context.drawText(
+      $localize`:@@Label.Move:Move` + $localize`:@@Label.DbDot::` + " ",
+      true
+    );
     context.drawText(
       `${unit.tacticalMove}’’/${this.unitService.getRunMove(unit)}’’ +1D4’’`
     );
     context.lineBreak();
 
-    context.drawText("DQM : ", true);
+    context.drawText(
+      $localize`:@@Label.DQM:DQM` + $localize`:@@Label.DbDot::` + " ",
+      true
+    );
     context.drawText(`${this.enumUtils.diceToString(unit.dqm)}`);
     context.lineBreak();
 
-    context.drawText("Sauvegarde : ", true);
+    context.drawText(
+      $localize`:@@Label.Protection:Protection` +
+        $localize`:@@Label.DbDot::` +
+        " ",
+      true
+    );
 
     if (unit.armor) {
       context.drawText(unit.armor.protection);
     } else {
-      context.drawText("Aucune sauvegarde");
+      context.drawText($localize`:@@Label.NoProtection:No protection`);
     }
-    context.drawText(" / PV : ", true);
+    context.drawText(
+      " / " + $localize`:@@Label.HP:HP` + $localize`:@@Label.DbDot::` + " ",
+      true
+    );
     context.drawText(`${unit.pv}`);
     context.lineBreak();
 
@@ -181,34 +209,59 @@ export class PdfService {
     }
     if (nb) {
       context.addHorizontalGap(40);
-      context.drawText("Nbr : ", true);
+      context.drawText(
+        $localize`:@@Label.Nbr:Nbr` + $localize`:@@Label.DbDot::` + " ",
+        true
+      );
       context.drawText(`${nb}`);
     }
     context.lineBreak();
 
-    context.drawText("Prix : ", true);
+    context.drawText(
+      $localize`:@@Label.UnitPrice:Price` + $localize`:@@Label.DbDot::` + " ",
+      true
+    );
     context.drawText(`${this.priceService.compute(vehicle)}`);
     context.lineBreak();
 
-    context.drawText("Type de mouvement : ", true);
+    context.drawText(
+      $localize`:@@Label.MoveType:Move type` +
+        $localize`:@@Label.DbDot::` +
+        " ",
+      true
+    );
     context.drawText(`${this.enumUtils.moveTypeToString(vehicle.moveType)}`);
     context.lineBreak();
 
-    context.drawText("Mouvement : ", true);
+    context.drawText(
+      $localize`:@@Label.Move:Move` + $localize`:@@Label.DbDot::` + " ",
+      true
+    );
     context.drawText(
       `${vehicle.tacticalMove}’’/${this.vehicleService.getRunMove(vehicle)}’’`
     );
     context.lineBreak();
 
     if (vehicle.type == VehicleType.TroopTransport) {
-      context.drawText("Place disponible pour le transport : ", true);
+      context.drawText(
+        $localize`:@@Label.TransportSpace:Transport space` +
+          $localize`:@@Label.DbDot::` +
+          " ",
+        true
+      );
       context.drawText(`${vehicle.transportSpace}`);
       context.lineBreak();
     }
 
-    context.drawText("Blindage : ", true);
+    context.drawText(
+      $localize`:@@Label.Armor:Armor` + $localize`:@@Label.DbDot::` + " ",
+      true
+    );
     context.drawText(`${this.enumUtils.diceToString(vehicle.armor)}`);
-    context.drawText(" / PS :  : ", true);
+    context.drawText(
+      " / " + $localize`:@@Label.SP:SP` + $localize`:@@Label.DbDot::` + " ",
+      true
+    );
     context.drawText(`${vehicle.structure}`);
     context.lineBreak();
 
@@ -225,7 +278,10 @@ export class PdfService {
       );
       if (meleeWeapons.length > 0) {
         context.addVerticalGap(5);
-        context.basicDrawTestLine("Mélée :", true);
+        context.basicDrawTestLine(
+          $localize`:@@Label.Melee:Melee` + $localize`:@@Label.DbDot::`,
+          true
+        );
         for (let weapon of meleeWeapons) {
           this.appendWeapon(context, weapon, unit);
         }
@@ -236,7 +292,10 @@ export class PdfService {
       );
       if (shootWeapons.length > 0) {
         context.addVerticalGap(5);
-        context.basicDrawTestLine("Tir :", true);
+        context.basicDrawTestLine(
+          $localize`:@@Label.Shoot:Shoot` + $localize`:@@Label.DbDot::`,
+          true
+        );
         for (let weapon of shootWeapons) {
           this.appendWeapon(context, weapon, unit);
         }
@@ -247,7 +306,10 @@ export class PdfService {
       );
       if (explosiveWeapons.length > 0) {
         context.addVerticalGap(5);
-        context.basicDrawTestLine("Explosif :", true);
+        context.basicDrawTestLine(
+          $localize`:@@Label.Explosive:Explosive` + $localize`:@@Label.DbDot::`,
+          true
+        );
         for (let weapon of explosiveWeapons) {
           this.appendWeapon(context, weapon, unit);
         }
@@ -258,7 +320,10 @@ export class PdfService {
       );
       if (grenadeWeapons.length > 0) {
         context.addVerticalGap(5);
-        context.basicDrawTestLine("Grenade :", true);
+        context.basicDrawTestLine(
+          $localize`:@@Label.Grenade:Grenade` + $localize`:@@Label.DbDot::`,
+          true
+        );
         for (let weapon of grenadeWeapons) {
           this.appendWeapon(context, weapon, unit);
         }
@@ -278,7 +343,8 @@ export class PdfService {
       weapon.weaponType != WeaponType.Melee
     ) {
       if (weapon.rangeMin) {
-        weaponStr += `+${weapon.rangeMin}'' à `;
+        weaponStr +=
+          `+${weapon.rangeMin}'' ` + $localize`:@@Label.RangeTo:to` + " ";
       }
       weaponStr += `${weapon.range}''`;
     }

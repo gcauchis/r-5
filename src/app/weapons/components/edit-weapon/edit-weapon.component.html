@@ -1,6 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
     <app-template-full-width *ngIf="weapon">
-        <span class="tr-title"><span i18n="@@Label.Edit">Edit</span> {{form.controls.name.value}}</span>
+        <span class="tr-title"><span i18n="@@Label.Edit">Edit</span><span i18n="@@Label.DbDot">:</span>
+            {{form.controls.name.value}}</span>
         <div class="tr-content">
 
             <mat-form-field>

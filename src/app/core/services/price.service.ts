@@ -97,7 +97,7 @@ export class PriceService {
           break;
       }
       switch (unit.unitType) {
-        case UnitType.Droide:
+        case UnitType.Droid:
           result += dcPrive;
           break;
         default:

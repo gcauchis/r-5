@@ -2,20 +2,22 @@
     <span class="tr-title">Unitées</span>
     <div class="tr-content">
         <mat-form-field>
-            <mat-label>Filtrage nom</mat-label>
-            <input matInput [(ngModel)]="nameFilter" placeholder="Nom" (ngModelChange)='onChangeFilter()' />
+            <mat-label i18n="@@Label.NameFilter">Name filter</mat-label>
+            <input matInput [(ngModel)]="nameFilter" i18n-placeholder="@@Label.Name" placeholder="Name"
+                (ngModelChange)='onChangeFilter()' />
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Filtrage camps</mat-label>
-            <input matInput [(ngModel)]="factionFilter" placeholder="Camps" (ngModelChange)='onChangeFilter()' />
+            <mat-label i18n="@@Label.FactionFilter">Faction filter</mat-label>
+            <input matInput [(ngModel)]="factionFilter" i18n-placeholder="@@Label.Faction" placeholder="Faction"
+                (ngModelChange)='onChangeFilter()' />
         </mat-form-field>
 
         <table mat-table [dataSource]="dataSourceUnits">
             <caption></caption>
 
             <ng-container matColumnDef="unit">
-                <th mat-header-cell *matHeaderCellDef scope="col">Unitée</th>
+                <th mat-header-cell *matHeaderCellDef scope="col" i18n="@@Label.Unit">Unit</th>
                 <td mat-cell *matCellDef="let unit">
                     <app-view-unit [unit]="unit"></app-view-unit>
                 </td>
@@ -23,13 +25,15 @@
 
             <ng-container matColumnDef="edit">
                 <th mat-header-cell *matHeaderCellDef scope="col"></th>
-                <td mat-cell *matCellDef="let unit"><a mat-raised-button routerLink="/editUnit/{{unit.id}}">Edit</a>
+                <td mat-cell *matCellDef="let unit"><a mat-raised-button routerLink="/editUnit/{{unit.id}}"
+                        i18n="@@Label.Edit">Edit</a>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="view">
                 <th mat-header-cell *matHeaderCellDef scope="col"></th>
-                <td mat-cell *matCellDef="let unit"><a mat-raised-button routerLink="/viewUnit/{{unit.id}}">Voir</a>
+                <td mat-cell *matCellDef="let unit"><a mat-raised-button routerLink="/viewUnit/{{unit.id}}"
+                        i18n="@@Label.See">See</a>
                 </td>
             </ng-container>
 
@@ -44,7 +48,7 @@
                 <th mat-header-cell *matHeaderCellDef scope="col"></th>
                 <td mat-cell *matCellDef="let unit">
                     <mat-form-field style="width: 80px;">
-                        <mat-label>Nombre</mat-label>
+                        <mat-label i18n="@@Label.Number">Number</mat-label>
                         <input matInput type="number" min="0" [ngModel]="links[unit.id]" placeholder="Nombre"
                             (ngModelChange)="updateLinks(unit.id, $event)" />
                     </mat-form-field>
@@ -58,6 +62,6 @@
 
     </div>
     <div class="tr-actions">
-        <a mat-raised-button routerLink="/editUnit">Ajouter une nouvelle unitée</a>
+        <a mat-raised-button routerLink="/editUnit" i18n="@@Label.AddNewUnit">Add new unit</a>
     </div>
 </app-template-full-width>

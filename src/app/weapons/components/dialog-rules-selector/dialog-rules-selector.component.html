@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="tr-actions">
-        <button mat-raised-button mat-button (click)="close()">Annuler</button>
-        <button mat-raised-button [mat-dialog-close]="rules" cdkFocusInitial>Ok</button>
+        <button mat-raised-button mat-button (click)="close()" i18n="@@Label.Cancel">Cancel</button>
+        <button mat-raised-button [mat-dialog-close]="rules" cdkFocusInitial i18n="@@Label.Ok">Ok</button>
     </div>
 </app-template-dialog>

@@ -74,10 +74,11 @@ export class WeaponService extends AbstractCrudService<Weapon> {
   public retrieveRules(weapon: Weapon): string[] {
     let rules = [];
     if (weapon) {
-      if (weapon.assault) rules.push("Assaut");
-      if (weapon.heavy) rules.push("Lourd");
-      if (weapon.cover) rules.push("Couverture");
-      if (weapon.nonLethal) rules.push("Non mortelle");
+      if (weapon.assault) rules.push($localize`:@@Label.Assault:Assault`);
+      if (weapon.heavy) rules.push($localize`:@@Label.Heavy:Heavy`);
+      if (weapon.cover) rules.push($localize`:@@Label.Cover:Cover`);
+      if (weapon.nonLethal)
+        rules.push($localize`:@@Label.NonLethal:Non lethal`);
       if (weapon.rule) weapon.rule.forEach((rule) => rules.push(rule));
     }
     if (rules.length <= 0) rules = null;

@@ -1,6 +1,7 @@
 <div *ngIf="weapon">{{weapon.name}}
     <span *ngIf="hasRange">
-        <span *ngIf="weapon.rangeMin">+{{weapon.rangeMin}}'' à </span>{{weapon.range}}''
+        <span *ngIf="weapon.rangeMin">+{{weapon.rangeMin}}'' <span i18="@@Label.RangeTo">to</span>
+        </span>{{weapon.range}}''
     </span>
     {{weapon.power}}<span *ngIf="combatUnit; else NoUnit">{{combatUnit.dc | diceToString}}</span>
     <ng-template #NoUnit>D</ng-template><span *ngIf="weapon.superPower">++</span><span

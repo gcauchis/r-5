@@ -2,19 +2,24 @@
     <p class="vehicle-line"><span class="vehicle-title">{{vehicle.name}} /
             {{vehicle.type | vehicleTypeToString}}</span><span *ngIf="vehicle.faction" class="vehicle-title">
             ({{vehicle.faction}})</span>
-        <span *ngIf="vehicleCount" class="vehicle-number"><span class="vehicle-title"> Nbr :</span>
+        <span *ngIf="vehicleCount" class="vehicle-number"><span class="vehicle-title"> <span
+                    i18n="@@Label.Nbr">Nbr</span><span i18n="@@Label.DbDot">:</span></span>
             {{vehicleCount}}</span>
     </p>
-    <p class="vehicle-line"><span class="vehicle-title">Type de mouvement :</span>
+    <p class="vehicle-line"><span class="vehicle-title"><span i18n="@@Label.MoveType">Move type</span><span
+                i18n="@@Label.DbDot">:</span></span>
         {{ vehicle.moveType | moveTypeToString}}</p>
-    <p class="vehicle-line"><span class="vehicle-title">Mouvement :</span> {{vehicle.tacticalMove}}’’ /
+    <p class="vehicle-line"><span class="vehicle-title"><span i18n="@@Label.Move">Move</span><span
+                i18n="@@Label.DbDot">:</span></span> {{vehicle.tacticalMove}}’’ /
         {{vehicle | vehicleRunMove}}’’</p>
-    <p class="vehicle-line" *ngIf="vehicle.type == VehicleType.TroopTransport"><span class="vehicle-title">Place
-            disponible
-            pour le transport :</span> {{vehicle.transportSpace}}</p>
-    <p class="vehicle-line"><span class="vehicle-title">Blindage :</span>{{vehicle.armor | diceToString}} <span
-            class="vehicle-title"> / PS :</span> {{vehicle.structure}}</p>
-    <p class="vehicle-line"><span class="vehicle-title">Prix :</span> {{vehicle | priceCombatUnit}}</p>
+    <p class="vehicle-line" *ngIf="vehicle.type == VehicleType.TroopTransport"><span class="vehicle-title"><span
+                i18n="@@Label.TransportSpace">Transport space</span><span i18n="@@Label.DbDot">:</span></span>
+        {{vehicle.transportSpace}}</p>
+    <p class="vehicle-line"><span class="vehicle-title"><span i18n="@@Label.Armor">Armor</span><span
+                i18n="@@Label.DbDot">:</span></span>{{vehicle.armor | diceToString}} <span class="vehicle-title"> /
+            <span i18n="@@Label.SP">SP</span><span i18n="@@Label.DbDot">:</span></span> {{vehicle.structure}}</p>
+    <p class="vehicle-line"><span class="vehicle-title"><span i18n="@@Label.UnitPrice">Price</span><span
+                i18n="@@Label.DbDot">:</span></span> {{vehicle | priceCombatUnit}}</p>
     <app-view-weapons [combatUnit]="vehicle"></app-view-weapons>
 </app-view-imaged>
 <app-show-pdf *ngIf="showPdf && pdfContext" [pdfDrawContext]="pdfContext" pdfName="{{vehicle.name}}.pdf"></app-show-pdf>
