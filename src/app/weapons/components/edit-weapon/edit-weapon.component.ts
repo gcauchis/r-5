@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { TranslateService } from "@ngx-translate/core";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { ExposiveWeaponSize } from "./../../../core/enums/exposive-weapon-size.enum";
@@ -22,8 +23,8 @@ import { WeaponService } from "./../../../core/services/weapon.service";
 export class EditWeaponComponent implements OnInit {
   WeaponType = WeaponType;
 
-  weaponTypes: any[];
-  weaponSizes: any[];
+  weaponTypes: Promise<any[]>;
+  weaponSizes: Promise<any[]>;
   possibleRules: string[];
   currentRule: string;
 
@@ -40,15 +41,18 @@ export class EditWeaponComponent implements OnInit {
     private weaponService: WeaponService,
     private utils: UtilsService,
     private enumUtils: EnumUtilsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public translate: TranslateService
   ) {
-    this.weaponTypes = this.utils.enumToKeyValue(
+    this.weaponTypes = this.utils.enumToKeyValueTranslate(
+      this.translate,
       WeaponType,
-      this.enumUtils.weaponTypeToString
+      this.enumUtils.weaponTypeToBunbleString
     );
-    this.weaponSizes = this.utils.enumToKeyValue(
+    this.weaponSizes = this.utils.enumToKeyValueTranslate(
+      this.translate,
       ExposiveWeaponSize,
-      this.enumUtils.exposiveWeaponSizeToString
+      this.enumUtils.exposiveWeaponSizeToBunbleString
     );
   }
 

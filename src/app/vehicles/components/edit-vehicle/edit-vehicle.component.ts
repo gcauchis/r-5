@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { TranslateService } from "@ngx-translate/core";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { Dice } from "./../../../core/enums/dice.enum";
@@ -25,8 +26,8 @@ export class EditVehicleComponent implements OnInit {
   @Output() submited: EventEmitter<Vehicle> = new EventEmitter<Vehicle>();
   @Output() canceled: EventEmitter<any> = new EventEmitter<any>();
   public form: FormGroup;
-  vehicleType: any[];
-  moveTypes: any[];
+  vehicleType: Promise<any[]>;
+  moveTypes: Promise<any[]>;
   dices: any[];
 
   /** Pas terrible mais donne acces dans le template */
@@ -40,15 +41,18 @@ export class EditVehicleComponent implements OnInit {
     private utils: UtilsService,
     private enumUtils: EnumUtilsService,
     private vehicleService: VehicleService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public translate: TranslateService
   ) {
-    this.vehicleType = this.utils.enumToKeyValue(
+    this.vehicleType = this.utils.enumToKeyValueTranslate(
+      this.translate,
       VehicleType,
-      this.enumUtils.vehicleTypeToString
+      this.enumUtils.vehicleTypeToBunbleString
     );
-    this.moveTypes = this.utils.enumToKeyValue(
+    this.moveTypes = this.utils.enumToKeyValueTranslate(
+      this.translate,
       MoveType,
-      this.enumUtils.moveTypeToString
+      this.enumUtils.moveTypeToBunbleString
     );
     this.dices = this.utils.enumToKeyValue(Dice, this.enumUtils.diceToString);
   }

@@ -8,6 +8,7 @@ import {
 } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import { TranslateService } from "@ngx-translate/core";
 import { CombatUnitInterface } from "../../../core/interfaces/combat-unit-interface";
 import { WeaponType } from "./../../../core/enums/weapon-type.enum";
 import { Weapon } from "./../../../core/models/weapon";
@@ -40,17 +41,19 @@ export class WeaponSelectorComponent implements OnInit {
       ? true
       : data.name.toLowerCase().indexOf(this.nameFilter.toLowerCase()) != -1;
 
-  weaponTypes: any[];
+  weaponTypes: Promise<any[]>;
 
   constructor(
     private weaponService: WeaponService,
     private utils: UtilsService,
-    private enumUtils: EnumUtilsService
+    private enumUtils: EnumUtilsService,
+    public translate: TranslateService
   ) {
     this.currentWeaponType = WeaponType.Melee;
-    this.weaponTypes = this.utils.enumToKeyValue(
+    this.weaponTypes = this.utils.enumToKeyValueTranslate(
+      this.translate,
       WeaponType,
-      this.enumUtils.weaponTypeToString
+      this.enumUtils.weaponTypeToBunbleString
     );
   }
 

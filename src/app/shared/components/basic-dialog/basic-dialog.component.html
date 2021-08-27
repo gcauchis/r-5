@@ -7,8 +7,8 @@
         </div>
     </div>
     <div class="tr-actions">
-        <button mat-raised-button *ngIf="data.cancel" mat-button (click)="close()" i18n="@@Label.Cancel">Cancel</button>
+        <button mat-raised-button *ngIf="data.cancel" mat-button (click)="close()">{{ 'Label.Cancel' | translate }}</button>
         <button mat-raised-button *ngIf="data.ok" [mat-dialog-close]="data.message" cdkFocusInitial
-            i18n="@@Label.Ok">Ok</button>
+>{{ 'Label.Ok' | translate }}</button>
     </div>
 </app-template-dialog>

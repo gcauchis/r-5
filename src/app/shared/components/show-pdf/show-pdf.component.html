@@ -1,7 +1,7 @@
 <div *ngIf="pdfDrawContext" class="fullSize">
-    <button mat-raised-button (click)="openPDF()" *ngIf="!displayPDF" i18n="@@Label.DownloadPDF">Download PDF</button>
+    <button mat-raised-button (click)="openPDF()" *ngIf="!displayPDF">{{ 'Label.DownloadPDF' | translate }}</button>
     <app-template-collapsible-container class="fullSize" *ngIf="displayPDF">
-        <span class="tr-title" i18n="@@Label.PDF">PDF</span>
+        <span class="tr-title">{{ 'Label.PDF' | translate }}</span>
         <iframe #pdf class="tr-content fullSize" title="pdfView"></iframe>
     </app-template-collapsible-container>
 </div>

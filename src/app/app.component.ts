@@ -1,13 +1,19 @@
-import { Component} from '@angular/core';
+import { Component } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: 'my-app',
-  templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
+  selector: "my-app",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
-export class AppComponent  {
+export class AppComponent {
   name = "R-5";
 
-  constructor () {
+  constructor(public translate: TranslateService) {
+    translate.addLangs(["en", "fr"]);
+    translate.setDefaultLang("en");
+
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|fr/) ? browserLang : "en");
   }
 }

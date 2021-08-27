@@ -1,12 +1,18 @@
 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
     <app-icon-nav>menu</app-icon-nav>
 </button>
+<!--
+{{ 'Label.ChangeLanguage' | translate }}
+<select #langSelect (change)="translate.use(langSelect.value)">
+    <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang
+        }}</option>
+</select>-->
 
 <mat-menu #menu="matMenu">
-    <a mat-menu-item routerLink="/armies"><span class="nav-caption" i18n="@@Label.Armies">Armies</span></a>
-    <a mat-menu-item routerLink="/units"><span class="nav-caption" i18n="@@Label.Units">Units</span></a>
-    <a mat-menu-item routerLink="/vehicles"><span class="nav-caption" i18n="@@Label.Vehicles">Vehicles</span></a>
-    <a mat-menu-item routerLink="/weapons"><span class="nav-caption" i18n="@@Label.Weapons">Weapons</span></a>
-    <a mat-menu-item routerLink="/manageMemory"><span class="nav-caption" i18n="@@Label.ManageMemory">Manage
-            memory</span></a>
+    <a mat-menu-item routerLink="/armies"><span class="nav-caption">{{ 'Label.Armies' | translate }}</span></a>
+    <a mat-menu-item routerLink="/units"><span class="nav-caption">{{ 'Label.Units' | translate }}</span></a>
+    <a mat-menu-item routerLink="/vehicles"><span class="nav-caption">{{ 'Label.Vehicles' | translate }}</span></a>
+    <a mat-menu-item routerLink="/weapons"><span class="nav-caption">{{ 'Label.Weapons' | translate }}</span></a>
+    <a mat-menu-item routerLink="/manageMemory"><span class="nav-caption">{{ 'Label.ManageMemory' | translate
+            }}</span></a>
 </mat-menu>

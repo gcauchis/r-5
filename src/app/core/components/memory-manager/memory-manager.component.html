@@ -1,9 +1,9 @@
 <mat-card>
   <mat-card-content>
-    <app-memory-of-service i18n-name="@@Label.Weapons" name="Weapons" [service]="weaponService"></app-memory-of-service>
-    <app-memory-of-service i18n-name="@@Label.Units" name="Units" [service]="unitService"></app-memory-of-service>
-    <app-memory-of-service i18n-name="@@Label.Vehicles" name="Vehicles" [service]="vehicleService">
+    <app-memory-of-service name="{{ 'Label.Weapons' | translate }}" [service]="weaponService"></app-memory-of-service>
+    <app-memory-of-service name="{{ 'Label.Units' | translate }}" [service]="unitService"></app-memory-of-service>
+    <app-memory-of-service name="{{ 'Label.Vehicles' | translate }}" [service]="vehicleService">
     </app-memory-of-service>
-    <app-memory-of-service i18n-name="@@Label.Armies" name="Armies" [service]="armyService"></app-memory-of-service>
+    <app-memory-of-service name="{{ 'Label.Armies' | translate }}" [service]="armyService"></app-memory-of-service>
   </mat-card-content>
 </mat-card>

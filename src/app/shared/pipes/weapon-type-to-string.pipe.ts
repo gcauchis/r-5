@@ -7,7 +7,7 @@ import { EnumUtilsService } from "./../../core/services/enum-utils.service";
 export class WeaponTypeToStringPipe implements PipeTransform {
   constructor(private util: EnumUtilsService) {}
 
-  transform(value: any): string {
+  transform(value: any): Promise<string> {
     return this.util.weaponTypeToString(value);
   }
 }

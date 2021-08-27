@@ -6,5 +6,5 @@
     {{weapon.power}}<span *ngIf="combatUnit; else NoUnit">{{combatUnit.dc | diceToString}}</span>
     <ng-template #NoUnit>D</ng-template><span *ngIf="weapon.superPower">++</span><span
         *ngIf="weapon.superSuperPower">[++</span>
-    <span> {{weapon | weaponRulesToString}}</span>
+    <span> {{weapon | weaponRulesToString | async}}</span>
 </div>

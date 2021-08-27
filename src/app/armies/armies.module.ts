@@ -4,12 +4,12 @@ import { SharedModule } from "./../shared/shared.module";
 import { UnitsModule } from "./../units/units.module";
 import { VehiclesModule } from "./../vehicles/vehicles.module";
 import { ArmiesRoutingModule } from "./armies-routing.module";
+import { EditArmyComponent } from "./components/edit-army/edit-army.component";
+import { ListArmiesComponent } from "./components/list-armies/list-armies.component";
+import { ViewArmyComponent } from "./components/view-army/view-army.component";
 import { PageEditArmyComponent } from "./pages/page-edit-army/page-edit-army.component";
 import { PageListArmiesComponent } from "./pages/page-list-armies/page-list-armies.component";
 import { PageViewArmyComponent } from "./pages/page-view-army/page-view-army.component";
-import { ViewArmyComponent } from './components/view-army/view-army.component';
-import { EditArmyComponent } from './components/edit-army/edit-army.component';
-import { ListArmiesComponent } from './components/list-armies/list-armies.component';
 
 @NgModule({
   declarations: [

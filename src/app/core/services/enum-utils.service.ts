@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 import { Dice } from "./../enums/dice.enum";
 import { ExposiveWeaponSize } from "./../enums/exposive-weapon-size.enum";
 import { MoveType } from "./../enums/move-type.enum";
@@ -12,6 +13,8 @@ import { WeaponType } from "./../enums/weapon-type.enum";
   providedIn: "root",
 })
 export class EnumUtilsService {
+  constructor(public translate: TranslateService) {}
+
   public diceToString(value: any): string {
     switch (value) {
       case Dice.D6:
@@ -27,102 +30,139 @@ export class EnumUtilsService {
     }
   }
 
-  public unitTypeToString(value: any): string {
+  public async translateEnum(
+    value: any,
+    keyFunction: (enumValue: any) => string
+  ): Promise<string> {
+    let key = keyFunction(value);
+    if (key == null) return new Promise((resolve) => resolve(null));
+    else return this.translate.get(key).toPromise();
+  }
+
+  public async unitTypeToString(value: any): Promise<string> {
+    return this.translateEnum(value, this.unitTypeToBunbleString);
+  }
+
+  public unitTypeToBunbleString(value: any): string {
     switch (value) {
       case UnitType.Alive:
-        return $localize`:@@Label.Alive:Alive`;
+        return "Label.Alive";
       case UnitType.Droid:
-        return $localize`:@@Label.Droid:Droid`;
+        return "Label.Droid";
       case UnitType.Robot:
-        return $localize`:@@Label.Robot:Robot`;
+        return "Label.Robot";
       case UnitType.FightDrone:
-        return $localize`:@@Label.FightDrone:Fight drone`;
+        return "Label.FightDrone";
       case UnitType.AI:
-        return $localize`:@@Label.AI:AI`;
+        return "Label.AI";
       default:
         return null;
     }
   }
 
-  public unitSizeToString(value: any): string {
+  public async unitSizeToString(value: any): Promise<string> {
+    return this.translateEnum(value, this.unitSizeToBunbleString);
+  }
+
+  public unitSizeToBunbleString(value: any): string {
     switch (value) {
       case UnitSize.Small:
-        return $localize`:@@Label.Small:Small`;
+        return "Label.Small";
       case UnitSize.Standard:
-        return $localize`:@@Label.Standard:Standard`;
+        return "Label.Standard";
       case UnitSize.Big:
-        return $localize`:@@Label.Big:Big`;
+        return "Label.Big";
       default:
         return null;
     }
   }
 
-  public moveTypeToString(value: any): string {
+  public moveTypeToString(value: any): Promise<string> {
+    return this.translateEnum(value, this.moveTypeToBunbleString);
+  }
+
+  public moveTypeToBunbleString(value: any): string {
     switch (value) {
       case MoveType.Ground:
-        return $localize`:@@Label.Ground:Ground`;
+        return "Label.Ground";
       case MoveType.Fly:
-        return $localize`:@@Label.Fly:Fly`;
+        return "Label.Fly";
       default:
         return null;
     }
   }
 
-  public tacticalRoleToString(value: any): string {
+  public tacticalRoleToString(value: any): Promise<string> {
+    return this.translateEnum(value, this.tacticalRoleToBunbleString);
+  }
+
+  public tacticalRoleToBunbleString(value: any): string {
     switch (value) {
       case TacticalRole.Troop:
-        return $localize`:@@Label.Troop:Troop`;
+        return "Label.Troop";
       case TacticalRole.TacticalSupport:
-        return $localize`:@@Label.TacticalSupport:Tactical support`;
+        return "Label.TacticalSupport";
       case TacticalRole.Officer:
-        return $localize`:@@Label.Officer:Officer`;
+        return "Label.Officer";
       case TacticalRole.Mage:
-        return $localize`:@@Label.Mage:Mage`;
+        return "Label.Mage";
       case TacticalRole.Civilian:
-        return $localize`:@@Label.Civilian:Civilian`;
+        return "Label.Civilian";
       default:
         return null;
     }
   }
 
-  public weaponTypeToString(value: any): string {
+  public weaponTypeToString(value: any): Promise<string> {
+    return this.translateEnum(value, this.weaponTypeToBunbleString);
+  }
+
+  public weaponTypeToBunbleString(value: any): string {
     switch (value) {
       case WeaponType.Melee:
-        return $localize`:@@Label.Melee:Melee`;
+        return "Label.Melee";
       case WeaponType.Shoot:
-        return $localize`:@@Label.Shoot:Shoot`;
+        return "Label.Shoot";
       case WeaponType.Explosive:
-        return $localize`:@@Label.Explosive:Explosive`;
+        return "Label.Explosive";
       case WeaponType.Grenade:
-        return $localize`:@@Label.Grenade:Grenade`;
+        return "Label.Grenade";
       default:
         return null;
     }
   }
 
-  public exposiveWeaponSizeToString(value: any): string {
+  public exposiveWeaponSizeToString(value: any): Promise<string> {
+    return this.translateEnum(value, this.exposiveWeaponSizeToBunbleString);
+  }
+
+  public exposiveWeaponSizeToBunbleString(value: any): string {
     switch (value) {
       case ExposiveWeaponSize.Small:
-        return $localize`:@@Label.Small:Small`;
+        return "Label.Small";
       case ExposiveWeaponSize.Medium:
-        return $localize`:@@Label.Medium:Medium`;
+        return "Label.Medium";
       case ExposiveWeaponSize.Big:
-        return $localize`:@@Label.Big:Big`;
+        return "Label.Big";
       case ExposiveWeaponSize.Cone:
-        return $localize`:@@Label.Cone:Cone`;
+        return "Label.Cone";
       default:
         return null;
     }
   }
 
-  public vehicleTypeToString(value: any): string {
+  public vehicleTypeToString(value: any): Promise<string> {
+    return this.translateEnum(value, this.vehicleTypeToBunbleString);
+  }
+
+  public vehicleTypeToBunbleString(value: any): string {
     switch (value) {
       case VehicleType.TroopTransport:
-        return $localize`:@@Label.TroopTransport:Troop transport`;
+        return "Label.TroopTransport";
       case VehicleType.Tank:
-        return $localize`:@@Label.Tank:Tank`;
+        return "Label.Tank";
       case VehicleType.Individual:
-        return $localize`:@@Label.Individual:Individual`;
+        return "Label.Individual";
       default:
         return null;
     }

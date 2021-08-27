@@ -7,7 +7,7 @@ import { EnumUtilsService } from "./../../core/services/enum-utils.service";
 export class UnitSizeToStringPipe implements PipeTransform {
   constructor(private util: EnumUtilsService) {}
 
-  transform(value: any): string {
+  async transform(value: any): Promise<string> {
     return this.util.unitSizeToString(value);
   }
 }
