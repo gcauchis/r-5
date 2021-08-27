@@ -2,17 +2,16 @@
     <app-template-full-width>
         <div class="tr-content">
             <app-template-full-width>
-                <span class="tr-title"><span i18n="@@Label.Edit">Edit</span><span i18n="@@Label.DbDot">:</span>
+                <span class="tr-title">{{ 'Label.Edit' | translate }}{{ 'Label.DbDot' | translate }}
                     {{form.controls.name.value}}</span>
                 <div class="tr-content">
                     <mat-form-field class="army-full-width">
-                        <mat-label for="name" i18n="@@Label.Name">Name</mat-label>
-                        <input matInput formControlName="name" i18n-placeholder="@@Label.Name" placeholder="Name" />
+                        <mat-label for="name">{{ 'Label.Name' | translate }}</mat-label>
+                        <input matInput formControlName="name" placeholder="{{ 'Label.Name' | translate }}" />
                     </mat-form-field>
                     <mat-form-field class="army-full-width">
-                        <mat-label for="desc" i18n="@@Label.Description">Description</mat-label>
-                        <textarea matInput formControlName="desc" i18n-placeholder="@@Label.Description"
-                            placeholder="Description"></textarea>
+                        <mat-label for="desc">{{ 'Label.Description' | translate }}</mat-label>
+                        <textarea matInput formControlName="desc" placeholder="{{ 'Label.Description' | translate }}"></textarea>
                     </mat-form-field><br>
                 </div>
             </app-template-full-width>
@@ -22,8 +21,8 @@
             </app-list-vehicles>
         </div>
         <div class="tr-actions">
-            <button mat-raised-button type="submit" [disabled]="form.invalid" i18n="@@Label.Validate">Validate</button>
-            <button mat-raised-button type="button" (click)="cancel()" i18n="@@Label.Cancel">Cancel</button>
+            <button mat-raised-button type="submit" [disabled]="form.invalid">{{ 'Label.Validate' | translate }}</button>
+            <button mat-raised-button type="button" (click)="cancel()">{{ 'Label.Cancel' | translate }}</button>
         </div>
     </app-template-full-width>
 </form>

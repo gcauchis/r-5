@@ -2,15 +2,16 @@
   <span class="tr-title">Armes</span>
   <div class="tr-content">
     <mat-form-field>
-      <mat-label i18n="@@Label.Type">Type</mat-label>
+      <mat-label>{{ 'Label.Type' | translate }}</mat-label>
       <mat-select [(ngModel)]="currentWeaponType" (ngModelChange)="onChangecurrentWeaponType()">
-        <mat-option *ngFor="let weaponType of weaponTypes" [value]="weaponType.value">{{ weaponType.key }}</mat-option>
+        <mat-option *ngFor="let weaponType of weaponTypes | async" [value]="weaponType.value">{{ weaponType.key }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label i18n="@@Label.NameFilter">Name filter</mat-label>
-      <input matInput [(ngModel)]="nameFilter" i18n-placeholder="@@Label.Name" placeholder="Name"
+      <mat-label>{{ 'Label.NameFilter' | translate }}</mat-label>
+      <input matInput [(ngModel)]="nameFilter" placeholder="{{ 'Label.Name' | translate }}"
         (ngModelChange)="onChangeFilter()" />
     </mat-form-field>
 
@@ -18,44 +19,44 @@
       <caption></caption>
 
       <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef scope="col" i18n="@@Label.Type">Type</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">{{ 'Label.Type' | translate }}</th>
         <td mat-cell *matCellDef="let weapon">{{ weapon.name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="range">
-        <th mat-header-cell *matHeaderCellDef scope="col" i18n="@@Label.RangeInch">Range (inch)</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">{{ 'Label.RangeInch' | translate }}</th>
         <td mat-cell *matCellDef="let weapon">
           <span *ngIf="weapon.range; else NArange">
-            <span *ngIf="weapon.rangeMin">+{{ weapon.rangeMin }}'' <span i18n="@@Label.RangeTo">to</span> </span>{{
+            <span *ngIf="weapon.rangeMin">+{{ weapon.rangeMin }}'' {{ 'Label.RangeTo' | translate }} </span>{{
             weapon.range }}''
           </span>
-          <ng-template #NArange><span i18n="@@Label.NA">NA</span></ng-template>
+          <ng-template #NArange>{{ 'Label.NA' | translate }}</ng-template>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="power">
-        <th mat-header-cell *matHeaderCellDef scope="col" i18n="@@Label.Power">Power</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">{{ 'Label.Power' | translate }}</th>
         <td mat-cell *matCellDef="let weapon">
           <span *ngIf="weapon.power; else NApower">{{ weapon.power }}D<span *ngIf="weapon.superPower">++</span><span
               *ngIf="weapon.superSuperPower">[++</span></span>
-          <ng-template #NApower><span i18n="@@Label.NA">NA</span></ng-template>
+          <ng-template #NApower>{{ 'Label.NA' | translate }}</ng-template>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="rules">
-        <th mat-header-cell *matHeaderCellDef scope="col" i18n="@@Label.SpecialRules">Special rules</th>
-        <td mat-cell *matCellDef="let weapon">{{ weapon | weaponRulesToString : false}}</td>
+        <th mat-header-cell *matHeaderCellDef scope="col">{{ 'Label.SpecialRules' | translate }}</th>
+        <td mat-cell *matCellDef="let weapon">{{ weapon | weaponRulesToString : false | async}}</td>
       </ng-container>
 
       <ng-container matColumnDef="size">
-        <th mat-header-cell *matHeaderCellDef scope="col" i18n="@@Label.ExplosiveWeaponSize">Size</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">{{ 'Label.ExplosiveWeaponSize' | translate }}</th>
         <td mat-cell *matCellDef="let weapon">
-          {{ weapon.size | explosiveWeaponSizeToString }}
+          {{ weapon.size | explosiveWeaponSizeToString | async }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef scope="col" i18n="@@Label.UnitPrice">Price</th>
+        <th mat-header-cell *matHeaderCellDef scope="col">{{ 'Label.UnitPrice' | translate }}</th>
         <td mat-cell *matCellDef="let weapon">
           {{ weapon | priceWeapon : priceable | number }}
         </td>
@@ -64,15 +65,15 @@
       <ng-container matColumnDef="actionAdd">
         <th mat-header-cell *matHeaderCellDef scope="col"></th>
         <td mat-cell *matCellDef="let weapon">
-          <button type="button" mat-raised-button (click)="addWeapon(weapon)" i18n="@@Label.Use">Use</button>
+          <button type="button" mat-raised-button (click)="addWeapon(weapon)">{{ 'Label.Use' | translate }}</button>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="actionEdit">
         <th mat-header-cell *matHeaderCellDef scope="col"></th>
         <td mat-cell *matCellDef="let weapon">
-          <a mat-raised-button *ngIf="weapon.editable" routerLink="/weapons/edit/{{ weapon.id }}"
-            i18n="@@Label.Edit">Edit</a>
+          <a mat-raised-button *ngIf="weapon.editable" routerLink="/weapons/edit/{{ weapon.id }}">{{ 'Label.Edit' |
+            translate }}</a>
           <button type="button" mat-mini-fab *ngIf="weapon.editable" (click)="removeWeapon(weapon)" color="warn">
             <app-icon-delete></app-icon-delete>
           </button>
@@ -85,6 +86,6 @@
     <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
   </div>
   <div class="tr-actions">
-    <a mat-raised-button *ngIf="enableEdit" routerLink="/weapons/edit" i18n="@@Label.AddNewWeapon">Add new weapon</a>
+    <a mat-raised-button *ngIf="enableEdit" routerLink="/weapons/edit">{{ 'Label.AddNewWeapon' | translate }}</a>
   </div>
 </app-template-full-width>

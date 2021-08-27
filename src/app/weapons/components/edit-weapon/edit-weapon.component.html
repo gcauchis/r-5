@@ -1,51 +1,52 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
     <app-template-full-width *ngIf="weapon">
-        <span class="tr-title"><span i18n="@@Label.Edit">Edit</span><span i18n="@@Label.DbDot">:</span>
+        <span class="tr-title">{{ 'Label.Edit' | translate }}{{ 'Label.DbDot' | translate }}
             {{form.controls.name.value}}</span>
         <div class="tr-content">
 
             <mat-form-field>
-                <mat-label for="weaponType" i18n="@@Label.Type">Type</mat-label>
+                <mat-label for="weaponType">{{ 'Label.Type' | translate }}</mat-label>
                 <mat-select formControlName="weaponType">
-                    <mat-option *ngFor="let weaponType of weaponTypes" [value]="weaponType.value">{{weaponType.key}}
+                    <mat-option *ngFor="let weaponType of weaponTypes | async" [value]="weaponType.value">
+                        {{weaponType.key}}
                     </mat-option>
                 </mat-select>
             </mat-form-field><br>
 
             <mat-form-field class="weapon-full-width">
-                <mat-label for="name" i18n="@@Label.Name">Name</mat-label>
-                <input matInput formControlName="name" i18n-placeholder="@@Label.Name" placeholder="Name" />
+                <mat-label for="name">{{ 'Label.Name' | translate }}</mat-label>
+                <input matInput formControlName="name" placeholder="{{ 'Label.Name' | translate }}" />
             </mat-form-field><br>
 
             <mat-form-field *ngIf="form.controls.weaponType.value != WeaponType.Melee">
-                <mat-label for="range" i18n="@@Label.Range">Range</mat-label>
+                <mat-label for="range">{{ 'Label.Range' | translate }}</mat-label>
                 <input matInput type="number" min="0" max="100" formControlName="range" placeholder="Portée" />
             </mat-form-field>
 
             <mat-form-field *ngIf="form.controls.weaponType.value == WeaponType.Explosive">
-                <mat-label for="rangeMin" i18n="@@Label.MinimumRange">Minimum range</mat-label>
+                <mat-label for="rangeMin">{{ 'Label.MinimumRange' | translate }}</mat-label>
                 <input matInput type="number" min="0" [max]="form.controls.range.value" formControlName="rangeMin"
                     placeholder="Portée minimum" />
             </mat-form-field><br>
 
             <mat-form-field>
-                <mat-label for="power" i18n="@@Label.Power">Power</mat-label>
-                <input matInput type="number" min="1" max="3" formControlName="power" i18n-placeholder="@@Label.Power"
-                    placeholder="Power" />
+                <mat-label for="power">{{ 'Label.Power' | translate }}</mat-label>
+                <input matInput type="number" min="1" max="3" formControlName="power"
+                    placeholder="{{ 'Label.Power' | translate }}" />
             </mat-form-field>
 
-            <mat-checkbox formControlName="superPower" i18n="@@Label.SuperPower">Super power</mat-checkbox><br>
+            <mat-checkbox formControlName="superPower">{{ 'Label.SuperPower' | translate }}</mat-checkbox><br>
 
             <mat-form-field>
-                <mat-label i18n="@@Label.SpecialRules">Special rules</mat-label>
-                <input matInput type="text" i18n-placeholder="@@Label.ChooseARule" placeholder="Choose a rule"
+                <mat-label>{{ 'Label.SpecialRules' | translate }}</mat-label>
+                <input matInput type="text" placeholder="{{ 'Label.ChooseARule' | translate }}"
                     [formControl]="rulesControl" [matAutocomplete]="auto" [(ngModel)]="currentRule"
                     (keyup.enter)="addRule()">
                 <mat-autocomplete #auto="matAutocomplete">
                     <mat-option *ngFor="let rule of rulesFilteredOptions | async" [value]="rule">{{rule}}</mat-option>
                 </mat-autocomplete>
             </mat-form-field>
-            <button mat-raised-button (click)="addRule()" type="button" i18n="@@Label.AddARule">Add a rule</button>
+            <button mat-raised-button (click)="addRule()" type="button">{{ 'Label.AddARule' | translate }}</button>
 
             <div class="rules">
                 <div class="rulerow" *ngFor="let rule of form.controls.rule.value">
@@ -57,38 +58,37 @@
             </div>
 
             <div>
-                <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="assault"
-                    i18n="@@Label.Assault">
-                    Assault
+                <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="assault">
+                    {{ 'Label.Assault' | translate }}
                 </mat-checkbox>
                 &nbsp;
-                <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="heavy"
-                    i18n="@@Label.Heavy">
-                    Heavy
+                <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="heavy">
+                    {{ 'Label.Heavy' | translate }}
                 </mat-checkbox>
                 &nbsp;
-                <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="cover"
-                    i18n="@@Label.Cover">
-                    Cover
+                <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="cover">
+                    {{ 'Label.Cover' | translate }}
                 </mat-checkbox>
             </div>
 
             <mat-form-field
                 *ngIf="form.controls.weaponType.value == WeaponType.Explosive || form.controls.weaponType.value == WeaponType.Grenade">
-                <mat-label for="size" i18n="@@Label.ExplosiveWeaponSize">Size</mat-label>
+                <mat-label for="size">{{ 'Label.ExplosiveWeaponSize' | translate }}</mat-label>
                 <mat-select formControlName="size">
-                    <mat-option *ngFor="let weaponSize of weaponSizes" [value]="weaponSize.value">{{weaponSize.key}}
+                    <mat-option *ngFor="let weaponSize of weaponSizes | async" [value]="weaponSize.value">
+                        {{weaponSize.key}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
 
             <div>
-                <mat-checkbox formControlName="nonLethal" i18n="@@Label.NonLethal">Non lethal</mat-checkbox>
+                <mat-checkbox formControlName="nonLethal">{{ 'Label.NonLethal' | translate }}</mat-checkbox>
             </div>
         </div>
         <div class="tr-actions">
-            <button mat-raised-button type="submit" [disabled]="form.invalid" i18n="@@Label.Validate">Validate</button>
-            <button mat-raised-button type="button" (click)="cancel()" i18n="@@Label.Cancel">Cancel</button>
+            <button mat-raised-button type="submit" [disabled]="form.invalid">{{ 'Label.Validate' | translate
+                }}</button>
+            <button mat-raised-button type="button" (click)="cancel()">{{ 'Label.Cancel' | translate }}</button>
         </div>
     </app-template-full-width>
 </form>

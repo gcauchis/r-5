@@ -1,21 +1,17 @@
 <div *ngIf="combatUnit" style="margin:0px">
-    <div style="margin:0px" *ngIf="meleeWeapons"><span class="weapon-title"><span i18n="@@Label.Melee">Melee</span><span
-                i18n="@@Label.DbDot">:</span></span>
+    <div style="margin:0px" *ngIf="meleeWeapons"><span class="weapon-title">{{ 'Label.Melee' | translate }}{{ 'Label.DbDot' | translate }}</span>
         <app-view-weapon *ngFor="let weapon of meleeWeapons" [weapon]="weapon" [combatUnit]="combatUnit">
         </app-view-weapon>
     </div>
-    <div style="margin:0px" *ngIf="shootWeapons"><span class="weapon-title"><span i18n="@@Label.Shoot">Shoot</span><span
-                i18n="@@Label.DbDot">:</span></span>
+    <div style="margin:0px" *ngIf="shootWeapons"><span class="weapon-title">{{ 'Label.Shoot' | translate }}{{ 'Label.DbDot' | translate }}</span>
         <app-view-weapon *ngFor="let weapon of shootWeapons" [weapon]="weapon" [combatUnit]="combatUnit">
         </app-view-weapon>
     </div>
-    <div style="margin:0px" *ngIf="explosiveWeapons"><span class="weapon-title"><span
-                i18n="@@Label.Explosive">Explosive</span><span i18n="@@Label.DbDot">:</span></span>
+    <div style="margin:0px" *ngIf="explosiveWeapons"><span class="weapon-title">{{ 'Label.Explosive' | translate }}{{ 'Label.DbDot' | translate }}</span>
         <app-view-weapon *ngFor="let weapon of explosiveWeapons" [weapon]="weapon" [combatUnit]="combatUnit">
         </app-view-weapon>
     </div>
-    <div style="margin:0px" *ngIf="grenadeWeapons"><span class="weapon-title"><span
-                i18n="@@Label.Grenade">Grenade</span><span i18n="@@Label.DbDot">:</span></span>
+    <div style="margin:0px" *ngIf="grenadeWeapons"><span class="weapon-title">{{ 'Label.Grenade' | translate }}{{ 'Label.DbDot' | translate }}</span>
         <app-view-weapon *ngFor="let weapon of grenadeWeapons" [weapon]="weapon" [combatUnit]="combatUnit">
         </app-view-weapon>
     </div>

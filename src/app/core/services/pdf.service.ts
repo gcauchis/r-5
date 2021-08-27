@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 import { saveAs } from "file-saver";
 import { PDFImage } from "pdf-lib";
 import { Army } from "../models/army";
@@ -13,6 +14,7 @@ import { EnumUtilsService } from "./enum-utils.service";
 import { PriceService } from "./price.service";
 import { UnitService } from "./unit.service";
 import { VehicleService } from "./vehicle.service";
+import { WeaponService } from "./weapon.service";
 
 @Injectable({
   providedIn: "root",
@@ -21,25 +23,27 @@ export class PdfService {
   constructor(
     private unitService: UnitService,
     private vehicleService: VehicleService,
+    private weaponService: WeaponService,
     private enumUtils: EnumUtilsService,
-    public priceService: PriceService
+    public priceService: PriceService,
+    public translate: TranslateService
   ) {}
 
   public async printArmy(army: Army): Promise<PdfDrawContext> {
     const context = await PdfDrawContext.create();
-    this.appendArmy(context, army);
+    await this.appendArmy(context, army);
     return context;
   }
 
   public async printUnit(unit: Unit): Promise<PdfDrawContext> {
     const context = await PdfDrawContext.create();
-    this.appendUnit(context, unit);
+    await this.appendUnit(context, unit);
     return context;
   }
 
   public async printVehicle(vehicle: Vehicle): Promise<PdfDrawContext> {
     const context = await PdfDrawContext.create();
-    this.appendVehicle(context, vehicle);
+    await this.appendVehicle(context, vehicle);
     return context;
   }
 
@@ -48,8 +52,8 @@ export class PdfService {
     context.drawText(
       army.name +
         " (" +
-        $localize`:@@Label.UnitPrice:Price` +
-        $localize`:@@Label.DbDot::` +
+        (await this.translate.get("Label.UnitPrice").toPromise()) +
+        (await this.translate.get("Label.DbDot").toPromise()) +
         " " +
         (await this.priceService.computeArmy(army)) +
         ")",
@@ -100,7 +104,7 @@ export class PdfService {
     }
 
     context.drawText(
-      `${unit.name} / ${this.enumUtils.tacticalRoleToString(
+      `${unit.name} / ${await this.enumUtils.tacticalRoleToString(
         unit.tacticalRole
       )}`,
       true
@@ -111,7 +115,9 @@ export class PdfService {
     if (nb) {
       context.addHorizontalGap(40);
       context.drawText(
-        $localize`:@@Label.Nbr:Nbr` + $localize`:@@Label.DbDot::` + " ",
+        (await this.translate.get("Label.Nbr").toPromise()) +
+          (await this.translate.get("Label.DbDot").toPromise()) +
+          " ",
         true
       );
       context.drawText(`${nb}`);
@@ -119,15 +125,17 @@ export class PdfService {
     context.lineBreak();
 
     context.drawText(
-      $localize`:@@Label.UnitPrice:Price` + $localize`:@@Label.DbDot::` + " ",
+      (await this.translate.get("Label.UnitPrice").toPromise()) +
+        (await this.translate.get("Label.DbDot").toPromise()) +
+        " ",
       true
     );
     context.drawText(`${this.priceService.compute(unit)}`);
     context.lineBreak();
     if (unit.desc) {
       context.drawText(
-        $localize`:@@Label.Description:Description` +
-          $localize`:@@Label.DbDot::` +
+        (await this.translate.get("Label.Description").toPromise()) +
+          (await this.translate.get("Label.DbDot").toPromise()) +
           " ",
         true
       );
@@ -136,7 +144,9 @@ export class PdfService {
     }
 
     context.drawText(
-      $localize`:@@Label.Move:Move` + $localize`:@@Label.DbDot::` + " ",
+      (await this.translate.get("Label.Move").toPromise()) +
+        (await this.translate.get("Label.DbDot").toPromise()) +
+        " ",
       true
     );
     context.drawText(
@@ -145,15 +155,17 @@ export class PdfService {
     context.lineBreak();
 
     context.drawText(
-      $localize`:@@Label.DQM:DQM` + $localize`:@@Label.DbDot::` + " ",
+      (await this.translate.get("Label.DQM").toPromise()) +
+        (await this.translate.get("Label.DbDot").toPromise()) +
+        " ",
       true
     );
     context.drawText(`${this.enumUtils.diceToString(unit.dqm)}`);
     context.lineBreak();
 
     context.drawText(
-      $localize`:@@Label.Protection:Protection` +
-        $localize`:@@Label.DbDot::` +
+      (await this.translate.get("Label.Protection").toPromise()) +
+        (await this.translate.get("Label.DbDot").toPromise()) +
         " ",
       true
     );
@@ -161,16 +173,21 @@ export class PdfService {
     if (unit.armor) {
       context.drawText(unit.armor.protection);
     } else {
-      context.drawText($localize`:@@Label.NoProtection:No protection`);
+      context.drawText(
+        await this.translate.get("Label.NoProtection").toPromise()
+      );
     }
     context.drawText(
-      " / " + $localize`:@@Label.HP:HP` + $localize`:@@Label.DbDot::` + " ",
+      " / " +
+        (await this.translate.get("Label.HP").toPromise()) +
+        (await this.translate.get("Label.DbDot").toPromise()) +
+        " ",
       true
     );
     context.drawText(`${unit.pv}`);
     context.lineBreak();
 
-    this.appendWeapons(context, unit);
+    await this.appendWeapons(context, unit);
   }
 
   private async appendVehicle(
@@ -201,7 +218,9 @@ export class PdfService {
     }
 
     context.drawText(
-      `${vehicle.name} / ${this.enumUtils.vehicleTypeToString(vehicle.type)}`,
+      `${vehicle.name} / ${await this.enumUtils.vehicleTypeToString(
+        vehicle.type
+      )}`,
       true
     );
     if (vehicle.faction) {
@@ -210,7 +229,9 @@ export class PdfService {
     if (nb) {
       context.addHorizontalGap(40);
       context.drawText(
-        $localize`:@@Label.Nbr:Nbr` + $localize`:@@Label.DbDot::` + " ",
+        (await this.translate.get("Label.Nbr").toPromise()) +
+          (await this.translate.get("Label.DbDot").toPromise()) +
+          " ",
         true
       );
       context.drawText(`${nb}`);
@@ -218,23 +239,29 @@ export class PdfService {
     context.lineBreak();
 
     context.drawText(
-      $localize`:@@Label.UnitPrice:Price` + $localize`:@@Label.DbDot::` + " ",
+      (await this.translate.get("Label.UnitPrice").toPromise()) +
+        (await this.translate.get("Label.DbDot").toPromise()) +
+        " ",
       true
     );
     context.drawText(`${this.priceService.compute(vehicle)}`);
     context.lineBreak();
 
     context.drawText(
-      $localize`:@@Label.MoveType:Move type` +
-        $localize`:@@Label.DbDot::` +
+      (await this.translate.get("Label.MoveType").toPromise()) +
+        (await this.translate.get("Label.DbDot").toPromise()) +
         " ",
       true
     );
-    context.drawText(`${this.enumUtils.moveTypeToString(vehicle.moveType)}`);
+    context.drawText(
+      `${await this.enumUtils.moveTypeToString(vehicle.moveType)}`
+    );
     context.lineBreak();
 
     context.drawText(
-      $localize`:@@Label.Move:Move` + $localize`:@@Label.DbDot::` + " ",
+      (await this.translate.get("Label.Move").toPromise()) +
+        (await this.translate.get("Label.DbDot").toPromise()) +
+        " ",
       true
     );
     context.drawText(
@@ -244,8 +271,8 @@ export class PdfService {
 
     if (vehicle.type == VehicleType.TroopTransport) {
       context.drawText(
-        $localize`:@@Label.TransportSpace:Transport space` +
-          $localize`:@@Label.DbDot::` +
+        (await this.translate.get("Label.TransportSpace").toPromise()) +
+          (await this.translate.get("Label.DbDot").toPromise()) +
           " ",
         true
       );
@@ -254,24 +281,29 @@ export class PdfService {
     }
 
     context.drawText(
-      $localize`:@@Label.Armor:Armor` + $localize`:@@Label.DbDot::` + " ",
+      (await this.translate.get("Label.Armor").toPromise()) +
+        (await this.translate.get("Label.DbDot").toPromise()) +
+        " ",
       true
     );
     context.drawText(`${this.enumUtils.diceToString(vehicle.armor)}`);
     context.drawText(
-      " / " + $localize`:@@Label.SP:SP` + $localize`:@@Label.DbDot::` + " ",
+      " / " +
+        (await this.translate.get("Label.SP").toPromise()) +
+        (await this.translate.get("Label.DbDot").toPromise()) +
+        " ",
       true
     );
     context.drawText(`${vehicle.structure}`);
     context.lineBreak();
 
-    this.appendWeapons(context, vehicle);
+    await this.appendWeapons(context, vehicle);
   }
 
-  private appendWeapons(
+  private async appendWeapons(
     context: PdfDrawContext,
     unit: CombatUnitInterface
-  ): void {
+  ) {
     if (unit.weapons) {
       let meleeWeapons = unit.weapons.filter(
         (w) => w.weaponType == WeaponType.Melee
@@ -279,11 +311,12 @@ export class PdfService {
       if (meleeWeapons.length > 0) {
         context.addVerticalGap(5);
         context.basicDrawTestLine(
-          $localize`:@@Label.Melee:Melee` + $localize`:@@Label.DbDot::`,
+          (await this.translate.get("Label.Melee").toPromise()) +
+            (await this.translate.get("Label.DbDot").toPromise()),
           true
         );
         for (let weapon of meleeWeapons) {
-          this.appendWeapon(context, weapon, unit);
+          await this.appendWeapon(context, weapon, unit);
         }
       }
 
@@ -293,7 +326,8 @@ export class PdfService {
       if (shootWeapons.length > 0) {
         context.addVerticalGap(5);
         context.basicDrawTestLine(
-          $localize`:@@Label.Shoot:Shoot` + $localize`:@@Label.DbDot::`,
+          (await this.translate.get("Label.Shoot").toPromise()) +
+            (await this.translate.get("Label.DbDot").toPromise()),
           true
         );
         for (let weapon of shootWeapons) {
@@ -307,7 +341,8 @@ export class PdfService {
       if (explosiveWeapons.length > 0) {
         context.addVerticalGap(5);
         context.basicDrawTestLine(
-          $localize`:@@Label.Explosive:Explosive` + $localize`:@@Label.DbDot::`,
+          (await this.translate.get("Label.Explosive").toPromise()) +
+            (await this.translate.get("Label.DbDot").toPromise()),
           true
         );
         for (let weapon of explosiveWeapons) {
@@ -321,7 +356,8 @@ export class PdfService {
       if (grenadeWeapons.length > 0) {
         context.addVerticalGap(5);
         context.basicDrawTestLine(
-          $localize`:@@Label.Grenade:Grenade` + $localize`:@@Label.DbDot::`,
+          (await this.translate.get("Label.Grenade").toPromise()) +
+            (await this.translate.get("Label.DbDot").toPromise()),
           true
         );
         for (let weapon of grenadeWeapons) {
@@ -331,11 +367,11 @@ export class PdfService {
     }
   }
 
-  private appendWeapon(
+  private async appendWeapon(
     context: PdfDrawContext,
     weapon: Weapon,
     unit: CombatUnitInterface
-  ): void {
+  ) {
     let weaponStr = weapon.name;
     if (
       weapon.range &&
@@ -344,7 +380,9 @@ export class PdfService {
     ) {
       if (weapon.rangeMin) {
         weaponStr +=
-          `+${weapon.rangeMin}'' ` + $localize`:@@Label.RangeTo:to` + " ";
+          `+${weapon.rangeMin}'' ` +
+          (await this.translate.get("Label.RangeTo").toPromise()) +
+          " ";
       }
       weaponStr += `${weapon.range}''`;
     }
@@ -356,7 +394,7 @@ export class PdfService {
       }
     }
     if (weapon.rule && weapon.rule.length > 0) {
-      weaponStr += ` (${weapon.rule.join(", ")})`;
+      weaponStr += ` (${await this.weaponService.retrieveRules(weapon)})`;
     }
     context.basicDrawTestLine(weaponStr);
   }

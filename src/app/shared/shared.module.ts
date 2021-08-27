@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
+import { TranslateModule } from "@ngx-translate/core";
 import { IconsModule } from "./../icons/icons.module";
 import { MaterialModule } from "./../material/material.module";
 import { TemplatesModule } from "./../templates/templates.module";
@@ -22,8 +23,8 @@ import { UnitSizeToStringPipe } from "./pipes/unit-size-to-string.pipe";
 import { UnitTypeToStringPipe } from "./pipes/unit-type-to-string.pipe";
 import { VehicleRunMovePipe } from "./pipes/vehicle-run-move.pipe";
 import { VehicleTypeToStringPipe } from "./pipes/vehicle-type-to-string.pipe";
+import { WeaponRulesToStringPipe } from "./pipes/weapon-rules-to-string.pipe";
 import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
-import { WeaponRulesToStringPipe } from './pipes/weapon-rules-to-string.pipe';
 
 @NgModule({
   declarations: [
@@ -53,8 +54,10 @@ import { WeaponRulesToStringPipe } from './pipes/weapon-rules-to-string.pipe';
     FormsModule,
     ReactiveFormsModule,
     TemplatesModule,
+    TranslateModule,
   ],
   exports: [
+    CommonModule,
     BrowserModule,
     IconsModule,
     TemplatesModule,
@@ -79,6 +82,7 @@ import { WeaponRulesToStringPipe } from './pipes/weapon-rules-to-string.pipe';
     UnitRunMovePipe,
     VehicleRunMovePipe,
     WeaponRulesToStringPipe,
+    TranslateModule,
   ],
 })
 export class SharedModule {}

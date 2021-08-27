@@ -1,15 +1,15 @@
 <app-template-full-width>
-    <span class="tr-title" i18n="@@Label.Vehicles">Vehicles</span>
+    <span class="tr-title">{{ 'Label.Vehicles' | translate }}</span>
     <div class="tr-content">
         <mat-form-field>
-            <mat-label i18n="@@Label.NameFilter">Name filter</mat-label>
-            <input matInput [(ngModel)]="nameFilter" i18n-placeholder="@@Label.Name" placeholder="Name"
+            <mat-label>{{ 'Label.NameFilter' | translate }}</mat-label>
+            <input matInput [(ngModel)]="nameFilter" placeholder="{{ 'Label.Name' | translate }}"
                 (ngModelChange)='onChangeFilter()' />
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label i18n="@@Label.FactionFilter">Faction filter</mat-label>
-            <input matInput [(ngModel)]="factionFilter" i18n-placeholder="@@Label.Faction" placeholder="Faction"
+            <mat-label>{{ 'Label.FactionFilter' | translate }}</mat-label>
+            <input matInput [(ngModel)]="factionFilter" placeholder="{{ 'Label.Faction' | translate }}"
                 (ngModelChange)='onChangeFilter()' />
         </mat-form-field>
 
@@ -17,7 +17,7 @@
             <caption></caption>
 
             <ng-container matColumnDef="vehicle">
-                <th mat-header-cell *matHeaderCellDef scope="col" i18n="@@Label.Vehicle">Vehicle</th>
+                <th mat-header-cell *matHeaderCellDef scope="col">{{ 'Label.Vehicle' | translate }}</th>
                 <td mat-cell *matCellDef="let vehicle">
                     <app-view-vehicle [vehicle]="vehicle"></app-view-vehicle>
                 </td>
@@ -26,14 +26,14 @@
             <ng-container matColumnDef="edit">
                 <th mat-header-cell *matHeaderCellDef scope="col"></th>
                 <td mat-cell *matCellDef="let vehicle"><a mat-raised-button routerLink="/editVehicle/{{vehicle.id}}"
-                        i18n="@@Label.Edit">Edit</a>
+>{{ 'Label.Edit' | translate }}</a>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="view">
                 <th mat-header-cell *matHeaderCellDef scope="col"></th>
                 <td mat-cell *matCellDef="let vehicle"><a mat-raised-button routerLink="/viewVehicle/{{vehicle.id}}"
-                        i18n="@@Label.See">See</a>
+>{{ 'Label.See' | translate }}</a>
                 </td>
             </ng-container>
 
@@ -48,9 +48,9 @@
                 <th mat-header-cell *matHeaderCellDef scope="col"></th>
                 <td mat-cell *matCellDef="let vehicle">
                     <mat-form-field style="width: 80px;">
-                        <mat-label i18n="@@Label.Number">Number</mat-label>
+                        <mat-label>{{ 'Label.Number' | translate }}</mat-label>
                         <input matInput type="number" min="0" [ngModel]="links[vehicle.id]"
-                            i18n-placeholder="@@Label.Number" placeholder="Number"
+                            placeholder="{{ 'Label.Number' | translate }}"
                             (ngModelChange)="updateLinks(vehicle.id, $event)" />
                     </mat-form-field>
                 </td>
@@ -63,6 +63,6 @@
 
     </div>
     <div class="tr-actions">
-        <a mat-raised-button routerLink="/editVehicle" i18n="@@Label.AddNewVehicle">Add new vehicle</a>
+        <a mat-raised-button routerLink="/editVehicle">{{ 'Label.AddNewVehicle' | translate }}</a>
     </div>
 </app-template-full-width>

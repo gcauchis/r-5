@@ -1,11 +1,11 @@
 <div *ngIf="service">
   {{name}}
-  <button mat-raised-button (click)="exportData()" i18n="@@Label.Export">Export</button>
+  <button mat-raised-button (click)="exportData()">{{ 'Label.Export' | translate }}</button>
   <mat-form-field>
-    <mat-label i18n="@@Label.Import">Import</mat-label>
+    <mat-label>{{ 'Label.Import' | translate }}</mat-label>
     <ngx-mat-file-input [formControl]="fileControl" multiple="false" [accept]="accept">
       <mat-icon ngxMatFileInputIcon>folder</mat-icon>
     </ngx-mat-file-input>
   </mat-form-field>
-  <button mat-raised-button (click)="resetData()" i18n="@@Label.Reset">Reset</button>
+  <button mat-raised-button (click)="resetData()">{{ 'Label.Reset' | translate }}</button>
 </div>

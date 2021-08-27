@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { TranslateService } from "@ngx-translate/core";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { Dice } from "./../../../core/enums/dice.enum";
@@ -27,10 +28,10 @@ export class EditUnitComponent implements OnInit {
   @Output() submited: EventEmitter<Unit> = new EventEmitter<Unit>();
   @Output() canceled: EventEmitter<any> = new EventEmitter<any>();
   dices: any[];
-  unitTypes: any[];
-  unitSizes: any[];
-  moveTypes: any[];
-  tacticalRoles: any[];
+  unitTypes: Promise<any[]>;
+  unitSizes: Promise<any[]>;
+  moveTypes: Promise<any[]>;
+  tacticalRoles: Promise<any[]>;
   /** Pas terrible mais donne acces dans le template */
   TacticalRole = TacticalRole;
 
@@ -44,24 +45,29 @@ export class EditUnitComponent implements OnInit {
     private utils: UtilsService,
     private enumUtils: EnumUtilsService,
     private unitService: UnitService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public translate: TranslateService
   ) {
     this.dices = this.utils.enumToKeyValue(Dice, enumUtils.diceToString);
-    this.unitTypes = this.utils.enumToKeyValue(
+    this.unitTypes = this.utils.enumToKeyValueTranslate(
+      this.translate,
       UnitType,
-      this.enumUtils.unitTypeToString
+      this.enumUtils.unitTypeToBunbleString
     );
-    this.unitSizes = this.utils.enumToKeyValue(
+    this.unitSizes = this.utils.enumToKeyValueTranslate(
+      this.translate,
       UnitSize,
-      this.enumUtils.unitSizeToString
+      this.enumUtils.unitSizeToBunbleString
     );
-    this.moveTypes = this.utils.enumToKeyValue(
+    this.moveTypes = this.utils.enumToKeyValueTranslate(
+      this.translate,
       MoveType,
-      this.enumUtils.moveTypeToString
+      this.enumUtils.moveTypeToBunbleString
     );
-    this.tacticalRoles = this.utils.enumToKeyValue(
+    this.tacticalRoles = this.utils.enumToKeyValueTranslate(
+      this.translate,
       TacticalRole,
-      this.enumUtils.tacticalRoleToString
+      this.enumUtils.tacticalRoleToBunbleString
     );
   }
 

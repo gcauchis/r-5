@@ -1,0 +1,12 @@
+find . -name *.html | grep -v node_modules | grep -v dist | xargs -i git checkout {}
+find . -name *.html | grep -v node_modules | grep -v dist | xargs sed -i -E "s#<span i18n=\"@@Label.([^\"]*)\">[^<]+</span>#{{ 'Label.\1' | translate }}#"
+find . -name *.html | grep -v node_modules | grep -v dist | xargs sed -i -E "$!N;s#<span\s+i18n=\"@@Label.([^\"]*)\">[^<]+</span>#{{ 'Label.\1' | translate }}#;P;D"
+find . -name *.html | grep -v node_modules | grep -v dist | xargs sed -i -E "s#\s+i18n=\"@@Label.([^\"]*)\">[^<]+<#>{{ 'Label.\1' | translate }}<#"
+find . -name *.html | grep -v node_modules | grep -v dist | xargs sed -i -E "s#i18n-placeholder=\"@@Label.([^\"]*)\"\s+placeholder=\"[^\"]*\"#placeholder=\"{{ 'Label.\1' | translate }}\"#"
+find . -name *.html | grep -v node_modules | grep -v dist | xargs sed -i -E "$!N;s#i18n-placeholder=\"@@Label.([^\"]*)\"\s+placeholder=\"[^\"]*\"#placeholder=\"{{ 'Label.\1' | translate }}\"#;P;D"
+find . -name *.html | grep -v node_modules | grep -v dist | xargs sed -i -E "s#i18n-name=\"@@Label.([^\"]*)\"\s+name=\"[^\"]*\"#name=\"{{ 'Label.\1' | translate }}\"#"
+
+find . -name *.ts | grep -v node_modules/ | grep -v dist/ | xargs -i git checkout {}
+
+ sed -i -E "s#\$localize\`:@@Label.([^:]*):[^\`]*\`#(await this.translate.get(\"Label.\1\").toPromise())#" src/app/core/services/pdf.service.ts
+ sed -i -E "s#\$localize\`:@@Label.([^:]*):[^\`]*\`#(await this.translate.get(\"Label.\1\").toPromise())#" src/app/core/services/weapon.service.ts

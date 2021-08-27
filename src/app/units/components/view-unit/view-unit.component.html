@@ -1,27 +1,26 @@
 <app-view-imaged *ngIf="unit" [imageContainer]="unit" [pdfName]="unit.name">
     <p class="unit-line">
-        <span class="unit-title">{{unit.name}} / {{unit.tacticalRole | tacticalRoleToString}} <span
+        <span class="unit-title">{{unit.name}} / {{unit.tacticalRole | tacticalRoleToString | async}} <span
                 *ngIf="unit.faction"> ({{unit.faction}})</span></span>
-        <span *ngIf="unitCount" class="unit-number"><span class="unit-title"> <span i18n="@@Label.Nbr">Nbr</span><span
-                    i18n="@@Label.DbDot">:</span></span> {{unitCount}}</span>
+        <span *ngIf="unitCount" class="unit-number"><span class="unit-title"> {{ 'Label.Nbr' | translate }}{{
+                'Label.DbDot' | translate }}</span> {{unitCount}}</span>
     </p>
-    <p class="unit-line"><span class="unit-title"><span i18n="@@Label.Move">Move</span><span
-                i18n="@@Label.DbDot">:</span></span>
+    <p class="unit-line"><span class="unit-title">{{ 'Label.Move' | translate }}{{ 'Label.DbDot' | translate }}</span>
         {{unit.tacticalMove}}’’/{{unit | unitRunMove}}’’ +1D4’’</p>
-    <p class="unit-line"><span class="unit-title"><span i18n="@@Label.DQM">DQM</span><span
-                i18n="@@Label.DbDot">:</span></span> {{unit.dqm | diceToString}}</p>
+    <p class="unit-line"><span class="unit-title">{{ 'Label.DQM' | translate }}{{ 'Label.DbDot' | translate }}</span>
+        {{unit.dqm | diceToString}}</p>
     <app-view-weapons [combatUnit]="unit"></app-view-weapons>
-    <p class="unit-line"><span class="unit-title"><span i18n="@@Label.Protection">Protection</span><span
-                i18n="@@Label.DbDot">:</span></span><span *ngIf="unit.armor; else noProtection">
+    <p class="unit-line"><span class="unit-title">{{ 'Label.Protection' | translate }}{{ 'Label.DbDot' | translate
+            }}</span><span *ngIf="unit.armor; else noProtection">
             {{unit.armor.protection}}</span>
-        <ng-template #noProtection> <span i18n="@@Label.NoProtection">No protection</span></ng-template> <span
-            class="unit-title"> / <span i18n="@@Label.HP">HP</span><span i18n="@@Label.DbDot">:</span></span>
+        <ng-template #noProtection> {{ 'Label.NoProtection' | translate }}</ng-template> <span class="unit-title"> / {{
+            'Label.HP' | translate }}{{ 'Label.DbDot' | translate }}</span>
         {{unit.pv}}
     </p>
-    <p class="unit-line"><span class="unit-title"><span i18n="@@Label.UnitPrice">Price</span><span
-                i18n="@@Label.DbDot">:</span></span> {{unit | priceCombatUnit}}</p>
-    <p class="unit-line" *ngIf="unit.desc"><span class="unit-title"><span
-                i18n="@@Label.Description">Description</span><span i18n="@@Label.DbDot">:</span></span> {{unit.desc}}
+    <p class="unit-line"><span class="unit-title">{{ 'Label.UnitPrice' | translate }}{{ 'Label.DbDot' | translate
+            }}</span> {{unit | priceCombatUnit}}</p>
+    <p class="unit-line" *ngIf="unit.desc"><span class="unit-title">{{ 'Label.Description' | translate }}{{
+            'Label.DbDot' | translate }}</span> {{unit.desc}}
     </p>
 </app-view-imaged>
 <app-show-pdf *ngIf="showPdf && pdfContext" [pdfDrawContext]="pdfContext" pdfName="{{unit.name}}.pdf"></app-show-pdf>

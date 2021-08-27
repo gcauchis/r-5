@@ -8,13 +8,17 @@ import { WeaponService } from "./../../core/services/weapon.service";
 export class WeaponRulesToStringPipe implements PipeTransform {
   constructor(private weaponService: WeaponService) {}
 
-  transform(weapon: Weapon, useParenthesis: boolean = true): string {
-    let rules = this.weaponService.retrieveRules(weapon);
-    let result = "";
-    if (rules != null) {
-      result = rules.join(", ");
-      if (useParenthesis) result = "(" + result + ")";
-    }
-    return result;
+  async transform(
+    weapon: Weapon,
+    useParenthesis: boolean = true
+  ): Promise<string> {
+    return this.weaponService.retrieveRules(weapon).then((rules) => {
+      let result = "";
+      if (rules != null) {
+        result = rules.join(", ");
+        if (useParenthesis) result = "(" + result + ")";
+      }
+      return result;
+    });
   }
 }

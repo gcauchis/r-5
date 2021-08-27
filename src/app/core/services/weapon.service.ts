@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import jsonWeapons from "../../resources/weapons.json";
@@ -15,7 +16,10 @@ const LOCAL_KEY: string = "weapons";
 export class WeaponService extends AbstractCrudService<Weapon> {
   private rules$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
-  constructor(localStorage: LocalStorageService) {
+  constructor(
+    localStorage: LocalStorageService,
+    public translate: TranslateService
+  ) {
     super(localStorage, LOCAL_KEY);
     this.collection.subscribe((weapons) =>
       this.rules$.next(
@@ -71,17 +75,20 @@ export class WeaponService extends AbstractCrudService<Weapon> {
     return new Weapon(obj);
   }
 
-  public retrieveRules(weapon: Weapon): string[] {
+  public async retrieveRules(weapon: Weapon): Promise<string[]> {
     let rules = [];
     if (weapon) {
-      if (weapon.assault) rules.push($localize`:@@Label.Assault:Assault`);
-      if (weapon.heavy) rules.push($localize`:@@Label.Heavy:Heavy`);
-      if (weapon.cover) rules.push($localize`:@@Label.Cover:Cover`);
+      if (weapon.assault)
+        rules.push(await this.translate.get("Label.Assault").toPromise());
+      if (weapon.heavy)
+        rules.push(await this.translate.get("Label.Heavy").toPromise());
+      if (weapon.cover)
+        rules.push(await this.translate.get("Label.Cover").toPromise());
       if (weapon.nonLethal)
-        rules.push($localize`:@@Label.NonLethal:Non lethal`);
+        rules.push(await this.translate.get("Label.NonLethal").toPromise());
       if (weapon.rule) weapon.rule.forEach((rule) => rules.push(rule));
     }
     if (rules.length <= 0) rules = null;
-    return rules;
+    return Promise.resolve(rules);
   }
 }
