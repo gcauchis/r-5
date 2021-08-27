@@ -1,13 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-nav",
   templateUrl: "./nav.component.html",
   styleUrls: ["./nav.component.css"],
 })
-export class NavComponent implements OnInit {
-  constructor(public translate: TranslateService) {}
-
-  ngOnInit(): void {}
-}
+export class NavComponent {}

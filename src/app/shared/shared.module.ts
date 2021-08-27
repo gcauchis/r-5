@@ -25,6 +25,7 @@ import { VehicleRunMovePipe } from "./pipes/vehicle-run-move.pipe";
 import { VehicleTypeToStringPipe } from "./pipes/vehicle-type-to-string.pipe";
 import { WeaponRulesToStringPipe } from "./pipes/weapon-rules-to-string.pipe";
 import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
+import { ChangeLanguageComponent } from './components/change-language/change-language.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
     UnitRunMovePipe,
     VehicleRunMovePipe,
     WeaponRulesToStringPipe,
+    ChangeLanguageComponent,
   ],
   imports: [
     CommonModule,
@@ -83,6 +85,7 @@ import { WeaponTypeToStringPipe } from "./pipes/weapon-type-to-string.pipe";
     VehicleRunMovePipe,
     WeaponRulesToStringPipe,
     TranslateModule,
+    ChangeLanguageComponent,
   ],
 })
 export class SharedModule {}

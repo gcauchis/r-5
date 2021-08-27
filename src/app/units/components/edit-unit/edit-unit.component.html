@@ -64,7 +64,8 @@
                     <mat-form-field>
                         <mat-label for="unitType">{{ 'Label.UnitType' | translate }}</mat-label>
                         <mat-select formControlName="unitType">
-                            <mat-option *ngFor="let unitType of unitTypes" [value]="unitType.value">{{unitType.key}}
+                            <mat-option *ngFor="let unitType of unitTypes | async" [value]="unitType.value">
+                                {{unitType.key}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -72,7 +73,8 @@
                     <mat-form-field>
                         <mat-label for="size">{{ 'Label.UnitSize' | translate }}</mat-label>
                         <mat-select formControlName="size">
-                            <mat-option *ngFor="let unitSize of unitSizes" [value]="unitSize.value">{{unitSize.key}}
+                            <mat-option *ngFor="let unitSize of unitSizes | async" [value]="unitSize.value">
+                                {{unitSize.key}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field><br>

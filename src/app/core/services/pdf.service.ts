@@ -112,12 +112,11 @@ export class PdfService {
     if (unit.faction) {
       context.drawText(` (${unit.faction})`, true);
     }
+    let dbDotStr = await this.translate.get("Label.DbDot").toPromise();
     if (nb) {
       context.addHorizontalGap(40);
       context.drawText(
-        (await this.translate.get("Label.Nbr").toPromise()) +
-          (await this.translate.get("Label.DbDot").toPromise()) +
-          " ",
+        (await this.translate.get("Label.Nbr").toPromise()) + dbDotStr + " ",
         true
       );
       context.drawText(`${nb}`);
@@ -126,7 +125,7 @@ export class PdfService {
 
     context.drawText(
       (await this.translate.get("Label.UnitPrice").toPromise()) +
-        (await this.translate.get("Label.DbDot").toPromise()) +
+        dbDotStr +
         " ",
       true
     );
@@ -135,7 +134,7 @@ export class PdfService {
     if (unit.desc) {
       context.drawText(
         (await this.translate.get("Label.Description").toPromise()) +
-          (await this.translate.get("Label.DbDot").toPromise()) +
+          dbDotStr +
           " ",
         true
       );
@@ -144,9 +143,7 @@ export class PdfService {
     }
 
     context.drawText(
-      (await this.translate.get("Label.Move").toPromise()) +
-        (await this.translate.get("Label.DbDot").toPromise()) +
-        " ",
+      (await this.translate.get("Label.Move").toPromise()) + dbDotStr + " ",
       true
     );
     context.drawText(
@@ -155,9 +152,7 @@ export class PdfService {
     context.lineBreak();
 
     context.drawText(
-      (await this.translate.get("Label.DQM").toPromise()) +
-        (await this.translate.get("Label.DbDot").toPromise()) +
-        " ",
+      (await this.translate.get("Label.DQM").toPromise()) + dbDotStr + " ",
       true
     );
     context.drawText(`${this.enumUtils.diceToString(unit.dqm)}`);
@@ -165,7 +160,7 @@ export class PdfService {
 
     context.drawText(
       (await this.translate.get("Label.Protection").toPromise()) +
-        (await this.translate.get("Label.DbDot").toPromise()) +
+        dbDotStr +
         " ",
       true
     );
@@ -180,7 +175,7 @@ export class PdfService {
     context.drawText(
       " / " +
         (await this.translate.get("Label.HP").toPromise()) +
-        (await this.translate.get("Label.DbDot").toPromise()) +
+        dbDotStr +
         " ",
       true
     );
@@ -226,12 +221,11 @@ export class PdfService {
     if (vehicle.faction) {
       context.drawText(` (${vehicle.faction})`, true);
     }
+    let dbDotStr = await this.translate.get("Label.DbDot").toPromise();
     if (nb) {
       context.addHorizontalGap(40);
       context.drawText(
-        (await this.translate.get("Label.Nbr").toPromise()) +
-          (await this.translate.get("Label.DbDot").toPromise()) +
-          " ",
+        (await this.translate.get("Label.Nbr").toPromise()) + dbDotStr + " ",
         true
       );
       context.drawText(`${nb}`);
@@ -240,7 +234,7 @@ export class PdfService {
 
     context.drawText(
       (await this.translate.get("Label.UnitPrice").toPromise()) +
-        (await this.translate.get("Label.DbDot").toPromise()) +
+        dbDotStr +
         " ",
       true
     );
@@ -248,9 +242,7 @@ export class PdfService {
     context.lineBreak();
 
     context.drawText(
-      (await this.translate.get("Label.MoveType").toPromise()) +
-        (await this.translate.get("Label.DbDot").toPromise()) +
-        " ",
+      (await this.translate.get("Label.MoveType").toPromise()) + dbDotStr + " ",
       true
     );
     context.drawText(
@@ -259,9 +251,7 @@ export class PdfService {
     context.lineBreak();
 
     context.drawText(
-      (await this.translate.get("Label.Move").toPromise()) +
-        (await this.translate.get("Label.DbDot").toPromise()) +
-        " ",
+      (await this.translate.get("Label.Move").toPromise()) + dbDotStr + " ",
       true
     );
     context.drawText(
@@ -272,7 +262,7 @@ export class PdfService {
     if (vehicle.type == VehicleType.TroopTransport) {
       context.drawText(
         (await this.translate.get("Label.TransportSpace").toPromise()) +
-          (await this.translate.get("Label.DbDot").toPromise()) +
+          dbDotStr +
           " ",
         true
       );
@@ -281,16 +271,14 @@ export class PdfService {
     }
 
     context.drawText(
-      (await this.translate.get("Label.Armor").toPromise()) +
-        (await this.translate.get("Label.DbDot").toPromise()) +
-        " ",
+      (await this.translate.get("Label.Armor").toPromise()) + dbDotStr + " ",
       true
     );
     context.drawText(`${this.enumUtils.diceToString(vehicle.armor)}`);
     context.drawText(
       " / " +
         (await this.translate.get("Label.SP").toPromise()) +
-        (await this.translate.get("Label.DbDot").toPromise()) +
+        dbDotStr +
         " ",
       true
     );
@@ -308,11 +296,11 @@ export class PdfService {
       let meleeWeapons = unit.weapons.filter(
         (w) => w.weaponType == WeaponType.Melee
       );
+      let dbDotStr = await this.translate.get("Label.DbDot").toPromise();
       if (meleeWeapons.length > 0) {
         context.addVerticalGap(5);
         context.basicDrawTestLine(
-          (await this.translate.get("Label.Melee").toPromise()) +
-            (await this.translate.get("Label.DbDot").toPromise()),
+          (await this.translate.get("Label.Melee").toPromise()) + dbDotStr,
           true
         );
         for (let weapon of meleeWeapons) {
@@ -326,8 +314,7 @@ export class PdfService {
       if (shootWeapons.length > 0) {
         context.addVerticalGap(5);
         context.basicDrawTestLine(
-          (await this.translate.get("Label.Shoot").toPromise()) +
-            (await this.translate.get("Label.DbDot").toPromise()),
+          (await this.translate.get("Label.Shoot").toPromise()) + dbDotStr,
           true
         );
         for (let weapon of shootWeapons) {
@@ -341,8 +328,7 @@ export class PdfService {
       if (explosiveWeapons.length > 0) {
         context.addVerticalGap(5);
         context.basicDrawTestLine(
-          (await this.translate.get("Label.Explosive").toPromise()) +
-            (await this.translate.get("Label.DbDot").toPromise()),
+          (await this.translate.get("Label.Explosive").toPromise()) + dbDotStr,
           true
         );
         for (let weapon of explosiveWeapons) {
@@ -356,8 +342,7 @@ export class PdfService {
       if (grenadeWeapons.length > 0) {
         context.addVerticalGap(5);
         context.basicDrawTestLine(
-          (await this.translate.get("Label.Grenade").toPromise()) +
-            (await this.translate.get("Label.DbDot").toPromise()),
+          (await this.translate.get("Label.Grenade").toPromise()) + dbDotStr,
           true
         );
         for (let weapon of grenadeWeapons) {
