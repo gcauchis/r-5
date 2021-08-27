@@ -407,11 +407,7 @@ export class PdfService {
       imgBase64.includes("image/jpeg")
     )
       result = context.document.embedJpg(imgBase64);
-    else
-      result = new Promise<PDFImage>((resolve, reject) =>
-        reject("Unsuported image type")
-      );
-
+    else result = Promise.reject("Unsuported image type");
     return result;
   }
 }
