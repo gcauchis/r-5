@@ -20,13 +20,13 @@
 
             <mat-form-field *ngIf="form.controls.weaponType.value != WeaponType.Melee">
                 <mat-label for="range">{{ 'Label.Range' | translate }}</mat-label>
-                <input matInput type="number" min="0" max="100" formControlName="range" placeholder="Portée" />
+                <input matInput type="number" min="0" max="100" formControlName="range" placeholder="{{ 'Label.Range' | translate }}" />
             </mat-form-field>
 
             <mat-form-field *ngIf="form.controls.weaponType.value == WeaponType.Explosive">
                 <mat-label for="rangeMin">{{ 'Label.MinimumRange' | translate }}</mat-label>
                 <input matInput type="number" min="0" [max]="form.controls.range.value" formControlName="rangeMin"
-                    placeholder="Portée minimum" />
+                    placeholder="{{ 'Label.MinimumRange' | translate }}" />
             </mat-form-field><br>
 
             <mat-form-field>
