@@ -51,7 +51,7 @@
             <div class="rules">
                 <div class="rulerow" *ngFor="let rule of form.controls.rule.value">
                     <span class="rule">{{rule}}</span>
-                    <button mat-mini-fab (click)="removeRule(rule)" color="warn" class="ruleicon">
+                    <button mat-icon-button (click)="removeRule(rule)" color="warn" class="ruleicon">
                         <app-icon-delete></app-icon-delete>
                     </button>
                 </div>
