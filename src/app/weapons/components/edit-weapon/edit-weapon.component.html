@@ -20,7 +20,8 @@
 
             <mat-form-field *ngIf="form.controls.weaponType.value != WeaponType.Melee">
                 <mat-label for="range">{{ 'Label.Range' | translate }}</mat-label>
-                <input matInput type="number" min="0" max="100" formControlName="range" placeholder="{{ 'Label.Range' | translate }}" />
+                <input matInput type="number" min="0" max="100" formControlName="range"
+                    placeholder="{{ 'Label.Range' | translate }}" />
             </mat-form-field>
 
             <mat-form-field *ngIf="form.controls.weaponType.value == WeaponType.Explosive">
@@ -37,7 +38,7 @@
 
             <mat-checkbox formControlName="superPower">{{ 'Label.SuperPower' | translate }}</mat-checkbox><br>
 
-            <mat-form-field>
+            <!-- <mat-form-field>
                 <mat-label>{{ 'Label.SpecialRules' | translate }}</mat-label>
                 <input matInput type="text" placeholder="{{ 'Label.ChooseARule' | translate }}"
                     [formControl]="rulesControl" [matAutocomplete]="auto" [(ngModel)]="currentRule"
@@ -55,7 +56,26 @@
                         <app-icon-delete></app-icon-delete>
                     </button>
                 </div>
-            </div>
+            </div> -->
+
+            <mat-form-field class="full-width">
+                <mat-label>{{ 'Label.SpecialRules' | translate }}</mat-label>
+                <mat-chip-list #chipRuleList>
+                    <mat-chip *ngFor="let rule of form.controls.rule.value" [removable]="true"
+                        (removed)="removeRule(rule)">
+                        {{rule}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input #ruleInput type="text" placeholder="{{ 'Label.ChooseARule' | translate }}"
+                        [formControl]="rulesControl" [matChipInputFor]="chipRuleList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addRuleOnBlur"
+                        (matChipInputTokenEnd)="addRule($event)" [matAutocomplete]="autoRules" />
+                    <mat-autocomplete #autoRules="matAutocomplete" (optionSelected)="selectedRule($event)">
+                        <mat-option *ngFor="let rule of rulesFilteredOptions | async" [value]="rule">{{rule}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-chip-list>
+            </mat-form-field>
 
             <div>
                 <mat-checkbox *ngIf="form.controls.weaponType.value != WeaponType.Melee" formControlName="assault">

@@ -8,7 +8,7 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=gcauchis_r-5&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=gcauchis_r-5)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=gcauchis_r-5&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=gcauchis_r-5)
 
-# Getting started
+## Getting started
 
 Require `npm` to be installed. See [https://nodejs.org](https://nodejs.org).
 

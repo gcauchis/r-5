@@ -1,10 +1,23 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from "@angular/core";
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
+import {
+  /*MatChipEditedEvent,*/ MatChipInputEvent,
+} from "@angular/material/chips";
 import { TranslateService } from "@ngx-translate/core";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
@@ -26,10 +39,13 @@ export class EditWeaponComponent implements OnInit {
   weaponTypes: Promise<any[]>;
   weaponSizes: Promise<any[]>;
   possibleRules: string[];
-  currentRule: string;
+  addRuleOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   rulesControl = new FormControl();
   rulesFilteredOptions: Observable<string[]>;
+
+  @ViewChild("ruleInput") ruleInput: ElementRef;
 
   @Output() submited: EventEmitter<Weapon> = new EventEmitter<Weapon>();
   @Output() canceled: EventEmitter<any> = new EventEmitter<any>();
@@ -60,7 +76,9 @@ export class EditWeaponComponent implements OnInit {
     this.weaponService.rules.subscribe((res) => (this.possibleRules = res));
     this.rulesFilteredOptions = this.rulesControl.valueChanges.pipe(
       startWith(""),
-      map((value) => this._filter(value))
+      map((value: string | null) =>
+        value ? this._filter(value) : this.possibleRules.slice()
+      )
     );
     this.form = this.fb.group({
       id: [this.weapon.id],
@@ -83,22 +101,35 @@ export class EditWeaponComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterRule = value.toLowerCase();
-    return this.possibleRules.filter((rule) =>
-      rule.toLowerCase().includes(filterRule)
+    return this.possibleRules.filter(
+      (rule) => rule.toLowerCase().includes(filterRule)
+      // rule.toLowerCase().indexOf(filterRule) === 0
     );
   }
 
-  addRule(): void {
-    if (this.currentRule && this.currentRule.length > 0) {
-      this.form.controls.rule.value.push(this.currentRule);
-      this.currentRule = "";
+  addRule(event: MatChipInputEvent): void {
+    const value = (event.value || "").trim();
+
+    // Add our rule
+    if (value) {
+      this.form.controls.rule.value.push(value);
     }
+
+    // Clear the input value
+    event.input.value = "";
+    this.rulesControl.setValue(null);
   }
 
   removeRule(rule: string): void {
     this.form.controls.rule.setValue(
       this.form.controls.rule.value.filter((r) => r != rule)
     );
+  }
+
+  selectedRule(event: MatAutocompleteSelectedEvent): void {
+    this.ruleInput.nativeElement.value = "";
+    this.rulesControl.setValue(null);
+    this.form.controls.rule.value.push(event.option.viewValue);
   }
 
   submit(): void {

@@ -1,18 +1,4 @@
-.rules {
-  width: fit-content;
+.full-width {
+    width: 100%;
 }
-
-.rulerow::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.rule {
-  float: left;
-}
-
-.ruleicon {
-  float: right;
-  margin: 2px;
-}
+  
