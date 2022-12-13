@@ -26,8 +26,8 @@ export class MemoryOfServiceComponent<T extends IdentitfiableInterface>
   ngOnInit() {
     this.fileControl.valueChanges.subscribe((file: any) => {
       this.loadPath = file;
-      let fileReader: FileReader = new FileReader();
-      let self = this;
+      const fileReader: FileReader = new FileReader();
+      const self = this;
       fileReader.onloadend = function (x) {
         self.service.importData(JSON.parse(String(fileReader.result)));
       };
@@ -41,13 +41,13 @@ export class MemoryOfServiceComponent<T extends IdentitfiableInterface>
   }
 
   public exportData(fileName = this.name + ".json"): void {
-    let content = JSON.stringify(this.service.exportableData);
-    var blob = new Blob([content], { type: "application/json" });
+    const content = JSON.stringify(this.service.exportableData);
+    const blob = new Blob([content], { type: "application/json" });
     saveAs(blob, fileName);
   }
 
   public blobToFile(blob: Blob, fileName: string): File {
-    var file: any = blob;
+    const file: any = blob;
     //A Blob() is almost a File() - it's just missing the two properties below which we will add
     file.lastModifiedDate = new Date();
     file.name = fileName;

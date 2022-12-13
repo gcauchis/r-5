@@ -34,11 +34,11 @@ export class EditImageComponent implements OnInit {
 
     this.fileControl.valueChanges.subscribe((file: any) => {
       this.imgPath = file;
-      let fileReader: FileReader = new FileReader();
-      let self = this;
+      const fileReader: FileReader = new FileReader();
+      const self = this;
       fileReader.onloadend = function (x) {
-        let blob = new Blob([fileReader.result], { type: file.type });
-        var readerBlob = new FileReader();
+        const blob = new Blob([fileReader.result], { type: file.type });
+        const readerBlob = new FileReader();
         readerBlob.readAsDataURL(blob);
         readerBlob.onloadend = function () {
           self.imgBase64 = readerBlob.result;

@@ -34,8 +34,8 @@ export class EnumUtilsService {
     value: any,
     keyFunction: (enumValue: any) => string
   ): Promise<string> {
-    let key = keyFunction(value);
-    if (key == null) return new Promise((resolve) => resolve(null));
+    const key = keyFunction(value);
+    if (key == null) return Promise.resolve(null);
     else return this.translate.get(key).toPromise();
   }
 

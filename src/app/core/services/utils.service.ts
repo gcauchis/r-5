@@ -37,6 +37,6 @@ export class UtilsService {
           value: enumVal,
         });
     }
-    return new Promise((resole) => resole(keyValue));
+    return Promise.resolve(keyValue);
   }
 }
