@@ -111,8 +111,6 @@ export class EditWeaponComponent implements OnInit {
     const input = event.input;
     const value = event.value;
 
-    console.log("addRule: " + value);
-
     // Add our rule
     if ((value || "").trim()) {
       this.form.controls.rule.value.push(value.trim());
@@ -133,7 +131,6 @@ export class EditWeaponComponent implements OnInit {
   }
 
   selectedRule(event: MatAutocompleteSelectedEvent): void {
-    console.log("selectedRule: " + event.option.viewValue);
     this.form.controls.rule.value.push(event.option.viewValue);
     this.ruleInput.nativeElement.value = "";
     this.rulesControl.setValue(null);
