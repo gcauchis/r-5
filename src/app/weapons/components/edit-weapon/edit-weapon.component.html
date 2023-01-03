@@ -61,20 +61,26 @@
             <mat-form-field class="full-width">
                 <mat-label>{{ 'Label.SpecialRules' | translate }}</mat-label>
                 <mat-chip-list #chipRuleList>
-                    <mat-chip *ngFor="let rule of form.controls.rule.value" [removable]="true"
+                    <mat-chip *ngFor="let rule of form.controls.rule.value"
+                        [removable]="true"
                         (removed)="removeRule(rule)">
-                        {{rule}}
-                        <mat-icon matChipRemove>cancel</mat-icon>
+                            {{rule}} <mat-icon matChipRemove>cancel</mat-icon>
                     </mat-chip>
-                    <input #ruleInput type="text" placeholder="{{ 'Label.ChooseARule' | translate }}"
-                        [formControl]="rulesControl" [matChipInputFor]="chipRuleList"
-                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addRuleOnBlur"
-                        (matChipInputTokenEnd)="addRule($event)" [matAutocomplete]="autoRules" />
-                    <mat-autocomplete #autoRules="matAutocomplete" (optionSelected)="selectedRule($event)">
-                        <mat-option *ngFor="let rule of rulesFilteredOptions | async" [value]="rule">{{rule}}
-                        </mat-option>
-                    </mat-autocomplete>
+                    <input #ruleInput
+                        type="text"
+                        placeholder="{{ 'Label.ChooseARule' | translate }}"
+                        [formControl]="rulesControl"
+                        [matChipInputFor]="chipRuleList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addRuleOnBlur"
+                        (matChipInputTokenEnd)="addRule($event)"
+                        [matAutocomplete]="autoRules" />
                 </mat-chip-list>
+                <mat-autocomplete #autoRules="matAutocomplete" (optionSelected)="selectedRule($event)">
+                    <mat-option *ngFor="let rule of rulesFilteredOptions | async" [value]="rule">
+                        {{rule}}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
 
             <div>

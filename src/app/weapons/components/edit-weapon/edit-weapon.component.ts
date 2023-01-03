@@ -75,7 +75,7 @@ export class EditWeaponComponent implements OnInit {
   ngOnInit(): void {
     this.weaponService.rules.subscribe((res) => (this.possibleRules = res));
     this.rulesFilteredOptions = this.rulesControl.valueChanges.pipe(
-      startWith(""),
+      startWith(),
       map((value: string | null) =>
         value ? this._filter(value) : this.possibleRules.slice()
       )
@@ -108,15 +108,19 @@ export class EditWeaponComponent implements OnInit {
   }
 
   addRule(event: MatChipInputEvent): void {
-    const value = (event.value || "").trim();
+    const input = event.input;
+    const value = event.value;
 
     // Add our rule
-    if (value) {
-      this.form.controls.rule.value.push(value);
+    if ((value || '').trim()) {
+      this.form.controls.rule.value.push(value.trim());
     }
 
-    // Clear the input value
-    event.input.value = "";
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
     this.rulesControl.setValue(null);
   }
 
@@ -127,9 +131,9 @@ export class EditWeaponComponent implements OnInit {
   }
 
   selectedRule(event: MatAutocompleteSelectedEvent): void {
+    this.form.controls.rule.value.push(event.option.viewValue);
     this.ruleInput.nativeElement.value = "";
     this.rulesControl.setValue(null);
-    this.form.controls.rule.value.push(event.option.viewValue);
   }
 
   submit(): void {
