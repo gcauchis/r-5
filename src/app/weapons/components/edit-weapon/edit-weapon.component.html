@@ -38,26 +38,6 @@
 
             <mat-checkbox formControlName="superPower">{{ 'Label.SuperPower' | translate }}</mat-checkbox><br>
 
-            <!-- <mat-form-field>
-                <mat-label>{{ 'Label.SpecialRules' | translate }}</mat-label>
-                <input matInput type="text" placeholder="{{ 'Label.ChooseARule' | translate }}"
-                    [formControl]="rulesControl" [matAutocomplete]="auto" [(ngModel)]="currentRule"
-                    (keyup.enter)="addRule()">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let rule of rulesFilteredOptions | async" [value]="rule">{{rule}}</mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-            <button mat-raised-button (click)="addRule()" type="button">{{ 'Label.AddARule' | translate }}</button>
-
-            <div class="rules">
-                <div class="rulerow" *ngFor="let rule of form.controls.rule.value">
-                    <span class="rule">{{rule}}</span>
-                    <button mat-icon-button (click)="removeRule(rule)" color="warn" class="ruleicon">
-                        <app-icon-delete></app-icon-delete>
-                    </button>
-                </div>
-            </div> -->
-
             <mat-form-field class="full-width">
                 <mat-label>{{ 'Label.SpecialRules' | translate }}</mat-label>
                 <mat-chip-list #chipRuleList>
