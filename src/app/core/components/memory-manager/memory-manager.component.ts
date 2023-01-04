@@ -9,7 +9,7 @@ import { WeaponService } from "./../../services/weapon.service";
   templateUrl: "./memory-manager.component.html",
   styleUrls: ["./memory-manager.component.scss"],
 })
-export class MemoryManagerComponent implements OnInit {
+export class MemoryManagerComponent {
   constructor(
     public weaponService: WeaponService,
     public unitService: UnitService,
@@ -17,5 +17,4 @@ export class MemoryManagerComponent implements OnInit {
     public armyService: ArmyService
   ) {}
 
-  ngOnInit() {}
 }

@@ -56,5 +56,7 @@ export class MemoryOfServiceComponent<T extends IdentitfiableInterface>
     return <File>blob;
   }
 
-  public importData(): void {}
+  public importData(): void {
+    // TODO
+  }
 }
