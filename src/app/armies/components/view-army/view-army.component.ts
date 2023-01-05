@@ -12,7 +12,7 @@ import { VehicleService } from "./../../../core/services/vehicle.service";
   templateUrl: "./view-army.component.html",
   styleUrls: ["./view-army.component.css"],
 })
-export class ViewArmyComponent implements OnInit {
+export class ViewArmyComponent {
   @Input() army: Army;
   units: Unit[] = [];
   unitsCount: any = {};
@@ -29,8 +29,6 @@ export class ViewArmyComponent implements OnInit {
     private vehicleService: VehicleService,
     private pdfService: PdfService
   ) {}
-
-  ngOnInit(): void {}
 
   ngOnChanges() {
     if (this.army) {
