@@ -1,5 +1,5 @@
 <div *ngIf="service">
-  {{name}}
+  <h2 class="service-name">{{name}}</h2>
   <button mat-raised-button (click)="exportData()">{{ 'Label.Export' | translate }}</button>
   <mat-form-field>
     <mat-label>{{ 'Label.Import' | translate }}</mat-label>

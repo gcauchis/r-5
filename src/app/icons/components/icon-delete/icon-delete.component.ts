@@ -1,15 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-icon-delete',
-  templateUrl: './icon-delete.component.html',
-  styleUrls: ['./icon-delete.component.css']
+  selector: "app-icon-delete",
+  templateUrl: "./icon-delete.component.html",
 })
-export class IconDeleteComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class IconDeleteComponent {}

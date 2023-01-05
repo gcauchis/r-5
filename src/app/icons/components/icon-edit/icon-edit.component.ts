@@ -1,15 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-icon-edit',
-  templateUrl: './icon-edit.component.html',
-  styleUrls: ['./icon-edit.component.css']
+  selector: "app-icon-edit",
+  templateUrl: "./icon-edit.component.html",
 })
-export class IconEditComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class IconEditComponent {}

@@ -1,15 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-icon-folder',
-  templateUrl: './icon-folder.component.html',
-  styleUrls: ['./icon-folder.component.css']
+  selector: "app-icon-folder",
+  templateUrl: "./icon-folder.component.html",
 })
-export class IconFolderComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class IconFolderComponent {}
