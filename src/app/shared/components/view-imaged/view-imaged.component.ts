@@ -1,17 +1,13 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { ImageContainerInterface } from "./../../../core/interfaces/image-container-interface";
 
 @Component({
   selector: "app-view-imaged",
   templateUrl: "./view-imaged.component.html",
-  styleUrls: ["./view-imaged.component.css"],
+  styleUrls: ["./view-imaged.component.scss"],
 })
-export class ViewImagedComponent implements OnInit {
+export class ViewImagedComponent {
   @Input() imageContainer: ImageContainerInterface;
   @Input() pdfName: string = "file";
   @ViewChild("imgCard") imgCard: ElementRef;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

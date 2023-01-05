@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { VehicleService } from "../../services/vehicle.service";
 import { ArmyService } from "./../../services/army.service";
 import { UnitService } from "./../../services/unit.service";
@@ -16,5 +16,4 @@ export class MemoryManagerComponent {
     public vehicleService: VehicleService,
     public armyService: ArmyService
   ) {}
-
 }

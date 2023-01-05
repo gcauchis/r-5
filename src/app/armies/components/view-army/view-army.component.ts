@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { Army } from "./../../../core/models/army";
 import { PdfDrawContext } from "./../../../core/models/pdf-draw-context";
 import { Unit } from "./../../../core/models/unit";

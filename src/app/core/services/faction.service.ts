@@ -5,8 +5,6 @@ import { FactionableInterface } from "./../interfaces/factionable-interface";
   providedIn: "root",
 })
 export class FactionService {
-  constructor() {}
-
   public getFactions(factionable: FactionableInterface[]): string[] {
     return factionable
       .map((u) => u.faction)

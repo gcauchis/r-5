@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 /**
  * use like this :
@@ -13,10 +13,5 @@ import { Component, OnInit } from "@angular/core";
 @Component({
   selector: "app-template-full-width",
   templateUrl: "./template-full-width.component.html",
-  styleUrls: ["./template-full-width.component.css"],
 })
-export class TemplateFullWidthComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class TemplateFullWidthComponent {}
