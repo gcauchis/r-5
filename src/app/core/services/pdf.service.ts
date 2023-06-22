@@ -379,7 +379,9 @@ export class PdfService {
       }
     }
     if (weapon.rule && weapon.rule.length > 0) {
-      weaponStr += ` (${await this.weaponService.retrieveRules(weapon)})`;
+      weaponStr += ` (${(await this.weaponService.retrieveRules(weapon)).join(
+        ", "
+      )})`;
     }
     context.basicDrawTestLine(weaponStr);
   }

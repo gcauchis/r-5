@@ -32,7 +32,7 @@ import { WeaponService } from "./../../../core/services/weapon.service";
 @Component({
   selector: "app-edit-weapon",
   templateUrl: "./edit-weapon.component.html",
-  styleUrls: ["./edit-weapon.component.css"],
+  styleUrls: ["./edit-weapon.component.scss"],
 })
 export class EditWeaponComponent implements OnInit {
   WeaponType = WeaponType;

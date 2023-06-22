@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff [
+  <!ENTITY agrave "entity-value">
+  <!ENTITY egrave "entity-value">
+  <!ENTITY Eacute "entity-value">
+  <!ENTITY eacute "entity-value">
+  <!ENTITY ocirc "entity-value">
+  <!ENTITY iuml "entity-value">
+]>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="Label.Edit" datatype="html">
         <source>Edit</source>
-        <target>édition</target>
+        <target>&Eacute;dition</target>
       </trans-unit>
       <trans-unit id="Label.Faction" datatype="html">
         <source>Faction</source>
@@ -24,7 +32,7 @@
       </trans-unit>
       <trans-unit id="Label.Long.DQM" datatype="html">
         <source>Martial Quality Dice (DQM)</source>
-        <target>Dé Qualité Martial (DQM)</target>
+        <target>D&eacute; Qualit&eacute; Martial (DQM)</target>
       </trans-unit>
       <trans-unit id="Label.DC" datatype="html">
         <source>DC</source>
@@ -32,7 +40,7 @@
       </trans-unit>
       <trans-unit id="Label.Long.DC" datatype="html">
         <source>Combat Dice (DC)</source>
-        <target>Dé Combat (DC)</target>
+        <target>D&eacute; Combat (DC)</target>
       </trans-unit>
       <trans-unit id="Label.HP" datatype="html">
         <source>HP</source>
@@ -44,7 +52,7 @@
       </trans-unit>
       <trans-unit id="Label.UnitType" datatype="html">
         <source>Unit type</source>
-        <target>Type d’unité</target>
+        <target>Type d’unit&eacute;</target>
       </trans-unit>
       <trans-unit id="Label.UnitSize" datatype="html">
         <source>Unit size</source>
@@ -88,7 +96,7 @@
       </trans-unit>
       <trans-unit id="Label.SelectedWeapons" datatype="html">
         <source>Selected weapons</source>
-        <target>Armes sélectionées</target>
+        <target>Armes s&eacute;lection&eacute;es</target>
       </trans-unit>
       <trans-unit id="Label.Type" datatype="html">
         <source>Type</source>
@@ -104,15 +112,15 @@
       </trans-unit>
       <trans-unit id="Label.Range" datatype="html">
         <source>Range</source>
-        <target>Portée</target>
+        <target>Port&eacute;e</target>
       </trans-unit>
       <trans-unit id="Label.MinimumRange" datatype="html">
         <source>Minimum range</source>
-        <target>Portée minimum</target>
+        <target>Port&eacute;e minimum</target>
       </trans-unit>
       <trans-unit id="Label.RangeInch" datatype="html">
         <source>Range (inch)</source>
-        <target>Portée (pouces)</target>
+        <target>Port&eacute;e (pouces)</target>
       </trans-unit>
       <trans-unit id="Label.RangeTo" datatype="html">
         <source>to</source>
@@ -128,7 +136,7 @@
       </trans-unit>
       <trans-unit id="Label.SpecialRules" datatype="html">
         <source>Special rules</source>
-        <target>R&egrave;gles spéciales</target>
+        <target>R&egrave;gles sp&eacute;ciales</target>
       </trans-unit>
       <trans-unit id="Label.ChooseARule" datatype="html">
         <source>Choose a rule</source>
@@ -180,11 +188,11 @@
       </trans-unit>
       <trans-unit id="Label.Army" datatype="html">
         <source>Army</source>
-        <target>Armée</target>
+        <target>Arm&eacute;e</target>
       </trans-unit>
       <trans-unit id="Label.Armies" datatype="html">
         <source>Armies</source>
-        <target>Armées</target>
+        <target>Arm&eacute;es</target>
       </trans-unit>
       <trans-unit id="Label.See" datatype="html">
         <source>See</source>
@@ -192,7 +200,7 @@
       </trans-unit>
       <trans-unit id="Label.AddNewArmy" datatype="html">
         <source>Add new army</source>
-        <target>Ajouter une nouvelle armée</target>
+        <target>Ajouter une nouvelle arm&eacute;e</target>
       </trans-unit>
       <trans-unit id="Label.Armors" datatype="html">
         <source>Armors</source>
@@ -224,23 +232,23 @@
       </trans-unit>
       <trans-unit id="Label.Reset" datatype="html">
         <source>Reset</source>
-        <target>Réinitialiser</target>
+        <target>R&eacute;initialiser</target>
       </trans-unit>
       <trans-unit id="Label.Units" datatype="html">
         <source>Units</source>
-        <target>Unitées</target>
+        <target>Unit&eacute;es</target>
       </trans-unit>
       <trans-unit id="Label.Unit" datatype="html">
         <source>Unit</source>
-        <target>Unitée</target>
+        <target>Unit&eacute;e</target>
       </trans-unit>
       <trans-unit id="Label.Vehicle" datatype="html">
         <source>Vehicle</source>
-        <target>Véhicule</target>
+        <target>V&eacute;hicule</target>
       </trans-unit>
       <trans-unit id="Label.Vehicles" datatype="html">
         <source>Vehicles</source>
-        <target>Véhicules</target>
+        <target>V&eacute;hicules</target>
       </trans-unit>
       <trans-unit id="Label.Weapons" datatype="html">
         <source>Weapons</source>
@@ -248,15 +256,15 @@
       </trans-unit>
       <trans-unit id="Label.ManageMemory" datatype="html">
         <source>Manage memory</source>
-        <target>Gérer la mémoire</target>
+        <target>G&eacute;rer la m&eacute;moire</target>
       </trans-unit>
       <trans-unit id="Label.PageNotFound" datatype="html">
         <source>Page not found</source>
-        <target>Page non trouvée</target>
+        <target>Page non trouv&eacute;e</target>
       </trans-unit>
       <trans-unit id="Label.DownloadPDF" datatype="html">
         <source>Download PDF</source>
-        <target>Télécharger PDF</target>
+        <target>T&eacute;l&eacute;charger PDF</target>
       </trans-unit>
       <trans-unit id="Label.PDF" datatype="html">
         <source>PDF</source>
@@ -268,7 +276,7 @@
       </trans-unit>
       <trans-unit id="Label.AddNewUnit" datatype="html">
         <source>Add new unit</source>
-        <target>Ajouter une nouvelle unitée</target>
+        <target>Ajouter une nouvelle unit&eacute;e</target>
       </trans-unit>
       <trans-unit id="Label.DbDot" datatype="html">
         <source>:</source>
@@ -276,7 +284,7 @@
       </trans-unit>
       <trans-unit id="Label.Melee" datatype="html">
         <source>Melee</source>
-        <target>Mélée</target>
+        <target>M&eacute;l&eacute;e</target>
       </trans-unit>
       <trans-unit id="Label.Shoot" datatype="html">
         <source>Shoot</source>
@@ -348,7 +356,7 @@
       </trans-unit>
       <trans-unit id="Label.Officer" datatype="html">
         <source>Officer</source>
-        <target>Officier supérieur</target>
+        <target>Officier sup&eacute;rieur</target>
       </trans-unit>
       <trans-unit id="Label.Mage" datatype="html">
         <source>Mage</source>
@@ -364,7 +372,7 @@
       </trans-unit>
       <trans-unit id="Label.Tank" datatype="html">
         <source>Tank</source>
-        <target>Blindée</target>
+        <target>Blind&eacute;e</target>
       </trans-unit>
       <trans-unit id="Label.Individual" datatype="html">
         <source>Individual</source>
@@ -392,7 +400,7 @@
       </trans-unit>
       <trans-unit id="Label.VehicleType" datatype="html">
         <source>Vehicle type</source>
-        <target>Type de véhicule</target>
+        <target>Type de v&eacute;hicule</target>
       </trans-unit>
       <trans-unit id="Label.StructurePoint" datatype="html">
         <source>Structure point</source>
@@ -412,7 +420,7 @@
       </trans-unit>
       <trans-unit id="Label.Crew" datatype="html">
         <source>Crew</source>
-        <target>équipage</target>
+        <target>&Eacute;quipage</target>
       </trans-unit>
     </body>
   </file>
