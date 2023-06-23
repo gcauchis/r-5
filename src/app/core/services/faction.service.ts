@@ -12,6 +12,6 @@ export class FactionService {
         (value, index, self) =>
           value && value != "" && self.indexOf(value) === index
       )
-      .sort();
+      .sort((a, b) => a.localeCompare(b));
   }
 }
