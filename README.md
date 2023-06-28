@@ -2,8 +2,6 @@
 
 [![build](https://github.com/gcauchis/r-5/actions/workflows/electronBuild.yml/badge.svg)](https://github.com/gcauchis/r-5/actions)
 [![Known Vulnerabilities](https://snyk.io/test/github/gcauchis/r-5/badge.svg?targetFile=package.json)](https://snyk.io/test/github/gcauchis/r-5?targetFile=package.json)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/gcauchis/r-5.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/gcauchis/r-5/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/gcauchis/r-5.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/gcauchis/r-5/context:javascript)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=gcauchis_r-5&metric=ncloc)](https://sonarcloud.io/dashboard?id=gcauchis_r-5)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=gcauchis_r-5&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=gcauchis_r-5)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=gcauchis_r-5&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=gcauchis_r-5)
