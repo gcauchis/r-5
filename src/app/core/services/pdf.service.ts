@@ -16,10 +16,24 @@ import { UnitService } from "./unit.service";
 import { VehicleService } from "./vehicle.service";
 import { WeaponService } from "./weapon.service";
 
+/**
+ * Service for generating and managing PDF documents for game data.
+ * Provides methods to create PDF contexts for armies, units, and vehicles,
+ * and to append their details to the PDF.
+ */
 @Injectable({
   providedIn: "root",
 })
 export class PdfService {
+  /**
+   * Creates an instance of PdfService.
+   * @param unitService Service for retrieving units.
+   * @param vehicleService Service for retrieving vehicles.
+   * @param weaponService Service for retrieving weapons.
+   * @param enumUtils Utility service for enums.
+   * @param priceService Service for price calculations.
+   * @param translate Translation service.
+   */
   constructor(
     private unitService: UnitService,
     private vehicleService: VehicleService,
@@ -29,24 +43,44 @@ export class PdfService {
     public translate: TranslateService
   ) {}
 
+  /**
+   * Generates a PDF context for the given army.
+   * @param army The army to print.
+   * @returns A promise resolving to the PDF draw context.
+   */
   public async printArmy(army: Army): Promise<PdfDrawContext> {
     const context = await PdfDrawContext.create();
     await this.appendArmy(context, army);
     return context;
   }
 
+  /**
+   * Generates a PDF context for the given unit.
+   * @param unit The unit to print.
+   * @returns A promise resolving to the PDF draw context.
+   */
   public async printUnit(unit: Unit): Promise<PdfDrawContext> {
     const context = await PdfDrawContext.create();
     await this.appendUnit(context, unit);
     return context;
   }
 
+  /**
+   * Generates a PDF context for the given vehicle.
+   * @param vehicle The vehicle to print.
+   * @returns A promise resolving to the PDF draw context.
+   */
   public async printVehicle(vehicle: Vehicle): Promise<PdfDrawContext> {
     const context = await PdfDrawContext.create();
     await this.appendVehicle(context, vehicle);
     return context;
   }
 
+  /**
+   * Appends army information to the PDF context.
+   * @param context The PDF draw context.
+   * @param army The army to append.
+   */
   private async appendArmy(context: PdfDrawContext, army: Army) {
     context.fontSize = 20;
     context.drawText(
@@ -83,6 +117,12 @@ export class PdfService {
     }
   }
 
+  /**
+   * Appends unit information to the PDF context.
+   * @param context The PDF draw context.
+   * @param unit The unit to append.
+   * @param nb Optional number of units.
+   */
   private async appendUnit(context: PdfDrawContext, unit: Unit, nb?: number) {
     if (unit.imgBase64) {
       const image = await this.convertToEmbedecImage(context, unit.imgBase64);
@@ -185,6 +225,12 @@ export class PdfService {
     await this.appendWeapons(context, unit);
   }
 
+  /**
+   * Appends vehicle information to the PDF context.
+   * @param context The PDF draw context.
+   * @param vehicle The vehicle to append.
+   * @param nb Optional number of vehicles.
+   */
   private async appendVehicle(
     context: PdfDrawContext,
     vehicle: Vehicle,
@@ -288,6 +334,11 @@ export class PdfService {
     await this.appendWeapons(context, vehicle);
   }
 
+  /**
+   * Appends all weapons of a unit or vehicle to the PDF context.
+   * @param context The PDF draw context.
+   * @param unit The combat unit (unit or vehicle).
+   */
   private async appendWeapons(
     context: PdfDrawContext,
     unit: CombatUnitInterface
@@ -352,6 +403,12 @@ export class PdfService {
     }
   }
 
+  /**
+   * Appends a single weapon to the PDF context.
+   * @param context The PDF draw context.
+   * @param weapon The weapon to append.
+   * @param unit The combat unit owning the weapon.
+   */
   private async appendWeapon(
     context: PdfDrawContext,
     weapon: Weapon,
@@ -386,6 +443,11 @@ export class PdfService {
     context.basicDrawTestLine(weaponStr);
   }
 
+  /**
+   * Saves the generated PDF.
+   * @param context The PDF draw context.
+   * @param name The file name to use.
+   */
   public savePDF(context: PdfDrawContext, name: string) {
     context.save().then((content) => {
       let blob = new Blob([content], { type: "application/json" });
@@ -393,10 +455,21 @@ export class PdfService {
     });
   }
 
+  /**
+   * Saves the generated PDF as a Base64 string.
+   * @param context The PDF draw context.
+   * @returns A promise resolving to the Base64 string.
+   */
   public saveAsBase64(context: PdfDrawContext): Promise<string> {
     return context.document.saveAsBase64({ dataUri: true });
   }
 
+  /**
+   * Converts a base64 image string to an embedded PDF image.
+   * @param context The PDF draw context.
+   * @param imgBase64 The base64 image string.
+   * @returns A promise resolving to the embedded PDF image.
+   */
   private async convertToEmbedecImage(
     context: PdfDrawContext,
     imgBase64: any

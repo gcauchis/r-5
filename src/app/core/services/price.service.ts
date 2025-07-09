@@ -16,35 +16,119 @@ import { Weapon } from "./../models/weapon";
 import { UnitService } from "./unit.service";
 import { VehicleService } from "./vehicle.service";
 
+/**
+ * The base value used for dice calculations.
+ * @constant
+ */
 const DICE_VALUE: number = 4;
+
+/**
+ * The value for a D6 dice.
+ * @constant
+ */
 const DICE_D6_VALUE: number = DICE_VALUE * (3 / 6);
+
+/**
+ * The value for a D8 dice.
+ * @constant
+ */
 const DICE_D8_VALUE: number = DICE_VALUE * (5 / 8);
+
+/**
+ * The value for a D10 dice.
+ * @constant
+ */
 const DICE_D10_VALUE: number = DICE_VALUE * (7 / 10);
+
+/**
+ * The value for a D12 dice.
+ * @constant
+ */
 const DICE_D12_VALUE: number = DICE_VALUE * (9 / 12);
 
+/**
+ * Coefficient for power dice.
+ * @constant
+ */
 const POWER_DICE_COEF: number = 1;
+
+/**
+ * Coefficient for super power dice.
+ * @constant
+ */
 const POWER_SUPER_DICE_COEF: number = 1.2;
 
+/**
+ * Value added for assault weapons.
+ * @constant
+ */
 const ASSAULT_VALUE: number = 2;
+
+/**
+ * Value added for heavy weapons.
+ * @constant
+ */
 const HEAVY_VALUE: number = 1;
+
+/**
+ * Value added for cover weapons.
+ * @constant
+ */
 const COVER_VALUE: number = 2;
 
+/**
+ * Value for small explosive weapon size.
+ * @constant
+ */
 const SIZE_SMALL: number = 3;
+
+/**
+ * Value for medium explosive weapon size.
+ * @constant
+ */
 const SIZE_MEDIUM: number = 13;
+
+/**
+ * Value for big explosive weapon size.
+ * @constant
+ */
 const SIZE_BIG: number = 28;
+
+/**
+ * Value for cone explosive weapon size.
+ * @constant
+ */
 const SIZE_CONE: number = 17;
 
+/**
+ * Array of rule values for weapons loaded from JSON.
+ * @constant
+ */
 const WEAPONS_RULES_VALUES: RuleValue[] = jsonWeaponsRulesValues;
 
+/**
+ * Service for calculating prices of units, vehicles, and weapons.
+ * Provides methods to compute prices based on stats, dice, and special rules.
+ */
 @Injectable({
   providedIn: "root",
 })
 export class PriceService {
+  /**
+   * Creates an instance of PriceService.
+   * @param unitService Service for retrieving units.
+   * @param vehicleService Service for retrieving vehicles.
+   */
   constructor(
     private unitService: UnitService,
     private vehicleService: VehicleService
   ) {}
 
+  /**
+   * Computes the numeric value of a dice.
+   * @param dice The dice enum value.
+   * @returns The computed value for the dice.
+   */
   public computeDice(dice: Dice): number {
     switch (dice) {
       case Dice.D6:
@@ -60,14 +144,29 @@ export class PriceService {
     }
   }
 
+  /**
+   * Computes the DQM (Quality Dice) value.
+   * @param dice The dice enum value.
+   * @returns The computed DQM value.
+   */
   public computeDQM(dice: Dice): number {
     return this.computeDice(dice);
   }
 
+  /**
+   * Computes the DC (Defense Dice) value.
+   * @param dice The dice enum value.
+   * @returns The computed DC value.
+   */
   public computeDC(dice: Dice): number {
     return this.computeDice(dice);
   }
 
+  /**
+   * Computes the base price of a combat unit (unit or vehicle).
+   * @param combatUnit The combat unit to compute.
+   * @returns The base price.
+   */
   public computeBase(combatUnit: CombatUnitInterface): number {
     let dcPrive = this.computeDC(combatUnit.dc);
     let result = 0;
@@ -117,6 +216,12 @@ export class PriceService {
     return result;
   }
 
+  /**
+   * Calculates the price of a weapon for a given combat unit.
+   * @param weapon The weapon to price.
+   * @param combatUnit The owning combat unit.
+   * @returns The computed price for the weapon.
+   */
   public getPrice(weapon: Weapon, combatUnit: CombatUnitInterface): number {
     let unitBase = this.computeBase(combatUnit);
     let result = 0;
@@ -172,6 +277,11 @@ export class PriceService {
     return Math.round(result);
   }
 
+  /**
+   * Computes the total price of a combat unit, including its weapons.
+   * @param item The combat unit.
+   * @returns The total computed price.
+   */
   public compute(item: CombatUnitInterface): number {
     let price = this.computeBase(item);
     if (item.weapons) {
@@ -182,6 +292,11 @@ export class PriceService {
     return price;
   }
 
+  /**
+   * Computes the total price of an army, including all units and vehicles.
+   * @param army The army to compute.
+   * @returns A promise resolving to the total price of the army.
+   */
   public async computeArmy(army: Army): Promise<number> {
     let result = 0;
     if (army.units) {
